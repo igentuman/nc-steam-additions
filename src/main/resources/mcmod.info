@@ -1,0 +1,16 @@
+[
+{
+  "modid": "ncsteamadditions",
+  "name": "Nuclearcraft Steam Additions",
+  "description": "A Nuclearcraft addon that aims to bring additional mechanics with the power of steam",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://www.curseforge.com/minecraft/mc-mods/nc-steam-additions",
+  "updateUrl": "",
+  "authorList": ["igentuman"],
+  "credits": "tomdodd4598 For making NuclearCraft",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
