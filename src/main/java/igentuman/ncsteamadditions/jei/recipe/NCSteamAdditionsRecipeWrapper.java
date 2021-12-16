@@ -2,7 +2,6 @@ package igentuman.ncsteamadditions.jei.recipe;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import mezz.jei.api.IGuiHelper;
 import nc.integration.jei.JEIBasicRecipeWrapper;
@@ -35,12 +34,7 @@ public class NCSteamAdditionsRecipeWrapper
 		@Override
 		protected double getBaseProcessPower()
 		{
-			if (recipe == null)
-				return NCSteamAdditionsConfig.processor_power[0];
-			return recipe.getBaseProcessPower(NCSteamAdditionsConfig.processor_power[0]);
+			return 0;
 		}
 	}
-	
-
-
 }

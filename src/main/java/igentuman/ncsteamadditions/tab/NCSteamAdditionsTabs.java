@@ -4,5 +4,5 @@ import net.minecraft.creativetab.CreativeTabs;
 
 public class NCSteamAdditionsTabs
 {
-	public static final CreativeTabs BLOCKS = new TabNCSteamAdditionsBlocks();
+	public static final CreativeTabs ITEMS = new TabNCSteamAdditionsBlocks();
 }

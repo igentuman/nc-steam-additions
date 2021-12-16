@@ -95,12 +95,7 @@ dependencies {
 	deobfCompile "base:base:${b_a_s_e_version}"
 	deobfCompile "contenttweaker:ContentTweaker:${contenttweaker_version}"
 	deobfCompile "li.cil.oc:OpenComputers:${oc_version}"
-	
 	deobfCompile "mekanism:Mekanism:${mekanism_version}"
-
-
-
-
 	deobfCompile "vazkii.patchouli:Patchouli:${patchouli_version}"
 	deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:${top_version}"
 }

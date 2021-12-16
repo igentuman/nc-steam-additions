@@ -1,6 +1,6 @@
 package igentuman.ncsteamadditions.tab;
 
-import igentuman.ncsteamadditions.block.NCSteamAdditionsBlocks;
+import igentuman.ncsteamadditions.block.Blocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
@@ -15,6 +15,6 @@ public class TabNCSteamAdditionsBlocks extends CreativeTabs
 	@Override
 	public ItemStack createIcon()
 	{
-		return new ItemStack(NCSteamAdditionsBlocks.steamTransformer);
+		return new ItemStack(Blocks.blocks[1]);
 	}
 }

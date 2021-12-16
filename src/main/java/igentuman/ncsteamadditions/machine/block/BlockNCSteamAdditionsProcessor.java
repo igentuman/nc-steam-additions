@@ -6,7 +6,8 @@ import static nc.block.property.BlockProperties.FACING_HORIZONTAL;
 import java.util.Random;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
-import igentuman.ncsteamadditions.enums.BlockTypes.ProcessorType;
+import igentuman.ncsteamadditions.enums.ProcessorType;
+import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import nc.block.tile.BlockSidedTile;
 import nc.block.tile.IActivatable;
 import nc.block.tile.ITileType;
@@ -35,15 +36,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockNCSteamAdditionsProcessor extends BlockSidedTile implements IActivatable, ITileType
 {
+	protected ProcessorType type;
 
-	protected final ProcessorType type;
-
-	public BlockNCSteamAdditionsProcessor(ProcessorType type)
+	public <T extends AbstractProcessor> BlockNCSteamAdditionsProcessor(T processor)
 	{
 		super(Material.IRON);
-		if (type.getCreativeTab() != null)
-			setCreativeTab(type.getCreativeTab());
-		this.type = type;
+		if (processor.getCreativeTab() != null)
+			setCreativeTab(processor.getCreativeTab());
+		this.type = processor.getType();
 	}
 
 	@Override

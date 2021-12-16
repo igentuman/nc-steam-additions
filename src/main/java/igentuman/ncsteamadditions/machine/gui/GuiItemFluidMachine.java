@@ -1,28 +1,25 @@
 package igentuman.ncsteamadditions.machine.gui;
+
 import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import nc.gui.NCGui;
 import nc.gui.element.GuiItemRenderer;
 import nc.init.NCItems;
 import nc.tile.energy.ITileEnergy;
 import nc.tile.processor.TileItemFluidProcessor;
-import nc.util.Lang;
-import nc.util.NCMath;
-import nc.util.UnitHelper;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+
 public class GuiItemFluidMachine extends NCGui {
     protected final EntityPlayer player;
     protected final TileItemFluidProcessor tile;
     protected final ResourceLocation gui_textures;
-    protected GuiItemRenderer speedUpgradeRender = null, energyUpgradeRender = null;
+    protected GuiItemRenderer speedUpgradeRender = null;
 
     public GuiItemFluidMachine(String name, EntityPlayer player, TileItemFluidProcessor tile, Container inventory)
     {
@@ -77,22 +74,7 @@ public class GuiItemFluidMachine extends NCGui {
     @Override
     public List<String> energyInfo(ITileEnergy tile)
     {
-        String energy = UnitHelper.prefix(tile.getEnergyStorage().getEnergyStored(),
-                tile.getEnergyStorage().getMaxEnergyStored(), 5, "RF");
-        String power = UnitHelper.prefix(this.tile.getProcessPower(), 5, "RF/t");
-
-        String speedMultiplier = "x" + NCMath.decimalPlaces(this.tile.getSpeedMultiplier(), 2);
-        String powerMultiplier = "x" + NCMath.decimalPlaces(this.tile.getPowerMultiplier(), 2);
-
-        return Lists.newArrayList(
-                TextFormatting.LIGHT_PURPLE + Lang.localise("gui.nc.container.energy_stored") + TextFormatting.WHITE
-                        + " " + energy,
-                TextFormatting.LIGHT_PURPLE + Lang.localise("gui.nc.container.process_power") + TextFormatting.WHITE
-                        + " " + power,
-                TextFormatting.AQUA + Lang.localise("gui.nc.container.speed_multiplier") + TextFormatting.WHITE + " "
-                        + speedMultiplier,
-                TextFormatting.AQUA + Lang.localise("gui.nc.container.power_multiplier") + TextFormatting.WHITE + " "
-                        + powerMultiplier);
+        return Lists.newArrayList("");
     }
 
     protected void drawUpgradeRenderers()
@@ -101,11 +83,6 @@ public class GuiItemFluidMachine extends NCGui {
         {
             speedUpgradeRender = new GuiItemRenderer(NCItems.upgrade, 0, guiLeft + 132, guiTop + ySize - 102, 0.5F);
         }
-        if (energyUpgradeRender == null)
-        {
-            energyUpgradeRender = new GuiItemRenderer(NCItems.upgrade, 1, guiLeft + 152, guiTop + ySize - 102, 0.5F);
-        }
         speedUpgradeRender.draw();
-        energyUpgradeRender.draw();
     }
 }

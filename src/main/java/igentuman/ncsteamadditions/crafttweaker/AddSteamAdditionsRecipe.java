@@ -13,7 +13,7 @@ import nc.integration.crafttweaker.CTHelper;
 import nc.recipe.ingredient.IFluidIngredient;
 import nc.recipe.ingredient.IItemIngredient;
 
-public class AddNCSteamAdditionsRecipe implements IAction
+public class AddSteamAdditionsRecipe implements IAction
 {
 	
 	public static boolean hasErrored = false;
@@ -27,7 +27,7 @@ public class AddNCSteamAdditionsRecipe implements IAction
 	public boolean inputsAllNull = true, ingredientError, wasNull, wrongSize;
 	public final NCSteamAdditionsRecipeHandler recipeHandler;
 
-	public AddNCSteamAdditionsRecipe(NCSteamAdditionsRecipeHandler recipeHandler, List objects)
+	public AddSteamAdditionsRecipe(NCSteamAdditionsRecipeHandler recipeHandler, List objects)
 	{
 		this.recipeHandler = recipeHandler;
 		

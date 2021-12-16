@@ -44,13 +44,11 @@ public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIBasi
 
     }
 
-
     @Override
     public String getModName()
     {
         return NCSteamAdditions.MOD_NAME;
     }
-
 
     @Override
     public IDrawable getBackground()

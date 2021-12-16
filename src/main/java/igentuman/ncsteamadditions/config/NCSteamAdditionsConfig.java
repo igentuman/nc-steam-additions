@@ -3,7 +3,6 @@ package igentuman.ncsteamadditions.config;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import nc.util.Lang;
 import net.minecraftforge.common.MinecraftForge;
@@ -45,39 +44,24 @@ public class NCSteamAdditionsConfig {
 	{
 		if (loadFromFile) config.load();
 
-		Property propertyProcessorPower = config.get(CATEGORY_PROCESSORS, "power", new int[] {50,100}, Lang.localise("gui.ncsteamadditions.config.processors.power.comment"), 0, 32767);
-		propertyProcessorPower.setLanguageKey("gui.ncsteamadditions.config.processors.power");
-		
 		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {400,200}, Lang.localise("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
 		propertyProcessorTime.setLanguageKey("gui.ncsteamadditions.config.processors.time");
-		
 
 		List<String> propertyOrderProcessors = new ArrayList<String>();
-		propertyOrderProcessors.add(propertyProcessorPower.getName());
 		propertyOrderProcessors.add(propertyProcessorTime.getName());
 
 		config.setCategoryPropertyOrder(CATEGORY_PROCESSORS, propertyOrderProcessors);
 		
-		
-
-		
-		
 		if (setFromConfig) 
 		{
-			processor_power = readIntegerArrayFromConfig(propertyProcessorPower);
 			processor_time = readIntegerArrayFromConfig(propertyProcessorTime);
 
 		}
-		propertyProcessorPower.set(processor_power);
 		propertyProcessorTime.set(processor_time);
 
-		
 		if (config.hasChanged()) config.save();
 	}
-	
-	
-	
-	
+
 	private static boolean[] readBooleanArrayFromConfig(Property property) {
 		int currentLength = property.getBooleanList().length;
 		int defaultLength = property.getDefaults().length;
@@ -143,8 +127,6 @@ public class NCSteamAdditionsConfig {
 		}
 		return newArray;
 	}
-	
-	
 
 	private static class ClientConfigEventHandler
 	{

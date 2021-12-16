@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-
-import igentuman.ncsteamadditions.block.NCSteamAdditionsBlocks;
+import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.jei.catergory.SteamTransformerCategory;
 import igentuman.ncsteamadditions.jei.recipe.NCSteamAdditionsRecipeWrapper;
+import igentuman.ncsteamadditions.processors.AbstractProcessor;
+import igentuman.ncsteamadditions.processors.ProcessorsList;
+import igentuman.ncsteamadditions.processors.SteamTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
-import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.JEIPlugin;
-import mezz.jei.api.ingredients.IIngredientRegistry;
-import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import nc.integration.jei.JEIBasicCategory;
 import nc.integration.jei.JEIBasicRecipeWrapper;
@@ -30,8 +29,6 @@ import net.minecraft.item.ItemStack;
 @JEIPlugin
 public class NCSteamAdditionsJEI implements IModPlugin
 {
-
-
 	public void registerCategories(IRecipeCategoryRegistration registry)
 	{
 		IJeiHelpers jeiHelpers = registry.getJeiHelpers();
@@ -53,9 +50,11 @@ public class NCSteamAdditionsJEI implements IModPlugin
 	}
 
 	
-	public enum JEIHandler implements IJEIHandler 
+	public enum JEIHandler implements IJEIHandler
 	{
-		STEAM_TRANSFORMER(NCSteamAdditionsRecipes.steam_transformer, NCSteamAdditionsBlocks.steamTransformer, "steam_transformer", NCSteamAdditionsRecipeWrapper.SteamTransformer.class);
+
+		STEAM_TRANSFORMER(NCSteamAdditionsRecipes.steam_transformer, Blocks.blocks[SteamTransformer.GUID], SteamTransformer.code, NCSteamAdditionsRecipeWrapper.SteamTransformer.class);
+
 		private BasicRecipeHandler recipeHandler;
 		private Class<? extends JEIBasicRecipeWrapper> recipeWrapper;
 		private boolean enabled;
@@ -80,7 +79,7 @@ public class NCSteamAdditionsJEI implements IModPlugin
 		@Override
 		public JEIBasicCategory getCategory(IGuiHelper guiHelper) 
 		{
-			switch (this) 
+			switch (this)
 			{
 			case STEAM_TRANSFORMER:
 				return new SteamTransformerCategory(guiHelper, this);

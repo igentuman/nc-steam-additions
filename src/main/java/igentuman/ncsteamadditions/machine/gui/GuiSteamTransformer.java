@@ -1,10 +1,7 @@
 package igentuman.ncsteamadditions.machine.gui;
 
 import java.io.IOException;
-
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTransformer;
-import igentuman.ncsteamadditions.machine.network.NCSteamAdditionsOpenSideConfigGuiPacket;
-import igentuman.ncsteamadditions.machine.network.NCSteamAdditionsOpenTileGuiPacket;
 import nc.container.ContainerTile;
 import nc.container.processor.ContainerMachineConfig;
 import nc.gui.element.GuiFluidRenderer;
@@ -49,7 +46,8 @@ public class GuiSteamTransformer  extends GuiItemFluidMachine
 	{
 		drawFluidTooltip(tile.getTanks().get(0), mouseX, mouseY, 36, 42, 16, 16);
 		drawFluidTooltip(tile.getTanks().get(1), mouseX, mouseY, 56, 42, 16, 16);
-		drawFluidTooltip(tile.getTanks().get(2), mouseX, mouseY, 76, 42, 16, 16);
+		drawFluidTooltip(tile.getTanks().get(2), mouseX, mouseY, 36, 62, 16, 16);
+		drawFluidTooltip(tile.getTanks().get(3), mouseX, mouseY, 56, 62, 16, 16);
 
 		drawTooltip(Lang.localise("gui.nc.container.machine_side_config"), mouseX, mouseY, 27, 63, 18, 18);
 		drawTooltip(Lang.localise("gui.nc.container.redstone_control"), mouseX, mouseY, 47, 63, 18, 18);
@@ -80,7 +78,8 @@ public class GuiSteamTransformer  extends GuiItemFluidMachine
 	{
 		GuiFluidRenderer.renderGuiTank(tile.getTanks().get(0), guiLeft + 36, guiTop + 42, zLevel, 16, 16);
 		GuiFluidRenderer.renderGuiTank(tile.getTanks().get(1), guiLeft + 56, guiTop + 42, zLevel, 16, 16);
-		GuiFluidRenderer.renderGuiTank(tile.getTanks().get(2), guiLeft + 76, guiTop + 42, zLevel, 16, 16);
+		GuiFluidRenderer.renderGuiTank(tile.getTanks().get(2), guiLeft + 36, guiTop + 62, zLevel, 16, 16);
+		GuiFluidRenderer.renderGuiTank(tile.getTanks().get(3), guiLeft + 56, guiTop + 62, zLevel, 16, 16);
 	}
 
 	@Override
@@ -156,15 +155,16 @@ public class GuiSteamTransformer  extends GuiItemFluidMachine
 		@Override
 		public void initButtons()
 		{
-			buttonList.add(new NCButton.SorptionConfig.ItemInput(0, guiLeft + 35, guiTop + 10));
-			buttonList.add(new NCButton.SorptionConfig.FluidInput(1, guiLeft + 35, guiTop + 41));
-			buttonList.add(new NCButton.SorptionConfig.FluidInput(2, guiLeft + 55, guiTop + 41));
-			buttonList.add(new NCButton.SorptionConfig.FluidInput(3, guiLeft + 75, guiTop + 41));
-			buttonList.add(new NCButton.SorptionConfig.ItemOutputSmall(4, guiLeft + 111, guiTop + 41));
-			buttonList.add(new NCButton.SorptionConfig.ItemOutputSmall(5, guiLeft + 131, guiTop + 41));
-			buttonList.add(new NCButton.SorptionConfig.ItemOutputSmall(6, guiLeft + 151, guiTop + 41));
-			buttonList.add(new NCButton.SorptionConfig.SpeedUpgrade(7, guiLeft + 131, guiTop + 63));
-			buttonList.add(new NCButton.SorptionConfig.EnergyUpgrade(8, guiLeft + 151, guiTop + 63));
+			buttonList.add(new NCButton.SorptionConfig.FluidInput(0, guiLeft + 35, guiTop + 10));
+
+			buttonList.add(new NCButton.SorptionConfig.ItemInput(1, guiLeft + 35, guiTop + 41));
+			buttonList.add(new NCButton.SorptionConfig.ItemInput(2, guiLeft + 55, guiTop + 41));
+			buttonList.add(new NCButton.SorptionConfig.ItemInput(3, guiLeft + 35, guiTop + 61));
+			buttonList.add(new NCButton.SorptionConfig.ItemInput(4, guiLeft + 55, guiTop + 61));
+
+			buttonList.add(new NCButton.SorptionConfig.ItemOutputSmall(5, guiLeft + 111, guiTop + 41));
+
+			buttonList.add(new NCButton.SorptionConfig.SpeedUpgrade(6, guiLeft + 131, guiTop + 63));
 		}
 
 		@Override
@@ -175,16 +175,16 @@ public class GuiSteamTransformer  extends GuiItemFluidMachine
 				switch (guiButton.id)
 				{
 				case 0:
-					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Input(this, tile, 0));
-					return;
-				case 1:
 					FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptions.Input(this, tile, 0));
 					return;
+				case 1:
+					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Input(this, tile, 0));
+					return;
 				case 2:
-					FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptions.Input(this, tile, 1));
+					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Input(this, tile, 1));
 					return;
 				case 3:
-					FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptions.Input(this, tile, 2));
+					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Input(this, tile, 2));
 					return;
 				case 4:
 					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Output(this, tile, 1));

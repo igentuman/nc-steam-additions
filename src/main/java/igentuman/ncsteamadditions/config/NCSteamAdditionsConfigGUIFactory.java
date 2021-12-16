@@ -3,7 +3,6 @@ package igentuman.ncsteamadditions.config;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import nc.util.Lang;
 import net.minecraft.client.Minecraft;

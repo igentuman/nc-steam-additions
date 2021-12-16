@@ -1,7 +1,6 @@
 package igentuman.ncsteamadditions.crafttweaker;
 
 import com.google.common.collect.Lists;
-
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -14,7 +13,7 @@ import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-public class NCSteamAdditionsCraftTweaker
+public class SteamAdditionsCraftTweaker
 {
 	@ZenClass("mods.ncsteamadditions.steam_transformer")
 	@ZenRegister
@@ -46,5 +45,4 @@ public class NCSteamAdditionsCraftTweaker
 		}
 	}
 
-	
 }

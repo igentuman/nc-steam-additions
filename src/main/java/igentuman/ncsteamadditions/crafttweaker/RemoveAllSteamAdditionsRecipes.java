@@ -3,13 +3,13 @@ package igentuman.ncsteamadditions.crafttweaker;
 import crafttweaker.IAction;
 import igentuman.ncsteamadditions.recipe.NCSteamAdditionsRecipeHandler;
 
-public class RemoveAllNCSteamAdditionsRecipes implements IAction
+public class RemoveAllSteamAdditionsRecipes implements IAction
 {
 	
 	public static boolean hasErrored = false;
 	public final NCSteamAdditionsRecipeHandler recipeHandler;
 	
-	public RemoveAllNCSteamAdditionsRecipes(NCSteamAdditionsRecipeHandler recipeHandler)
+	public RemoveAllSteamAdditionsRecipes(NCSteamAdditionsRecipeHandler recipeHandler)
 	{
 		this.recipeHandler = recipeHandler;
 	}

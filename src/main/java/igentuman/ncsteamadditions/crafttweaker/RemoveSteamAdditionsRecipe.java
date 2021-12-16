@@ -2,7 +2,6 @@ package igentuman.ncsteamadditions.crafttweaker;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.api.item.IIngredient;
@@ -14,7 +13,7 @@ import nc.recipe.IngredientSorption;
 import nc.recipe.ingredient.IFluidIngredient;
 import nc.recipe.ingredient.IItemIngredient;
 
-public class RemoveNCSteamAdditionsRecipe implements IAction
+public class RemoveSteamAdditionsRecipe implements IAction
 {
 	
 	public static boolean hasErrored = false;
@@ -26,7 +25,7 @@ public class RemoveNCSteamAdditionsRecipe implements IAction
 	public boolean ingredientError, wasNull, wrongSize;
 	public final NCSteamAdditionsRecipeHandler recipeHandler;
 
-	public RemoveNCSteamAdditionsRecipe(NCSteamAdditionsRecipeHandler recipeHandler, IngredientSorption type, List<IIngredient> ctIngredients)
+	public RemoveSteamAdditionsRecipe(NCSteamAdditionsRecipeHandler recipeHandler, IngredientSorption type, List<IIngredient> ctIngredients)
 	{
 		this.recipeHandler = recipeHandler;
 		this.type = type;
