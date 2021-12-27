@@ -1,15 +1,12 @@
 package igentuman.ncsteamadditions.recipes;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.block.Blocks;
-import igentuman.ncsteamadditions.machine.block.BlockNCSteamAdditionsProcessor;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
-import igentuman.ncsteamadditions.processors.ProcessorsList;
-import nc.init.NCBlocks;
+import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import nc.recipe.vanilla.recipe.ShapedEnergyRecipe;
 import nc.recipe.vanilla.recipe.ShapedFluidRecipe;
 import nc.recipe.vanilla.recipe.ShapelessArmorRadShieldingRecipe;
@@ -25,27 +22,11 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class NCSteamAdditionsCraftingRecipeHandler
 {
-	public static AbstractProcessor getProcessorObject(String name)
-	{
-		Class cTile = null;
-		try {
-			cTile = Class.forName(name);
-		} catch (ClassNotFoundException e) {
-			return null;
-		}
-		try {
-			return (AbstractProcessor) cTile.getDeclaredConstructor().newInstance();
-		} catch (InstantiationException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-			return null;
-		}
-	}
 
 	public static void registerCraftingRecipes() 
 	{
-		int i = 1;
 		//crafting
-		for (String processorName: ProcessorsList.processors) {
-			AbstractProcessor processor = getProcessorObject(processorName);
+		for (AbstractProcessor processor: ProcessorsRegistry.get().processors()) {
 			addShapedOreRecipe(Blocks.blocks[processor.GUID], processor);
 		}
 

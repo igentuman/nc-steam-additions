@@ -3,8 +3,8 @@ package igentuman.ncsteamadditions.recipes;
 import java.util.ArrayList;
 import java.util.List;
 
+import igentuman.ncsteamadditions.processors.SteamTransformer;
 import nc.recipe.BasicRecipeHandler;
-import nc.recipe.ingredient.EmptyItemIngredient;
 import nc.util.FluidStackHelper;
 
 public class SteamTransformerRecipes extends BasicRecipeHandler
@@ -12,8 +12,7 @@ public class SteamTransformerRecipes extends BasicRecipeHandler
 
 	public SteamTransformerRecipes()
 	{
-		super("steam_transformer", 1, 3, 3, 0);
-		
+		super(SteamTransformer.code, SteamTransformer.inputItems, SteamTransformer.inputFluids, SteamTransformer.outputItems, SteamTransformer.outputFluids);
 	}
 
 	@Override
@@ -21,7 +20,7 @@ public class SteamTransformerRecipes extends BasicRecipeHandler
 	{
 		addRecipe("dustRedstone",
 				fluidStack("steam", FluidStackHelper.INGOT_VOLUME),
-				chanceOreStack("dustSulfur", 1,50),new EmptyItemIngredient()
+				oreStack("dustIron", 1)
 				);
 		
 	}

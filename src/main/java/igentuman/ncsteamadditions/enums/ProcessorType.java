@@ -3,7 +3,6 @@ package igentuman.ncsteamadditions.enums;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
-import igentuman.ncsteamadditions.tab.TabNCSteamAdditionsBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;

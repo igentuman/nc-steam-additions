@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
 
 public class GuiItemFluidMachine extends NCGui {
     protected final EntityPlayer player;

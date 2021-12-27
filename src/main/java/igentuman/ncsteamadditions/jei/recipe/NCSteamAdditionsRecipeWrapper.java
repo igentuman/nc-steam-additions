@@ -1,16 +1,11 @@
 package igentuman.ncsteamadditions.jei.recipe;
 
-import java.util.ArrayList;
-import java.util.List;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import mezz.jei.api.IGuiHelper;
-import nc.integration.jei.JEIBasicRecipeWrapper;
 import nc.integration.jei.JEIMachineRecipeWrapper;
 import nc.integration.jei.NCJEI.IJEIHandler;
 import nc.recipe.BasicRecipe;
 import nc.recipe.BasicRecipeHandler;
-import nc.util.Lang;
-import net.minecraft.util.text.TextFormatting;
 
 public class NCSteamAdditionsRecipeWrapper
 {

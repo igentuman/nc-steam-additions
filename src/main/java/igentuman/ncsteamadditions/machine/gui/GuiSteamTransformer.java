@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.machine.gui;
 
 import java.io.IOException;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTransformer;
+import igentuman.ncsteamadditions.processors.SteamTransformer;
 import nc.container.ContainerTile;
 import nc.container.processor.ContainerMachineConfig;
 import nc.gui.element.GuiFluidRenderer;
@@ -30,7 +31,7 @@ public class GuiSteamTransformer  extends GuiItemFluidMachine
 
 	private GuiSteamTransformer(EntityPlayer player, TileItemFluidProcessor tile, ContainerTile container)
 	{
-		super("steam_transformer", player, tile, container);
+		super(SteamTransformer.code, player, tile, container);
 		xSize = 176;
 		ySize = 166;
 	}
@@ -38,19 +39,48 @@ public class GuiSteamTransformer  extends GuiItemFluidMachine
 	@Override
 	public void renderTooltips(int mouseX, int mouseY)
 	{
-		drawEnergyTooltip(tile, mouseX, mouseY, 8, 6, 16, 74);
 		renderButtonTooltips(mouseX, mouseY);
 	}
 
 	public void renderButtonTooltips(int mouseX, int mouseY)
 	{
-		drawFluidTooltip(tile.getTanks().get(0), mouseX, mouseY, 36, 42, 16, 16);
-		drawFluidTooltip(tile.getTanks().get(1), mouseX, mouseY, 56, 42, 16, 16);
-		drawFluidTooltip(tile.getTanks().get(2), mouseX, mouseY, 36, 62, 16, 16);
-		drawFluidTooltip(tile.getTanks().get(3), mouseX, mouseY, 56, 62, 16, 16);
+		int x = 16;
+		int toLimit = 0;
 
-		drawTooltip(Lang.localise("gui.nc.container.machine_side_config"), mouseX, mouseY, 27, 63, 18, 18);
-		drawTooltip(Lang.localise("gui.nc.container.redstone_control"), mouseX, mouseY, 47, 63, 18, 18);
+		if(SteamTransformer.inputFluids > 0) {
+			toLimit = SteamTransformer.inputFluids;
+			for(int i = 0; i < toLimit; i++) {
+				x += 20;
+				drawFluidTooltip(tile.getTanks().get(i), mouseX, mouseY, x, 42, 16, 16);
+			}
+		}
+
+		if(SteamTransformer.inputItems > 0) {
+			toLimit += SteamTransformer.inputItems - 1;
+			for (int i = toLimit - SteamTransformer.inputItems; i < toLimit; i++) {
+				x += 20;
+				//GuiFluidRenderer.renderGuiTank(tile.getTanks().get(i), guiLeft + x, guiTop + 42, zLevel, 16, 16);
+			}
+		}
+
+		if(SteamTransformer.outputFluids > 0) {
+			toLimit += SteamTransformer.outputFluids - 1;
+			for (int i = toLimit - SteamTransformer.outputFluids; i < toLimit; i++) {
+				x += 20;
+				drawFluidTooltip(tile.getTanks().get(i), mouseX, mouseY, x, 42, 16, 16);
+			}
+		}
+
+		if(SteamTransformer.outputItems > 0) {
+			toLimit += SteamTransformer.outputItems - 1;
+			for (int i = toLimit - SteamTransformer.outputItems; i < toLimit; i++) {
+				x += 20;
+				//GuiFluidRenderer.renderGuiTank(tile.getTanks().get(i), guiLeft + x, guiTop + 42, zLevel, 16, 16);
+			}
+		}
+		x += 20;
+		drawTooltip(Lang.localise("gui.nc.container.machine_side_config"), mouseX, mouseY, x, 63, 18, 18);
+		drawTooltip(Lang.localise("gui.nc.container.redstone_control"), mouseX, mouseY, x+20, 63, 18, 18);
 	}
 
 	@Override
@@ -76,10 +106,40 @@ public class GuiSteamTransformer  extends GuiItemFluidMachine
 
 	protected void drawBackgroundExtras()
 	{
-		GuiFluidRenderer.renderGuiTank(tile.getTanks().get(0), guiLeft + 36, guiTop + 42, zLevel, 16, 16);
-		GuiFluidRenderer.renderGuiTank(tile.getTanks().get(1), guiLeft + 56, guiTop + 42, zLevel, 16, 16);
-		GuiFluidRenderer.renderGuiTank(tile.getTanks().get(2), guiLeft + 36, guiTop + 62, zLevel, 16, 16);
-		GuiFluidRenderer.renderGuiTank(tile.getTanks().get(3), guiLeft + 56, guiTop + 62, zLevel, 16, 16);
+		int x = 16;
+		int toLimit = 0;
+
+		if(SteamTransformer.inputFluids > 0) {
+			toLimit = SteamTransformer.inputFluids;
+			for(int i = 0; i < toLimit; i++) {
+				x += 20;
+				GuiFluidRenderer.renderGuiTank(tile.getTanks().get(i), guiLeft + x, guiTop + 42, zLevel, 16, 16);
+			}
+		}
+
+		if(SteamTransformer.inputItems > 0) {
+			toLimit += SteamTransformer.inputItems - 1;
+			for (int i = toLimit - SteamTransformer.inputItems; i < toLimit; i++) {
+				x += 20;
+				//GuiFluidRenderer.renderGuiTank(tile.getTanks().get(i), guiLeft + x, guiTop + 42, zLevel, 16, 16);
+			}
+		}
+
+		if(SteamTransformer.outputFluids > 0) {
+			toLimit += SteamTransformer.outputFluids - 1;
+			for (int i = toLimit - SteamTransformer.outputFluids; i < toLimit; i++) {
+				x += 20;
+				GuiFluidRenderer.renderGuiTank(tile.getTanks().get(i), guiLeft + x, guiTop + 42, zLevel, 16, 16);
+			}
+		}
+
+		if(SteamTransformer.outputItems > 0) {
+			toLimit += SteamTransformer.outputItems - 1;
+			for (int i = toLimit - SteamTransformer.outputItems; i < toLimit; i++) {
+				x += 20;
+				//GuiFluidRenderer.renderGuiTank(tile.getTanks().get(i), guiLeft + x, guiTop + 42, zLevel, 16, 16);
+			}
+		}
 	}
 
 	@Override
@@ -91,12 +151,44 @@ public class GuiSteamTransformer  extends GuiItemFluidMachine
 
 	public void initButtons()
 	{
-		buttonList.add(new NCButton.EmptyTank(0, guiLeft + 36, guiTop + 42, 16, 16));
-		buttonList.add(new NCButton.EmptyTank(1, guiLeft + 56, guiTop + 42, 16, 16));
-		buttonList.add(new NCButton.EmptyTank(2, guiLeft + 76, guiTop + 42, 16, 16));
+		int x = 16;
+		int toLimit = 0;
 
-		buttonList.add(new NCButton.MachineConfig(3, guiLeft + 27, guiTop + 63));
-		buttonList.add(new NCToggleButton.RedstoneControl(4, guiLeft + 47, guiTop + 63, tile));
+		if(SteamTransformer.inputFluids > 0) {
+			toLimit = SteamTransformer.inputFluids;
+			for(int i = 0; i < toLimit; i++) {
+				x += 20;
+				buttonList.add(new NCButton.EmptyTank(i, guiLeft + x, guiTop + 42, 16, 16));
+			}
+		}
+
+		if(SteamTransformer.inputItems > 0) {
+			toLimit += SteamTransformer.inputItems - 1;
+			for (int i = toLimit - SteamTransformer.inputItems; i < toLimit; i++) {
+				x += 20;
+				//buttonList.add(new NCButton.EmptyTank(i, guiLeft + x, guiTop + 42, 16, 16));
+			}
+		}
+
+		if(SteamTransformer.outputFluids > 0) {
+			toLimit += SteamTransformer.outputFluids - 1;
+			for (int i = toLimit - SteamTransformer.outputFluids; i < toLimit; i++) {
+				x += 20;
+				buttonList.add(new NCButton.SorptionConfig.FluidOutput(i, guiLeft + x, guiTop + 10));
+			}
+		}
+
+		if(SteamTransformer.outputItems > 0) {
+			toLimit += SteamTransformer.outputItems - 1;
+			for (int i = toLimit - SteamTransformer.outputItems; i < toLimit; i++) {
+				x += 20;
+				//buttonList.add(new NCButton.SorptionConfig.ItemOutput(i, guiLeft + x, guiTop + 10));
+			}
+		}
+
+
+		buttonList.add(new NCButton.MachineConfig(toLimit, guiLeft + 27, guiTop + 63));
+		buttonList.add(new NCToggleButton.RedstoneControl(toLimit+1, guiLeft + 47, guiTop + 63, tile));
 	}
 
 	@Override
@@ -131,15 +223,45 @@ public class GuiSteamTransformer  extends GuiItemFluidMachine
 		@Override
 		public void renderButtonTooltips(int mouseX, int mouseY)
 		{
-			drawTooltip(TextFormatting.BLUE + Lang.localise("gui.nc.container.input_item_config"), mouseX, mouseY, 36, 11, 18, 18);
-			drawTooltip(TextFormatting.DARK_AQUA + Lang.localise("gui.nc.container.input_tank_config"), mouseX, mouseY, 36, 42, 18, 18);
-			drawTooltip(TextFormatting.DARK_AQUA + Lang.localise("gui.nc.container.input_tank_config"), mouseX, mouseY, 56, 42, 18, 18);
-			drawTooltip(TextFormatting.DARK_AQUA + Lang.localise("gui.nc.container.input_tank_config"), mouseX, mouseY, 76, 42, 18, 18);
-			drawTooltip(TextFormatting.GOLD + Lang.localise("gui.nc.container.output_item_config"), mouseX, mouseY, 112, 42, 18, 18);
-			drawTooltip(TextFormatting.GOLD + Lang.localise("gui.nc.container.output_item_config"), mouseX, mouseY, 132, 42, 18, 18);
-			drawTooltip(TextFormatting.GOLD + Lang.localise("gui.nc.container.output_item_config"), mouseX, mouseY, 152, 42, 18, 18);
+
+			int x = 16;
+			int toLimit = 0;
+
+			if(SteamTransformer.inputFluids > 0) {
+				toLimit = SteamTransformer.inputFluids;
+				for(int i = 0; i < toLimit; i++) {
+					x += 20;
+					drawTooltip(TextFormatting.DARK_AQUA + Lang.localise("gui.nc.container.input_tank_config"), mouseX, mouseY, x, 42, 18, 18);
+				}
+			}
+
+			if(SteamTransformer.inputItems > 0) {
+				toLimit += SteamTransformer.inputItems - 1;
+				for (int i = toLimit - SteamTransformer.inputItems; i < toLimit; i++) {
+					x += 20;
+					drawTooltip(TextFormatting.BLUE + Lang.localise("gui.nc.container.input_item_config"), mouseX, mouseY, x, 11, 18, 18);
+
+				}
+			}
+
+			if(SteamTransformer.outputFluids > 0) {
+				toLimit += SteamTransformer.outputFluids - 1;
+				for (int i = toLimit - SteamTransformer.outputFluids; i < toLimit; i++) {
+					x += 20;
+					drawTooltip(TextFormatting.DARK_AQUA + Lang.localise("gui.nc.container.output_tank_config"), mouseX, mouseY, x, 42, 18, 18);
+
+				}
+			}
+
+			if(SteamTransformer.outputItems > 0) {
+				toLimit += SteamTransformer.outputItems - 1;
+				for (int i = toLimit - SteamTransformer.outputItems; i < toLimit; i++) {
+					x += 20;
+					drawTooltip(TextFormatting.GOLD + Lang.localise("gui.nc.container.output_item_config"), mouseX, mouseY, x, 42, 18, 18);
+				}
+			}
+
 			drawTooltip(TextFormatting.DARK_BLUE + Lang.localise("gui.nc.container.upgrade_config"), mouseX, mouseY, 131, 63, 18, 18);
-			drawTooltip(TextFormatting.YELLOW + Lang.localise("gui.nc.container.upgrade_config"), mouseX, mouseY, 151, 63, 18, 18);
 		}
 
 		@Override
@@ -155,16 +277,42 @@ public class GuiSteamTransformer  extends GuiItemFluidMachine
 		@Override
 		public void initButtons()
 		{
-			buttonList.add(new NCButton.SorptionConfig.FluidInput(0, guiLeft + 35, guiTop + 10));
+			int x = 15;
+			int toLimit = 0;
 
-			buttonList.add(new NCButton.SorptionConfig.ItemInput(1, guiLeft + 35, guiTop + 41));
-			buttonList.add(new NCButton.SorptionConfig.ItemInput(2, guiLeft + 55, guiTop + 41));
-			buttonList.add(new NCButton.SorptionConfig.ItemInput(3, guiLeft + 35, guiTop + 61));
-			buttonList.add(new NCButton.SorptionConfig.ItemInput(4, guiLeft + 55, guiTop + 61));
+			if(SteamTransformer.inputFluids > 0) {
+				toLimit = SteamTransformer.inputFluids;
+				for(int i = 0; i < toLimit; i++) {
+					x += 20;
+					buttonList.add(new NCButton.SorptionConfig.FluidInput(i, guiLeft + x, guiTop + 10));
+				}
+			}
 
-			buttonList.add(new NCButton.SorptionConfig.ItemOutputSmall(5, guiLeft + 111, guiTop + 41));
+			if(SteamTransformer.inputItems > 0) {
+				toLimit += SteamTransformer.inputItems - 1;
+				for (int i = toLimit - SteamTransformer.inputItems; i < toLimit; i++) {
+					x += 20;
+					buttonList.add(new NCButton.SorptionConfig.ItemInput(i, guiLeft + x, guiTop + 10));
+				}
+			}
 
-			buttonList.add(new NCButton.SorptionConfig.SpeedUpgrade(6, guiLeft + 131, guiTop + 63));
+			if(SteamTransformer.outputFluids > 0) {
+				toLimit += SteamTransformer.outputFluids - 1;
+				for (int i = toLimit - SteamTransformer.outputFluids; i < toLimit; i++) {
+					x += 20;
+					buttonList.add(new NCButton.SorptionConfig.FluidOutput(i, guiLeft + x, guiTop + 10));
+				}
+			}
+
+			if(SteamTransformer.outputItems > 0) {
+				toLimit += SteamTransformer.outputItems - 1;
+				for (int i = toLimit - SteamTransformer.outputItems; i < toLimit; i++) {
+					x += 20;
+					buttonList.add(new NCButton.SorptionConfig.ItemOutput(i, guiLeft + x, guiTop + 10));
+				}
+			}
+
+			buttonList.add(new NCButton.SorptionConfig.SpeedUpgrade(toLimit, guiLeft + 131, guiTop + 63));
 		}
 
 		@Override
@@ -172,37 +320,29 @@ public class GuiSteamTransformer  extends GuiItemFluidMachine
 		{
 			if (tile.getWorld().isRemote)
 			{
-				switch (guiButton.id)
-				{
-				case 0:
-					FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptions.Input(this, tile, 0));
-					return;
-				case 1:
-					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Input(this, tile, 0));
-					return;
-				case 2:
-					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Input(this, tile, 1));
-					return;
-				case 3:
-					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Input(this, tile, 2));
-					return;
-				case 4:
-					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Output(this, tile, 1));
-					return;
-				case 5:
-					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Output(this, tile, 2));
-					return;
-				case 6:
-					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Output(this, tile, 3));
-					return;
-				case 7:
-					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.SpeedUpgrade(this, tile, 4));
-					return;
-				case 8:
-					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.EnergyUpgrade(this, tile, 5));
+				//order Finput,Iinput,Foutput,Ioutput
+				if(guiButton.id < SteamTransformer.inputFluids) {
+					 FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptions.Input(this, tile, guiButton.id));
+					 return;
+				}
+
+				if(guiButton.id < SteamTransformer.inputFluids + SteamTransformer.inputItems - 1) {
+					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Input(this, tile, guiButton.id));
 					return;
 				}
 
+				if(guiButton.id < SteamTransformer.inputFluids + SteamTransformer.inputItems + SteamTransformer.outputFluids - 1) {
+					FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptions.Output(this, tile, guiButton.id));
+					return;
+				}
+
+				if(guiButton.id < SteamTransformer.inputFluids + SteamTransformer.inputItems + SteamTransformer.outputFluids + SteamTransformer.outputItems - 1) {
+					FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Output(this, tile, guiButton.id));
+					return;
+				}
+
+				FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.SpeedUpgrade(this, tile, 4));
+				return;
 			}
 		}
 	}

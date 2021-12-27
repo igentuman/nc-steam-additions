@@ -4,10 +4,6 @@ import java.text.DecimalFormat;
 
 public class Units
 {
-
-	
-	
-	
 	public static String getSIFormat(double number,String unit)
 	{
 		 return getSIFormat(number,0,unit);

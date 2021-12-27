@@ -21,9 +21,9 @@ public class SteamAdditionsCraftTweaker
 	{
 		
 		@ZenMethod
-		public static void addRecipe(IIngredient input1,IIngredient input2,IIngredient input3,IIngredient input4, IIngredient output1,IIngredient output2,IIngredient output3, @Optional(valueDouble = 1D) double timeMultiplier, @Optional(valueDouble = 1D) double powerMultiplier, @Optional double processRadiation) 
+		public static void addRecipe(IIngredient input1,IIngredient input2,IIngredient input3,IIngredient input4, IIngredient output1, @Optional(valueDouble = 1D) double timeMultiplier)
 		{
-			CraftTweakerAPI.apply(new CTAddRecipe(NCSteamAdditionsRecipes.steam_transformer, Lists.newArrayList(input1, input2, input3, input4, output1, output2, output3, timeMultiplier, powerMultiplier, processRadiation)));
+			CraftTweakerAPI.apply(new CTAddRecipe(NCSteamAdditionsRecipes.steam_transformer, Lists.newArrayList(input1, input2, input3, input4, output1, timeMultiplier)));
 		}
 		
 		@ZenMethod
@@ -33,9 +33,9 @@ public class SteamAdditionsCraftTweaker
 		}
 		
 		@ZenMethod
-		public static void removeRecipeWithOutput(IIngredient output1,IIngredient output2,IIngredient output3) 
+		public static void removeRecipeWithOutput(IIngredient output1)
 		{
-			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.steam_transformer, IngredientSorption.OUTPUT, Lists.newArrayList(output1, output2, output3)));
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.steam_transformer, IngredientSorption.OUTPUT, Lists.newArrayList(output1)));
 		}
 		
 		@ZenMethod

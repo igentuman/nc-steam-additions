@@ -1,10 +1,13 @@
 package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.enums.ProcessorType;
+import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
+import mezz.jei.api.IGuiHelper;
+import nc.integration.jei.JEIBasicCategory;
 import net.minecraft.creativetab.CreativeTabs;
 
-public class AbstractProcessor {
+public abstract class AbstractProcessor {
     public static String code;
 
     public static String PORCESSOR_ENUM;
@@ -27,6 +30,10 @@ public class AbstractProcessor {
 
     public static Object craftingRecipe;
 
+    public JEIHandler recipeHandler;
+
+    public abstract JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper);
+
     public static CreativeTabs getCreativeTab()
     {
         return NCSteamAdditionsTabs.ITEMS;
@@ -36,4 +43,5 @@ public class AbstractProcessor {
     {
         return new ProcessorType(code,GUID,particle1,particle2);
     }
+
 }

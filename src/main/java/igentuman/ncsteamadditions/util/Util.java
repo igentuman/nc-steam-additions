@@ -30,13 +30,7 @@ public class Util
 		
 		return newLocation;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	public static EnumFacing getAxisFacing(EnumFacing.Axis axis, boolean positive)
 	{
 		if(axis == EnumFacing.Axis.X)
@@ -66,8 +60,7 @@ public class Util
 	
 		return null;
 	}
-	
-	
+
 	
 	public static int getTaxiDistance(BlockPos a, BlockPos b)
 	{

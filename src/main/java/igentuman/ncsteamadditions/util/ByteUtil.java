@@ -3,13 +3,10 @@ package igentuman.ncsteamadditions.util;
 import io.netty.buffer.ByteBuf;
 import nc.tile.internal.energy.EnergyStorage;
 import nc.tile.internal.heat.HeatBuffer;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class ByteUtil
 {
 
-	
-	
 	public static void writeBufHeat(HeatBuffer heatBuffer,ByteBuf buf) 
 	{
 		buf.writeLong(heatBuffer.getHeatCapacity());	
