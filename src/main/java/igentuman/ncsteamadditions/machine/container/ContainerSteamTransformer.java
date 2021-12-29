@@ -1,5 +1,6 @@
 package igentuman.ncsteamadditions.machine.container;
 
+import igentuman.ncsteamadditions.machine.gui.GuiSteamTransformer;
 import igentuman.ncsteamadditions.processors.SteamTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import nc.container.processor.ContainerItemFluidProcessor;
@@ -18,43 +19,45 @@ public class ContainerSteamTransformer extends ContainerItemFluidProcessor
 	{
 		super(player, tileEntity, NCSteamAdditionsRecipes.steam_transformer);
 
-		int x = 15;
-		int toLimit = 0;
+		int x = GuiSteamTransformer.inputFluidsLeft;
+		int idCounter = 0;
 
 		if(SteamTransformer.inputFluids > 0) {
-			toLimit = SteamTransformer.inputFluids;
-			for(int i = 0; i < toLimit; i++) {
-				x += 20;
-				addSlotToContainer(new SlotProcessorInput(tileEntity, recipeHandler, i, x, 11));
+			for(int i = 0; i < SteamTransformer.inputFluids; i++) {
+				//addSlotToContainer(new SlotProcessorInput(tileEntity, recipeHandler, idCounter, x, GuiSteamTransformer.inputFluidsTop));
+				//x += GuiSteamTransformer.cellSpan;
+				//idCounter++;
 			}
 		}
 
+		x = GuiSteamTransformer.inputItemsLeft;
 		if(SteamTransformer.inputItems > 0) {
-			toLimit += SteamTransformer.inputItems - 1;
-			for (int i = toLimit - SteamTransformer.inputItems; i < toLimit; i++) {
-				x += 20;
-				addSlotToContainer(new SlotProcessorInput(tileEntity, recipeHandler, i, x, 11));
+			for (int i = 0; i < SteamTransformer.inputItems; i++) {
+				addSlotToContainer(new SlotProcessorInput(tileEntity, recipeHandler, idCounter, x, GuiSteamTransformer.inputItemsTop));
+				x += GuiSteamTransformer.cellSpan;
+				idCounter++;
 			}
 		}
 
+		x = 152;
 		if(SteamTransformer.outputFluids > 0) {
-			toLimit += SteamTransformer.outputFluids - 1;
-			for (int i = toLimit - SteamTransformer.outputFluids; i < toLimit; i++) {
-				x += 20;
-				//addSlotToContainer(new SlotFurnace(player, tileEntity, i, x, 42));
+			for (int i = 0; i < SteamTransformer.outputFluids; i++) {
+				//x += GuiSteamTransformer.cellSpan;
+				//addSlotToContainer(new SlotFurnace(player, tileEntity, idCounter, x, GuiSteamTransformer.inputFluidsTop));
+				//idCounter++;
 			}
 		}
-
+		x = 152;
 		if(SteamTransformer.outputItems > 0) {
-			toLimit += SteamTransformer.outputItems - 1;
-			for (int i = toLimit - SteamTransformer.outputItems; i < toLimit; i++) {
-				x += 20;
-				addSlotToContainer(new SlotFurnace(player, tileEntity, i, x, 42));
+			for (int i = 0; i < SteamTransformer.outputItems; i++) {
+				addSlotToContainer(new SlotFurnace(player, tileEntity, idCounter, x, GuiSteamTransformer.inputItemsTop));
+				x += GuiSteamTransformer.cellSpan;
+				idCounter++;
 			}
 		}
 
 		
-		addSlotToContainer(new SlotSpecificInput(tileEntity, toLimit, 132, 64, SPEED_UPGRADE));
+		addSlotToContainer(new SlotSpecificInput(tileEntity, idCounter, 152, 64, SPEED_UPGRADE));
 		
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {

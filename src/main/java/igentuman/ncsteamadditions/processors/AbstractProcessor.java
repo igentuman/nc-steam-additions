@@ -1,17 +1,18 @@
 package igentuman.ncsteamadditions.processors;
 
-import igentuman.ncsteamadditions.enums.ProcessorType;
+import igentuman.ncsteamadditions.gui.GUIHandler;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
 import mezz.jei.api.IGuiHelper;
+import nc.container.processor.ContainerItemFluidProcessor;
+import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
 import net.minecraft.creativetab.CreativeTabs;
-import igentuman.ncsteamadditions.machine.tile.TileNCSteamAdditionsProcessor;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 
 public abstract class AbstractProcessor {
     public static String code;
-
-    public static String PORCESSOR_ENUM;
 
     public static String particle1;
 
@@ -28,6 +29,14 @@ public abstract class AbstractProcessor {
     public static int outputFluids;
 
     public static int outputItems;
+
+    public abstract int getInputItems();
+
+    public abstract int getInputFluids();
+
+    public abstract int getOutputFluids();
+
+    public abstract int getOutputItems();
 
     public static Object[] craftingRecipe;
 
@@ -49,5 +58,19 @@ public abstract class AbstractProcessor {
     public abstract ProcessorType getType();
 
     public abstract Class getTileClass();
+
+    public abstract String getCode();
+
+    public abstract int getGuid();
+
+    public abstract int getSideid();
+
+    public abstract Object getGuiContainer(EntityPlayer player, TileEntity tile);
+
+    public abstract Object getGuiContainerConfig(EntityPlayer player, TileEntity tile);
+
+    public abstract Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile);
+
+    public abstract Object getLocalGuiContainer(EntityPlayer player, TileEntity tile);
 
 }

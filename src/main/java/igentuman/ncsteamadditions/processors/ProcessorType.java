@@ -1,4 +1,4 @@
-package igentuman.ncsteamadditions.enums;
+package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;

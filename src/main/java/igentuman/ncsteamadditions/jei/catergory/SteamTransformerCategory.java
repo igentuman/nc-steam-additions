@@ -1,41 +1,75 @@
 package igentuman.ncsteamadditions.jei.catergory;
 
-import igentuman.ncsteamadditions.jei.recipe.NCSteamAdditionsRecipeWrapper;
+import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.machine.gui.GuiSteamTransformer;
 import igentuman.ncsteamadditions.processors.SteamTransformer;
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IRecipeLayout;
-import mezz.jei.api.ingredients.IIngredients;
-import nc.integration.jei.JEIHelper.RecipeFluidMapper;
-import nc.integration.jei.JEIHelper.RecipeItemMapper;
+import nc.integration.jei.JEIMachineRecipeWrapper;
 import nc.integration.jei.NCJEI.IJEIHandler;
-import nc.recipe.IngredientSorption;
+import nc.recipe.BasicRecipe;
+import nc.recipe.BasicRecipeHandler;
 
-public class SteamTransformerCategory extends JEINCSteamAdditionsMachineCategory<NCSteamAdditionsRecipeWrapper.SteamTransformer>
+public class SteamTransformerCategory extends ParentProcessorCategory
 {
-	
-	public SteamTransformerCategory(IGuiHelper guiHelper, IJEIHandler handler) 
+	private SteamTransformer processor;
+
+	protected int getCellSpan()
 	{
-		super(guiHelper, handler, SteamTransformer.code, 30, 7, 142, 56);
+		return GuiSteamTransformer.cellSpan;
 	}
-	
-	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, NCSteamAdditionsRecipeWrapper.SteamTransformer recipeWrapper, IIngredients ingredients)
+
+	protected int getItemsLeft()
 	{
-		super.setRecipe(recipeLayout, recipeWrapper, ingredients);
-		
-		RecipeItemMapper itemMapper = new RecipeItemMapper();
-		RecipeFluidMapper fluidMapper = new RecipeFluidMapper();
+		return GuiSteamTransformer.inputItemsLeft;
+	}
 
-		fluidMapper.map(IngredientSorption.INPUT, 0, 0, 36 - backPosX, 11 - backPosY,16,16);
+	protected int getFluidsLeft()
+	{
+		return GuiSteamTransformer.inputFluidsLeft;
+	}
 
-		itemMapper.map(IngredientSorption.INPUT, 0, 0, 36 - backPosX, 42 - backPosY);
-		itemMapper.map(IngredientSorption.INPUT, 1, 1, 56 - backPosX, 42 - backPosY);
-		itemMapper.map(IngredientSorption.INPUT, 2, 0, 36 - backPosX, 62 - backPosY);
-		itemMapper.map(IngredientSorption.INPUT, 3, 2, 56 - backPosX, 62 - backPosY);
+	protected int getItemsTop()
+	{
+		return GuiSteamTransformer.inputItemsTop;
+	}
 
-		itemMapper.map(IngredientSorption.OUTPUT, 0, 1, 112 - backPosX, 42 - backPosY);
+	protected int getFluidsTop()
+	{
+		return GuiSteamTransformer.inputFluidsTop;
+	}
 
-		itemMapper.mapItemsTo(recipeLayout.getItemStacks(), ingredients);
-		fluidMapper.mapFluidsTo(recipeLayout.getFluidStacks(), ingredients);
+	@Override
+	public SteamTransformer getProcessor()
+	{
+		return processor;
+	}
+
+	public SteamTransformerCategory(IGuiHelper guiHelper, IJEIHandler handler, SteamTransformer proc)
+	{
+		super(guiHelper, handler, SteamTransformer.code, 24, 7, 148, 56, proc);
+		processor = proc;
+	}
+
+	public static class SteamTransformerWrapper extends JEIMachineRecipeWrapper
+	{
+
+		public SteamTransformerWrapper(IGuiHelper guiHelper, IJEIHandler jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
+		{
+			super(guiHelper, jeiHandler, recipeHandler, recipe, 24, 7, 0, 0, 0, 0, 0, 0, 94, 30, 16, 16);
+		}
+
+		@Override
+		protected double getBaseProcessTime()
+		{
+			if (recipe == null)
+				return NCSteamAdditionsConfig.processor_time[igentuman.ncsteamadditions.processors.SteamTransformer.GUID];
+			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[igentuman.ncsteamadditions.processors.SteamTransformer.GUID]);
+		}
+
+		@Override
+		protected double getBaseProcessPower()
+		{
+			return 0;
+		}
 	}
 }

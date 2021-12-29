@@ -1,10 +1,6 @@
 package igentuman.ncsteamadditions.gui;
 
-import igentuman.ncsteamadditions.machine.container.ContainerSteamTransformer;
-import igentuman.ncsteamadditions.machine.gui.GuiSteamTransformer;
-import igentuman.ncsteamadditions.machine.tile.TileNCSteamAdditionsProcessor.TileSteamTransformer;
 import igentuman.ncsteamadditions.processors.*;
-import nc.container.processor.ContainerMachineConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -21,14 +17,13 @@ public class GUIHandler implements IGuiHandler
 		ID--;
 		if (tile != null)
 		{
-			switch (ID)
-			{
-				case SteamTransformer.GUID:
-					if (tile instanceof TileSteamTransformer)
-						return new ContainerSteamTransformer(player,  (TileSteamTransformer)tile);
-				case SteamTransformer.SIDEID:
-					if (tile instanceof TileSteamTransformer)
-						return new ContainerMachineConfig(player,  (TileSteamTransformer)tile);
+			for(AbstractProcessor processor: ProcessorsRegistry.get().processors()) {
+				if(ID == processor.getGuid() && tile.getClass() == processor.getTileClass()) {
+					return processor.getGuiContainer(player,tile);
+				}
+				if(ID == processor.getSideid() && tile.getClass() == processor.getTileClass()) {
+					return processor.getGuiContainerConfig(player,tile);
+				}
 			}
 		}
 		return null;
@@ -41,14 +36,13 @@ public class GUIHandler implements IGuiHandler
 		ID--;
 		if (tile != null)
 		{
-			switch (ID)
-			{
-				case SteamTransformer.GUID:
-					if (tile instanceof TileSteamTransformer)
-						return new GuiSteamTransformer(player,(TileSteamTransformer) tile);
-				case SteamTransformer.SIDEID:
-					if (tile instanceof TileSteamTransformer)
-						return new GuiSteamTransformer.SideConfig(player,(TileSteamTransformer) tile);
+			for(AbstractProcessor processor: ProcessorsRegistry.get().processors()) {
+				if(ID == processor.getGuid() && tile.getClass() == processor.getTileClass()) {
+					return processor.getLocalGuiContainer(player,tile);
+				}
+				if(ID == processor.getSideid() && tile.getClass() == processor.getTileClass()) {
+					return processor.getLocalGuiContainerConfig(player,tile);
+				}
 			}
 		}
 		return null;

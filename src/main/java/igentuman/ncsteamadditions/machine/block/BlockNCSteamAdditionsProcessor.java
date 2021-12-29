@@ -6,7 +6,7 @@ import static nc.block.property.BlockProperties.FACING_HORIZONTAL;
 import java.util.Random;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
-import igentuman.ncsteamadditions.enums.ProcessorType;
+import igentuman.ncsteamadditions.processors.ProcessorType;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import nc.block.tile.BlockSidedTile;
 import nc.block.tile.IActivatable;
@@ -105,9 +105,6 @@ public class BlockNCSteamAdditionsProcessor extends BlockSidedTile implements IA
 		{
 			if (installUpgrade(tile, ((IUpgradable) tile).getSpeedUpgradeSlot(), player, hand, facing,
 					new ItemStack(NCItems.upgrade, 1, 0)))
-				return true;
-			if (installUpgrade(tile, ((IUpgradable) tile).getEnergyUpgradeSlot(), player, hand, facing,
-					new ItemStack(NCItems.upgrade, 1, 1)))
 				return true;
 		}
 

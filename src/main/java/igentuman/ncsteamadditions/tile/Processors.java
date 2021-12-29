@@ -1,8 +1,8 @@
 package igentuman.ncsteamadditions.tile;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
-import igentuman.ncsteamadditions.machine.tile.TileNCSteamAdditionsProcessor;
-import igentuman.ncsteamadditions.processors.SteamTransformer;
+import igentuman.ncsteamadditions.processors.AbstractProcessor;
+import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -10,7 +10,9 @@ public class Processors
 {
 	public static void register() 
 	{
-		GameRegistry.registerTileEntity(TileNCSteamAdditionsProcessor.TileSteamTransformer.class,
-				new ResourceLocation(NCSteamAdditions.MOD_ID, SteamTransformer.code));
+		for(AbstractProcessor processor: ProcessorsRegistry.get().processors()) {
+			GameRegistry.registerTileEntity(processor.getTileClass(),
+					new ResourceLocation(NCSteamAdditions.MOD_ID, processor.getCode()));
+		}
 	}
 }
