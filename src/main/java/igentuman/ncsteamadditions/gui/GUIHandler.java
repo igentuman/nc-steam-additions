@@ -18,7 +18,7 @@ public class GUIHandler implements IGuiHandler
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
-
+		ID--;
 		if (tile != null)
 		{
 			switch (ID)
@@ -38,7 +38,7 @@ public class GUIHandler implements IGuiHandler
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
-
+		ID--;
 		if (tile != null)
 		{
 			switch (ID)

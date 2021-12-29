@@ -22,8 +22,11 @@ public class Blocks
 
 	public static void init() 
 	{
-		for (AbstractProcessor processor: ProcessorsRegistry.get().processors()) {
-			blocks[processor.GUID] = withName(new BlockNCSteamAdditionsProcessor(processor));
+		AbstractProcessor[] processors = ProcessorsRegistry.get().processors();
+		blocks = new Block[processors.length];
+		for (AbstractProcessor processor: processors) {
+			BlockNCSteamAdditionsProcessor processorBlock = new BlockNCSteamAdditionsProcessor(processor);
+			blocks[processor.GUID] = withName(processorBlock);
 		}
 	}
 	

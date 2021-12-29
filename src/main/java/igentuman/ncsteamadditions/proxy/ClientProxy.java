@@ -3,6 +3,7 @@ package igentuman.ncsteamadditions.proxy;
 import static igentuman.ncsteamadditions.config.NCSteamAdditionsConfig.clientPreInit;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
+import igentuman.ncsteamadditions.render.RenderHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -24,7 +25,7 @@ public class ClientProxy extends CommonProxy
 	{
 		super.preInit(preEvent);
 		clientPreInit();
-		
+		RenderHandler.init();
 	}
 
 

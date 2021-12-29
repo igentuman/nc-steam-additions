@@ -27,7 +27,7 @@ public class NCSteamAdditionsCraftingRecipeHandler
 	{
 		//crafting
 		for (AbstractProcessor processor: ProcessorsRegistry.get().processors()) {
-			addShapedOreRecipe(Blocks.blocks[processor.GUID], processor);
+			addShapedOreRecipe(Blocks.blocks[processor.GUID], processor.getCraftingRecipe());
 		}
 
 	}

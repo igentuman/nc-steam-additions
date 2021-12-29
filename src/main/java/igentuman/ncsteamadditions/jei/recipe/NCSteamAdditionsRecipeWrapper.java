@@ -22,8 +22,8 @@ public class NCSteamAdditionsRecipeWrapper
 		protected double getBaseProcessTime()
 		{
 			if (recipe == null)
-				return NCSteamAdditionsConfig.processor_time[0];
-			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[0]);
+				return NCSteamAdditionsConfig.processor_time[igentuman.ncsteamadditions.processors.SteamTransformer.GUID];
+			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[igentuman.ncsteamadditions.processors.SteamTransformer.GUID]);
 		}
 
 		@Override

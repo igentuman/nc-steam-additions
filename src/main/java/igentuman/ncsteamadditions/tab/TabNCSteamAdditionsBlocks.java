@@ -15,6 +15,6 @@ public class TabNCSteamAdditionsBlocks extends CreativeTabs
 	@Override
 	public ItemStack createIcon()
 	{
-		return new ItemStack(Blocks.blocks[1]);
+		return new ItemStack(Blocks.blocks[0]);
 	}
 }

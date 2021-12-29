@@ -1,7 +1,7 @@
 package igentuman.ncsteamadditions.enums;
 
-import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.block.Blocks;
+import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,10 +12,16 @@ import java.lang.reflect.InvocationTargetException;
 public class ProcessorType {
     private String name;
     private int id;
+    private AbstractProcessor processor;
 
     public ProcessorType(String name, int id, String particle1, String particle2) {
         this.name = name;
         this.id = id;
+    }
+
+    public void setProcessor(AbstractProcessor proc)
+    {
+        processor = proc;
     }
 
     public String getName() {
@@ -27,14 +33,9 @@ public class ProcessorType {
     }
 
     public TileEntity getTile(){
-        Class cTile = null;
         try {
-            cTile = Class.forName(name);
-        } catch (ClassNotFoundException e) {
-            return null;
-        }
-        try {
-            return (TileEntity) cTile.getDeclaredConstructor().newInstance();
+            TileEntity tEntity = (TileEntity) processor.getTileClass().getDeclaredConstructor().newInstance();
+            return tEntity;
         } catch (InstantiationException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             return null;
         }

@@ -6,6 +6,7 @@ import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
 import mezz.jei.api.IGuiHelper;
 import nc.integration.jei.JEIBasicCategory;
 import net.minecraft.creativetab.CreativeTabs;
+import igentuman.ncsteamadditions.machine.tile.TileNCSteamAdditionsProcessor;
 
 public abstract class AbstractProcessor {
     public static String code;
@@ -28,20 +29,25 @@ public abstract class AbstractProcessor {
 
     public static int outputItems;
 
-    public static Object craftingRecipe;
+    public static Object[] craftingRecipe;
 
     public JEIHandler recipeHandler;
 
+    public abstract Object[] getCraftingRecipe();
+
+    public abstract JEIHandler getRecipeHandler();
+
     public abstract JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper);
 
-    public static CreativeTabs getCreativeTab()
+    public CreativeTabs getCreativeTab()
     {
         return NCSteamAdditionsTabs.ITEMS;
     }
 
-    public static ProcessorType getType()
-    {
-        return new ProcessorType(code,GUID,particle1,particle2);
-    }
+    protected ProcessorType type;
+
+    public abstract ProcessorType getType();
+
+    public abstract Class getTileClass();
 
 }

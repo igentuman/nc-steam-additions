@@ -5,6 +5,7 @@ import java.util.List;
 
 import igentuman.ncsteamadditions.processors.SteamTransformer;
 import nc.recipe.BasicRecipeHandler;
+import nc.recipe.ingredient.EmptyItemIngredient;
 import nc.util.FluidStackHelper;
 
 public class SteamTransformerRecipes extends BasicRecipeHandler
@@ -18,7 +19,7 @@ public class SteamTransformerRecipes extends BasicRecipeHandler
 	@Override
 	public void addRecipes()
 	{
-		addRecipe("dustRedstone",
+		addRecipe("dustRedstone",new EmptyItemIngredient(),new EmptyItemIngredient(),new EmptyItemIngredient(),
 				fluidStack("steam", FluidStackHelper.INGOT_VOLUME),
 				oreStack("dustIron", 1)
 				);

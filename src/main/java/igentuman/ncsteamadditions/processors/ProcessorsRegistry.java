@@ -21,9 +21,9 @@ public class ProcessorsRegistry {
 
     public AbstractProcessor[] processors()
     {
-        if(processorList.length == 0) {
+        if(processorList == null || processorList.length == 0) {
             processorList = new AbstractProcessor[]{
-                    new SteamTransformer()
+                   new SteamTransformer()
             };
         }
         return processorList;

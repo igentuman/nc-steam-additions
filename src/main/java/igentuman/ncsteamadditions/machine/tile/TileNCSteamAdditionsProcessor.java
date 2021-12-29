@@ -21,10 +21,10 @@ public class TileNCSteamAdditionsProcessor
 					defaultTankCapacities(5000, SteamTransformer.inputFluids, SteamTransformer.outputFluids),
 					defaultTankSorptions(SteamTransformer.inputFluids, SteamTransformer.outputFluids),
 					NCSteamAdditionsRecipes.steam_transformer_valid_fluids,
-					NCSteamAdditionsConfig.processor_time[0],
+					NCSteamAdditionsConfig.processor_time[SteamTransformer.GUID],
 					0, true,
 					NCSteamAdditionsRecipes.steam_transformer,
-					SteamTransformer.GUID, 0
+					SteamTransformer.GUID+1, 0
 			);
 		}
 	}

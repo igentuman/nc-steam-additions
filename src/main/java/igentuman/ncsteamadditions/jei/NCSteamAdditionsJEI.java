@@ -27,8 +27,8 @@ public class NCSteamAdditionsJEI implements IModPlugin
 		IJeiHelpers jeiHelpers = registry.getJeiHelpers();
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 		for (AbstractProcessor processor: ProcessorsRegistry.get().processors()) {
-			registry.addRecipes(processor.recipeHandler.getJEIRecipes(guiHelper), processor.recipeHandler.getUid());
-			registry.addRecipeCatalyst(processor.recipeHandler.getCrafters().get(0), processor.recipeHandler.getUid());
+			registry.addRecipes(processor.getRecipeHandler().getJEIRecipes(guiHelper), processor.getRecipeHandler().getUid());
+			registry.addRecipeCatalyst(processor.getRecipeHandler().getCrafters().get(0), processor.getRecipeHandler().getUid());
 		}
 	}
 }
