@@ -1,6 +1,8 @@
 package igentuman.ncsteamadditions.block;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
+import igentuman.ncsteamadditions.item.ItemPipe;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.machine.block.BlockNCSteamAdditionsProcessor;
 import igentuman.ncsteamadditions.processors.*;
 import nc.block.item.NCItemBlock;
@@ -19,15 +21,18 @@ public class Blocks
 {
 
 	public static Block[] blocks;
+	public static Block[] otherBlocks;
 
 	public static void init() 
 	{
 		AbstractProcessor[] processors = ProcessorsRegistry.get().processors();
 		blocks = new Block[processors.length];
+		otherBlocks = new Block[1];
 		for (AbstractProcessor processor: processors) {
 			BlockNCSteamAdditionsProcessor processorBlock = new BlockNCSteamAdditionsProcessor(processor);
 			blocks[processor.GUID] = withName(processorBlock);
 		}
+		otherBlocks[0] = withName(new BlockPipe(),"pipe");
 	}
 	
 	public static void register() 
@@ -35,11 +40,17 @@ public class Blocks
 		for(Block block: blocks) {
 			registerBlock(block);
 		}
+		for(Block block: otherBlocks) {
+			registerBlock(block,Items.getItemBlock(block));
+		}
 	}
 
 	public static void registerRenders() 
 	{
 		for(Block block: blocks) {
+			registerRender(block);
+		}
+		for(Block block: otherBlocks) {
 			registerRender(block);
 		}
 	}
@@ -75,6 +86,10 @@ public class Blocks
 	}
 	
 	public static void registerBlock(Block block, ItemBlock itemBlock) {
+		if(null == itemBlock) {
+			registerBlock(block);
+			return;
+		}
 		ForgeRegistries.BLOCKS.register(block);
 		ForgeRegistries.ITEMS.register(itemBlock.setRegistryName(block.getRegistryName()));
 	}

@@ -1,0 +1,56 @@
+{
+  "credit": "Made with Blockbench",
+  "textures": {
+    "extraction": "minecraft:blocks/iron_block"
+  },
+  "elements": [
+    {
+      "from": [4, 4, 0],
+      "to": [12, 5, 2],
+      "faces": {
+        "north": {"uv": [3, 12, 11, 13], "texture": "#extraction"},
+        "east": {"uv": [9, 4, 11, 5], "texture": "#extraction"},
+        "south": {"uv": [2, 14, 10, 15], "texture": "#extraction"},
+        "west": {"uv": [6, 4, 8, 5], "texture": "#extraction"},
+        "up": {"uv": [5, 9, 13, 11], "texture": "#extraction"},
+        "down": {"uv": [5, 6, 13, 8], "texture": "#extraction"}
+      }
+    },
+    {
+      "from": [4, 11, 0],
+      "to": [12, 12, 2],
+      "faces": {
+        "north": {"uv": [4, 7, 12, 8], "texture": "#extraction"},
+        "east": {"uv": [7, 9, 9, 10], "texture": "#extraction"},
+        "south": {"uv": [2, 7, 10, 8], "texture": "#extraction"},
+        "west": {"uv": [3, 8, 5, 9], "texture": "#extraction"},
+        "up": {"uv": [4, 11, 12, 13], "texture": "#extraction"},
+        "down": {"uv": [3, 7, 11, 9], "texture": "#extraction"}
+      }
+    },
+    {
+      "from": [4, 5, 0],
+      "to": [5, 11, 2],
+      "faces": {
+        "north": {"uv": [11, 5, 12, 11], "texture": "#extraction"},
+        "east": {"uv": [12, 3, 14, 9], "texture": "#extraction"},
+        "south": {"uv": [9, 6, 10, 12], "texture": "#extraction"},
+        "west": {"uv": [10, 4, 12, 10], "texture": "#extraction"},
+        "up": {"uv": [8, 12, 9, 14], "texture": "#extraction"},
+        "down": {"uv": [6, 6, 7, 8], "texture": "#extraction"}
+      }
+    },
+    {
+      "from": [11, 5, 0],
+      "to": [12, 11, 2],
+      "faces": {
+        "north": {"uv": [9, 4, 10, 10], "texture": "#extraction"},
+        "east": {"uv": [5, 7, 7, 13], "texture": "#extraction"},
+        "south": {"uv": [3, 8, 4, 14], "texture": "#extraction"},
+        "west": {"uv": [6, 6, 8, 12], "texture": "#extraction"},
+        "up": {"uv": [5, 6, 6, 8], "texture": "#extraction"},
+        "down": {"uv": [11, 7, 12, 9], "texture": "#extraction"}
+      }
+    }
+  ]
+}

@@ -6,7 +6,7 @@ import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class Processors
+public class NCSteamAdditionsTiles
 {
 	public static void register() 
 	{
@@ -14,5 +14,7 @@ public class Processors
 			GameRegistry.registerTileEntity(processor.getTileClass(),
 					new ResourceLocation(NCSteamAdditions.MOD_ID, processor.getCode()));
 		}
+		GameRegistry.registerTileEntity(TilePipe.class,
+				new ResourceLocation(NCSteamAdditions.MOD_ID, "pipe"));
 	}
 }

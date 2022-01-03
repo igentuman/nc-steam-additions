@@ -4,7 +4,7 @@ import java.util.Locale;
 import crafttweaker.CraftTweakerAPI;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
-import igentuman.ncsteamadditions.tile.Processors;
+import igentuman.ncsteamadditions.tile.NCSteamAdditionsTiles;
 import nc.ModCheck;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +24,7 @@ public class CommonProxy
 
 		Blocks.init();
 		Blocks.register();
-		Processors.register();
+		NCSteamAdditionsTiles.register();
 		MinecraftForge.EVENT_BUS.register(new NCSteamAdditionsRecipes());
 	}
 	

@@ -1,0 +1,128 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ncsteamadditions:pipe_middle"
+      }
+    },
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "ncsteamadditions:pipe_side",
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "ncsteamadditions:pipe_side",
+        "y": 90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "ncsteamadditions:pipe_side",
+        "y": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "ncsteamadditions:pipe_side",
+        "y": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": {
+        "model": "ncsteamadditions:pipe_side",
+        "x": -90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": {
+        "model": "ncsteamadditions:pipe_side",
+        "x": 90,
+        "uvlock": false
+      }
+    },
+
+    {
+      "when": {
+        "extract_north": "true"
+      },
+      "apply": {
+        "model": "ncsteamadditions:pipe_extraction",
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "extract_east": "true"
+      },
+      "apply": {
+        "model": "ncsteamadditions:pipe_extraction",
+        "y": 90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "extract_south": "true"
+      },
+      "apply": {
+        "model": "ncsteamadditions:pipe_extraction",
+        "y": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "extract_west": "true"
+      },
+      "apply": {
+        "model": "ncsteamadditions:pipe_extraction",
+        "y": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "extract_up": "true"
+      },
+      "apply": {
+        "model": "ncsteamadditions:pipe_extraction",
+        "x": -90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "extract_down": "true"
+      },
+      "apply": {
+        "model": "ncsteamadditions:pipe_extraction",
+        "x": 90,
+        "uvlock": false
+      }
+    }
+  ]
+}

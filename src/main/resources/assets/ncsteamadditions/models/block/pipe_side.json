@@ -1,0 +1,61 @@
+{
+  "credit": "Made with Blockbench",
+  "textures": {
+    "main": "ncsteamadditions:blocks/pipe/side",
+    "particle": "ncsteamadditions:blocks/pipe/side"
+  },
+  "elements": [
+    {
+      "name": "north_1",
+      "from": [5, 5, 0],
+      "to": [11, 6, 4],
+      "faces": {
+        "north": {"uv": [5, 15, 11, 16], "texture": "#main"},
+        "east": {"uv": [12, 9, 16, 10], "texture": "#main"},
+        "south": {"uv": [5, 15, 11, 16], "texture": "#main"},
+        "west": {"uv": [0, 9, 4, 10], "texture": "#main"},
+        "up": {"uv": [5, 0, 11, 4], "texture": "#main"},
+        "down": {"uv": [5, 12, 11, 16], "texture": "#main"}
+      }
+    },
+    {
+      "name": "north_2",
+      "from": [5, 10, 0],
+      "to": [11, 11, 4],
+      "faces": {
+        "north": {"uv": [5, 0, 11, 1], "texture": "#main"},
+        "east": {"uv": [12, 6, 16, 7], "texture": "#main"},
+        "south": {"uv": [5, 0, 11, 1], "texture": "#main"},
+        "west": {"uv": [0, 6, 4, 7], "texture": "#main"},
+        "up": {"uv": [5, 0, 11, 4], "texture": "#main"},
+        "down": {"uv": [5, 12, 11, 16], "texture": "#main"}
+      }
+    },
+    {
+      "name": "north_3",
+      "from": [10, 6, 0],
+      "to": [11, 10, 4],
+      "faces": {
+        "north": {"uv": [0, 6, 1, 10], "texture": "#main"},
+        "east": {"uv": [12, 6, 16, 10], "texture": "#main"},
+        "south": {"uv": [15, 6, 16, 10], "texture": "#main"},
+        "west": {"uv": [0, 6, 4, 10], "texture": "#main"},
+        "up": {"uv": [0, 0, 1, 0], "texture": "#main"},
+        "down": {"uv": [0, 0, 1, 0], "texture": "#main"}
+      }
+    },
+    {
+      "name": "north_4",
+      "from": [5, 6, 0],
+      "to": [6, 10, 4],
+      "faces": {
+        "north": {"uv": [15, 6, 16, 10], "texture": "#main"},
+        "east": {"uv": [12, 6, 16, 10], "texture": "#main"},
+        "south": {"uv": [0, 6, 1, 10], "texture": "#main"},
+        "west": {"uv": [0, 6, 4, 10], "texture": "#main"},
+        "up": {"uv": [0, 0, 1, 0], "texture": "#main"},
+        "down": {"uv": [0, 0, 1, 0], "texture": "#main"}
+      }
+    }
+  ]
+}
