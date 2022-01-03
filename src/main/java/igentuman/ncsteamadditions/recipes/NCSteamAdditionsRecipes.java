@@ -17,26 +17,31 @@ public class NCSteamAdditionsRecipes
 	private static boolean initialized = false;
 
 	public static SteamTransformerRecipes steam_transformer;
+	public static SteamCrusherRecipes steam_crusher;
 
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void registerRecipes(RegistryEvent.Register<IRecipe> event)
 	{
 		if (initialized)
 			return;
-		steam_transformer = new SteamTransformerRecipes();
+		steam_transformer 	= new SteamTransformerRecipes();
+		steam_crusher 		= new SteamCrusherRecipes();
 		addRecipes();
 		initialized = true;
 	}
 
-	public static List<List<String>> steam_transformer_valid_fluids;
+	public static List<List<String>> steam_valid_fluids;
 
 	public static void init() 
 	{
-		steam_transformer_valid_fluids = RecipeHelper.validFluids(steam_transformer);
+
+		steam_valid_fluids = RecipeHelper.validFluids(steam_transformer);
 	}
 
 	public static void refreshRecipeCaches() 
 	{
+
+		steam_crusher.refreshCache();
 		steam_transformer.refreshCache();
 	}
 	

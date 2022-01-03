@@ -23,7 +23,8 @@ public class ProcessorsRegistry {
     {
         if(processorList == null || processorList.length == 0) {
             processorList = new AbstractProcessor[]{
-                   new SteamTransformer()
+                    new SteamTransformer(),
+                    new SteamCrusher()
             };
         }
         return processorList;

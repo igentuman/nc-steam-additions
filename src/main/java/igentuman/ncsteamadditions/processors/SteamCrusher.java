@@ -3,11 +3,11 @@ package igentuman.ncsteamadditions.processors;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.catergory.SteamTransformerCategory;
-import igentuman.ncsteamadditions.machine.container.ContainerSteamTransformer;
-import igentuman.ncsteamadditions.machine.gui.GuiSteamTransformer;
+import igentuman.ncsteamadditions.jei.catergory.SteamCrusherCategory;
+import igentuman.ncsteamadditions.machine.container.ContainerSteamCrusher;
+import igentuman.ncsteamadditions.machine.gui.GuiSteamCrusher;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
-import igentuman.ncsteamadditions.recipes.SteamTransformerRecipes;
+import igentuman.ncsteamadditions.recipes.SteamCrusherRecipes;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCBlocks;
@@ -16,19 +16,19 @@ import nc.tile.processor.TileItemFluidProcessor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
-public class SteamTransformer extends AbstractProcessor {
+public class SteamCrusher extends AbstractProcessor {
 
-    public static String code = "steam_transformer";
+    public static String code = "steam_crusher";
 
     public static String particle1 = "splash";
 
     public static String particle2 = "reddust";
 
-    public final static int GUID = 0;
+    public final static int GUID = 1;
 
     public final static int SIDEID = 1000+ GUID;
 
-    public static int inputItems = 4;
+    public static int inputItems = 1;
 
     public static int inputFluids = 1;
 
@@ -36,7 +36,7 @@ public class SteamTransformer extends AbstractProcessor {
 
     public static int outputItems = 1;
 
-    public static SteamTransformerRecipes recipes;
+    public static SteamCrusherRecipes recipes;
 
     public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "plateElite", 'F', "chassis", 'C', NCBlocks.chemical_reactor, 'R', NCBlocks.rock_crusher, 'H', "ingotHardCarbon"};
 
@@ -79,19 +79,19 @@ public class SteamTransformer extends AbstractProcessor {
     }
 
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTransformer(player,  (SteamTransformer.TileSteamTransformer)tile,this);
+        return new GuiSteamCrusher(player,  (SteamCrusher.TileSteamCrusher)tile,this);
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTransformer.SideConfig(player,  (SteamTransformer.TileSteamTransformer)tile,code);
+        return new GuiSteamCrusher.SideConfig(player,  (SteamCrusher.TileSteamCrusher)tile,code);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamTransformer(player,  (SteamTransformer.TileSteamTransformer)tile);
+        return new ContainerSteamCrusher(player,  (SteamCrusher.TileSteamCrusher)tile);
     }
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player,  (SteamTransformer.TileSteamTransformer)tile);
+        return new ContainerMachineConfig(player,  (SteamCrusher.TileSteamCrusher)tile);
     }
 
     public JEIHandler getRecipeHandler()
@@ -101,8 +101,8 @@ public class SteamTransformer extends AbstractProcessor {
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.steam_transformer, Blocks.blocks[SteamTransformer.GUID], SteamTransformer.code, SteamTransformerCategory.SteamTransformerWrapper.class);
-        return new SteamTransformerCategory(guiHelper,recipeHandler, this);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.steam_crusher, Blocks.blocks[SteamCrusher.GUID], SteamCrusher.code, SteamCrusherCategory.SteamCrusherWrapper.class);
+        return new SteamCrusherCategory(guiHelper,recipeHandler, this);
     }
 
     public ProcessorType getType()
@@ -116,12 +116,12 @@ public class SteamTransformer extends AbstractProcessor {
 
     public Class getTileClass()
     {
-        return TileSteamTransformer.class;
+        return TileSteamCrusher.class;
     }
 
-    public static class TileSteamTransformer extends TileItemFluidProcessor
+    public static class TileSteamCrusher extends TileItemFluidProcessor
     {
-        public TileSteamTransformer()
+        public TileSteamCrusher()
         {
             super(
                     code,
@@ -135,7 +135,7 @@ public class SteamTransformer extends AbstractProcessor {
                     NCSteamAdditionsRecipes.steam_valid_fluids,
                     NCSteamAdditionsConfig.processor_time[GUID],
                     0, true,
-                    NCSteamAdditionsRecipes.steam_transformer,
+                    NCSteamAdditionsRecipes.steam_crusher,
                     GUID+1, 0
             );
         }

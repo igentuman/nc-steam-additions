@@ -30,7 +30,7 @@ public class Blocks
 		otherBlocks = new Block[1];
 		for (AbstractProcessor processor: processors) {
 			BlockNCSteamAdditionsProcessor processorBlock = new BlockNCSteamAdditionsProcessor(processor);
-			blocks[processor.GUID] = withName(processorBlock);
+			blocks[processor.getGuid()] = withName(processorBlock);
 		}
 		otherBlocks[0] = withName(new BlockPipe(),"pipe");
 	}

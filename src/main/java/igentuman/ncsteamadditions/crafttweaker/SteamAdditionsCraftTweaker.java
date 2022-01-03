@@ -45,4 +45,33 @@ public class SteamAdditionsCraftTweaker
 		}
 	}
 
+	@ZenClass("mods.ncsteamadditions.steam_crusher")
+	@ZenRegister
+	public static class SteamCrusherHandler
+	{
+
+		@ZenMethod
+		public static void addRecipe(IIngredient input1,IIngredient input2, IIngredient output1, @Optional(valueDouble = 1D) double timeMultiplier)
+		{
+			CraftTweakerAPI.apply(new CTAddRecipe(NCSteamAdditionsRecipes.steam_crusher, Lists.newArrayList(input1, input2, output1, timeMultiplier)));
+		}
+
+		@ZenMethod
+		public static void removeRecipeWithInput(IIngredient input1,IIngredient input2)
+		{
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.steam_crusher, IngredientSorption.INPUT, Lists.newArrayList(input1,input2)));
+		}
+
+		@ZenMethod
+		public static void removeRecipeWithOutput(IIngredient output1)
+		{
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.steam_crusher, IngredientSorption.OUTPUT, Lists.newArrayList(output1)));
+		}
+
+		@ZenMethod
+		public static void removeAllRecipes()
+		{
+			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.steam_crusher));
+		}
+	}
 }
