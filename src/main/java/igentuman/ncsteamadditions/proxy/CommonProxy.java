@@ -5,6 +5,7 @@ import crafttweaker.CraftTweakerAPI;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.NCSteamAdditionsTiles;
+import igentuman.ncsteamadditions.item.Items;
 import nc.ModCheck;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,9 +22,10 @@ public class CommonProxy
 		if (ModCheck.craftTweakerLoaded()) {
 			CraftTweakerAPI.tweaker.loadScript(false, "ncsteamadditions_preinit");
 		}
-
+		Items.init();
 		Blocks.init();
 		Blocks.register();
+		Items.register();
 		NCSteamAdditionsTiles.register();
 		MinecraftForge.EVENT_BUS.register(new NCSteamAdditionsRecipes());
 	}

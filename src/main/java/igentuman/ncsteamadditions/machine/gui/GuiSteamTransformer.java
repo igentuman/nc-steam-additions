@@ -23,7 +23,7 @@ public class GuiSteamTransformer  extends GuiItemFluidMachine
 
 	private GuiSteamTransformer(EntityPlayer player, TileItemFluidProcessor tile, ContainerTile container, SteamTransformer processor)
 	{
-		super(SteamTransformer.code, player, tile, container);
+		super(processor.getCode(), player, tile, container);
 		xSize = 176;
 		ySize = 166;
 		this.processor = processor;

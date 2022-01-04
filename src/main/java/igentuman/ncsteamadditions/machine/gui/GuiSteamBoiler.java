@@ -23,7 +23,7 @@ public class GuiSteamBoiler extends GuiItemFluidMachine
 
 	private GuiSteamBoiler(EntityPlayer player, TileItemFluidProcessor tile, ContainerTile container, SteamBoiler processor)
 	{
-		super(SteamBoiler.code, player, tile, container);
+		super(processor.getCode(), player, tile, container);
 		xSize = 176;
 		ySize = 166;
 		this.processor = processor;

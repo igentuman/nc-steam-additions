@@ -23,7 +23,7 @@ public class GuiSteamCrusher extends GuiItemFluidMachine
 
 	private GuiSteamCrusher(EntityPlayer player, TileItemFluidProcessor tile, ContainerTile container, SteamCrusher processor)
 	{
-		super(SteamCrusher.code, player, tile, container);
+		super(processor.getCode(), player, tile, container);
 		xSize = 176;
 		ySize = 166;
 		this.processor = processor;

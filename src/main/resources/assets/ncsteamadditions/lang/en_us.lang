@@ -11,5 +11,6 @@ tile.ncsteamadditions.steam_boiler.name=Steam Boiler
 tile.ncsteamadditions.steam_crusher.desc=Crushes items with the power of steam
 
 tile.ncsteamadditions.pipe.name=Fluid Pipe
+tile.ncsteamadditions.copper_sheet.name=Fluid Pipe
 
 itemGroup.ncsteamadditions.blocks=NC Steam Additions
