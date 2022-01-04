@@ -25,7 +25,8 @@ public class ProcessorsRegistry {
             processorList = new AbstractProcessor[]{
                     new SteamTransformer(),
                     new SteamCrusher(),
-                    new SteamBoiler()
+                    new SteamBoiler(),
+                    new SteamFluidTransformer()
             };
         }
         return processorList;

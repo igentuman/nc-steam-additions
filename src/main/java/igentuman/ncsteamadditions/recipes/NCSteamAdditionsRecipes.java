@@ -19,25 +19,29 @@ public class NCSteamAdditionsRecipes
 	public static SteamTransformerRecipes steam_transformer;
 	public static SteamCrusherRecipes steam_crusher;
 	public static SteamBoilerRecipes steam_boiler;
+	public static SteamFluidTransformerRecipes steam_fluid_transformer;
 
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void registerRecipes(RegistryEvent.Register<IRecipe> event)
 	{
 		if (initialized)
 			return;
-		steam_transformer 	= new SteamTransformerRecipes();
-		steam_boiler 		= new SteamBoilerRecipes();
-		steam_crusher 		= new SteamCrusherRecipes();
+		steam_transformer 			= new SteamTransformerRecipes();
+		steam_boiler 				= new SteamBoilerRecipes();
+		steam_crusher 				= new SteamCrusherRecipes();
+		steam_fluid_transformer 	= new SteamFluidTransformerRecipes();
 		addRecipes();
 		initialized = true;
 	}
 
 	public static List<List<String>> steam_valid_fluids;
 	public static List<List<String>> steam_boiler_valid_fluids;
+	public static List<List<String>> steam_fluid_transformer_valid_fluids;
 
 	public static void init() 
 	{
 		steam_valid_fluids = RecipeHelper.validFluids(steam_transformer);
+		steam_fluid_transformer_valid_fluids = RecipeHelper.validFluids(steam_fluid_transformer);
 		steam_boiler_valid_fluids = RecipeHelper.validFluids(steam_boiler);
 	}
 
@@ -47,6 +51,7 @@ public class NCSteamAdditionsRecipes
 		steam_crusher.refreshCache();
 		steam_boiler.refreshCache();
 		steam_transformer.refreshCache();
+		steam_fluid_transformer.refreshCache();
 	}
 	
 	public static void addRecipes()
