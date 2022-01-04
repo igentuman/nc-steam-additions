@@ -16,7 +16,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class NCSteamAdditionsConfig {
 
 	private static Configuration config = null;
-	public static int[] processor_power;
 	public static int[] processor_time;
 
 	public static final String CATEGORY_PROCESSORS = "processors";
@@ -44,7 +43,7 @@ public class NCSteamAdditionsConfig {
 	{
 		if (loadFromFile) config.load();
 
-		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {400,200}, Lang.localise("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
+		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {400,200,400}, Lang.localise("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
 		propertyProcessorTime.setLanguageKey("gui.ncsteamadditions.config.processors.time");
 
 		List<String> propertyOrderProcessors = new ArrayList<String>();

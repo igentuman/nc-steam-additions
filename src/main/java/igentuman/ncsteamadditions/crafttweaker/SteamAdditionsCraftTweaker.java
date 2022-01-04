@@ -74,4 +74,34 @@ public class SteamAdditionsCraftTweaker
 			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.steam_crusher));
 		}
 	}
+
+	@ZenClass("mods.ncsteamadditions.steam_boiler")
+	@ZenRegister
+	public static class SteamBoilerHandler
+	{
+
+		@ZenMethod
+		public static void addRecipe(IIngredient input1,IIngredient input2, IIngredient output1, @Optional(valueDouble = 1D) double timeMultiplier)
+		{
+			CraftTweakerAPI.apply(new CTAddRecipe(NCSteamAdditionsRecipes.steam_boiler, Lists.newArrayList(input1, input2, output1, timeMultiplier)));
+		}
+
+		@ZenMethod
+		public static void removeRecipeWithInput(IIngredient input1,IIngredient input2)
+		{
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.steam_boiler, IngredientSorption.INPUT, Lists.newArrayList(input1,input2)));
+		}
+
+		@ZenMethod
+		public static void removeRecipeWithOutput(IIngredient output1)
+		{
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.steam_boiler, IngredientSorption.OUTPUT, Lists.newArrayList(output1)));
+		}
+
+		@ZenMethod
+		public static void removeAllRecipes()
+		{
+			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.steam_boiler));
+		}
+	}
 }
