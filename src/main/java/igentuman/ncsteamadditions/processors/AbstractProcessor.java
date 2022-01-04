@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.gui.GUIHandler;
 import igentuman.ncsteamadditions.jei.JEIHandler;
+import igentuman.ncsteamadditions.recipes.ProcessorRecipeHandler;
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerItemFluidProcessor;
@@ -72,5 +73,19 @@ public abstract class AbstractProcessor {
     public abstract Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile);
 
     public abstract Object getLocalGuiContainer(EntityPlayer player, TileEntity tile);
+
+    public abstract RecipeHandler getRecipes();
+    public abstract class RecipeHandler extends ProcessorRecipeHandler {
+
+        public RecipeHandler() {
+            super(code, inputItems, inputFluids, outputItems, outputFluids);
+        }
+
+        public RecipeHandler(String code, int inputItems, int inputFluids, int outputItems, int outputFluids) {
+            super(code, inputItems, inputFluids, outputItems, outputFluids);
+        }
+
+        public abstract void addRecipes();
+    };
 
 }

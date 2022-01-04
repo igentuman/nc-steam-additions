@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.machine.container;
 
 import igentuman.ncsteamadditions.machine.gui.GuiSteamFluidTransformer;
 import igentuman.ncsteamadditions.processors.SteamFluidTransformer;
+import igentuman.ncsteamadditions.processors.SteamTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import nc.container.processor.ContainerItemFluidProcessor;
 import nc.container.slot.SlotFurnace;
@@ -16,7 +17,7 @@ public class ContainerSteamFluidTransformer extends ContainerItemFluidProcessor
 
 	public ContainerSteamFluidTransformer(EntityPlayer player, TileItemFluidProcessor tileEntity)
 	{
-		super(player, tileEntity, NCSteamAdditionsRecipes.steam_fluid_transformer);
+		super(player, tileEntity, NCSteamAdditionsRecipes.processorRecipeHandlers[SteamFluidTransformer.GUID]);
 
 		int x = GuiSteamFluidTransformer.inputFluidsLeft;
 		int idCounter = 0;

@@ -7,12 +7,12 @@ import igentuman.ncsteamadditions.jei.catergory.SteamCrusherCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamCrusher;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamCrusher;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
-import igentuman.ncsteamadditions.recipes.SteamCrusherRecipes;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
 import nc.tile.processor.TileItemFluidProcessor;
+import nc.util.FluidStackHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
@@ -36,7 +36,7 @@ public class SteamCrusher extends AbstractProcessor {
 
     public static int outputItems = 1;
 
-    public static SteamCrusherRecipes recipes;
+    public static RecipeHandler recipes;
 
     public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "plateElite", 'F', "chassis", 'C', NCBlocks.chemical_reactor, 'R', NCBlocks.rock_crusher, 'H', "ingotHardCarbon"};
 
@@ -101,7 +101,7 @@ public class SteamCrusher extends AbstractProcessor {
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.steam_crusher, Blocks.blocks[SteamCrusher.GUID], SteamCrusher.code, SteamCrusherCategory.SteamCrusherWrapper.class);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[SteamCrusher.GUID], SteamCrusher.code, SteamCrusherCategory.SteamCrusherWrapper.class);
         return new SteamCrusherCategory(guiHelper,recipeHandler, this);
     }
 
@@ -132,11 +132,33 @@ public class SteamCrusher extends AbstractProcessor {
                     defaultItemSorptions(inputItems, outputItems, true),
                     defaultTankCapacities(5000, inputFluids, outputFluids),
                     defaultTankSorptions(inputFluids, outputFluids),
-                    NCSteamAdditionsRecipes.steam_valid_fluids,
+                    NCSteamAdditionsRecipes.validFluids[GUID],
                     NCSteamAdditionsConfig.processor_time[GUID],
                     0, true,
-                    NCSteamAdditionsRecipes.steam_crusher,
+                    NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
                     GUID+1, 0
+            );
+        }
+    }
+
+    public SteamCrusher.RecipeHandler getRecipes()
+    {
+        return new SteamCrusher.RecipeHandler();
+    }
+
+
+    public class RecipeHandler extends AbstractProcessor.RecipeHandler {
+        public RecipeHandler()
+        {
+            super(code, inputItems, inputFluids, outputItems, outputFluids);
+        }
+
+        @Override
+        public void addRecipes()
+        {
+            addRecipe("dustRedstone",
+                    fluidStack("steam", FluidStackHelper.INGOT_VOLUME),
+                    oreStack("dustIron", 1)
             );
         }
     }

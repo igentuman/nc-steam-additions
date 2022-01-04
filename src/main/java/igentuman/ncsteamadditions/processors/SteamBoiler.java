@@ -7,12 +7,12 @@ import igentuman.ncsteamadditions.jei.catergory.SteamBoilerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBoiler;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamBoiler;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
-import igentuman.ncsteamadditions.recipes.SteamBoilerRecipes;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
 import nc.tile.processor.TileItemFluidProcessor;
+import nc.util.FluidStackHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
@@ -36,7 +36,7 @@ public class SteamBoiler extends AbstractProcessor {
 
     public static int outputItems = 0;
 
-    public static SteamBoilerRecipes recipes;
+    public static RecipeHandler recipes;
 
     public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "plateElite", 'F', "chassis", 'C', NCBlocks.chemical_reactor, 'R', NCBlocks.rock_crusher, 'H', "ingotHardCarbon"};
 
@@ -101,7 +101,7 @@ public class SteamBoiler extends AbstractProcessor {
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.steam_boiler, Blocks.blocks[SteamBoiler.GUID], SteamBoiler.code, SteamBoilerCategory.SteamBoilerWrapper.class);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[SteamBoiler.GUID], SteamBoiler.code, SteamBoilerCategory.SteamBoilerWrapper.class);
         return new SteamBoilerCategory(guiHelper,recipeHandler, this);
     }
 
@@ -132,11 +132,35 @@ public class SteamBoiler extends AbstractProcessor {
                     defaultItemSorptions(inputItems, outputItems, true),
                     defaultTankCapacities(20000, inputFluids, outputFluids),
                     defaultTankSorptions(inputFluids, outputFluids),
-                    NCSteamAdditionsRecipes.steam_boiler_valid_fluids,
+                    NCSteamAdditionsRecipes.validFluids[GUID],
                     NCSteamAdditionsConfig.processor_time[GUID],
                     0, true,
-                    NCSteamAdditionsRecipes.steam_boiler,
+                    NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
                     GUID+1, 0
+            );
+        }
+    }
+
+    public SteamBoiler.RecipeHandler getRecipes()
+    {
+        return new SteamBoiler.RecipeHandler();
+    }
+
+
+    public class RecipeHandler extends AbstractProcessor.RecipeHandler {
+        public RecipeHandler()
+        {
+            super(code, inputItems, inputFluids, outputItems, outputFluids);
+        }
+
+        @Override
+        public void addRecipes()
+        {
+            addRecipe(
+
+                    "coal",
+                    fluidStack("water", FluidStackHelper.BUCKET_VOLUME*4),
+                    fluidStack("steam", FluidStackHelper.BUCKET_VOLUME*10)
             );
         }
     }

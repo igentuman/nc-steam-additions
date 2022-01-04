@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.machine.container;
 
 import igentuman.ncsteamadditions.machine.gui.GuiSteamCrusher;
 import igentuman.ncsteamadditions.processors.SteamCrusher;
+import igentuman.ncsteamadditions.processors.SteamTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import nc.container.processor.ContainerItemFluidProcessor;
 import nc.container.slot.SlotFurnace;
@@ -16,7 +17,7 @@ public class ContainerSteamCrusher extends ContainerItemFluidProcessor
 
 	public ContainerSteamCrusher(EntityPlayer player, TileItemFluidProcessor tileEntity)
 	{
-		super(player, tileEntity, NCSteamAdditionsRecipes.steam_crusher);
+		super(player, tileEntity, NCSteamAdditionsRecipes.processorRecipeHandlers[SteamCrusher.GUID]);
 
 		int x = GuiSteamCrusher.inputFluidsLeft;
 		int idCounter = 0;
