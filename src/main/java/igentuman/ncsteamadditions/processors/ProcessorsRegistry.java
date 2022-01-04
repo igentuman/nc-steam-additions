@@ -26,7 +26,9 @@ public class ProcessorsRegistry {
                     new SteamTransformer(),
                     new SteamCrusher(),
                     new SteamBoiler(),
-                    new SteamFluidTransformer()
+                    new SteamFluidTransformer(),
+                    new SteamCompactor(),
+                    new SteamWasher()
             };
         }
         return processorList;

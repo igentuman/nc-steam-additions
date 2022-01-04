@@ -5,10 +5,16 @@ tile.ncsteamadditions.steam_fluid_transformer.name=Steam Fluid Transformer
 tile.ncsteamadditions.steam_fluid_transformer.desc=Transforms fluids with the power of steam
 
 tile.ncsteamadditions.steam_crusher.name=Steam Crusher
-tile.ncsteamadditions.steam_boiler.desc=How do you suppose to get steam?
+tile.ncsteamadditions.steam_crusher.desc=Crushes items with the power of steam
+
+tile.ncsteamadditions.steam_washer.name=Steam Washer
+tile.ncsteamadditions.steam_washer.desc=Washing stuff with steam. Nice ;)
+
+tile.ncsteamadditions.steam_compactor.name=Steam Compactor
+tile.ncsteamadditions.steam_compactor.desc=Compacting items with the power of steam
 
 tile.ncsteamadditions.steam_boiler.name=Steam Boiler
-tile.ncsteamadditions.steam_crusher.desc=Crushes items with the power of steam
+tile.ncsteamadditions.steam_boiler.desc=How do you suppose to get steam?
 
 tile.ncsteamadditions.pipe.name=Fluid Pipe
 tile.ncsteamadditions.copper_sheet.name=Fluid Pipe
