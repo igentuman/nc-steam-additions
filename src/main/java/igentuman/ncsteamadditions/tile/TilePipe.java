@@ -3,6 +3,7 @@ package igentuman.ncsteamadditions.tile;
 import javax.annotation.Nullable;
 
 import igentuman.ncsteamadditions.block.BlockPipe;
+import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -26,7 +27,7 @@ public class TilePipe extends PersistantSyncableTileEntity implements ITickable,
     private Fluid fluid;
     private int amount;
     private boolean extraction;
-
+    private int transferRate = NCSteamAdditionsConfig.pipeTransfer;
     private ItemStack cachedBlockPipe;
 
     @Override
@@ -49,14 +50,14 @@ public class TilePipe extends PersistantSyncableTileEntity implements ITickable,
 
             if (this.extraction && !isPipe) {
 
-                int freeSpace = 5000 - this.amount;
+                int freeSpace = NCSteamAdditionsConfig.pipeCapacity - this.amount;
                 if (freeSpace <= 0) {
                     continue;
                 }
 
                 FluidStack drainableFluid = this.fluid == null
-                        ? fluidHandler.drain(Math.min(100, freeSpace), true)
-                        : fluidHandler.drain(new FluidStack(this.fluid, Math.min(100, freeSpace)), true);
+                        ? fluidHandler.drain(Math.min(transferRate, freeSpace), true)
+                        : fluidHandler.drain(new FluidStack(this.fluid, Math.min(transferRate, freeSpace)), true);
 
                 if (drainableFluid == null || drainableFluid.amount <= 0) {
                     continue;
@@ -76,7 +77,7 @@ public class TilePipe extends PersistantSyncableTileEntity implements ITickable,
                     continue;
                 }
 
-                this.amount -= fluidHandler.fill(new FluidStack(this.fluid, Math.min(100, this.amount)), true);
+                this.amount -= fluidHandler.fill(new FluidStack(this.fluid, Math.min(transferRate, this.amount)), true);
             }
         }
     }
@@ -116,7 +117,7 @@ public class TilePipe extends PersistantSyncableTileEntity implements ITickable,
 
     @Override
     public IFluidTankProperties[] getTankProperties() {
-        return new IFluidTankProperties[] { new FluidTankProperties(this.getFluidStack(), 5000) };
+        return new IFluidTankProperties[] { new FluidTankProperties(this.getFluidStack(), NCSteamAdditionsConfig.pipeCapacity) };
     }
 
     @Override
@@ -128,8 +129,8 @@ public class TilePipe extends PersistantSyncableTileEntity implements ITickable,
         FluidStack current = this.getFluidStack();
 
         int maxFill = current == null
-                ? Math.min(1000, resource.amount)
-                : current.isFluidEqual(resource) ? Math.min(1000 - current.amount, resource.amount) : 0;
+                ? Math.min(transferRate, resource.amount)
+                : current.isFluidEqual(resource) ? Math.min(transferRate - current.amount, resource.amount) : 0;
 
         if (!doFill) {
             return maxFill;

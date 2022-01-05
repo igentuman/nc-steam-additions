@@ -16,7 +16,31 @@ tile.ncsteamadditions.steam_compactor.desc=Compacting items with the power of st
 tile.ncsteamadditions.steam_boiler.name=Steam Boiler
 tile.ncsteamadditions.steam_boiler.desc=How do you suppose to get steam?
 
+tile.ncsteamadditions.steam_turbine.name=Steam Turbine
+tile.ncsteamadditions.steam_turbine.desc=Steam is rotating turbine, turbine generates electricity!
+
 tile.ncsteamadditions.pipe.name=Fluid Pipe
 tile.ncsteamadditions.copper_sheet.name=Fluid Pipe
 
 itemGroup.ncsteamadditions.blocks=NC Steam Additions
+
+gui.ncsteamadditions.config.processors.time=Processor Processing Time (ticks)
+gui.ncsteamadditions.config.processors.time.comment=Order: Transformer, Crusher, Boiler, Fluid Transformer, Compactor, Washer, Turbine
+
+gui.ncsteamadditions.config.processors.boiler_conversion=Boiler Water to Steam conversion rate
+gui.ncsteamadditions.config.processors.boiler_conversion.comment=Steam amount equals formula (Water Amount x Rate)
+
+gui.ncsteamadditions.config.processors.turbine_conversion=Turbine Steam to Water conversion rate
+gui.ncsteamadditions.config.processors.turbine_conversion.comment=Water amount equals formula (Steam Amount x Rate)
+
+gui.ncsteamadditions.config.processors.turbine_rf=Turbine RF output
+gui.ncsteamadditions.config.processors.turbine_rf.comment=
+
+gui.ncsteamadditions.config.processors.turbine_rf=Turbine RF output
+gui.ncsteamadditions.config.processors.turbine_rf.comment=
+
+gui.ncsteamadditions.config.pipes.transfer=Copper Pipe Transfer Rate
+gui.ncsteamadditions.config.pipes.transfer.comment=How much Copper Pipe can transfer fluid per tick
+
+gui.ncsteamadditions.config.pipes.capacity=Copper Pipe Capacity
+gui.ncsteamadditions.config.pipes.capacity.comment=How much Copper Pipe block can store fluid inside

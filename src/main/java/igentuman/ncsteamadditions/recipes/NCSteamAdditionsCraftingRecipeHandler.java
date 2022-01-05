@@ -5,6 +5,7 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.block.Blocks;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import nc.recipe.vanilla.recipe.ShapedEnergyRecipe;
@@ -29,7 +30,8 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		for (AbstractProcessor processor: ProcessorsRegistry.get().processors()) {
 			addShapedOreRecipe(Blocks.blocks[processor.GUID], processor.getCraftingRecipe());
 		}
-
+		addShapedOreRecipe(new ItemStack(Blocks.otherBlocks[0],4),new Object[]{"SSS", "S S", "SSS", 'S', "copperSheet"});
+		addShapedOreRecipe(new ItemStack(Items.items[0],2),new Object[]{"   ", " SS", " SS", 'S', "ingotCopper"});
 	}
 
 

@@ -161,9 +161,9 @@ public class SteamCompactor extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            addRecipe("dustRedstone",
-                    fluidStack("steam", FluidStackHelper.INGOT_VOLUME),
-                    oreStack("dustIron", 1)
+            addRecipe(oreStack("coal", 4),
+                    fluidStack("steam", FluidStackHelper.INGOT_VOLUME*2),
+                    oreStack("compressedCoal", 1)
             );
         }
     }

@@ -75,7 +75,7 @@ public class BlockPipe extends Block {
 
     public BlockPipe() {
         super(Material.IRON, MapColor.IRON);
-        this.setHardness(1.0F);
+        this.setHardness(2.0F);
         this.setResistance(2.0F);
         this.setSoundType(SoundType.METAL);
         this.setDefaultState(this.getBlockState().getBaseState()

@@ -46,7 +46,7 @@ public class TileSteamTurbine extends TileItemFluidProcessor implements ITileEne
     @Nonnull
     private final EnergyTileWrapperGT[] energySidesGT;
     private boolean ic2reg;
-    private int maxRf = 32;
+    private int maxRf = NCSteamAdditionsConfig.turbineRF;
 
     public TileSteamTurbine()
     {
@@ -66,7 +66,7 @@ public class TileSteamTurbine extends TileItemFluidProcessor implements ITileEne
                 SteamTurbine.GUID+1, 0
         );
         this.ic2reg = false;
-        this.storage = new EnergyStorage(512, maxRf);
+        this.storage = new EnergyStorage(1024, maxRf);
         this.setEnergyConnectionAll(EnergyConnection.OUT);
         this.energySides = ITileEnergy.getDefaultEnergySides(this);
         this.energySidesGT = ITileEnergy.getDefaultEnergySidesGT(this);

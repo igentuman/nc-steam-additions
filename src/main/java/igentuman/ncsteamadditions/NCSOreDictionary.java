@@ -7,6 +7,8 @@ import net.minecraftforge.oredict.OreDictionary;
 public class NCSOreDictionary {
     public static void register()
     {
+
         OreDictionary.registerOre("compressedCoal",new ItemStack(Items.items[1]));
+        OreDictionary.registerOre("copperSheet",new ItemStack(Items.items[0]));
     }
 }

@@ -12,6 +12,7 @@ import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
 import nc.tile.processor.TileItemFluidProcessor;
+import nc.util.FluidRegHelper;
 import nc.util.FluidStackHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -162,11 +163,24 @@ public class SteamBoiler extends AbstractProcessor {
         public void addRecipes()
         {
             addRecipe(
-
                     "coal",
-                    fluidStack("water", FluidStackHelper.BUCKET_VOLUME*4),
-                    fluidStack("steam", FluidStackHelper.BUCKET_VOLUME*10)
+                    fluidStack("water", FluidStackHelper.BUCKET_VOLUME),
+                    fluidStack("steam", Math.round(FluidStackHelper.BUCKET_VOLUME*NCSteamAdditionsConfig.boilerConversion))
             );
+
+            addRecipe(
+                    "compressedCoal",
+                    fluidStack("water", FluidStackHelper.BUCKET_VOLUME*5),
+                    fluidStack("steam", Math.round(FluidStackHelper.BUCKET_VOLUME*NCSteamAdditionsConfig.boilerConversion)*5)
+            );
+
+            if(FluidRegHelper.fluidExists("cleanWater")) {
+                addRecipe(
+                        "coal",
+                        fluidStack("cleanWater", FluidStackHelper.BUCKET_VOLUME),
+                        fluidStack("steam", Math.round(FluidStackHelper.BUCKET_VOLUME*NCSteamAdditionsConfig.boilerConversion*1.5F))
+                );
+            }
         }
     }
 }

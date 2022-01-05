@@ -143,7 +143,7 @@ public class SteamTurbine extends AbstractProcessor {
         {
             addRecipe(
                     fluidStack("steam", FluidStackHelper.BUCKET_VOLUME),
-                    fluidStack("water", FluidStackHelper.BUCKET_VOLUME/2)
+                    fluidStack("water", Math.round(FluidStackHelper.BUCKET_VOLUME * NCSteamAdditionsConfig.turbineConversion))
             );
         }
     }

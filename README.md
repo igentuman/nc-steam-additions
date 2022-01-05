@@ -2,7 +2,9 @@
 More useful steamy stuff for early and late game.
 
 Basically this mod was created as replacement for GT as Steam Era implementation in my mod-pack.
+
 This stuff will be useful at the early play before player gets RF machines and late game when you have High-Pressure steam from the NC reactor which opens you some new recipes
+![machines screenshot](https://media.forgecdn.net/attachments/420/658/minecraft-1.png)
 ## Machines (processors) implemented:
 ### 1. Steam boiler ![Steam Boiler](src/main/resources/assets/ncsteamadditions/textures/blocks/machine/steam_boiler_front_on.png?raw=true)
 Add some fuel and water to get steam

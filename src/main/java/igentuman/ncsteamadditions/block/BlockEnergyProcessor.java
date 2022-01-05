@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.block;
 
 import ic2.api.item.IElectricItemManager;
 import ic2.api.item.ISpecialElectricItem;
+import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.block.BlockNCSteamAdditionsProcessor;
 
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
@@ -43,12 +44,12 @@ public class BlockEnergyProcessor extends  BlockNCSteamAdditionsProcessor implem
 
     @Override
     public long getMaxEnergyStored(ItemStack itemStack) {
-        return 10000;
+        return 1024;
     }
 
     @Override
     public int getMaxTransfer(ItemStack itemStack) {
-        return 128;
+        return NCSteamAdditionsConfig.turbineRF;
     }
 
     @Override
@@ -68,7 +69,7 @@ public class BlockEnergyProcessor extends  BlockNCSteamAdditionsProcessor implem
 
     @Override
     public int getEnergyTier(ItemStack itemStack) {
-        return 2;
+        return 1;
     }
 
     @Override
@@ -77,6 +78,6 @@ public class BlockEnergyProcessor extends  BlockNCSteamAdditionsProcessor implem
     }
 
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        return new ItemEnergyCapabilityProvider(stack, 1024, 128, this.getEnergyStored(stack), EnergyConnection.OUT, 2);
+        return new ItemEnergyCapabilityProvider(stack, 1024, NCSteamAdditionsConfig.turbineRF, this.getEnergyStored(stack), EnergyConnection.OUT, 1);
     }
 }
