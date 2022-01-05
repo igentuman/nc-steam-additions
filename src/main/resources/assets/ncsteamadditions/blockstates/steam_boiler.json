@@ -3,7 +3,7 @@
     "defaults": {
         "model": "nuclearcraft:processor",
         "textures": {
-            "front": "ncsteamadditions:blocks/machine/steam_crusher_front_off"
+            "front": "ncsteamadditions:blocks/machine/steam_boiler_front_off"
         }
     },
     "variants": {
@@ -12,7 +12,7 @@
             "false": {},
             "true": {
                 "textures": {
-                    "front": "ncsteamadditions:blocks/machine/steam_crusher_front_on"
+                    "front": "ncsteamadditions:blocks/machine/steam_boiler_front_on"
                 }
             }
         },

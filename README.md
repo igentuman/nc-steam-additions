@@ -1,5 +1,5 @@
 # NuclearCraft Steam Additions
-More usefull steamy stuff for early and late game.
+More useful steamy stuff for early and late game.
 
 Basically this mod was created as replacement for GT as Steam Era implementation in my mod-pack.
 This stuff will be useful at the early play before player gets RF machines and late game when you have High-Pressure steam from the NC reactor which opens you some new recipes
