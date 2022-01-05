@@ -31,8 +31,9 @@ public class Items {
 
     public static void init()
     {
-        items = new Item[1];
+        items = new Item[2];
         items[0] =  withName(new ItemCopperSheet(), "copper_sheet");
+        items[1] =  withName(new ItemCompressedCoal(), "compressed_coal");
     }
 
     public static void register()

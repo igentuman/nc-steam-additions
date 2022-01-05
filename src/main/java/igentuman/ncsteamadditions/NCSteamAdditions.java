@@ -2,9 +2,11 @@ package igentuman.ncsteamadditions;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.gui.GUIHandler;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.proxy.CommonProxy;
 import igentuman.ncsteamadditions.util.Util;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -14,6 +16,7 @@ import net.minecraftforge.fml.common.event.FMLModIdMappingEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = NCSteamAdditions.MOD_ID, name = NCSteamAdditions.MOD_NAME, version = NCSteamAdditions.VERSION, acceptedMinecraftVersions = NCSteamAdditions.MCVERSION, dependencies = "after:nuclearcraft", guiFactory = "igentuman.ncsteamadditions.config.NCSteamAdditionsConfigGUIFactory")
@@ -47,7 +50,6 @@ public class NCSteamAdditions
 		proxy.init(event);
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
 	}
-	
 
 	@EventHandler
 	public void serverLoad(FMLServerStartingEvent event)
