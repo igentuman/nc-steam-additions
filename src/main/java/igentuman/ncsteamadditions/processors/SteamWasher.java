@@ -78,6 +78,11 @@ public class SteamWasher extends AbstractProcessor {
         return code;
     }
 
+    public String getBlockType()
+    {
+        return "nc_processor";
+    }
+
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
         return new GuiSteamWasher(player,  (SteamWasher.TileSteamWasher)tile,this);
     }

@@ -29,8 +29,14 @@ public class Blocks
 		blocks = new Block[processors.length];
 		otherBlocks = new Block[1];
 		for (AbstractProcessor processor: processors) {
-			BlockNCSteamAdditionsProcessor processorBlock = new BlockNCSteamAdditionsProcessor(processor);
-			blocks[processor.getGuid()] = withName(processorBlock);
+			if(processor.getBlockType().equals("nc_processor")) {
+				BlockNCSteamAdditionsProcessor processorBlock = new BlockNCSteamAdditionsProcessor(processor);
+				blocks[processor.getGuid()] = withName(processorBlock);
+			} else {
+				BlockEnergyProcessor processorBlock = new BlockEnergyProcessor(processor);
+				blocks[processor.getGuid()] = withName(processorBlock);
+			}
+
 		}
 		otherBlocks[0] = withName(new BlockPipe(),"pipe");
 	}

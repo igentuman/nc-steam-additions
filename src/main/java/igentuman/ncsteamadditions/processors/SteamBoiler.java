@@ -78,6 +78,11 @@ public class SteamBoiler extends AbstractProcessor {
         return code;
     }
 
+    public String getBlockType()
+    {
+        return "nc_processor";
+    }
+
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
         return new GuiSteamBoiler(player,  (SteamBoiler.TileSteamBoiler)tile,this);
     }

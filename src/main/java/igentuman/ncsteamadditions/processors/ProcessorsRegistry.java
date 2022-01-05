@@ -28,7 +28,8 @@ public class ProcessorsRegistry {
                     new SteamBoiler(),
                     new SteamFluidTransformer(),
                     new SteamCompactor(),
-                    new SteamWasher()
+                    new SteamWasher(),
+                    new SteamTurbine()
             };
         }
         return processorList;

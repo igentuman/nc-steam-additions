@@ -64,6 +64,11 @@ public class SteamTransformer extends AbstractProcessor {
 
     public JEIHandler recipeHandler;
 
+    public String getBlockType()
+    {
+        return "nc_processor";
+    }
+
     public int getGuid()
     {
         return GUID;

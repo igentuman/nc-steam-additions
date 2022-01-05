@@ -75,6 +75,7 @@ public abstract class AbstractProcessor {
     public abstract Object getLocalGuiContainer(EntityPlayer player, TileEntity tile);
 
     public abstract RecipeHandler getRecipes();
+    public abstract String getBlockType();
     public abstract class RecipeHandler extends ProcessorRecipeHandler {
 
         public RecipeHandler() {

@@ -1,12 +1,17 @@
 buildscript {
     repositories {
         jcenter()
+		maven {
+			name = "jitpack"
+			url = "https://jitpack.io/"
+		}
         maven { 
 				name = "forge"
 				url = "http://files.minecraftforge.net/maven" 
 			}
     }
     dependencies {
+		classpath 'com.github.GregTechCE:ForgeGradle:FG_2.3-SNAPSHOT'
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
@@ -95,6 +100,7 @@ dependencies {
 	deobfCompile "base:base:${b_a_s_e_version}"
 	deobfCompile "contenttweaker:ContentTweaker:${contenttweaker_version}"
 	deobfCompile "li.cil.oc:OpenComputers:${oc_version}"
+	deobfCompile "gregtechce:gregtech:${gregtech_version}"
 	deobfCompile "mekanism:Mekanism:${mekanism_version}"
 	deobfCompile "vazkii.patchouli:Patchouli:${patchouli_version}"
 	deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:${top_version}"

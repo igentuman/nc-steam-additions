@@ -52,6 +52,11 @@ public class SteamCrusher extends AbstractProcessor {
         return outputFluids;
     }
 
+    public String getBlockType()
+    {
+        return "nc_processor";
+    }
+
     public int getOutputItems() {
         return outputItems;
     }

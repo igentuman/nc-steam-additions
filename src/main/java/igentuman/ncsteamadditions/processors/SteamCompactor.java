@@ -44,6 +44,11 @@ public class SteamCompactor extends AbstractProcessor {
         return inputItems;
     }
 
+    public String getBlockType()
+    {
+        return "nc_processor";
+    }
+
     public int getInputFluids() {
         return inputFluids;
     }

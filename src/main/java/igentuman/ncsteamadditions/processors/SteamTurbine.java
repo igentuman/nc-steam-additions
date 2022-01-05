@@ -3,35 +3,35 @@ package igentuman.ncsteamadditions.processors;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.catergory.SteamFluidTransformerCategory;
-import igentuman.ncsteamadditions.machine.container.ContainerSteamFluidTransformer;
-import igentuman.ncsteamadditions.machine.gui.GuiSteamFluidTransformer;
+import igentuman.ncsteamadditions.jei.catergory.SteamTurbineCategory;
+import igentuman.ncsteamadditions.machine.container.ContainerSteamTurbine;
+import igentuman.ncsteamadditions.machine.gui.GuiSteamTurbine;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
+import igentuman.ncsteamadditions.tile.TileSteamTurbine;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
-import nc.recipe.ingredient.EmptyFluidIngredient;
 import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidStackHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
-public class SteamFluidTransformer extends AbstractProcessor {
+public class SteamTurbine extends AbstractProcessor {
 
-    public static String code = "steam_fluid_transformer";
+    public static String code = "steam_turbine";
 
     public static String particle1 = "splash";
 
     public static String particle2 = "reddust";
 
-    public final static int GUID = 3;
+    public final static int GUID = 6;
 
     public final static int SIDEID = 1000+ GUID;
 
     public static int inputItems = 0;
 
-    public static int inputFluids = 4;
+    public static int inputFluids = 1;
 
     public static int outputFluids = 1;
 
@@ -62,11 +62,6 @@ public class SteamFluidTransformer extends AbstractProcessor {
        return this.craftingRecipe;
     }
 
-    public String getBlockType()
-    {
-        return "nc_processor";
-    }
-
     public JEIHandler recipeHandler;
 
     public int getGuid()
@@ -84,20 +79,25 @@ public class SteamFluidTransformer extends AbstractProcessor {
         return code;
     }
 
+    public String getBlockType()
+    {
+        return "energy_processor";
+    }
+
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamFluidTransformer(player,  (SteamFluidTransformer.TileSteamFluidTransformer)tile,this);
+        return new GuiSteamTurbine(player,  (TileSteamTurbine)tile,this);
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamFluidTransformer.SideConfig(player,  (SteamFluidTransformer.TileSteamFluidTransformer)tile,code);
+        return new GuiSteamTurbine.SideConfig(player,  (TileSteamTurbine)tile,code);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamFluidTransformer(player,  (SteamFluidTransformer.TileSteamFluidTransformer)tile);
+        return new ContainerSteamTurbine(player,  (TileSteamTurbine)tile);
     }
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player,  (SteamFluidTransformer.TileSteamFluidTransformer)tile);
+        return new ContainerMachineConfig(player,  (TileSteamTurbine)tile);
     }
 
     public JEIHandler getRecipeHandler()
@@ -107,12 +107,8 @@ public class SteamFluidTransformer extends AbstractProcessor {
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this,
-                NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                Blocks.blocks[SteamFluidTransformer.GUID],
-                SteamFluidTransformer.code,
-                SteamFluidTransformerCategory.SteamFluidTransformerWrapper.class);
-        return new SteamFluidTransformerCategory(guiHelper,recipeHandler, this);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[SteamTurbine.GUID], SteamTurbine.code, SteamTurbineCategory.SteamTurbineWrapper.class);
+        return new SteamTurbineCategory(guiHelper,recipeHandler, this);
     }
 
     public ProcessorType getType()
@@ -126,34 +122,13 @@ public class SteamFluidTransformer extends AbstractProcessor {
 
     public Class getTileClass()
     {
-        return TileSteamFluidTransformer.class;
+        return TileSteamTurbine.class;
     }
 
-    public static class TileSteamFluidTransformer extends TileItemFluidProcessor
-    {
-        public TileSteamFluidTransformer()
-        {
-            super(
-                    code,
-                    inputItems,
-                    inputFluids,
-                    outputItems,
-                    outputFluids,
-                    defaultItemSorptions(inputItems, outputItems, true),
-                    defaultTankCapacities(5000, inputFluids, outputFluids),
-                    defaultTankSorptions(inputFluids, outputFluids),
-                    NCSteamAdditionsRecipes.validFluids[GUID],
-                    NCSteamAdditionsConfig.processor_time[GUID],
-                    0, true,
-                    NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                    GUID+1, 0
-            );
-        }
-    }
 
-    public SteamFluidTransformer.RecipeHandler getRecipes()
+    public SteamTurbine.RecipeHandler getRecipes()
     {
-        return new SteamFluidTransformer.RecipeHandler();
+        return new SteamTurbine.RecipeHandler();
     }
 
 
@@ -166,11 +141,9 @@ public class SteamFluidTransformer extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            addRecipe(fluidStack("steam", FluidStackHelper.INGOT_VOLUME),
-                    fluidStack("water", FluidStackHelper.INGOT_VOLUME),
-                    new EmptyFluidIngredient(),
-                    new EmptyFluidIngredient(),
-                    fluidStack("steam", FluidStackHelper.INGOT_VOLUME*2)
+            addRecipe(
+                    fluidStack("steam", FluidStackHelper.BUCKET_VOLUME),
+                    fluidStack("water", FluidStackHelper.BUCKET_VOLUME/2)
             );
         }
     }
