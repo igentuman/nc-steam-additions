@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamTurbineCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTurbine;
@@ -11,8 +12,10 @@ import igentuman.ncsteamadditions.tile.TileSteamTurbine;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCBlocks;
+import nc.init.NCItems;
 import nc.integration.jei.JEIBasicCategory;
 import nc.tile.processor.TileItemFluidProcessor;
+import nc.util.FluidRegHelper;
 import nc.util.FluidStackHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -27,7 +30,7 @@ public class SteamTurbine extends AbstractProcessor {
 
     public final static int GUID = 6;
 
-    public final static int SIDEID = 1000+ GUID;
+    public final static int SIDEID = 1000 + GUID;
 
     public static int inputItems = 0;
 
@@ -39,7 +42,7 @@ public class SteamTurbine extends AbstractProcessor {
 
     public static RecipeHandler recipes;
 
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "plateElite", 'F', "chassis", 'C', NCBlocks.chemical_reactor, 'R', NCBlocks.rock_crusher, 'H', "ingotHardCarbon"};
+    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', Items.items[0], 'F', "solenoidCopper", 'C', "blockIron", 'R', "chassis", 'H', net.minecraft.init.Items.COMPARATOR};
 
     public int getInputItems() {
         return inputItems;
@@ -89,7 +92,7 @@ public class SteamTurbine extends AbstractProcessor {
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTurbine.SideConfig(player,  (TileSteamTurbine)tile,code);
+        return new GuiSteamTurbine.SideConfig(player,  (TileSteamTurbine)tile,this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
@@ -107,7 +110,7 @@ public class SteamTurbine extends AbstractProcessor {
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[SteamTurbine.GUID], SteamTurbine.code, SteamTurbineCategory.SteamTurbineWrapper.class);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[SteamTurbine.GUID], Blocks.blocks[SteamTurbine.GUID], SteamTurbine.code, SteamTurbineCategory.SteamTurbineWrapper.class);
         return new SteamTurbineCategory(guiHelper,recipeHandler, this);
     }
 
@@ -141,10 +144,20 @@ public class SteamTurbine extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            addRecipe(
-                    fluidStack("steam", FluidStackHelper.BUCKET_VOLUME),
-                    fluidStack("water", Math.round(FluidStackHelper.BUCKET_VOLUME * NCSteamAdditionsConfig.turbineConversion))
-            );
+            addTurbineRecipe("low_quality_steam","condensate_water",NCSteamAdditionsConfig.turbineConversion - 0.1, 0.5);
+            addTurbineRecipe("low_pressure_steam","preheated_water",NCSteamAdditionsConfig.turbineConversion - 0.1, 1.0);
+            addTurbineRecipe("steam","low_quality_steam",NCSteamAdditionsConfig.turbineConversion - 0.1, 1.0);
+            addTurbineRecipe("ic2steam","low_quality_steam",NCSteamAdditionsConfig.turbineConversion - 0.1, 1.0);
+        }
+
+        public void addTurbineRecipe(String input, String output, Double rate, Double time)
+        {
+            if(FluidRegHelper.fluidExists(input) && FluidRegHelper.fluidExists(output)) {
+                addRecipe(new Object[]{
+                        fluidStack(input, 100),
+                        fluidStack(output, (int) Math.round(100 * rate))
+                        ,time});
+            }
         }
     }
 }

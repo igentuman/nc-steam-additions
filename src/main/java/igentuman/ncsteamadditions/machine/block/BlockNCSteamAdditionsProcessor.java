@@ -33,6 +33,7 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.omg.PortableInterceptor.INACTIVE;
 
 public class BlockNCSteamAdditionsProcessor extends BlockSidedTile implements IActivatable, ITileType
 {
@@ -82,7 +83,7 @@ public class BlockNCSteamAdditionsProcessor extends BlockSidedTile implements IA
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { FACING_HORIZONTAL, ACTIVE });
+		return new BlockStateContainer(this, new IProperty[] { FACING_HORIZONTAL, ACTIVE});
 	}
 
 	@Override
@@ -90,7 +91,7 @@ public class BlockNCSteamAdditionsProcessor extends BlockSidedTile implements IA
 			float hitZ, int meta, EntityLivingBase placer)
 	{
 		return getDefaultState().withProperty(FACING_HORIZONTAL, placer.getHorizontalFacing().getOpposite())
-				.withProperty(ACTIVE, Boolean.valueOf(false));
+				.withProperty(ACTIVE, Boolean.FALSE);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamTransformerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTransformer;
@@ -27,7 +28,7 @@ public class SteamTransformer extends AbstractProcessor {
 
     public final static int GUID = 0;
 
-    public final static int SIDEID = 1000+ GUID;
+    public final static int SIDEID = 1000 + GUID;
 
     public static int inputItems = 4;
 
@@ -39,7 +40,7 @@ public class SteamTransformer extends AbstractProcessor {
 
     public static RecipeHandler recipes;
 
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "plateElite", 'F', "chassis", 'C', NCBlocks.chemical_reactor, 'R', NCBlocks.rock_crusher, 'H', "ingotHardCarbon"};
+    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "chest", 'F', net.minecraft.init.Items.BUCKET, 'C', Items.items[0], 'R', net.minecraft.init.Items.ENDER_EYE, 'H', Items.items[1]};
 
     public int getInputItems() {
         return inputItems;
@@ -89,7 +90,7 @@ public class SteamTransformer extends AbstractProcessor {
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTransformer.SideConfig(player,  (SteamTransformer.TileSteamTransformer)tile,code);
+        return new GuiSteamTransformer.SideConfig(player,  (SteamTransformer.TileSteamTransformer)tile,this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {

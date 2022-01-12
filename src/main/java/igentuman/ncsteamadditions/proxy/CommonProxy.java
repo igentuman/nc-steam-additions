@@ -6,6 +6,7 @@ import igentuman.ncsteamadditions.NCSOreDictionary;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.item.ItemCompressedCoal;
+import igentuman.ncsteamadditions.network.NCSAPacketHandler;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.NCSteamAdditionsTiles;
 import igentuman.ncsteamadditions.item.Items;
@@ -32,6 +33,8 @@ public class CommonProxy
 		Blocks.init();
 		Blocks.register();
 		Items.register();
+		NCSAPacketHandler.registerMessages(NCSteamAdditions.MOD_ID);
+
 		NCSteamAdditionsTiles.register();
 		NCSOreDictionary.register();
 		MinecraftForge.EVENT_BUS.register(new NCSteamAdditionsRecipes());

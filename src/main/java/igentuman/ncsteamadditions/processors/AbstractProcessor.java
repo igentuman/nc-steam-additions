@@ -1,5 +1,6 @@
 package igentuman.ncsteamadditions.processors;
 
+import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.gui.GUIHandler;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.recipes.ProcessorRecipeHandler;
@@ -8,9 +9,14 @@ import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerItemFluidProcessor;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
+import nc.recipe.ingredient.FluidIngredient;
+import nc.util.FluidRegHelper;
+import nc.util.FluidStackHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+
+import java.util.ArrayList;
 
 public abstract class AbstractProcessor {
     public static String code;
@@ -21,7 +27,7 @@ public abstract class AbstractProcessor {
 
     public static int GUID;
 
-    public static int SIDEID = 1000+ GUID;
+    public static int SIDEID = 1000 + GUID;
 
     public static int inputItems;
 
@@ -77,6 +83,27 @@ public abstract class AbstractProcessor {
     public abstract RecipeHandler getRecipes();
     public abstract String getBlockType();
     public abstract class RecipeHandler extends ProcessorRecipeHandler {
+        public int bucket() {
+            return FluidStackHelper.BUCKET_VOLUME;
+        }
+        public int ingot()
+        {
+            return FluidStackHelper.INGOT_VOLUME;
+        }
+        public ArrayList steam;
+
+        public ArrayList getSteamIngredient()
+        {
+            if(steam == null) {
+                steam = Lists.newArrayList(
+                        new FluidIngredient[]{fluidStack("steam", bucket())}
+                );
+                if(FluidRegHelper.fluidExists("ic2steam")) {
+                    steam.add(fluidStack("ic2steam", bucket()));
+                }
+            }
+            return steam;
+        }
 
         public RecipeHandler() {
             super(code, inputItems, inputFluids, outputItems, outputFluids);

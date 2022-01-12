@@ -1,9 +1,13 @@
 package igentuman.ncsteamadditions.machine.gui;
 
+import java.security.PublicKey;
 import java.util.List;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.NCSteamAdditions;
+import igentuman.ncsteamadditions.network.NCSAPacketHandler;
+import igentuman.ncsteamadditions.network.OpenSideGuiPacket;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
+import nc.NuclearCraft;
 import nc.container.ContainerTile;
 import nc.container.processor.ContainerMachineConfig;
 import nc.gui.NCGui;
@@ -16,7 +20,9 @@ import nc.gui.processor.GuiItemSorptions;
 import nc.init.NCItems;
 import nc.network.PacketHandler;
 import nc.network.gui.EmptyTankPacket;
+import nc.network.gui.OpenSideConfigGuiPacket;
 import nc.network.gui.ToggleRedstoneControlPacket;
+import nc.tile.ITileGui;
 import nc.tile.energy.ITileEnergy;
 import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.Lang;
@@ -24,10 +30,16 @@ import nc.util.NCUtil;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class GuiItemFluidMachine extends NCGui {
     protected final EntityPlayer player;
@@ -39,6 +51,8 @@ public class GuiItemFluidMachine extends NCGui {
     public static int inputFluidsTop = 16;
     public static int inputFluidsLeft = 26;
     public static int cellSpan = 19;
+    public int sideConfigButton;
+    public int redstoneButton;
 
     public AbstractProcessor processor;
 
@@ -76,13 +90,6 @@ public class GuiItemFluidMachine extends NCGui {
         mc.getTextureManager().bindTexture(gui_textures);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-
-        if (tile.defaultProcessPower != 0)
-        {
-            int e = (int) Math.round(74D * tile.getEnergyStorage().getEnergyStored() / tile.getEnergyStorage().getMaxEnergyStored());
-            drawTexturedModalRect(guiLeft + 8, guiTop + 6 + 74 - e, 176, 90 + 74 - e, 16, e);
-        }
-
         drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(120), 24);
 
         drawUpgradeRenderers();
@@ -100,9 +107,6 @@ public class GuiItemFluidMachine extends NCGui {
     @Override
     public void drawEnergyTooltip(ITileEnergy tile, int mouseX, int mouseY, int x, int y, int width, int height)
     {
-        if (this.tile.defaultProcessPower != 0)
-            super.drawEnergyTooltip(tile, mouseX, mouseY, x, y, width, height);
-
     }
 
     @Override
@@ -176,12 +180,12 @@ public class GuiItemFluidMachine extends NCGui {
 
     protected void drawBackgroundExtras()
     {
-        int x = inputFluidsLeft;
+        int x = inputFluidsLeft+guiLeft;
         int idCounter = 0;
 
         if(getProcessor().getInputFluids() > 0) {
             for(int i = 0; i < getProcessor().getInputFluids(); i++) {
-                GuiFluidRenderer.renderGuiTank(tile.getTanks().get(idCounter++), guiLeft + x, guiTop + inputFluidsTop, zLevel, 16, 16);
+                GuiFluidRenderer.renderGuiTank(tile.getTanks().get(idCounter++), x, guiTop + inputFluidsTop, zLevel, 16, 16);
                 x += cellSpan;
             }
         }
@@ -234,7 +238,7 @@ public class GuiItemFluidMachine extends NCGui {
         x = 152;
         if(getProcessor().getOutputFluids() > 0) {
             for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
-                buttonList.add(new NCButton.SorptionConfig.FluidOutput(idCounter++, guiLeft + x, guiTop + inputFluidsTop));
+                buttonList.add(new NCButton.EmptyTank(idCounter++, guiLeft + x, guiTop + inputFluidsTop, 16, 16));
                 x += cellSpan;
             }
         }
@@ -247,40 +251,66 @@ public class GuiItemFluidMachine extends NCGui {
             }
         }
 
-        buttonList.add(new NCButton.MachineConfig(idCounter++, guiLeft + 27, guiTop + 63));
-        buttonList.add(new NCToggleButton.RedstoneControl(idCounter, guiLeft + 47, guiTop + 63, tile));
+        sideConfigButton = idCounter;
+        redstoneButton = idCounter+1;
+        buttonList.add(new NCButton.MachineConfig(sideConfigButton, guiLeft + 27, guiTop + 63));
+        buttonList.add(new NCToggleButton.RedstoneControl(redstoneButton, guiLeft + 47, guiTop + 63, tile));
     }
 
 
     @Override
     protected void actionPerformed(GuiButton guiButton)
     {
-        int btns = getProcessor().getInputFluids() + getProcessor().getOutputFluids();
         if (tile.getWorld().isRemote)
         {
-            for (int i = 0; i < getProcessor().getInputFluids(); i++)
+            if (guiButton.id == redstoneButton)
+            {
+                tile.setRedstoneControl(!tile.getRedstoneControl());
+                PacketHandler.instance.sendToServer(new ToggleRedstoneControlPacket(tile));
+                return;
+            }
+
+            if (guiButton.id == sideConfigButton)
+            {
+                NCSAPacketHandler.instance.sendToServer(new OpenSideGuiPacket(tile));
+                return;
+            }
+
+            for (int i = 1; i < getProcessor().getInputFluids() + getProcessor().getOutputFluids(); i++)
                 if (guiButton.id == i && NCUtil.isModifierKeyDown())
                 {
-                    PacketHandler.instance.sendToServer(new EmptyTankPacket(tile, i));
+                    PacketHandler.instance.sendToServer(new EmptyTankPacket(tile, i-1));
                     return;
-                }
-
-                else if (guiButton.id == btns)
-                {
-                    tile.setRedstoneControl(!tile.getRedstoneControl());
-                    PacketHandler.instance.sendToServer(new ToggleRedstoneControlPacket(tile));
                 }
         }
     }
 
+
     public static class SideConfig extends GuiItemFluidMachine
     {
+        AbstractProcessor processor;
 
-        public SideConfig(EntityPlayer player, TileItemFluidProcessor tile, String name)
+        public AbstractProcessor getProcessor()
         {
-            super(player, tile, new ContainerMachineConfig(player, tile), name);
+            return processor;
         }
 
+        public SideConfig(EntityPlayer player, TileItemFluidProcessor tile, AbstractProcessor proc)
+        {
+            super(player, tile, new ContainerMachineConfig(player, tile), proc.getCode());
+            processor = proc;
+        }
+
+        public TextFormatting[] colors = new TextFormatting[] {
+                TextFormatting.GRAY,
+                TextFormatting.BOLD,
+                TextFormatting.DARK_AQUA,
+                TextFormatting.BLUE,
+                TextFormatting.DARK_GREEN,
+                TextFormatting.DARK_RED,
+                TextFormatting.DARK_PURPLE,
+                TextFormatting.AQUA
+        };
 
         @Override
         public void renderButtonTooltips(int mouseX, int mouseY)
@@ -306,7 +336,7 @@ public class GuiItemFluidMachine extends NCGui {
             x = 152;
             if(getProcessor().getOutputFluids() > 0) {
                 for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
-                    drawTooltip(TextFormatting.DARK_AQUA + Lang.localise("gui.nc.container.output_tank_config"), mouseX, mouseY, x, inputFluidsTop, 18, 18);
+                    drawTooltip(TextFormatting.DARK_PURPLE + Lang.localise("gui.nc.container.output_tank_config"), mouseX, mouseY, x, inputFluidsTop, 18, 18);
                     x += cellSpan;
                 }
             }
@@ -319,7 +349,7 @@ public class GuiItemFluidMachine extends NCGui {
                 }
             }
 
-            drawTooltip(TextFormatting.DARK_BLUE + Lang.localise("gui.nc.container.upgrade_config"), mouseX, mouseY, 152, 63, 18, 18);
+            //drawTooltip(TextFormatting.DARK_BLUE + Lang.localise("gui.nc.container.upgrade_config"), mouseX, mouseY, 152, 63, 18, 18);
         }
 
         @Override
@@ -331,6 +361,8 @@ public class GuiItemFluidMachine extends NCGui {
         protected void drawBackgroundExtras()
         {
         };
+
+
 
         @Override
         public void initButtons()
@@ -353,23 +385,23 @@ public class GuiItemFluidMachine extends NCGui {
                 }
             }
 
-            x = 152;
+            x = guiLeft + 151;
             if(getProcessor().getOutputFluids() > 0) {
                 for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
-                    buttonList.add(new NCButton.SorptionConfig.FluidOutput(idCounter++, guiLeft + x, guiTop + inputFluidsTop-1));
+                    buttonList.add(new NCButton.SorptionConfig.FluidOutputSmall(idCounter++,  x, guiTop + inputFluidsTop-1));
                     x += cellSpan;
                 }
             }
 
-            x = 152;
+            x = guiLeft + 151;
             if(getProcessor().getOutputItems() > 0) {
                 for (int i = 0; i < getProcessor().getOutputItems(); i++) {
+                    buttonList.add(new NCButton.SorptionConfig.ItemOutputSmall(idCounter++, x, guiTop + inputItemsTop-1));
                     x += cellSpan;
-                    buttonList.add(new NCButton.SorptionConfig.ItemOutput(idCounter++, guiLeft + x, guiTop + inputItemsTop-1));
                 }
             }
 
-            buttonList.add(new NCButton.SorptionConfig.SpeedUpgrade(idCounter, guiLeft + 152, guiTop + 63));
+            //buttonList.add(new NCButton.SorptionConfig.SpeedUpgrade(idCounter, guiLeft + 152, guiTop + 63));
         }
 
         @Override
@@ -383,24 +415,20 @@ public class GuiItemFluidMachine extends NCGui {
                     FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptions.Input(this, tile, guiButton.id));
                     return;
                 }
-                idCounter += (getProcessor().getInputItems() - 1);
+                idCounter += getProcessor().getInputItems();
                 if(guiButton.id < idCounter) {
                     FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Input(this, tile, guiButton.id));
                     return;
                 }
-                idCounter += (getProcessor().getOutputFluids() - 1);
+                idCounter += getProcessor().getOutputFluids();
                 if(guiButton.id < idCounter) {
                     FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptions.Output(this, tile, guiButton.id));
                     return;
                 }
-                idCounter += (getProcessor().getOutputItems() - 1);
-                if(guiButton.id < getProcessor().getInputFluids() + getProcessor().getInputItems() + getProcessor().getOutputFluids() + getProcessor().getOutputItems() - 1) {
+                idCounter += getProcessor().getOutputItems();
+                if(guiButton.id < idCounter) {
                     FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Output(this, tile, guiButton.id));
-                    return;
                 }
-                idCounter++;
-                FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.SpeedUpgrade(this, tile, idCounter));
-                return;
             }
         }
     }

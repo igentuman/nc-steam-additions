@@ -1,7 +1,6 @@
 package igentuman.ncsteamadditions.jei;
 
 import com.google.common.collect.Lists;
-import igentuman.ncsteamadditions.jei.catergory.SteamTransformerCategory;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import mezz.jei.api.IGuiHelper;
 import nc.integration.jei.JEIBasicCategory;

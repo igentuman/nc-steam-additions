@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamCrusherCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamCrusher;
@@ -26,7 +27,7 @@ public class SteamCrusher extends AbstractProcessor {
 
     public final static int GUID = 1;
 
-    public final static int SIDEID = 1000+ GUID;
+    public final static int SIDEID = 1000 + GUID;
 
     public static int inputItems = 1;
 
@@ -38,7 +39,7 @@ public class SteamCrusher extends AbstractProcessor {
 
     public static RecipeHandler recipes;
 
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "plateElite", 'F', "chassis", 'C', NCBlocks.chemical_reactor, 'R', NCBlocks.rock_crusher, 'H', "ingotHardCarbon"};
+    public Object[] craftingRecipe = new Object[] {"BRB", "CFC", "PRP", 'B', net.minecraft.init.Items.BUCKET, 'F', "chest", 'C', Items.items[0], 'R', net.minecraft.init.Blocks.PISTON, 'P', net.minecraft.init.Items.DIAMOND_PICKAXE};
 
     public int getInputItems() {
         return inputItems;
@@ -88,7 +89,7 @@ public class SteamCrusher extends AbstractProcessor {
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamCrusher.SideConfig(player,  (SteamCrusher.TileSteamCrusher)tile,code);
+        return new GuiSteamCrusher.SideConfig(player,  (SteamCrusher.TileSteamCrusher)tile,this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
@@ -161,7 +162,7 @@ public class SteamCrusher extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            addRecipe("dustRedstone",
+            addRecipe("oreIron",
                     fluidStack("steam", FluidStackHelper.INGOT_VOLUME),
                     oreStack("dustIron", 1)
             );

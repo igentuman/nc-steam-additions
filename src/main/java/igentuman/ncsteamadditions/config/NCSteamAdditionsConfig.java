@@ -26,8 +26,8 @@ public class NCSteamAdditionsConfig {
 	public static int pipeCapacity;
 	public static int pipeTransfer;
 	public static int turbineRF;
-	public static long turbineConversion;
-	public static long boilerConversion;
+	public static double turbineConversion;
+	public static double boilerConversion;
 
 	public static void preInit()
 	{
@@ -48,7 +48,7 @@ public class NCSteamAdditionsConfig {
 		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {800,400,400,800,400,400,400}, Lang.localise("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
 		propertyProcessorTime.setLanguageKey("gui.ncsteamadditions.config.processors.time");
 
-		Property propertyBoilerConversion = config.get(CATEGORY_PROCESSORS, "boiler_conversion", 1.25, Lang.localise("gui.ncsteamadditions.config.processors.boiler_conversion.comment"),0,32767);
+		Property propertyBoilerConversion = config.get(CATEGORY_PROCESSORS, "boiler_conversion", 1.25F, Lang.localise("gui.ncsteamadditions.config.processors.boiler_conversion.comment"),0,32767);
 		propertyBoilerConversion.setLanguageKey("gui.ncsteamadditions.config.processors.boiler_conversion");
 
 		Property propertyTurbineRF = config.get(CATEGORY_PROCESSORS, "turbine_rf", 32, Lang.localise("gui.ncsteamadditions.config.processors.turbine_rf.comment"),0,32767);
@@ -67,9 +67,9 @@ public class NCSteamAdditionsConfig {
 		pipeTransfer = transfer.getInt();
 
 		turbineRF = propertyTurbineRF.getInt();
-		turbineConversion = propertyTurbineConversion.getLong();
+		turbineConversion = propertyTurbineConversion.getDouble();
 
-		boilerConversion = propertyBoilerConversion.getLong();
+		boilerConversion = propertyBoilerConversion.getDouble();
 
 		List<String> propertyOrderProcessors = new ArrayList<String>();
 		propertyOrderProcessors.add(propertyProcessorTime.getName());

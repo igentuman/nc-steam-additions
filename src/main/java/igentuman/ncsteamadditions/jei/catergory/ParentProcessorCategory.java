@@ -42,31 +42,36 @@ public abstract class ParentProcessorCategory extends JEINCSteamAdditionsMachine
 		
 		RecipeItemMapper itemMapper = new RecipeItemMapper();
 		RecipeFluidMapper fluidMapper = new RecipeFluidMapper();
-		int x = getFluidsLeft() - getCellSpan();
+		int x = getFluidsLeft();
 		if(getProcessor().getInputFluids() > 0) {
 			for (int i = 0; i < getProcessor().getInputFluids(); i++) {
-				fluidMapper.map(IngredientSorption.INPUT, i, i, x+=getCellSpan() - backPosX, getFluidsTop() - backPosY, 16, 16);
+				fluidMapper.map(IngredientSorption.INPUT, i, i+1, x - backPosX, getFluidsTop() - backPosY, 16, 16);
+				x+=getCellSpan();
 			}
 		}
 
-		x = getItemsLeft() - getCellSpan();
+		x = getItemsLeft();
 		if(getProcessor().getInputItems() > 0) {
 			for (int i = 0; i < getProcessor().getInputItems(); i++) {
-				itemMapper.map(IngredientSorption.INPUT, i, i, x += getCellSpan() - backPosX, getItemsTop() - backPosY);
+				itemMapper.map(IngredientSorption.INPUT, i, i+1, x - backPosX, getItemsTop() - backPosY);
+				x+=getCellSpan();
 			}
 		}
 
-		x = 152 - getCellSpan();
+		x = 152;
 		if(getProcessor().getOutputFluids() > 0) {
 			for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
-				fluidMapper.map(IngredientSorption.OUTPUT, i, i, x += getCellSpan() - backPosX, getFluidsTop() - backPosY,16, 16);
+				fluidMapper.map(IngredientSorption.OUTPUT, i, i, x - backPosX, getFluidsTop() - backPosY,16, 16);
+				x+=getCellSpan();
+
 			}
 		}
 
-		x = 152 - getCellSpan();
+		x = 152;
 		if(getProcessor().getOutputItems() > 0) {
 			for (int i = 0; i < getProcessor().getOutputItems(); i++) {
-				itemMapper.map(IngredientSorption.OUTPUT, i, i-1, x += getCellSpan() - backPosX, getItemsTop() - backPosY);
+				itemMapper.map(IngredientSorption.OUTPUT, i, i, x - backPosX, getItemsTop() - backPosY);
+				x+=getCellSpan();
 			}
 		}
 

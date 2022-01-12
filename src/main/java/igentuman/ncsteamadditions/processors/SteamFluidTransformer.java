@@ -1,7 +1,9 @@
 package igentuman.ncsteamadditions.processors;
 
+import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamFluidTransformerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamFluidTransformer;
@@ -12,10 +14,13 @@ import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.EmptyFluidIngredient;
+import nc.recipe.ingredient.FluidIngredient;
 import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidStackHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+
+import java.util.ArrayList;
 
 public class SteamFluidTransformer extends AbstractProcessor {
 
@@ -27,7 +32,7 @@ public class SteamFluidTransformer extends AbstractProcessor {
 
     public final static int GUID = 3;
 
-    public final static int SIDEID = 1000+ GUID;
+    public final static int SIDEID = 1000 + GUID;
 
     public static int inputItems = 0;
 
@@ -39,7 +44,7 @@ public class SteamFluidTransformer extends AbstractProcessor {
 
     public static RecipeHandler recipes;
 
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "plateElite", 'F', "chassis", 'C', NCBlocks.chemical_reactor, 'R', NCBlocks.rock_crusher, 'H', "ingotHardCarbon"};
+    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', net.minecraft.init.Items.BUCKET, 'F', net.minecraft.init.Items.ENDER_EYE, 'C', Items.items[0], 'R', net.minecraft.init.Blocks.BREWING_STAND, 'H', Items.items[1]};
 
     public int getInputItems() {
         return inputItems;
@@ -89,7 +94,7 @@ public class SteamFluidTransformer extends AbstractProcessor {
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamFluidTransformer.SideConfig(player,  (SteamFluidTransformer.TileSteamFluidTransformer)tile,code);
+        return new GuiSteamFluidTransformer.SideConfig(player,  (SteamFluidTransformer.TileSteamFluidTransformer)tile,this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
@@ -166,11 +171,54 @@ public class SteamFluidTransformer extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            addRecipe(fluidStack("steam", FluidStackHelper.INGOT_VOLUME),
-                    fluidStack("water", FluidStackHelper.INGOT_VOLUME),
+            addRecipe(new Object[]{
+                    getSteamIngredient(),
+                    fluidStack("ethene", bucket()),
+                    fluidStack("lava", bucket()),
+                    fluidStack("glowstone", bucket()),
+                    fluidStack("pyrotheum", bucket()*2)}
+            );
+            addRecipe(new Object[]{
+                    getSteamIngredient(),
+                    fluidStack("ethanol", bucket()),
+                    fluidStack("fluorite_water", bucket()),
+                    fluidStack("lapis", bucket()),
+                    fluidStack("cryotheum", bucket()*2)}
+            );
+            addRecipe(new Object[]{
+                    getSteamIngredient(),
+                    fluidStack("low_quality_steam", bucket()),
                     new EmptyFluidIngredient(),
                     new EmptyFluidIngredient(),
-                    fluidStack("steam", FluidStackHelper.INGOT_VOLUME*2)
+                    fluidStack("low_pressure_steam", bucket()*2)}
+            );
+            addRecipe(new Object[]{
+                    getSteamIngredient(),
+                    fluidStack("lead", bucket()),
+                    fluidStack("glowstone", FluidStackHelper.INGOT_VOLUME),
+                    new EmptyFluidIngredient(),
+                    fluidStack("gold", FluidStackHelper.INGOT_VOLUME)}
+            );
+            addRecipe(new Object[]{
+                    getSteamIngredient(),
+                    fluidStack("iron", FluidStackHelper.INGOT_VOLUME),
+                    fluidStack("coal", FluidStackHelper.INGOT_VOLUME*3),
+                    new EmptyFluidIngredient(),
+                    fluidStack("steel", FluidStackHelper.INGOT_VOLUME)}
+            );
+            addRecipe(new Object[]{
+                    getSteamIngredient(),
+                    fluidStack("water", bucket()),
+                    fluidStack("lava", bucket()),
+                    new EmptyFluidIngredient(),
+                    fluidStack("obsidian", bucket())}
+            );
+            addRecipe(new Object[]{
+                    getSteamIngredient(),
+                    fluidStack("water", bucket()),
+                    new EmptyFluidIngredient(),
+                    new EmptyFluidIngredient(),
+                    fluidStack("preheated_water", bucket())}
             );
         }
     }

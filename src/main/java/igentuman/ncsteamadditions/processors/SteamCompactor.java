@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamCompactorCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamCompactor;
@@ -26,7 +27,7 @@ public class SteamCompactor extends AbstractProcessor {
 
     public final static int GUID = 4;
 
-    public final static int SIDEID = 1000+ GUID;
+    public final static int SIDEID = 1000 + GUID;
 
     public static int inputItems = 1;
 
@@ -38,7 +39,7 @@ public class SteamCompactor extends AbstractProcessor {
 
     public static RecipeHandler recipes;
 
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "plateElite", 'F', "chassis", 'C', NCBlocks.chemical_reactor, 'R', NCBlocks.rock_crusher, 'H', "ingotHardCarbon"};
+    public Object[] craftingRecipe = new Object[] {"BRB", "RFR", "PRP", 'B', net.minecraft.init.Items.BUCKET, 'F', "chest", 'R', net.minecraft.init.Blocks.PISTON, 'P', Items.items[0]};
 
     public int getInputItems() {
         return inputItems;
@@ -88,7 +89,7 @@ public class SteamCompactor extends AbstractProcessor {
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamCompactor.SideConfig(player,  (SteamCompactor.TileSteamCompactor)tile,code);
+        return new GuiSteamCompactor.SideConfig(player,  (SteamCompactor.TileSteamCompactor)tile,this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
@@ -161,9 +162,10 @@ public class SteamCompactor extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            addRecipe(oreStack("coal", 4),
-                    fluidStack("steam", FluidStackHelper.INGOT_VOLUME*2),
-                    oreStack("compressedCoal", 1)
+            addRecipe(new Object[]{
+                    oreStack("coal", 4),
+                    fluidStack("low_pressure_steam", FluidStackHelper.INGOT_VOLUME*2),
+                    oreStack("compressedCoal", 1)}
             );
         }
     }

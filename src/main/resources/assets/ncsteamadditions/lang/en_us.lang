@@ -24,6 +24,9 @@ tile.ncsteamadditions.copper_sheet.name=Fluid Pipe
 
 itemGroup.ncsteamadditions.blocks=NC Steam Additions
 
+item.ncsteamadditions.compressed_coal.name=Compressed Coal
+item.ncsteamadditions.compressed_coal.desc=Has some advantages
+
 gui.ncsteamadditions.config.processors.time=Processor Processing Time (ticks)
 gui.ncsteamadditions.config.processors.time.comment=Order: Transformer, Crusher, Boiler, Fluid Transformer, Compactor, Washer, Turbine
 

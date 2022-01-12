@@ -28,7 +28,7 @@ public class NCSteamAdditionsCraftingRecipeHandler
 	{
 		//crafting
 		for (AbstractProcessor processor: ProcessorsRegistry.get().processors()) {
-			addShapedOreRecipe(Blocks.blocks[processor.GUID], processor.getCraftingRecipe());
+			addShapedOreRecipe(Blocks.blocks[processor.getGuid()], processor.getCraftingRecipe());
 		}
 		addShapedOreRecipe(new ItemStack(Blocks.otherBlocks[0],4),new Object[]{"SSS", "S S", "SSS", 'S', "copperSheet"});
 		addShapedOreRecipe(new ItemStack(Items.items[0],2),new Object[]{"   ", " SS", " SS", 'S', "ingotCopper"});

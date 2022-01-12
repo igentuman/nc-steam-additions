@@ -1,7 +1,9 @@
 package igentuman.ncsteamadditions.processors;
 
+import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamBoilerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBoiler;
@@ -9,13 +11,13 @@ import igentuman.ncsteamadditions.machine.gui.GuiSteamBoiler;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
-import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
 import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidRegHelper;
-import nc.util.FluidStackHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+
+import java.util.ArrayList;
 
 public class SteamBoiler extends AbstractProcessor {
 
@@ -27,7 +29,7 @@ public class SteamBoiler extends AbstractProcessor {
 
     public final static int GUID = 2;
 
-    public final static int SIDEID = 1000+ GUID;
+    public final static int SIDEID = 1000 + GUID;
 
     public static int inputItems = 1;
 
@@ -39,7 +41,7 @@ public class SteamBoiler extends AbstractProcessor {
 
     public static RecipeHandler recipes;
 
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "plateElite", 'F', "chassis", 'C', NCBlocks.chemical_reactor, 'R', NCBlocks.rock_crusher, 'H', "ingotHardCarbon"};
+    public Object[] craftingRecipe = new Object[] {"PBP", "CFC", "PBP", 'P', "ingotLead", 'F', net.minecraft.init.Blocks.FURNACE, 'C', Items.items[0], 'B', net.minecraft.init.Blocks.CAULDRON};
 
     public int getInputItems() {
         return inputItems;
@@ -89,7 +91,7 @@ public class SteamBoiler extends AbstractProcessor {
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamBoiler.SideConfig(player,  (SteamBoiler.TileSteamBoiler)tile,code);
+        return new GuiSteamBoiler.SideConfig(player,  (SteamBoiler.TileSteamBoiler)tile,this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
@@ -159,27 +161,28 @@ public class SteamBoiler extends AbstractProcessor {
             super(code, inputItems, inputFluids, outputItems, outputFluids);
         }
 
+        ArrayList fuels = Lists.newArrayList(new String[]{"coal"});
+
         @Override
         public void addRecipes()
         {
-            addRecipe(
-                    "coal",
-                    fluidStack("water", FluidStackHelper.BUCKET_VOLUME),
-                    fluidStack("steam", Math.round(FluidStackHelper.BUCKET_VOLUME*NCSteamAdditionsConfig.boilerConversion))
-            );
+            addBoilerRecipe("coal", "water","low_quality_steam", NCSteamAdditionsConfig.boilerConversion, 1.0);
+            addBoilerRecipe("coal", "low_quality_steam","low_pressure_steam", NCSteamAdditionsConfig.boilerConversion-0.1, 1.5);
+            addBoilerRecipe("coal","condensate_water","low_pressure_steam", NCSteamAdditionsConfig.boilerConversion, 3.0);
+            addBoilerRecipe("coal","ic2distilled_water","low_pressure_steam", NCSteamAdditionsConfig.boilerConversion, 1.5);
+            addBoilerRecipe("coal","preheated_water","low_pressure_steam", NCSteamAdditionsConfig.boilerConversion, 0.5);
+            addBoilerRecipe("coal","ic2hot_water","low_pressure_steam", NCSteamAdditionsConfig.boilerConversion, 0.5);
+            addBoilerRecipe("compressedCoal","low_pressure_steam","steam", NCSteamAdditionsConfig.boilerConversion, 3.0);
+        }
 
-            addRecipe(
-                    "compressedCoal",
-                    fluidStack("water", FluidStackHelper.BUCKET_VOLUME*5),
-                    fluidStack("steam", Math.round(FluidStackHelper.BUCKET_VOLUME*NCSteamAdditionsConfig.boilerConversion)*5)
-            );
-
-            if(FluidRegHelper.fluidExists("cleanWater")) {
-                addRecipe(
-                        "coal",
-                        fluidStack("cleanWater", FluidStackHelper.BUCKET_VOLUME),
-                        fluidStack("steam", Math.round(FluidStackHelper.BUCKET_VOLUME*NCSteamAdditionsConfig.boilerConversion*1.5F))
-                );
+        public void addBoilerRecipe(String fuel, String input, String output, Double rate, Double time)
+        {
+            if(FluidRegHelper.fluidExists(input) && FluidRegHelper.fluidExists(output)) {
+                addRecipe(new Object[]{
+                        fuel,
+                        fluidStack(input, 100),
+                        fluidStack(output, (int) Math.round(100 * rate))
+                ,time});
             }
         }
     }
