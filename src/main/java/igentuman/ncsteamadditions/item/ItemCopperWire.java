@@ -5,14 +5,13 @@ import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class ItemCopperSheet extends Item {
-    public ItemCopperSheet() {
+public class ItemCopperWire extends Item {
+    public ItemCopperWire() {
         super();
     }
-    public static int regId = 0;
+    public static int regId = 2;
     public CreativeTabs getCreativeTab()
     {
         return NCSteamAdditionsTabs.ITEMS;
     }
-
 }

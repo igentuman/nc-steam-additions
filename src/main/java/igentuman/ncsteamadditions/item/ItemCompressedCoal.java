@@ -8,7 +8,7 @@ public class ItemCompressedCoal extends Item {
     public ItemCompressedCoal() {
         super();
     }
-
+    public static int regId = 1;
     public CreativeTabs getCreativeTab()
     {
         return NCSteamAdditionsTabs.ITEMS;

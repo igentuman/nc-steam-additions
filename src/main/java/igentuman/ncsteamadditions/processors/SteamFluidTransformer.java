@@ -17,7 +17,9 @@ import nc.recipe.ingredient.EmptyFluidIngredient;
 import nc.recipe.ingredient.FluidIngredient;
 import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidStackHelper;
+import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 import java.util.ArrayList;
@@ -44,7 +46,7 @@ public class SteamFluidTransformer extends AbstractProcessor {
 
     public static RecipeHandler recipes;
 
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', net.minecraft.init.Items.BUCKET, 'F', net.minecraft.init.Items.ENDER_EYE, 'C', Items.items[0], 'R', net.minecraft.init.Blocks.BREWING_STAND, 'H', Items.items[1]};
+    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', net.minecraft.init.Items.BUCKET, 'F', net.minecraft.init.Items.ENDER_EYE, 'C', Items.items[0], 'R', RegistryHelper.itemStackFromRegistry("minecraft:brewing_stand"), 'H', Items.items[1]};
 
     public int getInputItems() {
         return inputItems;

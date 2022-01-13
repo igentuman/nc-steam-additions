@@ -2,6 +2,8 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.item.ItemCopperSheet;
+import igentuman.ncsteamadditions.item.ItemPipe;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamTurbineCategory;
@@ -42,7 +44,7 @@ public class SteamTurbine extends AbstractProcessor {
 
     public static RecipeHandler recipes;
 
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', Items.items[0], 'F', "solenoidCopper", 'C', "blockIron", 'R', "chassis", 'H', net.minecraft.init.Items.COMPARATOR};
+    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', Items.items[ItemCopperSheet.regId], 'F', "solenoidCopper", 'C', "blockIron", 'R', Blocks.otherBlocks[0], 'H', net.minecraft.init.Items.COMPARATOR};
 
     public int getInputItems() {
         return inputItems;

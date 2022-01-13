@@ -14,7 +14,9 @@ import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
 import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidRegHelper;
+import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 import java.util.ArrayList;
@@ -41,7 +43,7 @@ public class SteamBoiler extends AbstractProcessor {
 
     public static RecipeHandler recipes;
 
-    public Object[] craftingRecipe = new Object[] {"PBP", "CFC", "PBP", 'P', "ingotLead", 'F', net.minecraft.init.Blocks.FURNACE, 'C', Items.items[0], 'B', net.minecraft.init.Blocks.CAULDRON};
+    public Object[] craftingRecipe = new Object[] {"PBP", "CFC", "PBP", 'P', "ingotLead", 'F', net.minecraft.init.Blocks.FURNACE, 'C', Items.items[0], 'B', RegistryHelper.itemStackFromRegistry("minecraft:cauldron")};
 
     public int getInputItems() {
         return inputItems;

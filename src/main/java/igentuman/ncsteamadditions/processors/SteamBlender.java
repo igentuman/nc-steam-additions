@@ -4,43 +4,44 @@ import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.catergory.SteamTransformerCategory;
-import igentuman.ncsteamadditions.machine.container.ContainerSteamTransformer;
-import igentuman.ncsteamadditions.machine.gui.GuiSteamTransformer;
+import igentuman.ncsteamadditions.jei.catergory.SteamBlenderCategory;
+import igentuman.ncsteamadditions.machine.container.ContainerSteamBlender;
+import igentuman.ncsteamadditions.machine.gui.GuiSteamBlender;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
-import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.EmptyItemIngredient;
 import nc.tile.processor.TileItemFluidProcessor;
+import nc.util.FluidRegHelper;
 import nc.util.FluidStackHelper;
+import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
-public class SteamTransformer extends AbstractProcessor {
+public class SteamBlender extends AbstractProcessor {
 
-    public static String code = "steam_transformer";
+    public static String code = "steam_blender";
 
     public static String particle1 = "splash";
 
     public static String particle2 = "reddust";
 
-    public final static int GUID = 0;
+    public final static int GUID = 7;
 
     public final static int SIDEID = 1000 + GUID;
 
-    public static int inputItems = 4;
+    public static int inputItems = 3;
 
     public static int inputFluids = 1;
 
-    public static int outputFluids = 0;
+    public static int outputFluids = 1;
 
-    public static int outputItems = 1;
+    public static int outputItems = 0;
 
     public static RecipeHandler recipes;
 
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "chest", 'F', net.minecraft.init.Items.BUCKET, 'C', Items.items[0], 'R', net.minecraft.init.Items.ENDER_EYE, 'H', Items.items[1]};
+    public Object[] craftingRecipe = new Object[] {"PPP", "CFC", "RHR", 'P', "chest", 'F', net.minecraft.init.Blocks.FURNACE, 'C', Items.items[0], 'R', net.minecraft.init.Items.ENDER_EYE, 'H',  RegistryHelper.itemStackFromRegistry("minecraft:cauldron")};
 
     public int getInputItems() {
         return inputItems;
@@ -86,19 +87,19 @@ public class SteamTransformer extends AbstractProcessor {
     }
 
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTransformer(player,  (SteamTransformer.TileSteamTransformer)tile,this);
+        return new GuiSteamBlender(player,  (SteamBlender.TileSteamBlender)tile,this);
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTransformer.SideConfig(player,  (SteamTransformer.TileSteamTransformer)tile,this);
+        return new GuiSteamBlender.SideConfig(player,  (SteamBlender.TileSteamBlender)tile,this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamTransformer(player,  (SteamTransformer.TileSteamTransformer)tile);
+        return new ContainerSteamBlender(player,  (SteamBlender.TileSteamBlender)tile);
     }
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player,  (SteamTransformer.TileSteamTransformer)tile);
+        return new ContainerMachineConfig(player,  (SteamBlender.TileSteamBlender)tile);
     }
 
     public JEIHandler getRecipeHandler()
@@ -108,8 +109,8 @@ public class SteamTransformer extends AbstractProcessor {
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[getGuid()], Blocks.blocks[getGuid()], SteamTransformer.code, SteamTransformerCategory.SteamTransformerWrapper.class);
-        return new SteamTransformerCategory(guiHelper,recipeHandler, this);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[getGuid()], Blocks.blocks[getGuid()], SteamBlender.code, SteamBlenderCategory.SteamBlenderWrapper.class);
+        return new SteamBlenderCategory(guiHelper,recipeHandler, this);
     }
 
     public ProcessorType getType()
@@ -123,12 +124,12 @@ public class SteamTransformer extends AbstractProcessor {
 
     public Class getTileClass()
     {
-        return TileSteamTransformer.class;
+        return TileSteamBlender.class;
     }
 
-    public static class TileSteamTransformer extends TileItemFluidProcessor
+    public static class TileSteamBlender extends TileItemFluidProcessor
     {
-        public TileSteamTransformer()
+        public TileSteamBlender()
         {
             super(
                     code,
@@ -163,14 +164,20 @@ public class SteamTransformer extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            addRecipe("ingotSteel","itemSilicon","stone",new EmptyItemIngredient(),
-                    fluidStack("high_pressure_steam", FluidStackHelper.BUCKET_VOLUME*2),
-                    oreStack("oreBoron", 1)
+            addRecipe("dustIron",oreStack("dustCoal",3),new EmptyItemIngredient(),
+                    fluidStack("steam", FluidStackHelper.BUCKET_VOLUME),
+                    fluidStack("steel", FluidStackHelper.INGOT_VOLUME)
             );
-            addRecipe("ingotLead","gemEmerald","stone",new EmptyItemIngredient(),
-                    fluidStack("high_pressure_steam", FluidStackHelper.BUCKET_VOLUME*2),
-                    oreStack("oreUranium", 1)
+            addRecipe(oreStack("dustCopper",3),"dustLead",new EmptyItemIngredient(),
+                    fluidStack("steam", FluidStackHelper.BUCKET_VOLUME),
+                    fluidStack("bronze", FluidStackHelper.INGOT_VOLUME)
             );
+            if(FluidRegHelper.fluidExists("ic2distilled_water")) {
+                addRecipe("blockSnow", new EmptyItemIngredient(), new EmptyItemIngredient(),
+                        fluidStack("low_pressure_steam", FluidStackHelper.INGOT_VOLUME),
+                        fluidStack("ic2distilled_water", FluidStackHelper.BUCKET_VOLUME)
+                );
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package igentuman.ncsteamadditions.processors;
 
+import com.google.common.collect.Sets;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.item.Items;
@@ -12,10 +13,15 @@ import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
+import nc.recipe.ingredient.FluidIngredient;
 import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidStackHelper;
+import nc.util.OreDictHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.Set;
 
 public class SteamCompactor extends AbstractProcessor {
 
@@ -158,7 +164,6 @@ public class SteamCompactor extends AbstractProcessor {
         {
             super(code, inputItems, inputFluids, outputItems, outputFluids);
         }
-
         @Override
         public void addRecipes()
         {
@@ -167,6 +172,45 @@ public class SteamCompactor extends AbstractProcessor {
                     fluidStack("low_pressure_steam", FluidStackHelper.INGOT_VOLUME*2),
                     oreStack("compressedCoal", 1)}
             );
+            addRecipe(new Object[]{
+                    oreStack("copperSheet", 1),
+                    fluidStack("low_pressure_steam", FluidStackHelper.INGOT_VOLUME*2),
+                    oreStack("wireCopper", 1)}
+            );
+            addPlatePressingRecipes();
+        }
+
+        public void addPlatePressingRecipes() {
+            String[] var1 = OreDictionary.getOreNames();
+            int var2 = var1.length;
+            FluidIngredient steam = fluidStack("low_pressure_steam", FluidStackHelper.INGOT_VOLUME*2);
+            Set<String> PLATE_BLACKLIST = Sets.newHashSet(new String[]{"Graphite"});
+            for(int var3 = 0; var3 < var2; ++var3) {
+                String ore = var1[var3];
+                String plate;
+                if (ore.startsWith("plate")) {
+                    plate = ore.substring(5);
+                    if (PLATE_BLACKLIST.contains(plate)) {
+                        continue;
+                    }
+
+                    String ingot = "ingot" + plate;
+                    String gem = "gem" + plate;
+                    if (OreDictHelper.oreExists(ingot)) {
+                        this.addRecipe(new Object[]{ingot, steam, ore, 1.0D, 1.0D});
+                    } else if (OreDictHelper.oreExists(gem)) {
+                        this.addRecipe(new Object[]{gem,steam, ore, 1.0D, 1.0D});
+                    }
+                }
+
+                if (ore.startsWith("plateDense")) {
+                    plate = "plate" + ore.substring(10);
+                    if (OreDictHelper.oreExists(plate)) {
+                        this.addRecipe(new Object[]{oreStack(plate, 9), steam, ore, 2.0D, 2.0D});
+                    }
+                }
+            }
+
         }
     }
 }

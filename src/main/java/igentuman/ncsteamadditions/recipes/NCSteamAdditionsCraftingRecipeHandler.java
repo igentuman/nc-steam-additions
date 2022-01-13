@@ -1,5 +1,6 @@
 package igentuman.ncsteamadditions.recipes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import com.google.common.collect.Lists;
@@ -8,18 +9,21 @@ import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
+import nc.init.NCItems;
 import nc.recipe.vanilla.recipe.ShapedEnergyRecipe;
 import nc.recipe.vanilla.recipe.ShapedFluidRecipe;
 import nc.recipe.vanilla.recipe.ShapelessArmorRadShieldingRecipe;
 import nc.recipe.vanilla.recipe.ShapelessFluidRecipe;
 import nc.util.NCUtil;
 import nc.util.StackHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.registries.ForgeRegistry;
 
 public class NCSteamAdditionsCraftingRecipeHandler
 {
@@ -32,8 +36,25 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		}
 		addShapedOreRecipe(new ItemStack(Blocks.otherBlocks[0],4),new Object[]{"SSS", "S S", "SSS", 'S', "copperSheet"});
 		addShapedOreRecipe(new ItemStack(Items.items[0],2),new Object[]{"   ", " SS", " SS", 'S', "ingotCopper"});
+		removeRecipeFor(new ItemStack(NCItems.part, 1, 4).getItem());
+		addShapedOreRecipe(new ItemStack(NCItems.part, 2, 4), "CC", "II", "CC", 'C', "wireCopper", 'I', "ingotIron");
+
 	}
 
+	public static void removeRecipeFor(Item item)
+	{
+		ForgeRegistry<IRecipe> recipeRegistry = (ForgeRegistry<IRecipe>)ForgeRegistries.RECIPES;
+		ArrayList<IRecipe> recipes = Lists.newArrayList(recipeRegistry.getValues());
+
+		for (IRecipe r : recipes)
+		{
+			ItemStack output = r.getRecipeOutput();
+			if (output.getItem() == item)
+			{
+				recipeRegistry.remove(r.getRegistryName());
+			}
+		}
+	}
 
 	private static final Map<String, Integer> RECIPE_COUNT_MAP = new HashMap<String, Integer>();
 

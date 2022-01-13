@@ -25,9 +25,12 @@ public class Blocks
 
 	public static void init() 
 	{
+		otherBlocks = new Block[1];
+		otherBlocks[0] = withName(new BlockPipe(),"pipe");
+
 		AbstractProcessor[] processors = ProcessorsRegistry.get().processors();
 		blocks = new Block[processors.length];
-		otherBlocks = new Block[1];
+
 		for (AbstractProcessor processor: processors) {
 			if(processor.getBlockType().equals("nc_processor")) {
 				BlockNCSteamAdditionsProcessor processorBlock = new BlockNCSteamAdditionsProcessor(processor);
@@ -38,7 +41,6 @@ public class Blocks
 			}
 
 		}
-		otherBlocks[0] = withName(new BlockPipe(),"pipe");
 	}
 	
 	public static void register() 

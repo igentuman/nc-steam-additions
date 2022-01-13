@@ -19,8 +19,13 @@ tile.ncsteamadditions.steam_boiler.desc=How do you suppose to get steam?
 tile.ncsteamadditions.steam_turbine.name=Steam Turbine
 tile.ncsteamadditions.steam_turbine.desc=Steam is rotating turbine, turbine generates electricity!
 
+tile.ncsteamadditions.steam_blender.name=Steam Blender
+tile.ncsteamadditions.steam_blender.desc=Drop solid, get liquid.
+
 tile.ncsteamadditions.pipe.name=Fluid Pipe
-tile.ncsteamadditions.copper_sheet.name=Fluid Pipe
+item.ncsteamadditions.copper_sheet.name=Copper Sheet
+
+item.ncsteamadditions.copper_wire.name=Copper Wire
 
 itemGroup.ncsteamadditions.blocks=NC Steam Additions
 
