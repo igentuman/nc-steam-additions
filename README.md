@@ -1,7 +1,7 @@
 # NuclearCraft Steam Additions
 More useful steamy stuff for early and late game.
 
-(`Note`. This mod is in very WIP. Please consider [issue tracker](/issues) for posting issues and suggestions.)
+(`Note`. This mod is in very WIP. Please consider [issue tracker](https://github.com/igentuman/nc-steam-additions/issues) for posting issues and suggestions.)
 
 Basically this mod was created as replacement for GT as Steam Era implementation in my mod-pack.
 
@@ -26,7 +26,7 @@ Washes items with steam
 ### 9. Steam Turbine ![Steam Turbine](src/main/resources/assets/ncsteamadditions/textures/blocks/machine/steam_turbine_front_on.png?raw=true)
 The way you can quit steam era and step into world of forge energy
 
-## Check mod [WIKI pages](/wiki)
+## Check mod [WIKI pages](https://github.com/igentuman/nc-steam-additions/wiki)
 
 ## Permissions
 Feel free to go ahead and use this mod in your pack if you wish!
