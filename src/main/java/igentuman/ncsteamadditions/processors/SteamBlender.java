@@ -25,7 +25,7 @@ public class SteamBlender extends AbstractProcessor {
 
     public static String particle1 = "splash";
 
-    public static String particle2 = "reddust";
+    public static String particle2 = "endRod";
 
     public final static int GUID = 7;
 

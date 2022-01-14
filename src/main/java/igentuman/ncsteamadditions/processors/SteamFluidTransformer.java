@@ -1,6 +1,5 @@
 package igentuman.ncsteamadditions.processors;
 
-import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.item.Items;
@@ -11,18 +10,13 @@ import igentuman.ncsteamadditions.machine.gui.GuiSteamFluidTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
-import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.EmptyFluidIngredient;
-import nc.recipe.ingredient.FluidIngredient;
 import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidStackHelper;
 import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-
-import java.util.ArrayList;
 
 public class SteamFluidTransformer extends AbstractProcessor {
 
@@ -30,7 +24,7 @@ public class SteamFluidTransformer extends AbstractProcessor {
 
     public static String particle1 = "splash";
 
-    public static String particle2 = "reddust";
+    public static String particle2 = "spell";
 
     public final static int GUID = 3;
 

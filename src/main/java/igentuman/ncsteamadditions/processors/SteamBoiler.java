@@ -27,7 +27,7 @@ public class SteamBoiler extends AbstractProcessor {
 
     public static String particle1 = "splash";
 
-    public static String particle2 = "reddust";
+    public static String particle2 = "flame";
 
     public final static int GUID = 2;
 

@@ -33,7 +33,6 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.omg.PortableInterceptor.INACTIVE;
 
 public class BlockNCSteamAdditionsProcessor extends BlockSidedTile implements IActivatable, ITileType
 {
@@ -165,5 +164,9 @@ public class BlockNCSteamAdditionsProcessor extends BlockSidedTile implements IA
 	{
 		if (!state.getValue(ACTIVE))
 			return;
+		BlockHelper.spawnParticleOnProcessor(state, world, pos, rand, state.getValue(FACING_HORIZONTAL),
+				type.getParticle1());
+		BlockHelper.spawnParticleOnProcessor(state, world, pos, rand, state.getValue(FACING_HORIZONTAL),
+				type.getParticle2());
 	}
 }

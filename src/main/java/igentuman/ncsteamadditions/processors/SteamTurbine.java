@@ -26,7 +26,7 @@ public class SteamTurbine extends AbstractProcessor {
 
     public static String code = "steam_turbine";
 
-    public static String particle1 = "splash";
+    public static String particle1 = "fireworksSpark";
 
     public static String particle2 = "reddust";
 
