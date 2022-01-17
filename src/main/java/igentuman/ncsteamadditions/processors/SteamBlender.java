@@ -138,7 +138,7 @@ public class SteamBlender extends AbstractProcessor {
                     outputItems,
                     outputFluids,
                     defaultItemSorptions(inputItems, outputItems, true),
-                    defaultTankCapacities(5000, inputFluids, outputFluids),
+                    defaultTankCapacities(10000, inputFluids, outputFluids),
                     defaultTankSorptions(inputFluids, outputFluids),
                     NCSteamAdditionsRecipes.validFluids[GUID],
                     NCSteamAdditionsConfig.processor_time[GUID],
@@ -165,16 +165,16 @@ public class SteamBlender extends AbstractProcessor {
         public void addRecipes()
         {
             addRecipe("dustIron",oreStack("dustCoal",3),new EmptyItemIngredient(),
-                    fluidStack("steam", FluidStackHelper.BUCKET_VOLUME),
+                    fluidStack("steam", 250),
                     fluidStack("steel", FluidStackHelper.INGOT_VOLUME)
             );
             addRecipe(oreStack("dustCopper",3),"dustLead",new EmptyItemIngredient(),
-                    fluidStack("steam", FluidStackHelper.BUCKET_VOLUME),
+                    fluidStack("steam", 250),
                     fluidStack("bronze", FluidStackHelper.INGOT_VOLUME)
             );
             if(FluidRegHelper.fluidExists("ic2distilled_water")) {
                 addRecipe("blockSnow", new EmptyItemIngredient(), new EmptyItemIngredient(),
-                        fluidStack("low_pressure_steam", FluidStackHelper.INGOT_VOLUME),
+                        fluidStack("low_pressure_steam", 250),
                         fluidStack("ic2distilled_water", FluidStackHelper.BUCKET_VOLUME)
                 );
             }

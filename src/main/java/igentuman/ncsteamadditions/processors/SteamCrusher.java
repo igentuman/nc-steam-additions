@@ -1,5 +1,6 @@
 package igentuman.ncsteamadditions.processors;
 
+import com.google.common.collect.Sets;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.item.Items;
@@ -12,10 +13,15 @@ import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
+import nc.recipe.ingredient.FluidIngredient;
 import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidStackHelper;
+import nc.util.OreDictHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.Set;
 
 public class SteamCrusher extends AbstractProcessor {
 
@@ -162,10 +168,36 @@ public class SteamCrusher extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            addRecipe("oreIron",
-                    fluidStack("steam", FluidStackHelper.INGOT_VOLUME),
-                    oreStack("dustIron", 1)
-            );
+            addDustRecipes();
+        }
+
+        public void addDustRecipes() {
+            String[] var1 = OreDictionary.getOreNames();
+            int var2 = var1.length;
+            FluidIngredient steam = fluidStack("low_pressure_steam", 250);
+            Set<String> DUST_BL = Sets.newHashSet(new String[]{"Graphite"});
+            for(int var3 = 0; var3 < var2; ++var3) {
+                String oreEntry = var1[var3];
+                String dust;
+                if (oreEntry.startsWith("dust")) {
+                    dust = oreEntry.substring(4);
+                    if (DUST_BL.contains(dust)) {
+                        continue;
+                    }
+
+                    String ingot = "ingot" + dust;
+                    String gem = "gem" + dust;
+                    String ore = "ore" + dust;
+                    if (OreDictHelper.oreExists(ingot)) {
+                        this.addRecipe(new Object[]{ingot, steam, oreEntry, 1.0D, 1.0D});
+                    } else if (OreDictHelper.oreExists(gem)) {
+                        this.addRecipe(new Object[]{gem,steam, oreEntry, 1.0D, 1.0D});
+                    } else if (OreDictHelper.oreExists(ore)) {
+                        this.addRecipe(new Object[]{ore,steam, oreEntry, 1.0D, 1.0D});
+                    }
+                }
+            }
+
         }
     }
 }

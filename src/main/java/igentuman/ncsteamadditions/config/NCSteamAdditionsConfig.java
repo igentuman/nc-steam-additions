@@ -45,13 +45,13 @@ public class NCSteamAdditionsConfig {
 	{
 		if (loadFromFile) config.load();
 
-		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {800,400,400,800,400,400,200,400}, Lang.localise("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
+		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {800,400,400,800,400,400,500,400}, Lang.localise("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
 		propertyProcessorTime.setLanguageKey("gui.ncsteamadditions.config.processors.time");
 
 		Property propertyBoilerConversion = config.get(CATEGORY_PROCESSORS, "boiler_conversion", 1.25F, Lang.localise("gui.ncsteamadditions.config.processors.boiler_conversion.comment"),0,32767);
 		propertyBoilerConversion.setLanguageKey("gui.ncsteamadditions.config.processors.boiler_conversion");
 
-		Property propertyTurbineRF = config.get(CATEGORY_PROCESSORS, "turbine_rf", 32, Lang.localise("gui.ncsteamadditions.config.processors.turbine_rf.comment"),0,32767);
+		Property propertyTurbineRF = config.get(CATEGORY_PROCESSORS, "turbine_rf", 12, Lang.localise("gui.ncsteamadditions.config.processors.turbine_rf.comment"),0,32767);
 		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.turbine_rf");
 
 		Property propertyTurbineConversion = config.get(CATEGORY_PROCESSORS, "turbine_conversion", 0.50, Lang.localise("gui.ncsteamadditions.config.processors.turbine_conversion.comment"),0,32767);

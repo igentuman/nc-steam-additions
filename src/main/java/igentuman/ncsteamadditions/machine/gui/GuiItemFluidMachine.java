@@ -276,7 +276,7 @@ public class GuiItemFluidMachine extends NCGui {
                 return;
             }
 
-            for (int i = 1; i < getProcessor().getInputFluids() + getProcessor().getOutputFluids(); i++)
+            for (int i = 1; i <= getProcessor().getInputFluids() + getProcessor().getOutputFluids(); i++)
                 if (guiButton.id == i && NCUtil.isModifierKeyDown())
                 {
                     PacketHandler.instance.sendToServer(new EmptyTankPacket(tile, i-1));
@@ -300,17 +300,6 @@ public class GuiItemFluidMachine extends NCGui {
             super(player, tile, new ContainerMachineConfig(player, tile), proc.getCode());
             processor = proc;
         }
-
-        public TextFormatting[] colors = new TextFormatting[] {
-                TextFormatting.GRAY,
-                TextFormatting.BOLD,
-                TextFormatting.DARK_AQUA,
-                TextFormatting.BLUE,
-                TextFormatting.DARK_GREEN,
-                TextFormatting.DARK_RED,
-                TextFormatting.DARK_PURPLE,
-                TextFormatting.AQUA
-        };
 
         @Override
         public void renderButtonTooltips(int mouseX, int mouseY)

@@ -137,7 +137,7 @@ public class SteamTransformer extends AbstractProcessor {
                     outputItems,
                     outputFluids,
                     defaultItemSorptions(inputItems, outputItems, true),
-                    defaultTankCapacities(5000, inputFluids, outputFluids),
+                    defaultTankCapacities(10000, inputFluids, outputFluids),
                     defaultTankSorptions(inputFluids, outputFluids),
                     NCSteamAdditionsRecipes.validFluids[GUID],
                     NCSteamAdditionsConfig.processor_time[GUID],
@@ -164,11 +164,11 @@ public class SteamTransformer extends AbstractProcessor {
         public void addRecipes()
         {
             addRecipe("ingotSteel","itemSilicon","stone",new EmptyItemIngredient(),
-                    fluidStack("high_pressure_steam", FluidStackHelper.BUCKET_VOLUME*2),
+                    fluidStack("high_pressure_steam", 250),
                     oreStack("oreBoron", 1)
             );
             addRecipe("ingotLead","gemEmerald","stone",new EmptyItemIngredient(),
-                    fluidStack("high_pressure_steam", FluidStackHelper.BUCKET_VOLUME*2),
+                    fluidStack("high_pressure_steam", 250),
                     oreStack("oreUranium", 1)
             );
         }

@@ -8,6 +8,7 @@ import java.util.Random;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.processors.ProcessorType;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
+import nc.block.property.BlockProperties;
 import nc.block.tile.BlockSidedTile;
 import nc.block.tile.IActivatable;
 import nc.block.tile.ITileType;
@@ -85,12 +86,8 @@ public class BlockNCSteamAdditionsProcessor extends BlockSidedTile implements IA
 		return new BlockStateContainer(this, new IProperty[] { FACING_HORIZONTAL, ACTIVE});
 	}
 
-	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-			float hitZ, int meta, EntityLivingBase placer)
-	{
-		return getDefaultState().withProperty(FACING_HORIZONTAL, placer.getHorizontalFacing().getOpposite())
-				.withProperty(ACTIVE, Boolean.FALSE);
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+		return this.getDefaultState().withProperty(BlockProperties.FACING_HORIZONTAL, placer.getHorizontalFacing().getOpposite()).withProperty(BlockProperties.ACTIVE, false);
 	}
 
 	@Override

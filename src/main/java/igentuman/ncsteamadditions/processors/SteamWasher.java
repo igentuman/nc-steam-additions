@@ -1,5 +1,6 @@
 package igentuman.ncsteamadditions.processors;
 
+import com.google.common.collect.Sets;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.item.Items;
@@ -12,10 +13,15 @@ import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
+import nc.recipe.ingredient.FluidIngredient;
 import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidStackHelper;
+import nc.util.OreDictHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.Set;
 
 public class SteamWasher extends AbstractProcessor {
 
@@ -162,10 +168,39 @@ public class SteamWasher extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            addRecipe("dustRedstone",
-                    fluidStack("steam", FluidStackHelper.INGOT_VOLUME),
-                    oreStack("dustIron", 1)
+            addRecipe(oreStack("dustUranium", 3),
+                    fluidStack("steam", 250),
+                    oreStack("ingotUranium235", 2)
             );
+            addIsotopeRecipes();
+        }
+
+        public void addIsotopeRecipes() {
+            String[] var1 = OreDictionary.getOreNames();
+            int var2 = var1.length;
+            FluidIngredient steam = fluidStack("low_pressure_steam", 125);
+            for(int var3 = 0; var3 < var2; ++var3) {
+                String oreEntry = var1[var3];
+                String isotope;
+                if (oreEntry.startsWith("ingot")) {
+                    isotope = oreEntry.substring(5);
+
+                    String oxide = "ingot" + isotope + "Oxide";
+                    String nitride = "ingot" + isotope + "Nitride";
+                    String carbide = "ingot" + isotope + "Carbide";
+                    String za = "ingot" + isotope + "ZA";
+                    if (OreDictHelper.oreExists(oxide)) {
+                        this.addRecipe(new Object[]{oxide, steam, oreEntry, 1.0D});
+                    } else if(OreDictHelper.oreExists(nitride)){
+                        this.addRecipe(new Object[]{nitride, steam, oreEntry, 1.0D});
+                    } else if(OreDictHelper.oreExists(carbide)){
+                        this.addRecipe(new Object[]{carbide, steam, oreEntry, 1.0D});
+                    } else if(OreDictHelper.oreExists(za)){
+                        this.addRecipe(new Object[]{za, steam, oreEntry, 1.0D});
+                    }
+                }
+            }
+
         }
     }
 }

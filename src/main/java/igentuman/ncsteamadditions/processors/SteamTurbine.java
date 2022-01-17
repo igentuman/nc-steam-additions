@@ -146,18 +146,19 @@ public class SteamTurbine extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            addTurbineRecipe("low_quality_steam","condensate_water",NCSteamAdditionsConfig.turbineConversion - 0.1, 0.5);
-            addTurbineRecipe("low_pressure_steam","preheated_water",NCSteamAdditionsConfig.turbineConversion - 0.1, 1.0);
-            addTurbineRecipe("steam","low_quality_steam",NCSteamAdditionsConfig.turbineConversion - 0.1, 1.0);
-            addTurbineRecipe("ic2steam","low_quality_steam",NCSteamAdditionsConfig.turbineConversion - 0.1, 1.0);
+            double x = NCSteamAdditionsConfig.turbineConversion;
+            addTurbineRecipe("low_quality_steam","condensate_water", x, 0.5);
+            addTurbineRecipe("low_pressure_steam","preheated_water", x, 1.0);
+            addTurbineRecipe("steam","low_quality_steam", x, 1.0);
+            addTurbineRecipe("ic2steam","low_quality_steam", x, 1.0);
         }
 
         public void addTurbineRecipe(String input, String output, Double rate, Double time)
         {
             if(FluidRegHelper.fluidExists(input) && FluidRegHelper.fluidExists(output)) {
                 addRecipe(new Object[]{
-                        fluidStack(input, 100),
-                        fluidStack(output, (int) Math.round(100 * rate))
+                        fluidStack(input, 500),
+                        fluidStack(output, (int) Math.round(500 * rate))
                         ,time});
             }
         }

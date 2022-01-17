@@ -163,18 +163,17 @@ public class SteamBoiler extends AbstractProcessor {
             super(code, inputItems, inputFluids, outputItems, outputFluids);
         }
 
-        ArrayList fuels = Lists.newArrayList(new String[]{"coal"});
-
         @Override
         public void addRecipes()
         {
-            addBoilerRecipe("coal", "water","low_quality_steam", NCSteamAdditionsConfig.boilerConversion, 1.0);
-            addBoilerRecipe("coal", "low_quality_steam","low_pressure_steam", NCSteamAdditionsConfig.boilerConversion-0.1, 1.5);
-            addBoilerRecipe("coal","condensate_water","low_pressure_steam", NCSteamAdditionsConfig.boilerConversion, 3.0);
-            addBoilerRecipe("coal","ic2distilled_water","low_pressure_steam", NCSteamAdditionsConfig.boilerConversion, 1.5);
-            addBoilerRecipe("coal","preheated_water","low_pressure_steam", NCSteamAdditionsConfig.boilerConversion, 0.5);
-            addBoilerRecipe("coal","ic2hot_water","low_pressure_steam", NCSteamAdditionsConfig.boilerConversion, 0.5);
-            addBoilerRecipe("compressedCoal","low_pressure_steam","steam", NCSteamAdditionsConfig.boilerConversion, 3.0);
+            double x = NCSteamAdditionsConfig.boilerConversion;
+            addBoilerRecipe("coal", "water","low_quality_steam", x, 1.0);
+            addBoilerRecipe("coal", "low_quality_steam","low_pressure_steam", x-0.1, 1.5);
+            addBoilerRecipe("coal","condensate_water","low_pressure_steam", x, 3.0);
+            addBoilerRecipe("coal","ic2distilled_water","low_pressure_steam", x, 1.5);
+            addBoilerRecipe("coal","preheated_water","low_pressure_steam", x, 1.0);
+            addBoilerRecipe("coal","ic2hot_water","low_pressure_steam", x, 1.0);
+            addBoilerRecipe("compressedCoal","low_pressure_steam","steam", x, 2.0);
         }
 
         public void addBoilerRecipe(String fuel, String input, String output, Double rate, Double time)
@@ -182,8 +181,8 @@ public class SteamBoiler extends AbstractProcessor {
             if(FluidRegHelper.fluidExists(input) && FluidRegHelper.fluidExists(output)) {
                 addRecipe(new Object[]{
                         fuel,
-                        fluidStack(input, 100),
-                        fluidStack(output, (int) Math.round(100 * rate))
+                        fluidStack(input, 500),
+                        fluidStack(output, (int) Math.round(500 * rate))
                 ,time});
             }
         }

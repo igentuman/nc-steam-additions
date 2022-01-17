@@ -141,7 +141,7 @@ public class SteamFluidTransformer extends AbstractProcessor {
                     outputItems,
                     outputFluids,
                     defaultItemSorptions(inputItems, outputItems, true),
-                    defaultTankCapacities(5000, inputFluids, outputFluids),
+                    defaultTankCapacities(10000, inputFluids, outputFluids),
                     defaultTankSorptions(inputFluids, outputFluids),
                     NCSteamAdditionsRecipes.validFluids[GUID],
                     NCSteamAdditionsConfig.processor_time[GUID],

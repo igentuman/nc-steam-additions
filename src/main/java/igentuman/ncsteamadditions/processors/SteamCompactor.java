@@ -169,12 +169,12 @@ public class SteamCompactor extends AbstractProcessor {
         {
             addRecipe(new Object[]{
                     oreStack("coal", 4),
-                    fluidStack("low_pressure_steam", FluidStackHelper.INGOT_VOLUME*2),
+                    fluidStack("low_pressure_steam", 250),
                     oreStack("compressedCoal", 1)}
             );
             addRecipe(new Object[]{
                     oreStack("copperSheet", 1),
-                    fluidStack("low_pressure_steam", FluidStackHelper.INGOT_VOLUME*2),
+                    fluidStack("low_pressure_steam", 250),
                     oreStack("wireCopper", 1)}
             );
             addPlatePressingRecipes();
@@ -183,7 +183,7 @@ public class SteamCompactor extends AbstractProcessor {
         public void addPlatePressingRecipes() {
             String[] var1 = OreDictionary.getOreNames();
             int var2 = var1.length;
-            FluidIngredient steam = fluidStack("low_pressure_steam", FluidStackHelper.INGOT_VOLUME*2);
+            FluidIngredient steam = fluidStack("low_pressure_steam", 250);
             Set<String> PLATE_BLACKLIST = Sets.newHashSet(new String[]{"Graphite"});
             for(int var3 = 0; var3 < var2; ++var3) {
                 String ore = var1[var3];
