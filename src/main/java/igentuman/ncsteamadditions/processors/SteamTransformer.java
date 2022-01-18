@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.config.SteamTransformerRecipesConfig;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamTransformerCategory;
@@ -163,14 +164,12 @@ public class SteamTransformer extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            addRecipe("ingotSteel","itemSilicon","stone",new EmptyItemIngredient(),
-                    fluidStack("high_pressure_steam", 250),
-                    oreStack("oreBoron", 1)
-            );
-            addRecipe("ingotLead","gemEmerald","stone",new EmptyItemIngredient(),
-                    fluidStack("high_pressure_steam", 250),
-                    oreStack("oreUranium", 1)
-            );
+            for(int i = 0; i < SteamTransformerRecipesConfig.transformerRecipes.length; i++) {
+                Object[] recipe = SteamTransformerRecipesConfig.parseTransformerRecipe(SteamTransformerRecipesConfig.transformerRecipes[i]);
+                if(recipe != null) {
+                    addRecipe(recipe);
+                }
+            }
         }
     }
 }

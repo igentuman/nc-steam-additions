@@ -1,6 +1,7 @@
 package igentuman.ncsteamadditions;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.config.SteamTransformerRecipesConfig;
 import igentuman.ncsteamadditions.gui.GUIHandler;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.proxy.CommonProxy;
@@ -40,7 +41,8 @@ public class NCSteamAdditions
 	{
 		Util.getLogger().info("PreInitialization");
 		NCSteamAdditionsConfig.preInit();
-		proxy.preInit(event);	
+		SteamTransformerRecipesConfig.preInit();
+		proxy.preInit(event);
 	}
 
 	@EventHandler

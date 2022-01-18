@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.config.SteamTransformerRecipesConfig;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamFluidTransformerCategory;
@@ -167,55 +168,12 @@ public class SteamFluidTransformer extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            addRecipe(new Object[]{
-                    getSteamIngredient(),
-                    fluidStack("ethene", bucket()),
-                    fluidStack("lava", bucket()),
-                    fluidStack("glowstone", bucket()),
-                    fluidStack("pyrotheum", bucket()*2)}
-            );
-            addRecipe(new Object[]{
-                    getSteamIngredient(),
-                    fluidStack("ethanol", bucket()),
-                    fluidStack("fluorite_water", bucket()),
-                    fluidStack("lapis", bucket()),
-                    fluidStack("cryotheum", bucket()*2)}
-            );
-            addRecipe(new Object[]{
-                    getSteamIngredient(),
-                    fluidStack("low_quality_steam", bucket()),
-                    new EmptyFluidIngredient(),
-                    new EmptyFluidIngredient(),
-                    fluidStack("low_pressure_steam", bucket()*2)}
-            );
-            addRecipe(new Object[]{
-                    getSteamIngredient(),
-                    fluidStack("lead", bucket()),
-                    fluidStack("glowstone", FluidStackHelper.INGOT_VOLUME),
-                    new EmptyFluidIngredient(),
-                    fluidStack("gold", FluidStackHelper.INGOT_VOLUME)}
-            );
-            addRecipe(new Object[]{
-                    getSteamIngredient(),
-                    fluidStack("iron", FluidStackHelper.INGOT_VOLUME),
-                    fluidStack("coal", FluidStackHelper.INGOT_VOLUME*3),
-                    new EmptyFluidIngredient(),
-                    fluidStack("steel", FluidStackHelper.INGOT_VOLUME)}
-            );
-            addRecipe(new Object[]{
-                    getSteamIngredient(),
-                    fluidStack("water", bucket()),
-                    fluidStack("lava", bucket()),
-                    new EmptyFluidIngredient(),
-                    fluidStack("obsidian", bucket())}
-            );
-            addRecipe(new Object[]{
-                    getSteamIngredient(),
-                    fluidStack("water", bucket()),
-                    new EmptyFluidIngredient(),
-                    new EmptyFluidIngredient(),
-                    fluidStack("preheated_water", bucket())}
-            );
+            for(int i = 0; i < SteamTransformerRecipesConfig.fluidTransformerRecipes.length; i++) {
+                Object[] recipe = SteamTransformerRecipesConfig.parseFluidTransformerRecipe(SteamTransformerRecipesConfig.fluidTransformerRecipes[i]);
+                if(recipe != null) {
+                    addRecipe(recipe);
+                }
+            }
         }
     }
 }
