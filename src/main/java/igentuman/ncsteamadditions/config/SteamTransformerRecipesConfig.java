@@ -54,8 +54,14 @@ public class SteamTransformerRecipesConfig {
 		if (loadFromFile) config.load();
 
 		String[] defaultTransformerRecipes = new String[] {
-				"ingotSteel;itemSilicon;stone;null;high_pressure_steam*250=oreBoron*2",
-				"ingotLead;gemEmerald;stone;null;high_pressure_steam*250=oreUranium"
+				"minecraft:water_bucket;blockPrismarine;plateBasic*4;dustTin;low_quality_steam*250=nuclearcraft:water_source",
+				"ingotSteel;itemSilicon;stone;null;low_pressure_steam*250=oreBoron",
+				"ingotLead;gemEmerald;stone;null;low_pressure_steam*250=oreUranium",
+				"ingotClay;dyeGreen;null;null;high_pressure_steam*1500=ingotUranium",
+				"ingotClay;dyeYellow;null;null;high_pressure_steam*1500=ingotGold",
+				"ingotClay;dyeGray;null;null;high_pressure_steam*1500=ingotBoron",
+				"ingotClay;dyeWhite;null;null;high_pressure_steam*1500=ingotTin",
+				"ingotClay;dyeLightBlue;null;null;high_pressure_steam*2500=ingotPlatinum"
 		};
 
 		String[] defaultFluidTransformerRecipes = new String[] {

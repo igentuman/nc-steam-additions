@@ -9,6 +9,7 @@ import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
+import nc.init.NCBlocks;
 import nc.init.NCItems;
 import nc.recipe.vanilla.recipe.ShapedEnergyRecipe;
 import nc.recipe.vanilla.recipe.ShapedFluidRecipe;
@@ -36,12 +37,13 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		}
 		addShapedOreRecipe(new ItemStack(Blocks.otherBlocks[0],4),new Object[]{"SSS", "S S", "SSS", 'S', "copperSheet"});
 		addShapedOreRecipe(new ItemStack(Items.items[0],2),new Object[]{"   ", " SS", " SS", 'S', "ingotCopper"});
-		removeRecipeFor(new ItemStack(NCItems.part, 1, 4).getItem());
+		removeRecipeFor(new ItemStack(NCItems.part, 1, 4).getItem(),4);
+		removeRecipeFor(new ItemStack(NCBlocks.water_source, 1).getItem(),0);
 		addShapedOreRecipe(new ItemStack(NCItems.part, 2, 4), "CC", "II", "CC", 'C', "wireCopper", 'I', "ingotIron");
 
 	}
 
-	public static void removeRecipeFor(Item item)
+	public static void removeRecipeFor(Item item, int meta)
 	{
 		ForgeRegistry<IRecipe> recipeRegistry = (ForgeRegistry<IRecipe>)ForgeRegistries.RECIPES;
 		ArrayList<IRecipe> recipes = Lists.newArrayList(recipeRegistry.getValues());
@@ -49,7 +51,7 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		for (IRecipe r : recipes)
 		{
 			ItemStack output = r.getRecipeOutput();
-			if (output.getItem() == item)
+			if (output.getItem() == item && output.getItem().getMetadata(output) == meta)
 			{
 				recipeRegistry.remove(r.getRegistryName());
 			}
