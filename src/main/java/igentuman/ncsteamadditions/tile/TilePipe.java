@@ -21,6 +21,9 @@ import net.minecraftforge.fluids.capability.FluidTankProperties;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class TilePipe extends PersistantSyncableTileEntity implements ITickable, IFluidHandler {
 
@@ -29,6 +32,7 @@ public class TilePipe extends PersistantSyncableTileEntity implements ITickable,
     private boolean extraction;
     private int transferRate = NCSteamAdditionsConfig.pipeTransfer;
     private ItemStack cachedBlockPipe;
+    private int ticksToRefresh = 1000;
 
     @Override
     public void update() {
@@ -36,7 +40,11 @@ public class TilePipe extends PersistantSyncableTileEntity implements ITickable,
         for (EnumFacing facing : EnumFacing.values()) {
             BlockPos pos = this.getPos().offset(facing);
             TileEntity tileEntity = this.getWorld().getTileEntity(pos);
-
+            if(ticksToRefresh <= 0) {
+                clearConnectionCache();
+                ticksToRefresh = 1000;
+            }
+            ticksToRefresh--;
             if (!this.canConnectTo(tileEntity, facing, false)) {
                 continue;
             }
@@ -80,6 +88,11 @@ public class TilePipe extends PersistantSyncableTileEntity implements ITickable,
                 this.amount -= fluidHandler.fill(new FluidStack(this.fluid, Math.min(transferRate, this.amount)), true);
             }
         }
+    }
+    protected Map<String, Boolean> connectionsCache = new HashMap<>();
+    public void clearConnectionCache()
+    {
+        connectionsCache = new HashMap<>();
     }
 
     private FluidStack getFluidStack() {
@@ -240,18 +253,24 @@ public class TilePipe extends PersistantSyncableTileEntity implements ITickable,
         if (tileEntity == null) {
             return false;
         }
+        BlockPos pos = tileEntity.getPos();
+        String cacheKey  = pos.getX() + "_" + pos.getY() + "_" + pos.getZ() +"_"+ direction.getIndex() +"_"+ excludePipe;
+        if( !connectionsCache.containsKey(cacheKey)) {
 
-        if (tileEntity instanceof TilePipe) {
-            if (excludePipe) {
-                return false;
+
+            if (tileEntity instanceof TilePipe) {
+                if (excludePipe) {
+                    return false;
+                }
+
+                TilePipe otherPipe = (TilePipe) tileEntity;
+
+                return otherPipe.getBlockPipe().isItemEqual(this.getBlockPipe());
             }
 
-            TilePipe otherPipe = (TilePipe) tileEntity;
-
-            return otherPipe.getBlockPipe().isItemEqual(this.getBlockPipe());
+            connectionsCache.put(cacheKey,tileEntity.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, direction.getOpposite()));
         }
-
-        return tileEntity.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, direction.getOpposite());
+        return connectionsCache.get(cacheKey);
     }
 
 }

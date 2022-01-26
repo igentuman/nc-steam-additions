@@ -5,6 +5,7 @@ import crafttweaker.CraftTweakerAPI;
 import igentuman.ncsteamadditions.NCSOreDictionary;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.block.Blocks;
+import igentuman.ncsteamadditions.fluid.NCSfluids;
 import igentuman.ncsteamadditions.item.ItemCompressedCoal;
 import igentuman.ncsteamadditions.network.NCSAPacketHandler;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
@@ -33,6 +34,7 @@ public class CommonProxy
 		Blocks.init();
 		Blocks.register();
 		Items.register();
+		NCSfluids.init();
 		NCSAPacketHandler.registerMessages(NCSteamAdditions.MOD_ID);
 
 		NCSteamAdditionsTiles.register();

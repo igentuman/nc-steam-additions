@@ -164,6 +164,10 @@ public class SteamBlender extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
+            addRecipe("dustUraniumOxide", new EmptyItemIngredient(), new EmptyItemIngredient(),
+                    fluidStack("steam", 250),
+                    fluidStack("uranium_oxide", FluidStackHelper.BUCKET_VOLUME/2)
+            );
             addRecipe("dustIron",oreStack("dustCoal",3),new EmptyItemIngredient(),
                     fluidStack("steam", 250),
                     fluidStack("steel", FluidStackHelper.INGOT_VOLUME)

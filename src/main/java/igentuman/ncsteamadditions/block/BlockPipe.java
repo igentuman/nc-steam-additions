@@ -1,12 +1,8 @@
 package igentuman.ncsteamadditions.block;
 
-import codechicken.lib.block.property.PropertyString;
-import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
 import igentuman.ncsteamadditions.tile.TilePipe;
-import li.cil.repack.org.luaj.vm2.ast.Str;
 import nc.init.NCItems;
-import nc.item.NCItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -263,7 +259,6 @@ public class BlockPipe extends Block {
         if (pipeTileEntity instanceof TilePipe) {
             return ((TilePipe) pipeTileEntity).canConnectTo(direction, excludePipe);
         }
-
         return false;
     }
 

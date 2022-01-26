@@ -11,11 +11,17 @@ import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import nc.init.NCBlocks;
 import nc.init.NCItems;
+import nc.recipe.NCRecipes;
+import nc.recipe.ingredient.EmptyFluidIngredient;
+import nc.recipe.ingredient.FluidIngredient;
+import nc.recipe.ingredient.OreIngredient;
 import nc.recipe.vanilla.recipe.ShapedEnergyRecipe;
 import nc.recipe.vanilla.recipe.ShapedFluidRecipe;
 import nc.recipe.vanilla.recipe.ShapelessArmorRadShieldingRecipe;
 import nc.recipe.vanilla.recipe.ShapelessFluidRecipe;
+import nc.util.FluidRegHelper;
 import nc.util.NCUtil;
+import nc.util.OreDictHelper;
 import nc.util.StackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -40,7 +46,17 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		removeRecipeFor(new ItemStack(NCItems.part, 1, 4).getItem(),4);
 		removeRecipeFor(new ItemStack(NCBlocks.water_source, 1).getItem(),0);
 		addShapedOreRecipe(new ItemStack(NCItems.part, 2, 4), "CC", "II", "CC", 'C', "wireCopper", 'I', "ingotIron");
+		NCRecipes.infuser.addOxidizingRecipe("dustUranium",1000);
+		NCRecipes.chemical_reactor.addRecipe(new Object[] {fluidStack("uranium_oxide",1000),fluidStack("hydrofluoric_acid",500),fluidStack("uranium_hexafluoride",1000), new EmptyFluidIngredient()});
+		NCRecipes.centrifuge.addRecipe(new Object[]{fluidStack("uranium_hexafluoride",1000),fluidStack("uranium_235",144),fluidStack("uranium_238",144*4),fluidStack("uranium_233",72),new EmptyFluidIngredient(),new EmptyFluidIngredient(),new EmptyFluidIngredient()});
+	}
 
+	public static OreIngredient oreStack(String oreType, int stackSize) {
+		return !OreDictHelper.oreExists(oreType) ? null : new OreIngredient(oreType, stackSize);
+	}
+
+	public static FluidIngredient fluidStack(String fluidName, int stackSize) {
+		return !FluidRegHelper.fluidExists(fluidName) ? null : new FluidIngredient(fluidName, stackSize);
 	}
 
 	public static void removeRecipeFor(Item item, int meta)

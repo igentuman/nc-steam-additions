@@ -61,6 +61,7 @@ public class SteamTransformerRecipesConfig {
 				"ingotClay;dyeYellow;null;null;high_pressure_steam*1500=ingotGold",
 				"ingotClay;dyeGray;null;null;high_pressure_steam*1500=ingotBoron",
 				"ingotClay;dyeWhite;null;null;high_pressure_steam*1500=ingotTin",
+				"ingotIron;ingotBoron;ingotLithium;coal;high_pressure_steam*500=ingotTough*2",
 				"ingotClay;dyeLightBlue;null;null;high_pressure_steam*2500=ingotPlatinum"
 		};
 
@@ -71,7 +72,8 @@ public class SteamTransformerRecipesConfig {
 				"steam;lead;glowstone*144;null=gold*288",
 				"steam;iron*144;coal*432;null=steel*144",
 				"steam*125;water;lava;null=obsidian",
-				"steam*125;water;null;null=preheated_water"
+				"steam*125;water;null;null=preheated_water",
+				"high_pressure_steam*125;uranium_oxide;hydrofluoric_acid*500;null=uranium_hexafluoride*1500"
 		};
 
 		transformerRecipes = config.get(RECIPES, "transformer", defaultTransformerRecipes).getStringList();

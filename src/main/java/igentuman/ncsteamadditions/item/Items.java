@@ -31,10 +31,11 @@ public class Items {
 
     public static void init()
     {
-        items = new Item[3];
+        items = new Item[4];
         items[ItemCopperSheet.regId] =  withName(new ItemCopperSheet(), "copper_sheet");
         items[ItemCompressedCoal.regId] =  withName(new ItemCompressedCoal(), "compressed_coal");
         items[ItemCopperWire.regId] =  withName(new ItemCopperWire(), "copper_wire");
+        items[3] = withMetaItem(new NCItemMeta(MetaEnums.DustType.class), "dust_uranium_oxide");
     }
 
     public static void register()
@@ -44,9 +45,18 @@ public class Items {
         }
     }
 
+
+
     public static  Item withName(Item item, String name)
     {
         item.setTranslationKey(NCSteamAdditions.MOD_ID + "." + name).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, name));
+        return item;
+    }
+
+    public static <T extends Item & IInfoItem> Item withMetaItem(T item, String name)
+    {
+        item.setTranslationKey(NCSteamAdditions.MOD_ID + "." + name).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, name));
+        item.setInfo();
         return item;
     }
 

@@ -52,3 +52,10 @@ gui.ncsteamadditions.config.pipes.transfer.comment=How much Copper Pipe can tran
 
 gui.ncsteamadditions.config.pipes.capacity=Copper Pipe Capacity
 gui.ncsteamadditions.config.pipes.capacity.comment=How much Copper Pipe block can store fluid inside
+
+fluid.uranium_oxide=Uranium Oxide
+fluid.uranium_hexafluoride=Uranium Hexafluoride
+
+item.ncsteamadditions.dust_uranium_oxide.copper.name=Uranium Oxide Dust
+item.ncsteamadditions.dust_uranium_oxide.name=Uranium Oxide Dust
+item.ncsteamadditions.dust_uranium_oxide.desc=Yellowcake
