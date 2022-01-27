@@ -7,10 +7,11 @@ import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.item.Items;
-import igentuman.ncsteamadditions.processors.AbstractProcessor;
-import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
+import igentuman.ncsteamadditions.processors.*;
+import nc.config.NCConfig;
 import nc.init.NCBlocks;
 import nc.init.NCItems;
+import nc.radiation.RadSources;
 import nc.recipe.NCRecipes;
 import nc.recipe.ingredient.EmptyFluidIngredient;
 import nc.recipe.ingredient.FluidIngredient;
@@ -49,6 +50,8 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		NCRecipes.infuser.addOxidizingRecipe("dustUranium",1000);
 		NCRecipes.chemical_reactor.addRecipe(new Object[] {fluidStack("uranium_oxide",1000),fluidStack("hydrofluoric_acid",500),fluidStack("uranium_hexafluoride",1000), new EmptyFluidIngredient()});
 		NCRecipes.centrifuge.addRecipe(new Object[]{fluidStack("uranium_hexafluoride",1000),fluidStack("uranium_235",144),fluidStack("uranium_238",144*4),fluidStack("uranium_233",72),new EmptyFluidIngredient(),new EmptyFluidIngredient(),new EmptyFluidIngredient()});
+		NCRecipes.assembler.addRecipe(new Object[]{NCBlocks.assembler, Blocks.blocks[SteamTransformer.GUID], Blocks.blocks[SteamFluidTransformer.GUID], "coreOfTransformation", Blocks.blocks[DigitalTransformer.GUID], 2.0D, 2.0D});
+		NCRecipes.fission_irradiator.addRecipe(new Object[]{"gemEnderEye","coreOfTransformation",2720000, NCConfig.fission_irradiator_heat_per_flux[1], NCConfig.fission_irradiator_efficiency[1], RadSources.TBP});
 	}
 
 	public static OreIngredient oreStack(String oreType, int stackSize) {

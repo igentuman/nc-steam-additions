@@ -26,6 +26,7 @@ public class NCSteamAdditionsConfig {
 	public static int pipeCapacity;
 	public static int pipeTransfer;
 	public static int turbineRF;
+	public static int digitalTransformerRF;
 	public static double turbineConversion;
 	public static double boilerConversion;
 
@@ -45,7 +46,7 @@ public class NCSteamAdditionsConfig {
 	{
 		if (loadFromFile) config.load();
 
-		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {800,400,400,800,400,400,500,400}, Lang.localise("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
+		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {800,400,400,800,400,400,500,400,12000}, Lang.localise("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
 		propertyProcessorTime.setLanguageKey("gui.ncsteamadditions.config.processors.time");
 
 		Property propertyBoilerConversion = config.get(CATEGORY_PROCESSORS, "boiler_conversion", 1.25F, Lang.localise("gui.ncsteamadditions.config.processors.boiler_conversion.comment"),0,32767);
@@ -62,6 +63,11 @@ public class NCSteamAdditionsConfig {
 
 		Property transfer = config.get(CATEGORY_PIPES, "transfer", 1000, Lang.localise("gui.ncsteamadditions.config.pipes.transfer.comment"),0,32767);
 		transfer.setLanguageKey("gui.ncsteamadditions.config.pipes.transfer");
+
+		Property digitalTransformerBasePower = config.get(CATEGORY_PROCESSORS, "digital_transformer_rf", 1024, Lang.localise("gui.ncsteamadditions.config.processors.digital_transformer_rf.comment"),0,32767);
+		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.digital_transformer_rf");
+
+		digitalTransformerRF = digitalTransformerBasePower.getInt();
 
 		pipeCapacity = capacity.getInt();
 		pipeTransfer = transfer.getInt();

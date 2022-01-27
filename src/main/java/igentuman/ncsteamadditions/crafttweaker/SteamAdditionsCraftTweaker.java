@@ -16,6 +16,36 @@ import stanhebben.zenscript.annotations.ZenMethod;
 
 public class SteamAdditionsCraftTweaker
 {
+	@ZenClass("mods.ncsteamadditions.digital_transformer")
+	@ZenRegister
+	public static class DigitalTransformerHandler
+	{
+
+		@ZenMethod
+		public static void addRecipe(IIngredient input1,IIngredient input2,IIngredient input3,IIngredient input4,IIngredient input5,IIngredient input6, IIngredient input7,IIngredient input8, IIngredient output1, IIngredient output2, @Optional(valueDouble = 1D) double timeMultiplier,@Optional(valueDouble = 1D) double powerMultiplier)
+		{
+			CraftTweakerAPI.apply(new CTAddRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[DigitalTransformer.GUID], Lists.newArrayList(input1, input2, input3, input4,input5,input6,input7,input8, output1,output2, timeMultiplier, powerMultiplier)));
+		}
+
+		@ZenMethod
+		public static void removeRecipeWithInput(IIngredient input1,IIngredient input2,IIngredient input3,IIngredient input4,IIngredient input5,IIngredient input6, IIngredient input7,IIngredient input8)
+		{
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[DigitalTransformer.GUID], IngredientSorption.INPUT, Lists.newArrayList(input1,input2,input3,input4,input5,input6,input7,input8)));
+		}
+
+		@ZenMethod
+		public static void removeRecipeWithOutput(IIngredient output1)
+		{
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[DigitalTransformer.GUID], IngredientSorption.OUTPUT, Lists.newArrayList(output1)));
+		}
+
+		@ZenMethod
+		public static void removeAllRecipes()
+		{
+			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[DigitalTransformer.GUID]));
+		}
+	}
+
 	@ZenClass("mods.ncsteamadditions.steam_transformer")
 	@ZenRegister
 	public static class SteamTransformerHandler 

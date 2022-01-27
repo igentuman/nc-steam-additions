@@ -2,7 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import igentuman.ncsteamadditions.config.SteamTransformerRecipesConfig;
+import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamFluidTransformerCategory;
@@ -12,9 +12,7 @@ import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
-import nc.recipe.ingredient.EmptyFluidIngredient;
 import nc.tile.processor.TileItemFluidProcessor;
-import nc.util.FluidStackHelper;
 import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -168,8 +166,8 @@ public class SteamFluidTransformer extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            for(int i = 0; i < SteamTransformerRecipesConfig.fluidTransformerRecipes.length; i++) {
-                Object[] recipe = SteamTransformerRecipesConfig.parseFluidTransformerRecipe(SteamTransformerRecipesConfig.fluidTransformerRecipes[i]);
+            for(int i = 0; i < TransformerRecipesConfig.fluidTransformerRecipes.length; i++) {
+                Object[] recipe = TransformerRecipesConfig.parseFluidTransformerRecipe(TransformerRecipesConfig.fluidTransformerRecipes[i]);
                 if(recipe != null) {
                     addRecipe(recipe);
                 }

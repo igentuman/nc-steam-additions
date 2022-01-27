@@ -16,5 +16,6 @@ public class NCSOreDictionary {
         OreDictionary.registerOre("wireCopper",new ItemStack(Items.items[ItemCopperWire.regId]));
         OreDictionary.registerOre("blockSnow",new ItemStack(Blocks.SNOW));
         OreDictionary.registerOre("dustUraniumOxide",new ItemStack(Items.items[3]));
+        OreDictionary.registerOre("coreOfTransformation",new ItemStack(Items.items[4]));
     }
 }

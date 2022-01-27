@@ -31,11 +31,12 @@ public class Items {
 
     public static void init()
     {
-        items = new Item[4];
+        items = new Item[5];
         items[ItemCopperSheet.regId] =  withName(new ItemCopperSheet(), "copper_sheet");
         items[ItemCompressedCoal.regId] =  withName(new ItemCompressedCoal(), "compressed_coal");
         items[ItemCopperWire.regId] =  withName(new ItemCopperWire(), "copper_wire");
         items[3] = withMetaItem(new NCItemMeta(MetaEnums.DustType.class), "dust_uranium_oxide");
+        items[4] = withMetaItem(new NCItemMeta(MetaEnums.DustType.class), "core_of_transformation");
     }
 
     public static void register()

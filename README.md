@@ -23,7 +23,9 @@ Transforms fluids (3 fluids input) into something new with well known magic of s
 Washes items with steam
 ### 8. Steam Compactor ![Steam Compactor](src/main/resources/assets/ncsteamadditions/textures/blocks/machine/steam_compactor_front_on.png?raw=true)
 Washes items with steam
-### 9. Steam Turbine ![Steam Turbine](src/main/resources/assets/ncsteamadditions/textures/blocks/machine/steam_turbine_front_on.png?raw=true)
+### 9. Digital Transformer ![Digital Transformer](src/main/resources/assets/ncsteamadditions/textures/blocks/machine/digital_transformer_front_on.png?raw=true)
+Transforms everything. Requires Computer
+### 10. Steam Turbine ![Steam Turbine](src/main/resources/assets/ncsteamadditions/textures/blocks/machine/steam_turbine_front_on.png?raw=true)
 The way you can quit steam era and step into world of forge energy
 
 ## Check mod [WIKI pages](https://github.com/igentuman/nc-steam-additions/wiki)

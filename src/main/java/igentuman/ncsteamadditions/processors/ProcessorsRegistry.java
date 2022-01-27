@@ -31,6 +31,7 @@ public class ProcessorsRegistry {
                     new SteamWasher(),
                     new SteamTurbine(),
                     new SteamBlender(),
+                    new DigitalTransformer()
             };
         }
         return processorList;

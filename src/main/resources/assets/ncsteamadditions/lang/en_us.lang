@@ -1,3 +1,6 @@
+tile.ncsteamadditions.digital_transformer.name=Digital Transformer
+tile.ncsteamadditions.digital_transformer.desc=Transforms everything. Requires Computer controlling
+
 tile.ncsteamadditions.steam_transformer.name=Steam Transformer
 tile.ncsteamadditions.steam_transformer.desc=Transforms items with the power of steam
 
@@ -44,6 +47,9 @@ gui.ncsteamadditions.config.processors.turbine_conversion.comment=Water amount e
 gui.ncsteamadditions.config.processors.turbine_rf=Turbine RF output
 gui.ncsteamadditions.config.processors.turbine_rf.comment=
 
+gui.ncsteamadditions.config.processors.digital_transformer_rf=Digital Transformer Process Power
+gui.ncsteamadditions.config.processors.digital_transformer_rf.comment=
+
 gui.ncsteamadditions.config.processors.turbine_rf=Turbine RF output
 gui.ncsteamadditions.config.processors.turbine_rf.comment=
 
@@ -59,3 +65,6 @@ fluid.uranium_hexafluoride=Uranium Hexafluoride
 item.ncsteamadditions.dust_uranium_oxide.copper.name=Uranium Oxide Dust
 item.ncsteamadditions.dust_uranium_oxide.name=Uranium Oxide Dust
 item.ncsteamadditions.dust_uranium_oxide.desc=Yellowcake
+
+item.ncsteamadditions.core_of_transformation.name=Core of Transformation
+item.ncsteamadditions.core_of_transformation.desc=Very important thing

@@ -5,10 +5,11 @@ import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.catergory.SteamTransformerCategory;
-import igentuman.ncsteamadditions.machine.container.ContainerSteamTransformer;
-import igentuman.ncsteamadditions.machine.gui.GuiSteamTransformer;
+import igentuman.ncsteamadditions.jei.catergory.DigitalTransformerCategory;
+import igentuman.ncsteamadditions.machine.container.ContainerDigitalTransformer;
+import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
+import igentuman.ncsteamadditions.tile.TDigitalTransformer;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
@@ -16,29 +17,29 @@ import nc.tile.processor.TileItemFluidProcessor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
-public class SteamTransformer extends AbstractProcessor {
+public class DigitalTransformer extends AbstractProcessor {
 
-    public static String code = "steam_transformer";
+    public static String code = "digital_transformer";
 
-    public static String particle1 = "splash";
+    public static String particle1 = "endRod";
 
     public static String particle2 = "reddust";
 
-    public final static int GUID = 0;
+    public final static int GUID = 8;
 
     public final static int SIDEID = 1000 + GUID;
 
     public static int inputItems = 4;
 
-    public static int inputFluids = 1;
+    public static int inputFluids = 4;
 
-    public static int outputFluids = 0;
+    public static int outputFluids = 1;
 
     public static int outputItems = 1;
 
     public static RecipeHandler recipes;
 
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "chest", 'F', net.minecraft.init.Items.BUCKET, 'C', Items.items[0], 'R', net.minecraft.init.Items.ENDER_EYE, 'H', Items.items[1]};
+    public Object[] craftingRecipe = new Object[] {};
 
     public int getInputItems() {
         return inputItems;
@@ -84,19 +85,19 @@ public class SteamTransformer extends AbstractProcessor {
     }
 
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTransformer(player,  (SteamTransformer.TileSteamTransformer)tile,this);
+        return new GuiDigitalTransformer(player,  (DigitalTransformer.TileDigitalTransformer)tile,this);
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTransformer.SideConfig(player,  (SteamTransformer.TileSteamTransformer)tile,this);
+        return new GuiDigitalTransformer.SideConfig(player,  (DigitalTransformer.TileDigitalTransformer)tile,this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamTransformer(player,  (SteamTransformer.TileSteamTransformer)tile);
+        return new ContainerDigitalTransformer(player,  (DigitalTransformer.TileDigitalTransformer)tile);
     }
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player,  (SteamTransformer.TileSteamTransformer)tile);
+        return new ContainerMachineConfig(player,  (DigitalTransformer.TileDigitalTransformer)tile);
     }
 
     public JEIHandler getRecipeHandler()
@@ -106,8 +107,8 @@ public class SteamTransformer extends AbstractProcessor {
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[getGuid()], Blocks.blocks[getGuid()], SteamTransformer.code, SteamTransformerCategory.SteamTransformerWrapper.class);
-        return new SteamTransformerCategory(guiHelper,recipeHandler, this);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[getGuid()], Blocks.blocks[getGuid()], DigitalTransformer.code, DigitalTransformerCategory.DigitalTransformerWrapper.class);
+        return new DigitalTransformerCategory(guiHelper,recipeHandler, this);
     }
 
     public ProcessorType getType()
@@ -121,29 +122,12 @@ public class SteamTransformer extends AbstractProcessor {
 
     public Class getTileClass()
     {
-        return TileSteamTransformer.class;
+        return TileDigitalTransformer.class;
     }
 
-    public static class TileSteamTransformer extends TileItemFluidProcessor
+    public static class TileDigitalTransformer extends TDigitalTransformer
     {
-        public TileSteamTransformer()
-        {
-            super(
-                    code,
-                    inputItems,
-                    inputFluids,
-                    outputItems,
-                    outputFluids,
-                    defaultItemSorptions(inputItems, outputItems, true),
-                    defaultTankCapacities(10000, inputFluids, outputFluids),
-                    defaultTankSorptions(inputFluids, outputFluids),
-                    NCSteamAdditionsRecipes.validFluids[GUID],
-                    NCSteamAdditionsConfig.processor_time[GUID],
-                    0, true,
-                    NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                    GUID+1, 0
-            );
-        }
+
     }
 
     public RecipeHandler getRecipes()
@@ -161,8 +145,8 @@ public class SteamTransformer extends AbstractProcessor {
         @Override
         public void addRecipes()
         {
-            for(int i = 0; i < TransformerRecipesConfig.transformerRecipes.length; i++) {
-                Object[] recipe = TransformerRecipesConfig.parseTransformerRecipe(TransformerRecipesConfig.transformerRecipes[i]);
+            for(int i = 0; i < TransformerRecipesConfig.digitalTransformerRecipes.length; i++) {
+                Object[] recipe = TransformerRecipesConfig.parseDigitalTransformerRecipe(TransformerRecipesConfig.digitalTransformerRecipes[i]);
                 if(recipe != null) {
                     addRecipe(recipe);
                 }
