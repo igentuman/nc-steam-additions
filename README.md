@@ -1,5 +1,6 @@
 # NuclearCraft Steam Additions
 More useful steamy stuff for early and late game.
+[https://www.curseforge.com/minecraft/mc-mods/nc-steam-additions](https://www.curseforge.com/minecraft/mc-mods/nc-steam-additions)
 
 (`Note`. This mod is in very WIP. Please consider [issue tracker](https://github.com/igentuman/nc-steam-additions/issues) for posting issues and suggestions.)
 
