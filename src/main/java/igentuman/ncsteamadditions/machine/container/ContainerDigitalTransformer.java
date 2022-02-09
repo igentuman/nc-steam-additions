@@ -3,18 +3,17 @@ package igentuman.ncsteamadditions.machine.container;
 import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
 import igentuman.ncsteamadditions.processors.DigitalTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
+import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.container.processor.ContainerItemFluidProcessor;
 import nc.container.slot.SlotFurnace;
 import nc.container.slot.SlotProcessorInput;
-import nc.container.slot.SlotSpecificInput;
-import nc.tile.processor.TileItemFluidProcessor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 
 public class ContainerDigitalTransformer extends ContainerItemFluidProcessor
 {
 
-	public ContainerDigitalTransformer(EntityPlayer player, TileItemFluidProcessor tileEntity)
+	public ContainerDigitalTransformer(EntityPlayer player, TileNCSProcessor tileEntity)
 	{
 		super(player, tileEntity, NCSteamAdditionsRecipes.processorRecipeHandlers[DigitalTransformer.GUID]);
 

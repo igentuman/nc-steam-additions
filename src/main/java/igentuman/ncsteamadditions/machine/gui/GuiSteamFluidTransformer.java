@@ -2,8 +2,8 @@ package igentuman.ncsteamadditions.machine.gui;
 
 import igentuman.ncsteamadditions.machine.container.ContainerSteamFluidTransformer;
 import igentuman.ncsteamadditions.processors.SteamFluidTransformer;
+import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.container.ContainerTile;
-import nc.tile.processor.TileItemFluidProcessor;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -17,12 +17,12 @@ public class GuiSteamFluidTransformer extends GuiItemFluidMachine
 		return processor;
 	}
 
-	public GuiSteamFluidTransformer(EntityPlayer player, TileItemFluidProcessor tile, SteamFluidTransformer processor)
+	public GuiSteamFluidTransformer(EntityPlayer player, TileNCSProcessor tile, SteamFluidTransformer processor)
 	{
 		this(player, tile, new ContainerSteamFluidTransformer(player, tile), processor);
 	}
 
-	private GuiSteamFluidTransformer(EntityPlayer player, TileItemFluidProcessor tile, ContainerTile container, SteamFluidTransformer processor)
+	private GuiSteamFluidTransformer(EntityPlayer player, TileNCSProcessor tile, ContainerTile container, SteamFluidTransformer processor)
 	{
 		super(processor.getCode(), player, tile, container);
 		xSize = 176;

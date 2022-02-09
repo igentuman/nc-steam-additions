@@ -1,22 +1,20 @@
 package igentuman.ncsteamadditions.machine.container;
 
 import igentuman.ncsteamadditions.machine.gui.GuiSteamTransformer;
-import igentuman.ncsteamadditions.processors.SteamFluidTransformer;
 import igentuman.ncsteamadditions.processors.SteamTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
+import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.container.processor.ContainerItemFluidProcessor;
 import nc.container.slot.SlotFurnace;
 import nc.container.slot.SlotProcessorInput;
 import nc.container.slot.SlotSpecificInput;
-import nc.gui.element.NCButton;
-import nc.tile.processor.TileItemFluidProcessor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 
 public class ContainerSteamTransformer extends ContainerItemFluidProcessor
 {
 
-	public ContainerSteamTransformer(EntityPlayer player, TileItemFluidProcessor tileEntity)
+	public ContainerSteamTransformer(EntityPlayer player, TileNCSProcessor tileEntity)
 	{
 		super(player, tileEntity, NCSteamAdditionsRecipes.processorRecipeHandlers[SteamTransformer.GUID]);
 

@@ -1,29 +1,22 @@
 package igentuman.ncsteamadditions.machine.gui;
 
-import cofh.core.gui.GuiTextList;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.machine.container.ContainerDigitalTransformer;
 import igentuman.ncsteamadditions.processors.DigitalTransformer;
 import igentuman.ncsteamadditions.tile.TDigitalTransformer;
+import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.container.ContainerTile;
 import nc.gui.element.GuiItemRenderer;
 import nc.init.NCItems;
 import nc.tile.energy.ITileEnergy;
-import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.NCMath;
 import nc.util.Lang;
 import nc.util.UnitHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class GuiDigitalTransformer extends GuiItemFluidMachine
 {
@@ -65,12 +58,12 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 			drawNoEnergyTooltip(mouseX, mouseY, x, y, width, height);
 	}
 
-	public GuiDigitalTransformer(EntityPlayer player, TileItemFluidProcessor tile, DigitalTransformer processor)
+	public GuiDigitalTransformer(EntityPlayer player, TileNCSProcessor tile, DigitalTransformer processor)
 	{
 		this(player, tile, new ContainerDigitalTransformer(player, tile), processor);
 	}
 
-	private GuiDigitalTransformer(EntityPlayer player, TileItemFluidProcessor tile, ContainerTile container, DigitalTransformer processor)
+	private GuiDigitalTransformer(EntityPlayer player, TileNCSProcessor tile, ContainerTile container, DigitalTransformer processor)
 	{
 		super(processor.getCode(), player, tile, container);
 		xSize = 176;
@@ -104,11 +97,11 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 		drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(135), 12);
 		//drawUpgradeRenderers();
 		drawBackgroundExtras();
-		//TDigitalTransformer t = (TDigitalTransformer) tile;
+		TDigitalTransformer t = (TDigitalTransformer) tile;
 		//drawRect(guiLeft,guiTop-25,guiLeft + xSize,guiTop,0xfffffff);
-		//drawString(Minecraft.getMinecraft().fontRenderer,"EF: "+String.format("%.2f", t.getRecipeEfficiency()),guiLeft + 2, guiTop  - 7, 16711680);
-		//drawString(Minecraft.getMinecraft().fontRenderer,"CR: "+String.format("%.2f", t.getCurrentReactivity()),guiLeft + 35, guiTop - 7,1113879);
-		//drawString(Minecraft.getMinecraft().fontRenderer,"TR: "+String.format("%.2f", t.getTargetReactivity()),guiLeft + 65, guiTop  - 7,6950317);
+		drawString(Minecraft.getMinecraft().fontRenderer,"EF: "+String.format("%.2f", t.getRecipeEfficiency()),guiLeft + 2, guiTop  - 7, 16711680);
+		drawString(Minecraft.getMinecraft().fontRenderer,"CR: "+String.format("%.2f", t.getCurrentReactivity()),guiLeft + 40, guiTop - 7,1113879);
+		drawString(Minecraft.getMinecraft().fontRenderer,"TR: "+String.format("%.2f", t.getTargetReactivity()),guiLeft + 75, guiTop  - 7,6950317);
 	}
 
 	@Override

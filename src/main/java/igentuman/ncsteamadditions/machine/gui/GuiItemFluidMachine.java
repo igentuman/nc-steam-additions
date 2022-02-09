@@ -1,13 +1,12 @@
 package igentuman.ncsteamadditions.machine.gui;
 
-import java.security.PublicKey;
 import java.util.List;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.network.NCSAPacketHandler;
 import igentuman.ncsteamadditions.network.OpenSideGuiPacket;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
-import nc.NuclearCraft;
+import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.container.ContainerTile;
 import nc.container.processor.ContainerMachineConfig;
 import nc.gui.NCGui;
@@ -20,30 +19,21 @@ import nc.gui.processor.GuiItemSorptions;
 import nc.init.NCItems;
 import nc.network.PacketHandler;
 import nc.network.gui.EmptyTankPacket;
-import nc.network.gui.OpenSideConfigGuiPacket;
 import nc.network.gui.ToggleRedstoneControlPacket;
-import nc.tile.ITileGui;
 import nc.tile.energy.ITileEnergy;
-import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.Lang;
 import nc.util.NCUtil;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class GuiItemFluidMachine extends NCGui {
     protected final EntityPlayer player;
-    protected final TileItemFluidProcessor tile;
+    protected final TileNCSProcessor tile;
     protected final ResourceLocation gui_textures;
     protected GuiItemRenderer speedUpgradeRender = null;
     public static int inputItemsTop = 42;
@@ -61,7 +51,7 @@ public class GuiItemFluidMachine extends NCGui {
         return processor;
     }
 
-    public GuiItemFluidMachine(String name, EntityPlayer player, TileItemFluidProcessor tile, Container inventory)
+    public GuiItemFluidMachine(String name, EntityPlayer player, TileNCSProcessor tile, Container inventory)
     {
         super(inventory);
         this.player = player;
@@ -69,7 +59,7 @@ public class GuiItemFluidMachine extends NCGui {
         gui_textures = new ResourceLocation(NCSteamAdditions.MOD_ID + ":textures/gui/" + name + ".png");
     }
 
-    private GuiItemFluidMachine(EntityPlayer player, TileItemFluidProcessor tile, ContainerTile container,String name)
+    private GuiItemFluidMachine(EntityPlayer player, TileNCSProcessor tile, ContainerTile container,String name)
     {
         this(name, player, tile, container);
         xSize = 176;
@@ -295,7 +285,7 @@ public class GuiItemFluidMachine extends NCGui {
             return processor;
         }
 
-        public SideConfig(EntityPlayer player, TileItemFluidProcessor tile, AbstractProcessor proc)
+        public SideConfig(EntityPlayer player, TileNCSProcessor tile, AbstractProcessor proc)
         {
             super(player, tile, new ContainerMachineConfig(player, tile), proc.getCode());
             processor = proc;

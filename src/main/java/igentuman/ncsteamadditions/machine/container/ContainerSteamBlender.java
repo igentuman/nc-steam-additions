@@ -3,18 +3,18 @@ package igentuman.ncsteamadditions.machine.container;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamBlender;
 import igentuman.ncsteamadditions.processors.SteamBlender;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
+import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.container.processor.ContainerItemFluidProcessor;
 import nc.container.slot.SlotFurnace;
 import nc.container.slot.SlotProcessorInput;
 import nc.container.slot.SlotSpecificInput;
-import nc.tile.processor.TileItemFluidProcessor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 
 public class ContainerSteamBlender extends ContainerItemFluidProcessor
 {
 
-	public ContainerSteamBlender(EntityPlayer player, TileItemFluidProcessor tileEntity)
+	public ContainerSteamBlender(EntityPlayer player, TileNCSProcessor tileEntity)
 	{
 		super(player, tileEntity, NCSteamAdditionsRecipes.processorRecipeHandlers[SteamBlender.GUID]);
 

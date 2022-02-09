@@ -1,6 +1,5 @@
 package igentuman.ncsteamadditions.processors;
 
-import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.item.Items;
@@ -9,6 +8,7 @@ import igentuman.ncsteamadditions.jei.catergory.SteamBoilerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBoiler;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamBoiler;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
+import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
@@ -16,10 +16,7 @@ import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidRegHelper;
 import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-
-import java.util.ArrayList;
 
 public class SteamBoiler extends AbstractProcessor {
 
@@ -88,20 +85,35 @@ public class SteamBoiler extends AbstractProcessor {
         return "nc_processor";
     }
 
+    GuiSteamBoiler guiSteamBoiler;
+    GuiSteamBoiler.SideConfig sideConfig;
+    Object containerMachineConfig;
+
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamBoiler(player,  (SteamBoiler.TileSteamBoiler)tile,this);
+        if(guiSteamBoiler == null) {
+            guiSteamBoiler = new GuiSteamBoiler(player, (SteamBoiler.TileSteamBoiler) tile, this);
+        }
+        return guiSteamBoiler;
     }
 
+
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamBoiler.SideConfig(player,  (SteamBoiler.TileSteamBoiler)tile,this);
+        if(sideConfig == null) {
+            sideConfig = new GuiSteamBoiler.SideConfig(player, (SteamBoiler.TileSteamBoiler) tile, this);
+        }
+        return sideConfig;
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamBoiler(player,  (SteamBoiler.TileSteamBoiler)tile);
+        return new ContainerSteamBoiler(player, (SteamBoiler.TileSteamBoiler) tile);
     }
 
+
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player,  (SteamBoiler.TileSteamBoiler)tile);
+        if(containerMachineConfig == null) {
+            containerMachineConfig = new ContainerMachineConfig(player, (SteamBoiler.TileSteamBoiler) tile);
+        }
+        return containerMachineConfig;
     }
 
     public JEIHandler getRecipeHandler()
@@ -129,7 +141,7 @@ public class SteamBoiler extends AbstractProcessor {
         return TileSteamBoiler.class;
     }
 
-    public static class TileSteamBoiler extends TileItemFluidProcessor
+    public static class TileSteamBoiler extends TileNCSProcessor
     {
         public TileSteamBoiler()
         {
@@ -146,7 +158,7 @@ public class SteamBoiler extends AbstractProcessor {
                     NCSteamAdditionsConfig.processor_time[GUID],
                     0, true,
                     NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                    GUID+1, 0
+                    GUID+1, 0,0,10
             );
         }
     }

@@ -3,7 +3,6 @@ package igentuman.ncsteamadditions.processors;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.item.ItemCopperSheet;
-import igentuman.ncsteamadditions.item.ItemPipe;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamTurbineCategory;
@@ -13,12 +12,8 @@ import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileSteamTurbine;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
-import nc.init.NCBlocks;
-import nc.init.NCItems;
 import nc.integration.jei.JEIBasicCategory;
-import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidRegHelper;
-import nc.util.FluidStackHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
@@ -89,22 +84,36 @@ public class SteamTurbine extends AbstractProcessor {
         return "energy_processor";
     }
 
+    GuiSteamTurbine guiSteamTurbine;
+    GuiSteamTurbine.SideConfig sideConfig;
+    Object containerMachineConfig;
+
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTurbine(player,  (TileSteamTurbine)tile,this);
+        if(guiSteamTurbine == null) {
+            guiSteamTurbine = new GuiSteamTurbine(player, (TileSteamTurbine) tile, this);
+        }
+        return guiSteamTurbine;
     }
 
+
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTurbine.SideConfig(player,  (TileSteamTurbine)tile,this);
+        if(sideConfig == null) {
+            sideConfig = new GuiSteamTurbine.SideConfig(player, (TileSteamTurbine) tile, this);
+        }
+        return sideConfig;
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamTurbine(player,  (TileSteamTurbine)tile);
+        return new ContainerSteamTurbine(player, (TileSteamTurbine) tile);
     }
+
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player,  (TileSteamTurbine)tile);
+        if(containerMachineConfig == null) {
+            containerMachineConfig = new ContainerMachineConfig(player, (TileSteamTurbine) tile);
+        }
+        return containerMachineConfig;
     }
-
     public JEIHandler getRecipeHandler()
     {
         return this.recipeHandler;

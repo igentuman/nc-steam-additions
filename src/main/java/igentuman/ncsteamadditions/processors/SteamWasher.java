@@ -1,27 +1,25 @@
 package igentuman.ncsteamadditions.processors;
 
-import com.google.common.collect.Sets;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamWasherCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamWasher;
+import igentuman.ncsteamadditions.machine.gui.GuiItemFluidMachine;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamWasher;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
+import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
-import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
+import nc.tile.ITileGui;
 import nc.tile.processor.TileItemFluidProcessor;
-import nc.util.FluidStackHelper;
 import nc.util.OreDictHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.Set;
 
 public class SteamWasher extends AbstractProcessor {
 
@@ -89,26 +87,40 @@ public class SteamWasher extends AbstractProcessor {
     {
         return "nc_processor";
     }
-
-    public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamWasher(player,  (SteamWasher.TileSteamWasher)tile,this);
-    }
-
-    public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamWasher.SideConfig(player,  (SteamWasher.TileSteamWasher)tile,this);
-    }
-
-    public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamWasher(player,  (SteamWasher.TileSteamWasher)tile);
-    }
-
-    public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player,  (SteamWasher.TileSteamWasher)tile);
-    }
-
     public JEIHandler getRecipeHandler()
     {
         return this.recipeHandler;
+    }
+
+    GuiSteamWasher guiSteamWasher;
+    GuiSteamWasher.SideConfig sideConfig;
+    Object containerMachineConfig;
+
+    public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
+        if(guiSteamWasher == null) {
+            guiSteamWasher = new GuiSteamWasher(player, (SteamWasher.TileSteamWasher) tile, this);
+        }
+        return guiSteamWasher;
+    }
+
+
+    public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
+        if(sideConfig == null) {
+            sideConfig = new GuiSteamWasher.SideConfig(player, (SteamWasher.TileSteamWasher) tile, this);
+        }
+        return sideConfig;
+    }
+
+    public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
+        return new ContainerSteamWasher(player, (SteamWasher.TileSteamWasher) tile);
+    }
+
+
+    public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
+        if(containerMachineConfig == null) {
+            containerMachineConfig = new ContainerMachineConfig(player, (SteamWasher.TileSteamWasher) tile);
+        }
+        return containerMachineConfig;
     }
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
@@ -131,7 +143,7 @@ public class SteamWasher extends AbstractProcessor {
         return TileSteamWasher.class;
     }
 
-    public static class TileSteamWasher extends TileItemFluidProcessor
+    public static class TileSteamWasher extends TileNCSProcessor
     {
         public TileSteamWasher()
         {
@@ -148,7 +160,7 @@ public class SteamWasher extends AbstractProcessor {
                     NCSteamAdditionsConfig.processor_time[GUID],
                     0, true,
                     NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                    GUID+1, 0
+                    GUID+1, 0,0,10
             );
         }
     }

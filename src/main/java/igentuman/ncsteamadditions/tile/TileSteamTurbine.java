@@ -35,7 +35,7 @@ import javax.annotation.Nullable;
         iface = "ic2.api.energy.tile.IEnergySource",
         modid = "ic2"
 )})
-public class TileSteamTurbine extends TileItemFluidProcessor implements ITileEnergy, IEnergySink, IEnergySource {
+public class TileSteamTurbine extends TileNCSProcessor implements ITileEnergy, IEnergySink, IEnergySource {
 
     @Nonnull
     private final EnergyStorage storage;
@@ -63,7 +63,7 @@ public class TileSteamTurbine extends TileItemFluidProcessor implements ITileEne
                 NCSteamAdditionsConfig.processor_time[SteamTurbine.GUID],
                 0, true,
                 NCSteamAdditionsRecipes.processorRecipeHandlers[SteamTurbine.GUID],
-                SteamTurbine.GUID+1, 0
+                SteamTurbine.GUID+1, 0,0,10
         );
         this.ic2reg = false;
         this.storage = new EnergyStorage(1024, maxRf);

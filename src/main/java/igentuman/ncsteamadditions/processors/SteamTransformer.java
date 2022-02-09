@@ -9,6 +9,7 @@ import igentuman.ncsteamadditions.jei.catergory.SteamTransformerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTransformer;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
+import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
@@ -83,20 +84,35 @@ public class SteamTransformer extends AbstractProcessor {
         return code;
     }
 
+    GuiSteamTransformer guiSteamTransformer;
+    GuiSteamTransformer.SideConfig sideConfig;
+    Object containerMachineConfig;
+
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTransformer(player,  (SteamTransformer.TileSteamTransformer)tile,this);
+        if(guiSteamTransformer == null) {
+            guiSteamTransformer = new GuiSteamTransformer(player, (SteamTransformer.TileSteamTransformer) tile, this);
+        }
+        return guiSteamTransformer;
     }
 
+
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTransformer.SideConfig(player,  (SteamTransformer.TileSteamTransformer)tile,this);
+        if(sideConfig == null) {
+            sideConfig = new GuiSteamTransformer.SideConfig(player, (SteamTransformer.TileSteamTransformer) tile, this);
+        }
+        return sideConfig;
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamTransformer(player,  (SteamTransformer.TileSteamTransformer)tile);
+        return new ContainerSteamTransformer(player, (SteamTransformer.TileSteamTransformer) tile);
     }
 
+
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player,  (SteamTransformer.TileSteamTransformer)tile);
+        if(containerMachineConfig == null) {
+            containerMachineConfig = new ContainerMachineConfig(player, (SteamTransformer.TileSteamTransformer) tile);
+        }
+        return containerMachineConfig;
     }
 
     public JEIHandler getRecipeHandler()
@@ -124,7 +140,7 @@ public class SteamTransformer extends AbstractProcessor {
         return TileSteamTransformer.class;
     }
 
-    public static class TileSteamTransformer extends TileItemFluidProcessor
+    public static class TileSteamTransformer extends TileNCSProcessor
     {
         public TileSteamTransformer()
         {
@@ -141,7 +157,7 @@ public class SteamTransformer extends AbstractProcessor {
                     NCSteamAdditionsConfig.processor_time[GUID],
                     0, true,
                     NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                    GUID+1, 0
+                    GUID+1, 0,0,10
             );
         }
     }

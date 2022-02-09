@@ -1,9 +1,7 @@
 package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
-import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
-import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.DigitalTransformerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerDigitalTransformer;
@@ -13,7 +11,6 @@ import igentuman.ncsteamadditions.tile.TDigitalTransformer;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
-import nc.tile.processor.TileItemFluidProcessor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
@@ -84,20 +81,34 @@ public class DigitalTransformer extends AbstractProcessor {
         return code;
     }
 
-    public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiDigitalTransformer(player,  (DigitalTransformer.TileDigitalTransformer)tile,this);
-    }
+    GuiDigitalTransformer guiDigitalTransformer;
+    GuiDigitalTransformer.SideConfig sideConfig;
+    Object containerMachineConfig;
 
-    public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiDigitalTransformer.SideConfig(player,  (DigitalTransformer.TileDigitalTransformer)tile,this);
+    public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
+        if(guiDigitalTransformer == null) {
+            guiDigitalTransformer = new GuiDigitalTransformer(player, (DigitalTransformer.TileDigitalTransformer) tile, this);
+        }
+        return guiDigitalTransformer;
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerDigitalTransformer(player,  (DigitalTransformer.TileDigitalTransformer)tile);
+        return new ContainerDigitalTransformer(player, (DigitalTransformer.TileDigitalTransformer) tile);
     }
 
+
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player,  (DigitalTransformer.TileDigitalTransformer)tile);
+        if(containerMachineConfig == null) {
+            containerMachineConfig = new ContainerMachineConfig(player, (DigitalTransformer.TileDigitalTransformer) tile);
+        }
+        return containerMachineConfig;
+    }
+
+    public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
+        if(sideConfig == null) {
+            sideConfig = new GuiDigitalTransformer.SideConfig(player, (DigitalTransformer.TileDigitalTransformer) tile, this);
+        }
+        return sideConfig;
     }
 
     public JEIHandler getRecipeHandler()

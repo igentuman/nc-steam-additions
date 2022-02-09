@@ -1,13 +1,10 @@
 package igentuman.ncsteamadditions.processors;
 
 import com.google.common.collect.Lists;
-import igentuman.ncsteamadditions.gui.GUIHandler;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.recipes.ProcessorRecipeHandler;
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
 import mezz.jei.api.IGuiHelper;
-import nc.container.processor.ContainerItemFluidProcessor;
-import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
 import nc.util.FluidRegHelper;
