@@ -84,23 +84,13 @@ public class SteamTransformer extends AbstractProcessor {
         return code;
     }
 
-    GuiSteamTransformer guiSteamTransformer;
-    GuiSteamTransformer.SideConfig sideConfig;
-    Object containerMachineConfig;
-
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        if(guiSteamTransformer == null) {
-            guiSteamTransformer = new GuiSteamTransformer(player, (SteamTransformer.TileSteamTransformer) tile, this);
-        }
-        return guiSteamTransformer;
+        return new GuiSteamTransformer(player, (SteamTransformer.TileSteamTransformer) tile, this);
     }
 
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(sideConfig == null) {
-            sideConfig = new GuiSteamTransformer.SideConfig(player, (SteamTransformer.TileSteamTransformer) tile, this);
-        }
-        return sideConfig;
+        return new GuiSteamTransformer.SideConfig(player, (SteamTransformer.TileSteamTransformer) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
@@ -109,10 +99,7 @@ public class SteamTransformer extends AbstractProcessor {
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(containerMachineConfig == null) {
-            containerMachineConfig = new ContainerMachineConfig(player, (SteamTransformer.TileSteamTransformer) tile);
-        }
-        return containerMachineConfig;
+        return new ContainerMachineConfig(player, (SteamTransformer.TileSteamTransformer) tile);
     }
 
     public JEIHandler getRecipeHandler()

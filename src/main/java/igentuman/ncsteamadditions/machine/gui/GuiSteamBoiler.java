@@ -2,8 +2,10 @@ package igentuman.ncsteamadditions.machine.gui;
 
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBoiler;
 import igentuman.ncsteamadditions.processors.SteamBoiler;
+import igentuman.ncsteamadditions.tile.TDigitalTransformer;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.container.ContainerTile;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -39,6 +41,7 @@ public class GuiSteamBoiler extends GuiItemFluidMachine
 		drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(135), 12);
 		drawUpgradeRenderers();
 		drawBackgroundExtras();
+		drawString(Minecraft.getMinecraft().fontRenderer,"Efficiency: "+String.format("%.2f", tile.getRecipeEfficiency()),guiLeft + 2, guiTop  - 7, 16711680);
 	}
 
 }

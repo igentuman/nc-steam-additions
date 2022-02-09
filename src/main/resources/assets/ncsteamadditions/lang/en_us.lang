@@ -68,3 +68,6 @@ item.ncsteamadditions.dust_uranium_oxide.desc=Yellowcake
 
 item.ncsteamadditions.core_of_transformation.name=Core of Transformation
 item.ncsteamadditions.core_of_transformation.desc=Very important thing
+
+gui.ncsteamadditions.config.processors.efficiency_cap.comment=100 Means normal machine efficiency
+gui.ncsteamadditions.config.processors.efficiency_change_speed.comment=Bigger value means faster speed

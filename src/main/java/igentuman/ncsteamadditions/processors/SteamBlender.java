@@ -87,22 +87,12 @@ public class SteamBlender extends AbstractProcessor {
         return code;
     }
 
-    GuiSteamBlender guiSteamBlender;
-    GuiSteamBlender.SideConfig sideConfig;
-    Object containerMachineConfig;
-
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        if (guiSteamBlender == null) {
-            guiSteamBlender = new GuiSteamBlender(player,  (SteamBlender.TileSteamBlender)tile,this);
-        }
-        return guiSteamBlender;
+        return new GuiSteamBlender(player,  (SteamBlender.TileSteamBlender)tile,this);
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(sideConfig == null) {
-            sideConfig = new GuiSteamBlender.SideConfig(player, (SteamBlender.TileSteamBlender) tile, this);
-        }
-        return sideConfig;
+        return new GuiSteamBlender.SideConfig(player, (SteamBlender.TileSteamBlender) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
@@ -110,10 +100,7 @@ public class SteamBlender extends AbstractProcessor {
     }
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(containerMachineConfig == null) {
-            containerMachineConfig = new ContainerMachineConfig(player, (SteamBlender.TileSteamBlender) tile);
-        }
-        return containerMachineConfig;
+        return new ContainerMachineConfig(player, (SteamBlender.TileSteamBlender) tile);
     }
 
     public JEIHandler getRecipeHandler()

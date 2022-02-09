@@ -81,15 +81,8 @@ public class DigitalTransformer extends AbstractProcessor {
         return code;
     }
 
-    GuiDigitalTransformer guiDigitalTransformer;
-    GuiDigitalTransformer.SideConfig sideConfig;
-    Object containerMachineConfig;
-
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        if(guiDigitalTransformer == null) {
-            guiDigitalTransformer = new GuiDigitalTransformer(player, (DigitalTransformer.TileDigitalTransformer) tile, this);
-        }
-        return guiDigitalTransformer;
+        return new GuiDigitalTransformer(player, (DigitalTransformer.TileDigitalTransformer) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
@@ -98,17 +91,11 @@ public class DigitalTransformer extends AbstractProcessor {
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(containerMachineConfig == null) {
-            containerMachineConfig = new ContainerMachineConfig(player, (DigitalTransformer.TileDigitalTransformer) tile);
-        }
-        return containerMachineConfig;
+       return new ContainerMachineConfig(player, (DigitalTransformer.TileDigitalTransformer) tile);
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(sideConfig == null) {
-            sideConfig = new GuiDigitalTransformer.SideConfig(player, (DigitalTransformer.TileDigitalTransformer) tile, this);
-        }
-        return sideConfig;
+        return new GuiDigitalTransformer.SideConfig(player, (DigitalTransformer.TileDigitalTransformer) tile, this);
     }
 
     public JEIHandler getRecipeHandler()

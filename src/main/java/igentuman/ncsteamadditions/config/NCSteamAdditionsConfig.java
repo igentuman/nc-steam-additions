@@ -26,6 +26,8 @@ public class NCSteamAdditionsConfig {
 	public static int pipeCapacity;
 	public static int pipeTransfer;
 	public static int turbineRF;
+	public static int efficiencyCap;
+	public static int efficiencyChangeSpeed;
 	public static int digitalTransformerRF;
 	public static double turbineConversion;
 	public static double boilerConversion;
@@ -66,6 +68,16 @@ public class NCSteamAdditionsConfig {
 
 		Property digitalTransformerBasePower = config.get(CATEGORY_PROCESSORS, "digital_transformer_rf", 1024, Lang.localise("gui.ncsteamadditions.config.processors.digital_transformer_rf.comment"),0,32767);
 		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.digital_transformer_rf");
+
+		Property efficiency_cap = config.get(CATEGORY_PROCESSORS, "efficiency_cap", 100, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,32767);
+		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_cap");
+
+		Property efficiency_change_speed = config.get(CATEGORY_PROCESSORS, "efficiency_change_speed", 50, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_change_speed.comment"),0,100);
+		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_change_speed");
+
+		efficiencyChangeSpeed = efficiency_change_speed.getInt();
+		efficiencyCap = efficiency_cap.getInt();
+
 
 		digitalTransformerRF = digitalTransformerBasePower.getInt();
 

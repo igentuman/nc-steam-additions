@@ -92,23 +92,13 @@ public class SteamWasher extends AbstractProcessor {
         return this.recipeHandler;
     }
 
-    GuiSteamWasher guiSteamWasher;
-    GuiSteamWasher.SideConfig sideConfig;
-    Object containerMachineConfig;
-
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        if(guiSteamWasher == null) {
-            guiSteamWasher = new GuiSteamWasher(player, (SteamWasher.TileSteamWasher) tile, this);
-        }
-        return guiSteamWasher;
+        return new GuiSteamWasher(player, (SteamWasher.TileSteamWasher) tile, this);
     }
 
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(sideConfig == null) {
-            sideConfig = new GuiSteamWasher.SideConfig(player, (SteamWasher.TileSteamWasher) tile, this);
-        }
-        return sideConfig;
+        return new GuiSteamWasher.SideConfig(player, (SteamWasher.TileSteamWasher) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
@@ -117,10 +107,7 @@ public class SteamWasher extends AbstractProcessor {
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(containerMachineConfig == null) {
-            containerMachineConfig = new ContainerMachineConfig(player, (SteamWasher.TileSteamWasher) tile);
-        }
-        return containerMachineConfig;
+        return new ContainerMachineConfig(player, (SteamWasher.TileSteamWasher) tile);
     }
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)

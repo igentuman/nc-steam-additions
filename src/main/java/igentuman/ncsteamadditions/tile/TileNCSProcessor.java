@@ -1,5 +1,6 @@
 package igentuman.ncsteamadditions.tile;
 
+import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.network.NCSAPacketHandler;
 import igentuman.ncsteamadditions.network.NCSProcessorUpdatePacket;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
@@ -325,15 +326,16 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public void process() {
-        this.currentReactivity += (this.targetReactivity-this.currentReactivity)/100;
-        this.time += this.getSpeedMultiplier() * this.getRecipeEfficiency();
+        if(currentReactivity < this.targetReactivity) {
+            this.currentReactivity += (this.targetReactivity - this.currentReactivity) * (float)NCSteamAdditionsConfig.efficiencyChangeSpeed/50000;
+        }
+        this.time += this.getSpeedMultiplier() * Math.min(this.getRecipeEfficiency()/100, (float)NCSteamAdditionsConfig.efficiencyCap/100);
         this.getEnergyStorage().changeEnergyStored((long)(-this.getProcessPower()));
         this.getRadiationSource().setRadiationLevel(this.baseProcessRadiation * this.getSpeedMultiplier());
 
         while(this.time >= this.baseProcessTime) {
             this.finishProcess();
         }
-
     }
 
     public void finishProcess() {
@@ -423,7 +425,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         if (this.time < this.resetTime) {
             this.resetTime = this.time;
         }
-        this.currentReactivity -= (this.targetReactivity-this.currentReactivity)/1000;
+        this.currentReactivity -= (this.targetReactivity-this.currentReactivity)*(float)NCSteamAdditionsConfig.efficiencyChangeSpeed/50000;
     }
 
     public int getItemInputSize() {
@@ -495,7 +497,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public int getSourceTier() {
-        return 1;
+        return 2;
     }
 
     public ItemStack decrStackSize(int slot, int amount) {

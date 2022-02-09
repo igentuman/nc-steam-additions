@@ -89,23 +89,13 @@ public class SteamCrusher extends AbstractProcessor {
         return code;
     }
 
-    GuiSteamCrusher guiSteamCrusher;
-    GuiSteamCrusher.SideConfig sideConfig;
-    Object containerMachineConfig;
-
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        if(guiSteamCrusher == null) {
-            guiSteamCrusher = new GuiSteamCrusher(player, (SteamCrusher.TileSteamCrusher) tile, this);
-        }
-        return guiSteamCrusher;
+        return new GuiSteamCrusher(player, (SteamCrusher.TileSteamCrusher) tile, this);
     }
 
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(sideConfig == null) {
-            sideConfig = new GuiSteamCrusher.SideConfig(player, (SteamCrusher.TileSteamCrusher) tile, this);
-        }
-        return sideConfig;
+        return new GuiSteamCrusher.SideConfig(player, (SteamCrusher.TileSteamCrusher) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
@@ -114,10 +104,7 @@ public class SteamCrusher extends AbstractProcessor {
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(containerMachineConfig == null) {
-            containerMachineConfig = new ContainerMachineConfig(player, (SteamCrusher.TileSteamCrusher) tile);
-        }
-        return containerMachineConfig;
+        return new ContainerMachineConfig(player, (SteamCrusher.TileSteamCrusher) tile);
     }
 
     public JEIHandler getRecipeHandler()

@@ -85,35 +85,20 @@ public class SteamBoiler extends AbstractProcessor {
         return "nc_processor";
     }
 
-    GuiSteamBoiler guiSteamBoiler;
-    GuiSteamBoiler.SideConfig sideConfig;
-    Object containerMachineConfig;
-
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        if(guiSteamBoiler == null) {
-            guiSteamBoiler = new GuiSteamBoiler(player, (SteamBoiler.TileSteamBoiler) tile, this);
-        }
-        return guiSteamBoiler;
+        return new GuiSteamBoiler(player, (SteamBoiler.TileSteamBoiler) tile, this);
     }
 
-
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(sideConfig == null) {
-            sideConfig = new GuiSteamBoiler.SideConfig(player, (SteamBoiler.TileSteamBoiler) tile, this);
-        }
-        return sideConfig;
+        return new GuiSteamBoiler.SideConfig(player, (SteamBoiler.TileSteamBoiler) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
         return new ContainerSteamBoiler(player, (SteamBoiler.TileSteamBoiler) tile);
     }
 
-
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(containerMachineConfig == null) {
-            containerMachineConfig = new ContainerMachineConfig(player, (SteamBoiler.TileSteamBoiler) tile);
-        }
-        return containerMachineConfig;
+        return new ContainerMachineConfig(player, (SteamBoiler.TileSteamBoiler) tile);
     }
 
     public JEIHandler getRecipeHandler()

@@ -23,6 +23,7 @@ import nc.network.gui.ToggleRedstoneControlPacket;
 import nc.tile.energy.ITileEnergy;
 import nc.util.Lang;
 import nc.util.NCUtil;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -85,6 +86,8 @@ public class GuiItemFluidMachine extends NCGui {
         drawUpgradeRenderers();
 
         drawBackgroundExtras();
+        drawString(Minecraft.getMinecraft().fontRenderer,"Efficiency: "+String.format("%.2f", tile.getRecipeEfficiency()),guiLeft + 2, guiTop  - 7, 16711680);
+
     }
 
     protected int getCookProgressScaled(double pixels)

@@ -84,35 +84,20 @@ public class SteamTurbine extends AbstractProcessor {
         return "energy_processor";
     }
 
-    GuiSteamTurbine guiSteamTurbine;
-    GuiSteamTurbine.SideConfig sideConfig;
-    Object containerMachineConfig;
-
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        if(guiSteamTurbine == null) {
-            guiSteamTurbine = new GuiSteamTurbine(player, (TileSteamTurbine) tile, this);
-        }
-        return guiSteamTurbine;
+        return new GuiSteamTurbine(player, (TileSteamTurbine) tile, this);
     }
 
-
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(sideConfig == null) {
-            sideConfig = new GuiSteamTurbine.SideConfig(player, (TileSteamTurbine) tile, this);
-        }
-        return sideConfig;
+        return new GuiSteamTurbine.SideConfig(player, (TileSteamTurbine) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
         return new ContainerSteamTurbine(player, (TileSteamTurbine) tile);
     }
 
-
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(containerMachineConfig == null) {
-            containerMachineConfig = new ContainerMachineConfig(player, (TileSteamTurbine) tile);
-        }
-        return containerMachineConfig;
+        return new ContainerMachineConfig(player, (TileSteamTurbine) tile);
     }
     public JEIHandler getRecipeHandler()
     {

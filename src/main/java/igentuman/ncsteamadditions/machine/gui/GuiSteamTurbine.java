@@ -4,6 +4,7 @@ import igentuman.ncsteamadditions.machine.container.ContainerSteamTurbine;
 import igentuman.ncsteamadditions.processors.SteamTurbine;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.container.ContainerTile;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -38,6 +39,8 @@ public class GuiSteamTurbine extends GuiItemFluidMachine
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(135), 12);
 		drawBackgroundExtras();
+		drawString(Minecraft.getMinecraft().fontRenderer,"Efficiency: "+String.format("%.2f", tile.getRecipeEfficiency()),guiLeft + 2, guiTop  - 7, 16711680);
+
 	}
 
 	public void initButtons()

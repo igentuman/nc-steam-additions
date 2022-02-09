@@ -85,23 +85,13 @@ public class SteamFluidTransformer extends AbstractProcessor {
         return code;
     }
 
-    GuiSteamFluidTransformer guiSteamFluidTransformer;
-    GuiSteamFluidTransformer.SideConfig sideConfig;
-    Object containerMachineConfig;
-
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        if(guiSteamFluidTransformer == null) {
-            guiSteamFluidTransformer = new GuiSteamFluidTransformer(player, (SteamFluidTransformer.TileSteamFluidTransformer) tile, this);
-        }
-        return guiSteamFluidTransformer;
+        return new GuiSteamFluidTransformer(player, (SteamFluidTransformer.TileSteamFluidTransformer) tile, this);
     }
 
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(sideConfig == null) {
-            sideConfig = new GuiSteamFluidTransformer.SideConfig(player, (SteamFluidTransformer.TileSteamFluidTransformer) tile, this);
-        }
-        return sideConfig;
+        return new GuiSteamFluidTransformer.SideConfig(player, (SteamFluidTransformer.TileSteamFluidTransformer) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
@@ -110,10 +100,7 @@ public class SteamFluidTransformer extends AbstractProcessor {
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        if(containerMachineConfig == null) {
-            containerMachineConfig = new ContainerMachineConfig(player, (SteamFluidTransformer.TileSteamFluidTransformer) tile);
-        }
-        return containerMachineConfig;
+        return new ContainerMachineConfig(player, (SteamFluidTransformer.TileSteamFluidTransformer) tile);
     }
 
     public JEIHandler getRecipeHandler()
