@@ -226,6 +226,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
             return true;
         }
     }
+
     //values range 0.48 ... 10
     public float getRecipeEfficiency()
     {
@@ -235,6 +236,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         float eff = (float)Math.exp(Math.log(1/Math.abs(this.targetReactivity/10 - this.currentReactivity/10)+0.1F));
         return eff;
     }
+
     public void setCapacityFromSpeed() {
         int capacity = IProcessor.getCapacity(this.processorID, this.getSpeedMultiplier(), this.getPowerMultiplier());
         this.getEnergyStorage().setStorageCapacity((long)capacity);
@@ -323,7 +325,8 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public void process() {
-        this.time += this.getSpeedMultiplier();
+        this.currentReactivity += (this.targetReactivity-this.currentReactivity)/100;
+        this.time += this.getSpeedMultiplier() * this.getRecipeEfficiency();
         this.getEnergyStorage().changeEnergyStored((long)(-this.getProcessPower()));
         this.getRadiationSource().setRadiationLevel(this.baseProcessRadiation * this.getSpeedMultiplier());
 
@@ -420,7 +423,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         if (this.time < this.resetTime) {
             this.resetTime = this.time;
         }
-
+        this.currentReactivity -= (this.targetReactivity-this.currentReactivity)/1000;
     }
 
     public int getItemInputSize() {
