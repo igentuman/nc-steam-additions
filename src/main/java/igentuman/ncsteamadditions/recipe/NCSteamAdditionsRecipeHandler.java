@@ -2,19 +2,13 @@ package igentuman.ncsteamadditions.recipe;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import crafttweaker.annotations.ZenRegister;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.ints.IntList;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.util.Util;
-import nc.config.NCConfig;
 import nc.recipe.ingredient.IFluidIngredient;
 import nc.recipe.ingredient.IItemIngredient;
-import nc.util.NCMath;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -48,8 +42,8 @@ public abstract class NCSteamAdditionsRecipeHandler extends AbstractNCSteamAddit
 
 	public void addRecipe(Object... objects)
 	{
-		List itemInputs = new ArrayList(), fluidInputs = new ArrayList(), particleInputs = new ArrayList(),
-				itemOutputs = new ArrayList(), fluidOutputs = new ArrayList(), particleOutputs = new ArrayList(),
+		List itemInputs = new ArrayList(), fluidInputs = new ArrayList(),
+				itemOutputs = new ArrayList(), fluidOutputs = new ArrayList(),
 				extras = new ArrayList();
 		for (int i = 0; i < objects.length; i++)
 		{

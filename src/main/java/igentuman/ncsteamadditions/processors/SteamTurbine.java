@@ -9,9 +9,11 @@ import igentuman.ncsteamadditions.jei.catergory.SteamTurbineCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTurbine;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamTurbine;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
+import igentuman.ncsteamadditions.tile.TileDigitalTransformer;
 import igentuman.ncsteamadditions.tile.TileSteamTurbine;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
+import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
 import nc.util.FluidRegHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,65 +21,26 @@ import net.minecraft.tileentity.TileEntity;
 
 public class SteamTurbine extends AbstractProcessor {
 
-    public static String code = "steam_turbine";
-
-    public static String particle1 = "fireworksSpark";
-
-    public static String particle2 = "reddust";
-
-    public final static int GUID = 6;
-
-    public final static int SIDEID = 1000 + GUID;
-
-    public static int inputItems = 0;
-
-    public static int inputFluids = 1;
-
-    public static int outputFluids = 1;
-
-    public static int outputItems = 0;
-
-    public static RecipeHandler recipes;
-
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', Items.items[ItemCopperSheet.regId], 'F', "solenoidCopper", 'C', "blockIron", 'R', Blocks.otherBlocks[0], 'H', net.minecraft.init.Items.COMPARATOR};
-
-    public int getInputItems() {
-        return inputItems;
-    }
-
-    public int getInputFluids() {
-        return inputFluids;
-    }
-
-    public int getOutputFluids() {
-        return outputFluids;
-    }
-
-    public int getOutputItems() {
-        return outputItems;
-    }
-
-    public Object[] getCraftingRecipe()
-    {
-       return this.craftingRecipe;
-    }
-
-    public JEIHandler recipeHandler;
-
-    public int getGuid()
-    {
-        return GUID;
-    }
-
-    public int getSideid()
-    {
-        return SIDEID;
-    }
-
-    public String getCode()
-    {
-        return code;
-    }
+   public SteamTurbine()
+   {
+       code = "steam_turbine";
+       particle1 = "fireworksSpark";
+       particle2 = "reddust";
+       GUID = 6;
+       SIDEID = 1000 + GUID;
+       inputItems = 0;
+       inputFluids = 1;
+       outputFluids = 1;
+       outputItems = 0;
+       craftingRecipe = new Object[] {
+               "PRP", "CFC", "PHP",
+               'P', Items.items[ItemCopperSheet.regId],
+               'F', "solenoidCopper",
+               'C', "blockIron",
+               'R', Blocks.otherBlocks[0],
+               'H', NCBlocks.voltaic_pile_basic
+       };
+   }
 
     public String getBlockType()
     {
@@ -99,15 +62,15 @@ public class SteamTurbine extends AbstractProcessor {
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
         return new ContainerMachineConfig(player, (TileSteamTurbine) tile);
     }
-    public JEIHandler getRecipeHandler()
-    {
-        return this.recipeHandler;
-    }
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[SteamTurbine.GUID], Blocks.blocks[SteamTurbine.GUID], SteamTurbine.code, SteamTurbineCategory.SteamTurbineWrapper.class);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[GUID], code, SteamTurbineCategory.SteamTurbineWrapper.class);
         return new SteamTurbineCategory(guiHelper,recipeHandler, this);
+    }
+
+    public Class getTileClass() {
+        return TileSteamTurbine.class;
     }
 
     public ProcessorType getType()
@@ -119,17 +82,15 @@ public class SteamTurbine extends AbstractProcessor {
         return type;
     }
 
-    public Class getTileClass()
+    public TileEntity getTile()
     {
-        return TileSteamTurbine.class;
+        return new TileSteamTurbine();
     }
-
 
     public SteamTurbine.RecipeHandler getRecipes()
     {
         return new SteamTurbine.RecipeHandler();
     }
-
 
     public class RecipeHandler extends AbstractProcessor.RecipeHandler {
         public RecipeHandler()

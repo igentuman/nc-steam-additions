@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.recipes.ProcessorRecipeHandler;
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
+import igentuman.ncsteamadditions.tile.NCSteamAdditionsTiles;
+import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
@@ -16,39 +18,54 @@ import net.minecraft.tileentity.TileEntity;
 import java.util.ArrayList;
 
 public abstract class AbstractProcessor {
-    public static String code;
 
-    public static String particle1;
+    public String code;
 
-    public static String particle2;
+    public String particle1;
 
-    public static int GUID;
+    public String particle2;
 
-    public static int SIDEID = 1000 + GUID;
+    public int GUID;
 
-    public static int inputItems;
+    public int SIDEID = 1000 + GUID;
 
-    public static int inputFluids;
+    public int inputItems;
 
-    public static int outputFluids;
+    public int inputFluids;
 
-    public static int outputItems;
+    public int outputFluids;
 
-    public abstract int getInputItems();
+    public int outputItems;
 
-    public abstract int getInputFluids();
+    public int getInputItems() {
+        return inputItems;
+    }
 
-    public abstract int getOutputFluids();
+    public int getInputFluids() {
+        return inputFluids;
+    }
 
-    public abstract int getOutputItems();
+    public int getOutputFluids() {
+        return outputFluids;
+    }
 
-    public static Object[] craftingRecipe;
+    public int getOutputItems() {
+        return outputItems;
+    }
+
+    public Object[] craftingRecipe;
 
     public JEIHandler recipeHandler;
 
-    public abstract Object[] getCraftingRecipe();
+    public Object[] getCraftingRecipe()
+    {
+        return this.craftingRecipe;
+    }
 
-    public abstract JEIHandler getRecipeHandler();
+    public JEIHandler getRecipeHandler()
+    {
+        return this.recipeHandler;
+    }
 
     public abstract JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper);
 
@@ -61,13 +78,24 @@ public abstract class AbstractProcessor {
 
     public abstract ProcessorType getType();
 
-    public abstract Class getTileClass();
+    public int getGuid()
+    {
+        return GUID;
+    }
 
-    public abstract String getCode();
+    public int getSideid()
+    {
+        return SIDEID;
+    }
 
-    public abstract int getGuid();
+    public String getCode()
+    {
+        return code;
+    }
 
-    public abstract int getSideid();
+    public Class getTileClass() {
+        return TileNCSProcessor.class;
+    }
 
     public abstract Object getGuiContainer(EntityPlayer player, TileEntity tile);
 
@@ -79,6 +107,9 @@ public abstract class AbstractProcessor {
 
     public abstract RecipeHandler getRecipes();
     public abstract String getBlockType();
+
+    public abstract TileEntity getTile();
+
     public abstract class RecipeHandler extends ProcessorRecipeHandler {
         public int bucket() {
             return FluidStackHelper.BUCKET_VOLUME;

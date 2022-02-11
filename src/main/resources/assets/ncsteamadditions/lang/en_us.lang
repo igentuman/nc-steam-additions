@@ -69,5 +69,10 @@ item.ncsteamadditions.dust_uranium_oxide.desc=Yellowcake
 item.ncsteamadditions.core_of_transformation.name=Core of Transformation
 item.ncsteamadditions.core_of_transformation.desc=Very important thing
 
-gui.ncsteamadditions.config.processors.efficiency_cap.comment=100 Means normal machine efficiency
-gui.ncsteamadditions.config.processors.efficiency_change_speed.comment=Bigger value means faster speed
+gui.ncsteamadditions.config.processors.efficiency_cap.comment=Value 100 Means normal machine efficiency. 5000 max. 0 - normal operation
+gui.ncsteamadditions.config.processors.efficiency_change_speed.comment=Bigger value means faster speed. 200 max
+
+gui.ncsteamadditions.config.processors.efficiency_cap=Maximum efficiency machines can reach
+gui.ncsteamadditions.config.processors.efficiency_change_speed=How fast machines gain or lose efficiency
+
+gui.nc.container.efficiency=Efficiency:

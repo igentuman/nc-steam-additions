@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.jei.catergory;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamCrusher;
+import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import igentuman.ncsteamadditions.processors.SteamCrusher;
 import mezz.jei.api.IGuiHelper;
 import nc.integration.jei.JEIMachineRecipeWrapper;
@@ -46,7 +47,7 @@ public class SteamCrusherCategory extends ParentProcessorCategory
 
 	public SteamCrusherCategory(IGuiHelper guiHelper, IJEIHandler handler, SteamCrusher proc)
 	{
-		super(guiHelper, handler, SteamCrusher.code, 24, 7, 148, 56, proc);
+		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
 	}
 
@@ -62,8 +63,8 @@ public class SteamCrusherCategory extends ParentProcessorCategory
 		protected double getBaseProcessTime()
 		{
 			if (recipe == null)
-				return NCSteamAdditionsConfig.processor_time[SteamCrusher.GUID];
-			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[SteamCrusher.GUID]);
+				return NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().STEAM_CRUSHER.GUID];
+			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().STEAM_CRUSHER.GUID]);
 		}
 
 		@Override

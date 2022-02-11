@@ -3,6 +3,7 @@ package igentuman.ncsteamadditions.tile;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.network.NCSAPacketHandler;
 import igentuman.ncsteamadditions.network.NCSProcessorUpdatePacket;
+import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -71,6 +72,25 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     protected int ticksToChange;
     protected float adjustment = 0;
     protected int ticksLastReactivityInit = 0;
+
+    public TileNCSProcessor(String code, int inputItems, int inputFluids, int outputItems, int outputFluids, int GUID)
+    {
+        this(
+                code,
+                inputItems,
+                inputFluids,
+                outputItems,
+                outputFluids,
+                defaultItemSorptions(inputItems, outputItems, true),
+                defaultTankCapacities(20000, inputFluids, outputFluids),
+                defaultTankSorptions(inputFluids, outputFluids),
+                NCSteamAdditionsRecipes.validFluids[GUID],
+                NCSteamAdditionsConfig.processor_time[GUID],
+                0, true,
+                NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
+                GUID+1, 0,0,10
+        );
+    }
 
     public TileNCSProcessor(String name, int itemInSize, int fluidInSize, int itemOutSize, int fluidOutSize, @Nonnull List<ItemSorption> itemSorptions, @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<List<String>> allowedFluids, int time, int power, boolean shouldLoseProgress, @Nonnull BasicRecipeHandler recipeHandler, int processorID, int sideConfigYOffset, float currentReactivity, float targetReactivity) {
         this(name, itemInSize, fluidInSize, itemOutSize, fluidOutSize, itemSorptions, fluidCapacity, tankSorptions, allowedFluids, time, power, shouldLoseProgress, true, recipeHandler, processorID, sideConfigYOffset, currentReactivity, targetReactivity);
@@ -326,10 +346,14 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public void process() {
-        if(currentReactivity < this.targetReactivity) {
+        if(currentReactivity < this.targetReactivity && this.getRecipeEfficiency() <= 100) {
             this.currentReactivity += (this.targetReactivity - this.currentReactivity) * (float)NCSteamAdditionsConfig.efficiencyChangeSpeed/50000;
         }
-        this.time += this.getSpeedMultiplier() * Math.min(this.getRecipeEfficiency()/100, (float)NCSteamAdditionsConfig.efficiencyCap/100);
+        float efficiency = 1;
+        if(NCSteamAdditionsConfig.efficiencyCap > 0) {
+            efficiency = Math.min(this.getRecipeEfficiency() / 100, (float) NCSteamAdditionsConfig.efficiencyCap / 100);
+        }
+        this.time += this.getSpeedMultiplier() * efficiency;
         this.getEnergyStorage().changeEnergyStored((long)(-this.getProcessPower()));
         this.getRadiationSource().setRadiationLevel(this.baseProcessRadiation * this.getSpeedMultiplier());
 

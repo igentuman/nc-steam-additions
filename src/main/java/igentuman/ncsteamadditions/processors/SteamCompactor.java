@@ -14,7 +14,6 @@ import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
-import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.OreDictHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -24,97 +23,41 @@ import java.util.Set;
 
 public class SteamCompactor extends AbstractProcessor {
 
-    public static String code = "steam_compactor";
-
-    public static String particle1 = "splash";
-
-    public static String particle2 = "reddust";
-
-    public final static int GUID = 4;
-
-    public final static int SIDEID = 1000 + GUID;
-
-    public static int inputItems = 1;
-
-    public static int inputFluids = 1;
-
-    public static int outputFluids = 0;
-
-    public static int outputItems = 1;
-
-    public static RecipeHandler recipes;
-
-    public Object[] craftingRecipe = new Object[] {"BRB", "RFR", "PRP", 'B', net.minecraft.init.Items.BUCKET, 'F', "chest", 'R', net.minecraft.init.Blocks.PISTON, 'P', Items.items[0]};
-
-    public int getInputItems() {
-        return inputItems;
-    }
-
-    public String getBlockType()
+    public SteamCompactor()
     {
-        return "nc_processor";
-    }
-
-    public int getInputFluids() {
-        return inputFluids;
-    }
-
-    public int getOutputFluids() {
-        return outputFluids;
-    }
-
-    public int getOutputItems() {
-        return outputItems;
-    }
-
-    public Object[] getCraftingRecipe()
-    {
-       return this.craftingRecipe;
-    }
-
-    public JEIHandler recipeHandler;
-
-    public int getGuid()
-    {
-        return GUID;
-    }
-
-    public int getSideid()
-    {
-        return SIDEID;
-    }
-
-    public String getCode()
-    {
-        return code;
+        code = "steam_compactor";
+        particle1 = "splash";
+        particle2 = "reddust";
+        GUID = 4;
+        SIDEID = 1000 + GUID;
+        inputItems = 1;
+        inputFluids = 1;
+        outputFluids = 0;
+        outputItems = 1;
+        craftingRecipe = new Object[] {"BRB", "RFR", "PRP", 'B', net.minecraft.init.Items.BUCKET, 'F', "chest", 'R', net.minecraft.init.Blocks.PISTON, 'P', Items.items[0]};
     }
 
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamCompactor(player, (SteamCompactor.TileSteamCompactor) tile, this);
+        return new GuiSteamCompactor(player, (TileNCSProcessor) tile, this);
     }
 
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-       return new GuiSteamCompactor.SideConfig(player, (SteamCompactor.TileSteamCompactor) tile, this);
+       return new GuiSteamCompactor.SideConfig(player, (TileNCSProcessor) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamCompactor(player, (SteamCompactor.TileSteamCompactor) tile);
+        return new ContainerSteamCompactor(player, (TileNCSProcessor) tile);
     }
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player, (SteamCompactor.TileSteamCompactor) tile);
-    }
-
-    public JEIHandler getRecipeHandler()
-    {
-        return this.recipeHandler;
+        return new ContainerMachineConfig(player, (TileNCSProcessor) tile);
     }
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[SteamCompactor.GUID], SteamCompactor.code, SteamCompactorCategory.SteamCompactorWrapper.class);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[GUID], code, SteamCompactorCategory.SteamCompactorWrapper.class);
         return new SteamCompactorCategory(guiHelper,recipeHandler, this);
     }
 
@@ -127,29 +70,25 @@ public class SteamCompactor extends AbstractProcessor {
         return type;
     }
 
+    public TileEntity getTile()
+    {
+        return new TileSteamCompactor();
+    }
+
     public Class getTileClass()
     {
         return TileSteamCompactor.class;
     }
 
-    public static class TileSteamCompactor extends TileNCSProcessor
-    {
-        public TileSteamCompactor()
-        {
+    public static class TileSteamCompactor extends TileNCSProcessor {
+        public TileSteamCompactor() {
             super(
-                    code,
-                    inputItems,
-                    inputFluids,
-                    outputItems,
-                    outputFluids,
-                    defaultItemSorptions(inputItems, outputItems, true),
-                    defaultTankCapacities(5000, inputFluids, outputFluids),
-                    defaultTankSorptions(inputFluids, outputFluids),
-                    NCSteamAdditionsRecipes.validFluids[GUID],
-                    NCSteamAdditionsConfig.processor_time[GUID],
-                    0, true,
-                    NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                    GUID+1, 0,0,10
+                    ProcessorsRegistry.get().STEAM_COMPACTOR.code,
+                    ProcessorsRegistry.get().STEAM_COMPACTOR.inputItems,
+                    ProcessorsRegistry.get().STEAM_COMPACTOR.inputFluids,
+                    ProcessorsRegistry.get().STEAM_COMPACTOR.outputItems,
+                    ProcessorsRegistry.get().STEAM_COMPACTOR.outputFluids,
+                    ProcessorsRegistry.get().STEAM_COMPACTOR.GUID
             );
         }
     }
@@ -157,6 +96,11 @@ public class SteamCompactor extends AbstractProcessor {
     public SteamCompactor.RecipeHandler getRecipes()
     {
         return new SteamCompactor.RecipeHandler();
+    }
+
+    public String getBlockType()
+    {
+        return "nc_processor";
     }
 
 

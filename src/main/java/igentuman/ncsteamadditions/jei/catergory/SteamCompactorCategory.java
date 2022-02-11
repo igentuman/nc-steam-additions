@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.jei.catergory;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamCompactor;
+import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import igentuman.ncsteamadditions.processors.SteamCompactor;
 import mezz.jei.api.IGuiHelper;
 import nc.integration.jei.JEIMachineRecipeWrapper;
@@ -46,7 +47,7 @@ public class SteamCompactorCategory extends ParentProcessorCategory
 
 	public SteamCompactorCategory(IGuiHelper guiHelper, IJEIHandler handler, SteamCompactor proc)
 	{
-		super(guiHelper, handler, SteamCompactor.code, 24, 7, 148, 56, proc);
+		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
 	}
 
@@ -62,8 +63,8 @@ public class SteamCompactorCategory extends ParentProcessorCategory
 		protected double getBaseProcessTime()
 		{
 			if (recipe == null)
-				return NCSteamAdditionsConfig.processor_time[SteamCompactor.GUID];
-			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[SteamCompactor.GUID]);
+				return NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().STEAM_COMPACTOR.GUID];
+			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().STEAM_COMPACTOR.GUID]);
 		}
 
 		@Override

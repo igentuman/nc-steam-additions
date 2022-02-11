@@ -1,6 +1,8 @@
 package igentuman.ncsteamadditions.gui;
 
 import igentuman.ncsteamadditions.processors.*;
+import igentuman.ncsteamadditions.tile.NCSteamAdditionsTiles;
+import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -18,10 +20,10 @@ public class GUIHandler implements IGuiHandler
 		if (tile != null)
 		{
 			for(AbstractProcessor processor: ProcessorsRegistry.get().processors()) {
-				if(ID == processor.getGuid() && tile.getClass() == processor.getTileClass()) {
+				if(ID == processor.getGuid() && tile instanceof TileNCSProcessor) {
 					return processor.getGuiContainer(player,tile);
 				}
-				if(ID == processor.getSideid() && tile.getClass() == processor.getTileClass()) {
+				if(ID == processor.getSideid() && tile instanceof TileNCSProcessor) {
 					return processor.getGuiContainerConfig(player,tile);
 				}
 			}
@@ -37,10 +39,10 @@ public class GUIHandler implements IGuiHandler
 		if (tile != null)
 		{
 			for(AbstractProcessor processor: ProcessorsRegistry.get().processors()) {
-				if(ID == processor.getGuid() && tile.getClass() == processor.getTileClass()) {
+				if(ID == processor.getGuid() && tile instanceof TileNCSProcessor) {
 					return processor.getLocalGuiContainer(player,tile);
 				}
-				if(ID == processor.getSideid() && tile.getClass() == processor.getTileClass()) {
+				if(ID == processor.getSideid() && tile instanceof TileNCSProcessor) {
 					return processor.getLocalGuiContainerConfig(player,tile);
 				}
 			}

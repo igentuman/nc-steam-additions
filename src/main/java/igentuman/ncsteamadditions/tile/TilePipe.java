@@ -4,8 +4,6 @@ import javax.annotation.Nullable;
 
 import igentuman.ncsteamadditions.block.BlockPipe;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

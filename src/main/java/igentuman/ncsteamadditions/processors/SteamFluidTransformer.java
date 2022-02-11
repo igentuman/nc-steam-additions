@@ -13,54 +13,25 @@ import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
-import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
 public class SteamFluidTransformer extends AbstractProcessor {
 
-    public static String code = "steam_fluid_transformer";
-
-    public static String particle1 = "splash";
-
-    public static String particle2 = "spell";
-
-    public final static int GUID = 3;
-
-    public final static int SIDEID = 1000 + GUID;
-
-    public static int inputItems = 0;
-
-    public static int inputFluids = 4;
-
-    public static int outputFluids = 1;
-
-    public static int outputItems = 0;
-
-    public static RecipeHandler recipes;
-
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', net.minecraft.init.Items.BUCKET, 'F', net.minecraft.init.Items.ENDER_EYE, 'C', Items.items[0], 'R', RegistryHelper.itemStackFromRegistry("minecraft:brewing_stand"), 'H', Items.items[1]};
-
-    public int getInputItems() {
-        return inputItems;
-    }
-
-    public int getInputFluids() {
-        return inputFluids;
-    }
-
-    public int getOutputFluids() {
-        return outputFluids;
-    }
-
-    public int getOutputItems() {
-        return outputItems;
-    }
-
-    public Object[] getCraftingRecipe()
+    public SteamFluidTransformer()
     {
-       return this.craftingRecipe;
+        code = "steam_fluid_transformer";
+        particle1 = "splash";
+        particle2 = "spell";
+        GUID = 3;
+        SIDEID = 1000 + GUID;
+        inputItems = 0;
+        inputFluids = 4;
+        outputFluids = 1;
+        outputItems = 0;
+        craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', net.minecraft.init.Items.BUCKET, 'F', net.minecraft.init.Items.ENDER_EYE, 'C', Items.items[0], 'R', RegistryHelper.itemStackFromRegistry("minecraft:brewing_stand"), 'H', Items.items[1]};
+
     }
 
     public String getBlockType()
@@ -68,52 +39,30 @@ public class SteamFluidTransformer extends AbstractProcessor {
         return "nc_processor";
     }
 
-    public JEIHandler recipeHandler;
-
-    public int getGuid()
-    {
-        return GUID;
-    }
-
-    public int getSideid()
-    {
-        return SIDEID;
-    }
-
-    public String getCode()
-    {
-        return code;
-    }
-
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamFluidTransformer(player, (SteamFluidTransformer.TileSteamFluidTransformer) tile, this);
+        return new GuiSteamFluidTransformer(player, (TileNCSProcessor) tile, this);
     }
 
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamFluidTransformer.SideConfig(player, (SteamFluidTransformer.TileSteamFluidTransformer) tile, this);
+        return new GuiSteamFluidTransformer.SideConfig(player, (TileNCSProcessor) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamFluidTransformer(player, (SteamFluidTransformer.TileSteamFluidTransformer) tile);
+        return new ContainerSteamFluidTransformer(player, (TileNCSProcessor) tile);
     }
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player, (SteamFluidTransformer.TileSteamFluidTransformer) tile);
-    }
-
-    public JEIHandler getRecipeHandler()
-    {
-        return this.recipeHandler;
+        return new ContainerMachineConfig(player, (TileNCSProcessor) tile);
     }
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
         recipeHandler = new JEIHandler(this,
                 NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                Blocks.blocks[SteamFluidTransformer.GUID],
-                SteamFluidTransformer.code,
+                Blocks.blocks[GUID],
+                code,
                 SteamFluidTransformerCategory.SteamFluidTransformerWrapper.class);
         return new SteamFluidTransformerCategory(guiHelper,recipeHandler, this);
     }
@@ -127,29 +76,25 @@ public class SteamFluidTransformer extends AbstractProcessor {
         return type;
     }
 
-    public Class getTileClass()
+    public TileEntity getTile()
     {
-        return TileSteamFluidTransformer.class;
+        return new TileFluidTransformer();
     }
 
-    public static class TileSteamFluidTransformer extends TileNCSProcessor
+    public Class getTileClass()
     {
-        public TileSteamFluidTransformer()
-        {
+        return TileFluidTransformer.class;
+    }
+
+    public static class TileFluidTransformer extends TileNCSProcessor {
+        public TileFluidTransformer() {
             super(
-                    code,
-                    inputItems,
-                    inputFluids,
-                    outputItems,
-                    outputFluids,
-                    defaultItemSorptions(inputItems, outputItems, true),
-                    defaultTankCapacities(10000, inputFluids, outputFluids),
-                    defaultTankSorptions(inputFluids, outputFluids),
-                    NCSteamAdditionsRecipes.validFluids[GUID],
-                    NCSteamAdditionsConfig.processor_time[GUID],
-                    0, true,
-                    NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                    GUID+1, 0,0,10
+                    ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.code,
+                    ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.inputItems,
+                    ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.inputFluids,
+                    ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.outputItems,
+                    ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.outputFluids,
+                    ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.GUID
             );
         }
     }

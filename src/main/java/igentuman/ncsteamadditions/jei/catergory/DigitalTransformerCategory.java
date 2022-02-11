@@ -3,6 +3,7 @@ package igentuman.ncsteamadditions.jei.catergory;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
 import igentuman.ncsteamadditions.processors.DigitalTransformer;
+import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import mezz.jei.api.IGuiHelper;
 import nc.integration.jei.JEIMachineRecipeWrapper;
 import nc.integration.jei.NCJEI.IJEIHandler;
@@ -46,7 +47,7 @@ public class DigitalTransformerCategory extends ParentProcessorCategory
 
 	public DigitalTransformerCategory(IGuiHelper guiHelper, IJEIHandler handler, DigitalTransformer proc)
 	{
-		super(guiHelper, handler, DigitalTransformer.code, 24, 7, 148, 56, proc);
+		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
 	}
 
@@ -62,8 +63,8 @@ public class DigitalTransformerCategory extends ParentProcessorCategory
 		protected double getBaseProcessTime()
 		{
 			if (recipe == null)
-				return NCSteamAdditionsConfig.processor_time[DigitalTransformer.GUID];
-			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[DigitalTransformer.GUID]);
+				return NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID];
+			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID]);
 		}
 
 		@Override

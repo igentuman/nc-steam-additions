@@ -1,17 +1,10 @@
 package igentuman.ncsteamadditions.recipe;
 
-import static nc.util.PermutationHelper.permutations;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javax.annotation.Nullable;
-
-import org.apache.commons.lang3.tuple.Triple;
-
 import com.google.common.collect.Lists;
-
 import crafttweaker.annotations.ZenRegister;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;

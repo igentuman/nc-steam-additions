@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.jei.catergory;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamBlender;
+import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import igentuman.ncsteamadditions.processors.SteamBlender;
 import mezz.jei.api.IGuiHelper;
 import nc.integration.jei.JEIMachineRecipeWrapper;
@@ -46,7 +47,7 @@ public class SteamBlenderCategory extends ParentProcessorCategory
 
 	public SteamBlenderCategory(IGuiHelper guiHelper, IJEIHandler handler, SteamBlender proc)
 	{
-		super(guiHelper, handler, SteamBlender.code, 24, 7, 148, 56, proc);
+		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
 	}
 
@@ -62,8 +63,8 @@ public class SteamBlenderCategory extends ParentProcessorCategory
 		protected double getBaseProcessTime()
 		{
 			if (recipe == null)
-				return NCSteamAdditionsConfig.processor_time[SteamBlender.GUID];
-			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[SteamBlender.GUID]);
+				return NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().STEAM_BLENDER.GUID];
+			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().STEAM_BLENDER.GUID]);
 		}
 
 		@Override

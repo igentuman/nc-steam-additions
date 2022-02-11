@@ -14,7 +14,6 @@ import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
-import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.OreDictHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -24,38 +23,18 @@ import java.util.Set;
 
 public class SteamCrusher extends AbstractProcessor {
 
-    public static String code = "steam_crusher";
-
-    public static String particle1 = "splash";
-
-    public static String particle2 = "reddust";
-
-    public final static int GUID = 1;
-
-    public final static int SIDEID = 1000 + GUID;
-
-    public static int inputItems = 1;
-
-    public static int inputFluids = 1;
-
-    public static int outputFluids = 0;
-
-    public static int outputItems = 1;
-
-    public static RecipeHandler recipes;
-
-    public Object[] craftingRecipe = new Object[] {"BRB", "CFC", "PRP", 'B', net.minecraft.init.Items.BUCKET, 'F', "chest", 'C', Items.items[0], 'R', net.minecraft.init.Blocks.PISTON, 'P', net.minecraft.init.Items.DIAMOND_PICKAXE};
-
-    public int getInputItems() {
-        return inputItems;
-    }
-
-    public int getInputFluids() {
-        return inputFluids;
-    }
-
-    public int getOutputFluids() {
-        return outputFluids;
+    public SteamCrusher()
+    {
+        code = "steam_crusher";
+        particle1 = "splash";
+        particle2 = "reddust";
+        GUID = 1;
+        SIDEID = 1000 + GUID;
+        inputItems = 1;
+        inputFluids = 1;
+        outputFluids = 0;
+        outputItems = 1;
+        craftingRecipe = new Object[] {"BRB", "CFC", "PRP", 'B', net.minecraft.init.Items.BUCKET, 'F', "chest", 'C', Items.items[0], 'R', net.minecraft.init.Blocks.PISTON, 'P', net.minecraft.init.Items.DIAMOND_PICKAXE};
     }
 
     public String getBlockType()
@@ -63,58 +42,27 @@ public class SteamCrusher extends AbstractProcessor {
         return "nc_processor";
     }
 
-    public int getOutputItems() {
-        return outputItems;
-    }
-
-    public Object[] getCraftingRecipe()
-    {
-       return this.craftingRecipe;
-    }
-
-    public JEIHandler recipeHandler;
-
-    public int getGuid()
-    {
-        return GUID;
-    }
-
-    public int getSideid()
-    {
-        return SIDEID;
-    }
-
-    public String getCode()
-    {
-        return code;
-    }
-
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamCrusher(player, (SteamCrusher.TileSteamCrusher) tile, this);
+        return new GuiSteamCrusher(player, (TileNCSProcessor) tile, this);
     }
 
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamCrusher.SideConfig(player, (SteamCrusher.TileSteamCrusher) tile, this);
+        return new GuiSteamCrusher.SideConfig(player, (TileNCSProcessor) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamCrusher(player, (SteamCrusher.TileSteamCrusher) tile);
+        return new ContainerSteamCrusher(player, (TileNCSProcessor) tile);
     }
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player, (SteamCrusher.TileSteamCrusher) tile);
-    }
-
-    public JEIHandler getRecipeHandler()
-    {
-        return this.recipeHandler;
+        return new ContainerMachineConfig(player, (TileNCSProcessor) tile);
     }
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[SteamCrusher.GUID], SteamCrusher.code, SteamCrusherCategory.SteamCrusherWrapper.class);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[GUID], code, SteamCrusherCategory.SteamCrusherWrapper.class);
         return new SteamCrusherCategory(guiHelper,recipeHandler, this);
     }
 
@@ -127,29 +75,25 @@ public class SteamCrusher extends AbstractProcessor {
         return type;
     }
 
+    public TileEntity getTile()
+    {
+        return new TileSteamCrusher();
+    }
+
     public Class getTileClass()
     {
         return TileSteamCrusher.class;
     }
 
-    public static class TileSteamCrusher extends TileNCSProcessor
-    {
-        public TileSteamCrusher()
-        {
+    public static class TileSteamCrusher extends TileNCSProcessor {
+        public TileSteamCrusher() {
             super(
-                    code,
-                    inputItems,
-                    inputFluids,
-                    outputItems,
-                    outputFluids,
-                    defaultItemSorptions(inputItems, outputItems, true),
-                    defaultTankCapacities(5000, inputFluids, outputFluids),
-                    defaultTankSorptions(inputFluids, outputFluids),
-                    NCSteamAdditionsRecipes.validFluids[GUID],
-                    NCSteamAdditionsConfig.processor_time[GUID],
-                    0, true,
-                    NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                    GUID+1, 0,0,10
+                    ProcessorsRegistry.get().STEAM_CRUSHER.code,
+                    ProcessorsRegistry.get().STEAM_CRUSHER.inputItems,
+                    ProcessorsRegistry.get().STEAM_CRUSHER.inputFluids,
+                    ProcessorsRegistry.get().STEAM_CRUSHER.outputItems,
+                    ProcessorsRegistry.get().STEAM_CRUSHER.outputFluids,
+                    ProcessorsRegistry.get().STEAM_CRUSHER.GUID
             );
         }
     }

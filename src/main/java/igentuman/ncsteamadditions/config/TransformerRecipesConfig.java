@@ -51,6 +51,7 @@ public class TransformerRecipesConfig {
 
 		String[] defaultTransformerRecipes = new String[] {
 				"minecraft:water_bucket;blockPrismarine;plateBasic*4;dustTin;low_quality_steam*250=nuclearcraft:water_source",
+				"blockMagnesium;solenoidCopper*4;plateBasic*4;null;steam*250=nuclearcraft:voltaic_pile_basic",
 				"ingotSteel;itemSilicon;stone;null;low_pressure_steam*250=oreBoron",
 				"ingotLead;gemEmerald;stone;null;low_pressure_steam*250=oreUranium",
 				"ingotClay;dyeGreen;null;null;high_pressure_steam*1500=ingotUranium",

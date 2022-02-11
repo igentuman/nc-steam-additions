@@ -1,6 +1,7 @@
 package igentuman.ncsteamadditions.network;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
+import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import io.netty.buffer.ByteBuf;
 import nc.tile.ITileGui;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -64,9 +65,9 @@ public class OpenSideGuiPacket implements IMessage {
             World world = player.getServerWorld();
             if (world.isBlockLoaded(message.pos) && world.isBlockModifiable(player, message.pos)) {
                 TileEntity tile = world.getTileEntity(message.pos);
-                if (tile instanceof ITileGui) {
-                    FMLNetworkHandler.openGui(player, NCSteamAdditions.instance, ((ITileGui)tile).getGuiID() + 1000, player.getServerWorld(), message.pos.getX(), message.pos.getY(), message.pos.getZ());
-                    ((ITileGui)tile).beginUpdatingPlayer(player);
+                if (tile instanceof TileNCSProcessor) {
+                    FMLNetworkHandler.openGui(player, NCSteamAdditions.instance, ((TileNCSProcessor)tile).getGuiID() + 1000, player.getServerWorld(), message.pos.getX(), message.pos.getY(), message.pos.getZ());
+                    ((TileNCSProcessor)tile).beginUpdatingPlayer(player);
                 }
             }
         }

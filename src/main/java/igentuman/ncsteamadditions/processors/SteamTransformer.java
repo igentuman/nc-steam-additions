@@ -13,103 +13,51 @@ import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
-import nc.tile.processor.TileItemFluidProcessor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
 public class SteamTransformer extends AbstractProcessor {
 
-    public static String code = "steam_transformer";
-
-    public static String particle1 = "splash";
-
-    public static String particle2 = "reddust";
-
-    public final static int GUID = 0;
-
-    public final static int SIDEID = 1000 + GUID;
-
-    public static int inputItems = 4;
-
-    public static int inputFluids = 1;
-
-    public static int outputFluids = 0;
-
-    public static int outputItems = 1;
-
-    public static RecipeHandler recipes;
-
-    public Object[] craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "chest", 'F', net.minecraft.init.Items.BUCKET, 'C', Items.items[0], 'R', net.minecraft.init.Items.ENDER_EYE, 'H', Items.items[1]};
-
-    public int getInputItems() {
-        return inputItems;
-    }
-
-    public int getInputFluids() {
-        return inputFluids;
-    }
-
-    public int getOutputFluids() {
-        return outputFluids;
-    }
-
-    public int getOutputItems() {
-        return outputItems;
-    }
-
-    public Object[] getCraftingRecipe()
+    public SteamTransformer()
     {
-       return this.craftingRecipe;
+        code = "steam_transformer";
+        particle1 = "splash";
+        particle2 = "reddust";
+        GUID = 2;
+        SIDEID = 1000 + GUID;
+        inputItems = 4;
+        inputFluids = 1;
+        outputFluids = 0;
+        outputItems = 1;
+        craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "chest", 'F', net.minecraft.init.Items.BUCKET, 'C', Items.items[0], 'R', net.minecraft.init.Items.ENDER_EYE, 'H', Items.items[1]};
     }
-
-    public JEIHandler recipeHandler;
 
     public String getBlockType()
     {
         return "nc_processor";
     }
 
-    public int getGuid()
-    {
-        return GUID;
-    }
-
-    public int getSideid()
-    {
-        return SIDEID;
-    }
-
-    public String getCode()
-    {
-        return code;
-    }
-
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTransformer(player, (SteamTransformer.TileSteamTransformer) tile, this);
+        return new GuiSteamTransformer(player, (TileNCSProcessor) tile, this);
     }
 
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamTransformer.SideConfig(player, (SteamTransformer.TileSteamTransformer) tile, this);
+        return new GuiSteamTransformer.SideConfig(player, (TileNCSProcessor) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamTransformer(player, (SteamTransformer.TileSteamTransformer) tile);
+        return new ContainerSteamTransformer(player, (TileNCSProcessor) tile);
     }
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player, (SteamTransformer.TileSteamTransformer) tile);
-    }
-
-    public JEIHandler getRecipeHandler()
-    {
-        return this.recipeHandler;
+        return new ContainerMachineConfig(player, (TileNCSProcessor) tile);
     }
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[getGuid()], Blocks.blocks[getGuid()], SteamTransformer.code, SteamTransformerCategory.SteamTransformerWrapper.class);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[getGuid()], Blocks.blocks[getGuid()], code, SteamTransformerCategory.SteamTransformerWrapper.class);
         return new SteamTransformerCategory(guiHelper,recipeHandler, this);
     }
 
@@ -122,29 +70,25 @@ public class SteamTransformer extends AbstractProcessor {
         return type;
     }
 
+    public TileEntity getTile()
+    {
+        return new TileSteamTransformer();
+    }
+
     public Class getTileClass()
     {
         return TileSteamTransformer.class;
     }
 
-    public static class TileSteamTransformer extends TileNCSProcessor
-    {
-        public TileSteamTransformer()
-        {
+    public static class TileSteamTransformer extends TileNCSProcessor {
+        public TileSteamTransformer() {
             super(
-                    code,
-                    inputItems,
-                    inputFluids,
-                    outputItems,
-                    outputFluids,
-                    defaultItemSorptions(inputItems, outputItems, true),
-                    defaultTankCapacities(10000, inputFluids, outputFluids),
-                    defaultTankSorptions(inputFluids, outputFluids),
-                    NCSteamAdditionsRecipes.validFluids[GUID],
-                    NCSteamAdditionsConfig.processor_time[GUID],
-                    0, true,
-                    NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                    GUID+1, 0,0,10
+                    ProcessorsRegistry.get().STEAM_TRANSFORMER.code,
+                    ProcessorsRegistry.get().STEAM_TRANSFORMER.inputItems,
+                    ProcessorsRegistry.get().STEAM_TRANSFORMER.inputFluids,
+                    ProcessorsRegistry.get().STEAM_TRANSFORMER.outputItems,
+                    ProcessorsRegistry.get().STEAM_TRANSFORMER.outputFluids,
+                    ProcessorsRegistry.get().STEAM_TRANSFORMER.GUID
             );
         }
     }

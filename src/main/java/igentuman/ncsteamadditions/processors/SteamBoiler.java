@@ -9,10 +9,10 @@ import igentuman.ncsteamadditions.machine.container.ContainerSteamBoiler;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamBoiler;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
+import li.cil.oc.common.block.traits.GUI;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
-import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidRegHelper;
 import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,65 +20,25 @@ import net.minecraft.tileentity.TileEntity;
 
 public class SteamBoiler extends AbstractProcessor {
 
-    public static String code = "steam_boiler";
-
-    public static String particle1 = "splash";
-
-    public static String particle2 = "flame";
-
-    public final static int GUID = 2;
-
-    public final static int SIDEID = 1000 + GUID;
-
-    public static int inputItems = 1;
-
-    public static int inputFluids = 1;
-
-    public static int outputFluids = 1;
-
-    public static int outputItems = 0;
-
-    public static RecipeHandler recipes;
-
-    public Object[] craftingRecipe = new Object[] {"PBP", "CFC", "PBP", 'P', "ingotLead", 'F', net.minecraft.init.Blocks.FURNACE, 'C', Items.items[0], 'B', RegistryHelper.itemStackFromRegistry("minecraft:cauldron")};
-
-    public int getInputItems() {
-        return inputItems;
-    }
-
-    public int getInputFluids() {
-        return inputFluids;
-    }
-
-    public int getOutputFluids() {
-        return outputFluids;
-    }
-
-    public int getOutputItems() {
-        return outputItems;
-    }
-
-    public Object[] getCraftingRecipe()
-    {
-       return this.craftingRecipe;
-    }
-
-    public JEIHandler recipeHandler;
-
-    public int getGuid()
-    {
-        return GUID;
-    }
-
-    public int getSideid()
-    {
-        return SIDEID;
-    }
-
-    public String getCode()
-    {
-        return code;
-    }
+   public SteamBoiler()
+   {
+       code = "steam_boiler";
+       GUID = 0;
+       SIDEID = 1000 + GUID;
+       particle1 = "splash";
+       particle2 = "flame";
+       inputItems = 1;
+       inputFluids = 1;
+       outputFluids = 1;
+       outputItems = 0;
+       craftingRecipe = new Object[] {
+               "PBP", "CFC", "PBP",
+               'P', "ingotLead",
+               'F', net.minecraft.init.Blocks.FURNACE,
+               'C', Items.items[0],
+               'B', RegistryHelper.itemStackFromRegistry("minecraft:cauldron")
+       };
+   }
 
     public String getBlockType()
     {
@@ -86,29 +46,24 @@ public class SteamBoiler extends AbstractProcessor {
     }
 
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamBoiler(player, (SteamBoiler.TileSteamBoiler) tile, this);
+        return new GuiSteamBoiler(player, (TileNCSProcessor) tile, this);
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamBoiler.SideConfig(player, (SteamBoiler.TileSteamBoiler) tile, this);
+        return new GuiSteamBoiler.SideConfig(player, (TileNCSProcessor) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new ContainerSteamBoiler(player, (SteamBoiler.TileSteamBoiler) tile);
+        return new ContainerSteamBoiler(player, (TileNCSProcessor) tile);
     }
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player, (SteamBoiler.TileSteamBoiler) tile);
-    }
-
-    public JEIHandler getRecipeHandler()
-    {
-        return this.recipeHandler;
+        return new ContainerMachineConfig(player, (TileNCSProcessor) tile);
     }
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[SteamBoiler.GUID], SteamBoiler.code, SteamBoilerCategory.SteamBoilerWrapper.class);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[GUID], code, SteamBoilerCategory.SteamBoilerWrapper.class);
         return new SteamBoilerCategory(guiHelper,recipeHandler, this);
     }
 
@@ -121,29 +76,25 @@ public class SteamBoiler extends AbstractProcessor {
         return type;
     }
 
+    public TileEntity getTile()
+    {
+        return new TileSteamBoiler();
+    }
+
     public Class getTileClass()
     {
         return TileSteamBoiler.class;
     }
 
-    public static class TileSteamBoiler extends TileNCSProcessor
-    {
-        public TileSteamBoiler()
-        {
+    public static class TileSteamBoiler extends TileNCSProcessor {
+        public TileSteamBoiler() {
             super(
-                    code,
-                    inputItems,
-                    inputFluids,
-                    outputItems,
-                    outputFluids,
-                    defaultItemSorptions(inputItems, outputItems, true),
-                    defaultTankCapacities(20000, inputFluids, outputFluids),
-                    defaultTankSorptions(inputFluids, outputFluids),
-                    NCSteamAdditionsRecipes.validFluids[GUID],
-                    NCSteamAdditionsConfig.processor_time[GUID],
-                    0, true,
-                    NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                    GUID+1, 0,0,10
+                    ProcessorsRegistry.get().STEAM_BOILER.code,
+                    ProcessorsRegistry.get().STEAM_BOILER.inputItems,
+                    ProcessorsRegistry.get().STEAM_BOILER.inputFluids,
+                    ProcessorsRegistry.get().STEAM_BOILER.outputItems,
+                    ProcessorsRegistry.get().STEAM_BOILER.outputFluids,
+                    ProcessorsRegistry.get().STEAM_BOILER.GUID
             );
         }
     }

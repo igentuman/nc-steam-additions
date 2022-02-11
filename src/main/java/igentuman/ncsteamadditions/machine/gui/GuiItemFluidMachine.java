@@ -3,6 +3,7 @@ package igentuman.ncsteamadditions.machine.gui;
 import java.util.List;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.NCSteamAdditions;
+import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.network.NCSAPacketHandler;
 import igentuman.ncsteamadditions.network.OpenSideGuiPacket;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
@@ -80,14 +81,19 @@ public class GuiItemFluidMachine extends NCGui {
         GlStateManager.color(1F, 1F, 1F, 1F);
         mc.getTextureManager().bindTexture(gui_textures);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-
+        drawEfficiencyBar();
         drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(120), 24);
-
         drawUpgradeRenderers();
-
         drawBackgroundExtras();
-        drawString(Minecraft.getMinecraft().fontRenderer,"Efficiency: "+String.format("%.2f", tile.getRecipeEfficiency()),guiLeft + 2, guiTop  - 7, 16711680);
 
+    }
+
+    public void drawEfficiencyBar()
+    {
+        if(NCSteamAdditionsConfig.efficiencyCap > 0) {
+            int e = (int) Math.round(74 * tile.getRecipeEfficiency() / NCSteamAdditionsConfig.efficiencyCap);
+            drawTexturedModalRect(guiLeft + 10, guiTop + 6 + 74 - e, 176, 90 + 74 - e, 11, e);
+        }
     }
 
     protected int getCookProgressScaled(double pixels)
@@ -129,7 +135,17 @@ public class GuiItemFluidMachine extends NCGui {
     @Override
     public void renderTooltips(int mouseX, int mouseY)
     {
+
+        drawEfficiencyTooltip(tile, mouseX, mouseY, 8, 6, 16, 74);
+
         renderButtonTooltips(mouseX, mouseY);
+    }
+
+    public void drawEfficiencyTooltip(TileNCSProcessor tile, int mouseX, int mouseY, int x, int y, int width, int height)
+    {
+        if(NCSteamAdditionsConfig.efficiencyCap > 0) {
+            super.drawTooltip(Lang.localise("gui.nc.container.efficiency")+" "+String.format("%.1f",tile.getRecipeEfficiency()), mouseX, mouseY, x, y, width, height);
+        }
     }
 
     public void renderButtonTooltips(int mouseX, int mouseY)
@@ -144,14 +160,6 @@ public class GuiItemFluidMachine extends NCGui {
             }
         }
 
-        x = inputItemsLeft;
-        if(getProcessor().getInputItems() > 0) {
-            for (int i = 0; i < getProcessor().getInputItems(); i++) {
-                //x += cellSpan;
-                //GuiFluidRenderer.renderGuiTank(tile.getTanks().get(idCounter++), guiLeft + x, guiTop + getInputItems()Top, zLevel, 16, 16);
-            }
-        }
-
         x = 152;
         if(getProcessor().getOutputFluids() > 0) {
             for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
@@ -160,13 +168,6 @@ public class GuiItemFluidMachine extends NCGui {
             }
         }
 
-        x = 152;
-        if(getProcessor().getOutputItems() > 0) {
-            for (int i = 0; i < getProcessor().getOutputItems(); i++) {
-                //GuiFluidRenderer.renderGuiTank(tile.getTanks().get(idCounter++), guiLeft + x, guiTop + getInputItems()Top, zLevel, 16, 16);
-                //x += cellSpan;
-            }
-        }
         drawTooltip(Lang.localise("gui.nc.container.machine_side_config"), mouseX, mouseY, 27, 63, 18, 18);
         drawTooltip(Lang.localise("gui.nc.container.redstone_control"), mouseX, mouseY, 47, 63, 18, 18);
     }
@@ -183,27 +184,11 @@ public class GuiItemFluidMachine extends NCGui {
             }
         }
 
-        x = inputItemsLeft;
-        if(getProcessor().getInputItems() > 0) {
-            for (int i = 0; i < getProcessor().getInputItems(); i++) {
-                //GuiFluidRenderer.renderGuiTank(tile.getTanks().get(idCounter++), guiLeft + x, guiTop + getInputItems()Top, zLevel, 16, 16);
-                //x += cellSpan;
-            }
-        }
-
         x = 152;
         if(getProcessor().getOutputFluids() > 0) {
             for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
                 GuiFluidRenderer.renderGuiTank(tile.getTanks().get(idCounter++), guiLeft + x, guiTop + inputFluidsTop, zLevel, 16, 16);
                 x += cellSpan;
-            }
-        }
-
-        x = 152;
-        if(getProcessor().getOutputItems() > 0) {
-            for (int i = 0; i < getProcessor().getOutputItems(); i++) {
-                //GuiFluidRenderer.renderGuiTank(tile.getTanks().get(idCounter++), guiLeft + x, guiTop + getInputItems()Top, zLevel, 16, 16);
-                //x += cellSpan;
             }
         }
     }
@@ -220,27 +205,11 @@ public class GuiItemFluidMachine extends NCGui {
             }
         }
 
-        x = inputItemsLeft;
-        if(getProcessor().getInputItems() > 0) {
-            for (int i = 0; i < getProcessor().getInputItems(); i++) {
-                //buttonList.add(new NCButton.EmptyTank(idCounter++, guiLeft + x, guiTop + getInputItems()Top, 16, 16));
-                //x += cellSpan;
-            }
-        }
-
         x = 152;
         if(getProcessor().getOutputFluids() > 0) {
             for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
                 buttonList.add(new NCButton.EmptyTank(idCounter++, guiLeft + x, guiTop + inputFluidsTop, 16, 16));
                 x += cellSpan;
-            }
-        }
-
-        x = 152;
-        if(getProcessor().getOutputItems() > 0) {
-            for (int i = 0; i < getProcessor().getOutputItems(); i++) {
-                //buttonList.add(new NCButton.SorptionConfig.ItemOutput(idCounter++, guiLeft + x, guiTop + getInputItems()Top));
-                //x += cellSpan;
             }
         }
 
@@ -330,8 +299,6 @@ public class GuiItemFluidMachine extends NCGui {
                     x += cellSpan;
                 }
             }
-
-            //drawTooltip(TextFormatting.DARK_BLUE + Lang.localise("gui.nc.container.upgrade_config"), mouseX, mouseY, 152, 63, 18, 18);
         }
 
         @Override
@@ -382,8 +349,6 @@ public class GuiItemFluidMachine extends NCGui {
                     x += cellSpan;
                 }
             }
-
-            //buttonList.add(new NCButton.SorptionConfig.SpeedUpgrade(idCounter, guiLeft + 152, guiTop + 63));
         }
 
         @Override

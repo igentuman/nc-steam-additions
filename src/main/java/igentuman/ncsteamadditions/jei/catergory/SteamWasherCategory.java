@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.jei.catergory;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamWasher;
+import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import igentuman.ncsteamadditions.processors.SteamWasher;
 import mezz.jei.api.IGuiHelper;
 import nc.integration.jei.JEIMachineRecipeWrapper;
@@ -46,7 +47,7 @@ public class SteamWasherCategory extends ParentProcessorCategory
 
 	public SteamWasherCategory(IGuiHelper guiHelper, IJEIHandler handler, SteamWasher proc)
 	{
-		super(guiHelper, handler, SteamWasher.code, 24, 7, 148, 56, proc);
+		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
 	}
 
@@ -62,8 +63,8 @@ public class SteamWasherCategory extends ParentProcessorCategory
 		protected double getBaseProcessTime()
 		{
 			if (recipe == null)
-				return NCSteamAdditionsConfig.processor_time[SteamWasher.GUID];
-			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[SteamWasher.GUID]);
+				return NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().STEAM_WASHER.GUID];
+			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().STEAM_WASHER.GUID]);
 		}
 
 		@Override

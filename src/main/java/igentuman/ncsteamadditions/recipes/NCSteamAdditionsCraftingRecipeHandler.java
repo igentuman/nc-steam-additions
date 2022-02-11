@@ -46,11 +46,14 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		addShapedOreRecipe(new ItemStack(Items.items[0],2),new Object[]{"   ", " SS", " SS", 'S', "ingotCopper"});
 		removeRecipeFor(new ItemStack(NCItems.part, 1, 4).getItem(),4);
 		removeRecipeFor(new ItemStack(NCBlocks.water_source, 1).getItem(),0);
+		removeRecipeFor(new ItemStack(NCBlocks.voltaic_pile_basic, 1).getItem(),0);
+		removeRecipeFor(new ItemStack(NCBlocks.turbine_controller, 1).getItem(),0);
 		addShapedOreRecipe(new ItemStack(NCItems.part, 2, 4), "CC", "II", "CC", 'C', "wireCopper", 'I', "ingotIron");
+		addShapedOreRecipe(new ItemStack(NCBlocks.turbine_controller, 1, 0), "THT", "CSC", "THT", 'C', net.minecraft.init.Items.COMPARATOR, 'H', "ingotHSLASteel",'T',"ingotTough", 'S', Blocks.blocks[ProcessorsRegistry.get().STEAM_TURBINE.GUID]);
 		NCRecipes.infuser.addOxidizingRecipe("dustUranium",1000);
 		NCRecipes.chemical_reactor.addRecipe(new Object[] {fluidStack("uranium_oxide",1000),fluidStack("hydrofluoric_acid",500),fluidStack("uranium_hexafluoride",1000), new EmptyFluidIngredient()});
 		NCRecipes.centrifuge.addRecipe(new Object[]{fluidStack("uranium_hexafluoride",1000),fluidStack("uranium_235",144),fluidStack("uranium_238",144*4),fluidStack("uranium_233",72),new EmptyFluidIngredient(),new EmptyFluidIngredient(),new EmptyFluidIngredient()});
-		NCRecipes.assembler.addRecipe(new Object[]{NCBlocks.assembler, Blocks.blocks[SteamTransformer.GUID], Blocks.blocks[SteamFluidTransformer.GUID], "coreOfTransformation", Blocks.blocks[DigitalTransformer.GUID], 2.0D, 2.0D});
+		NCRecipes.assembler.addRecipe(new Object[]{NCBlocks.assembler, Blocks.blocks[ProcessorsRegistry.get().STEAM_TRANSFORMER.GUID], Blocks.blocks[ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.GUID], "coreOfTransformation", Blocks.blocks[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID], 2.0D, 2.0D});
 		NCRecipes.fission_irradiator.addRecipe(new Object[]{"gemEnderEye","coreOfTransformation",2720000, NCConfig.fission_irradiator_heat_per_flux[1], NCConfig.fission_irradiator_efficiency[1], RadSources.TBP});
 	}
 

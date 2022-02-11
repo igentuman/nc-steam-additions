@@ -39,6 +39,7 @@ public class GuiSteamBlender extends GuiItemFluidMachine
 		drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(135), 12);
 		drawUpgradeRenderers();
 		drawBackgroundExtras();
+		drawEfficiencyBar();
 	}
 
 }

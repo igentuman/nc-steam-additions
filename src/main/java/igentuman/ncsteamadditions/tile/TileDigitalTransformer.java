@@ -1,7 +1,7 @@
 package igentuman.ncsteamadditions.tile;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import igentuman.ncsteamadditions.processors.DigitalTransformer;
+import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
@@ -12,24 +12,24 @@ import net.minecraftforge.fml.common.Optional;
 import java.util.Random;
 
 @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "opencomputers")
-public class TDigitalTransformer extends TileNCSProcessor implements SimpleComponent
+public class TileDigitalTransformer extends TileNCSProcessor implements SimpleComponent
 {
-    public TDigitalTransformer()
+    public TileDigitalTransformer()
     {
         super(
-                DigitalTransformer.code,
-                DigitalTransformer.inputItems,
-                DigitalTransformer.inputFluids,
-                DigitalTransformer.outputItems,
-                DigitalTransformer.outputFluids,
-                defaultItemSorptions(DigitalTransformer.inputItems, DigitalTransformer.outputItems, true),
-                defaultTankCapacities(40000, DigitalTransformer.inputFluids, DigitalTransformer.outputFluids),
-                defaultTankSorptions(DigitalTransformer.inputFluids, DigitalTransformer.outputFluids),
-                NCSteamAdditionsRecipes.validFluids[DigitalTransformer.GUID],
-                NCSteamAdditionsConfig.processor_time[DigitalTransformer.GUID],
+                ProcessorsRegistry.get().DIGITAL_TRANSFORMER.code,
+                ProcessorsRegistry.get().DIGITAL_TRANSFORMER.inputItems,
+                ProcessorsRegistry.get().DIGITAL_TRANSFORMER.inputFluids,
+                ProcessorsRegistry.get().DIGITAL_TRANSFORMER.outputItems,
+                ProcessorsRegistry.get().DIGITAL_TRANSFORMER.outputFluids,
+                defaultItemSorptions(ProcessorsRegistry.get().DIGITAL_TRANSFORMER.inputItems, ProcessorsRegistry.get().DIGITAL_TRANSFORMER.outputItems, true),
+                defaultTankCapacities(40000, ProcessorsRegistry.get().DIGITAL_TRANSFORMER.inputFluids, ProcessorsRegistry.get().DIGITAL_TRANSFORMER.outputFluids),
+                defaultTankSorptions(ProcessorsRegistry.get().DIGITAL_TRANSFORMER.inputFluids, ProcessorsRegistry.get().DIGITAL_TRANSFORMER.outputFluids),
+                NCSteamAdditionsRecipes.validFluids[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID],
+                NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID],
                 NCSteamAdditionsConfig.digitalTransformerRF, true,
-                NCSteamAdditionsRecipes.processorRecipeHandlers[DigitalTransformer.GUID],
-                DigitalTransformer.GUID+1, 0,0,0
+                NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID],
+                ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID+1, 0,0,0
         );
         this.getEnergyStorage().setMaxTransfer(2048000);
         this.getEnergyStorage().setStorageCapacity(2048000);
@@ -60,7 +60,7 @@ public class TDigitalTransformer extends TileNCSProcessor implements SimpleCompo
     @Optional.Method(modid = "opencomputers")
     public String getComponentName()
     {
-        return DigitalTransformer.code;
+        return ProcessorsRegistry.get().DIGITAL_TRANSFORMER.code;
     }
 
     protected int baseTicksToChange = 200;

@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.jei.catergory;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamFluidTransformer;
+import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import igentuman.ncsteamadditions.processors.SteamFluidTransformer;
 import mezz.jei.api.IGuiHelper;
 import nc.integration.jei.JEIMachineRecipeWrapper;
@@ -46,7 +47,7 @@ public class SteamFluidTransformerCategory extends ParentProcessorCategory
 
 	public SteamFluidTransformerCategory(IGuiHelper guiHelper, IJEIHandler handler, SteamFluidTransformer proc)
 	{
-		super(guiHelper, handler, SteamFluidTransformer.code, 24, 7, 148, 56, proc);
+		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
 	}
 
@@ -62,8 +63,8 @@ public class SteamFluidTransformerCategory extends ParentProcessorCategory
 		protected double getBaseProcessTime()
 		{
 			if (recipe == null)
-				return NCSteamAdditionsConfig.processor_time[SteamFluidTransformer.GUID];
-			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[SteamFluidTransformer.GUID]);
+				return NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.GUID];
+			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.GUID]);
 		}
 
 		@Override

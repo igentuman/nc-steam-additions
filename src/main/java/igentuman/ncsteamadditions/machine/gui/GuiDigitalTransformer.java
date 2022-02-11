@@ -3,7 +3,7 @@ package igentuman.ncsteamadditions.machine.gui;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.machine.container.ContainerDigitalTransformer;
 import igentuman.ncsteamadditions.processors.DigitalTransformer;
-import igentuman.ncsteamadditions.tile.TDigitalTransformer;
+import igentuman.ncsteamadditions.tile.TileDigitalTransformer;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.container.ContainerTile;
 import nc.gui.element.GuiItemRenderer;
@@ -21,7 +21,7 @@ import java.util.List;
 public class GuiDigitalTransformer extends GuiItemFluidMachine
 {
 	public DigitalTransformer processor;
-	protected GuiItemRenderer speedUpgradeRender = null, energyUpgradeRender = null;
+	protected GuiItemRenderer energyUpgradeRender = null;
 	@Override
 	public DigitalTransformer getProcessor()
 	{
@@ -97,7 +97,7 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 		drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(135), 12);
 		//drawUpgradeRenderers();
 		drawBackgroundExtras();
-		TDigitalTransformer t = (TDigitalTransformer) tile;
+		TileDigitalTransformer t = (TileDigitalTransformer) tile;
 		//drawRect(guiLeft,guiTop-25,guiLeft + xSize,guiTop,0xfffffff);
 		drawString(Minecraft.getMinecraft().fontRenderer,"EF: "+String.format("%.2f", t.getRecipeEfficiency()),guiLeft + 2, guiTop  - 7, 16711680);
 		drawString(Minecraft.getMinecraft().fontRenderer,"CR: "+String.format("%.2f", t.getCurrentReactivity()),guiLeft + 40, guiTop - 7,1113879);

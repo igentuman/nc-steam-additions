@@ -13,7 +13,6 @@ import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.EmptyItemIngredient;
-import nc.tile.processor.TileItemFluidProcessor;
 import nc.util.FluidRegHelper;
 import nc.util.FluidStackHelper;
 import nc.util.RegistryHelper;
@@ -22,96 +21,66 @@ import net.minecraft.tileentity.TileEntity;
 
 public class SteamBlender extends AbstractProcessor {
 
-    public static String code = "steam_blender";
-
-    public static String particle1 = "splash";
-
-    public static String particle2 = "endRod";
-
-    public final static int GUID = 7;
-
-    public final static int SIDEID = 1000 + GUID;
-
-    public static int inputItems = 3;
-
-    public static int inputFluids = 1;
-
-    public static int outputFluids = 1;
-
-    public static int outputItems = 0;
-
-    public static RecipeHandler recipes;
-
-    public Object[] craftingRecipe = new Object[] {"PPP", "CFC", "RHR", 'P', "chest", 'F', net.minecraft.init.Blocks.FURNACE, 'C', Items.items[0], 'R', net.minecraft.init.Items.ENDER_EYE, 'H',  RegistryHelper.itemStackFromRegistry("minecraft:cauldron")};
-
-    public int getInputItems() {
-        return inputItems;
-    }
-
-    public int getInputFluids() {
-        return inputFluids;
-    }
-
-    public int getOutputFluids() {
-        return outputFluids;
-    }
-
-    public int getOutputItems() {
-        return outputItems;
-    }
-
-    public Object[] getCraftingRecipe()
+    public SteamBlender()
     {
-       return this.craftingRecipe;
-    }
+        code = "steam_blender";
+        particle1 = "splash";
+        particle2 = "endRod";
+        GUID = 7;
+        SIDEID = 1000 + GUID;
+        inputItems = 3;
+        inputFluids = 1;
+        outputFluids = 1;
+        outputItems = 0;
+        craftingRecipe = new Object[] {
+                "PPP", "CFC", "RHR",
+                'P', "chest",
+                'F', net.minecraft.init.Blocks.FURNACE,
+                'C', Items.items[0],
+                'R', net.minecraft.init.Items.ENDER_EYE,
+                'H',  RegistryHelper.itemStackFromRegistry("minecraft:cauldron")
+        };
 
-    public JEIHandler recipeHandler;
+    }
 
     public String getBlockType()
     {
         return "nc_processor";
     }
 
-    public int getGuid()
-    {
-        return GUID;
-    }
-
-    public int getSideid()
-    {
-        return SIDEID;
-    }
-
-    public String getCode()
-    {
-        return code;
-    }
-
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamBlender(player,  (SteamBlender.TileSteamBlender)tile,this);
+        return new GuiSteamBlender(player,  (TileNCSProcessor)tile,this);
     }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new GuiSteamBlender.SideConfig(player, (SteamBlender.TileSteamBlender) tile, this);
+        return new GuiSteamBlender.SideConfig(player, (TileNCSProcessor) tile, this);
     }
 
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
-       return new ContainerSteamBlender(player, (SteamBlender.TileSteamBlender) tile);
+       return new ContainerSteamBlender(player, (TileNCSProcessor) tile);
     }
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player, (SteamBlender.TileSteamBlender) tile);
-    }
-
-    public JEIHandler getRecipeHandler()
-    {
-        return this.recipeHandler;
+        return new ContainerMachineConfig(player, (TileNCSProcessor) tile);
     }
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
     {
-        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[getGuid()], Blocks.blocks[getGuid()], SteamBlender.code, SteamBlenderCategory.SteamBlenderWrapper.class);
+        recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[getGuid()], Blocks.blocks[getGuid()], code, SteamBlenderCategory.SteamBlenderWrapper.class);
         return new SteamBlenderCategory(guiHelper,recipeHandler, this);
+    }
+
+    public static class TileSteamBlender extends TileNCSProcessor {
+        public TileSteamBlender() {
+            super(
+                    ProcessorsRegistry.get().STEAM_BLENDER.code,
+                    ProcessorsRegistry.get().STEAM_BLENDER.inputItems,
+                    ProcessorsRegistry.get().STEAM_BLENDER.inputFluids,
+                    ProcessorsRegistry.get().STEAM_BLENDER.outputItems,
+                    ProcessorsRegistry.get().STEAM_BLENDER.outputFluids,
+                    ProcessorsRegistry.get().STEAM_BLENDER.GUID
+            );
+        }
     }
 
     public ProcessorType getType()
@@ -128,26 +97,9 @@ public class SteamBlender extends AbstractProcessor {
         return TileSteamBlender.class;
     }
 
-    public static class TileSteamBlender extends TileNCSProcessor
+    public TileEntity getTile()
     {
-        public TileSteamBlender()
-        {
-            super(
-                    code,
-                    inputItems,
-                    inputFluids,
-                    outputItems,
-                    outputFluids,
-                    defaultItemSorptions(inputItems, outputItems, true),
-                    defaultTankCapacities(10000, inputFluids, outputFluids),
-                    defaultTankSorptions(inputFluids, outputFluids),
-                    NCSteamAdditionsRecipes.validFluids[GUID],
-                    NCSteamAdditionsConfig.processor_time[GUID],
-                    0, true,
-                    NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                    GUID+1, 0,0,10
-            );
-        }
+        return new TileSteamBlender();
     }
 
     public RecipeHandler getRecipes()

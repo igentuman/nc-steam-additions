@@ -46,12 +46,7 @@ public class ProcessorType {
     }
 
     public TileEntity getTile(){
-        try {
-            TileEntity tEntity = (TileEntity) processor.getTileClass().getDeclaredConstructor().newInstance();
-            return tEntity;
-        } catch (InstantiationException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            return null;
-        }
+        return (TileEntity) processor.getTile();
     }
 
     public Block getBlock() {

@@ -6,7 +6,7 @@ import ic2.api.energy.tile.IEnergyEmitter;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.api.energy.tile.IEnergySource;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import igentuman.ncsteamadditions.processors.SteamTurbine;
+import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import nc.ModCheck;
 import nc.config.NCConfig;
@@ -15,7 +15,6 @@ import nc.tile.internal.energy.EnergyConnection;
 import nc.tile.internal.energy.EnergyStorage;
 import nc.tile.internal.energy.EnergyTileWrapper;
 import nc.tile.internal.energy.EnergyTileWrapperGT;
-import nc.tile.processor.TileItemFluidProcessor;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -51,19 +50,19 @@ public class TileSteamTurbine extends TileNCSProcessor implements ITileEnergy, I
     public TileSteamTurbine()
     {
         super(
-                SteamTurbine.code,
-                SteamTurbine.inputItems,
-                SteamTurbine.inputFluids,
-                SteamTurbine.outputItems,
-                SteamTurbine.outputFluids,
-                defaultItemSorptions(SteamTurbine.inputItems, SteamTurbine.outputItems, true),
-                defaultTankCapacities(5000, SteamTurbine.inputFluids, SteamTurbine.outputFluids),
-                defaultTankSorptions(SteamTurbine.inputFluids, SteamTurbine.outputFluids),
-                NCSteamAdditionsRecipes.validFluids[SteamTurbine.GUID],
-                NCSteamAdditionsConfig.processor_time[SteamTurbine.GUID],
+                ProcessorsRegistry.get().STEAM_TURBINE.code,
+                ProcessorsRegistry.get().STEAM_TURBINE.inputItems,
+                ProcessorsRegistry.get().STEAM_TURBINE.inputFluids,
+                ProcessorsRegistry.get().STEAM_TURBINE.outputItems,
+                ProcessorsRegistry.get().STEAM_TURBINE.outputFluids,
+                defaultItemSorptions(ProcessorsRegistry.get().STEAM_TURBINE.inputItems, ProcessorsRegistry.get().STEAM_TURBINE.outputItems, true),
+                defaultTankCapacities(5000, ProcessorsRegistry.get().STEAM_TURBINE.inputFluids, ProcessorsRegistry.get().STEAM_TURBINE.outputFluids),
+                defaultTankSorptions(ProcessorsRegistry.get().STEAM_TURBINE.inputFluids, ProcessorsRegistry.get().STEAM_TURBINE.outputFluids),
+                NCSteamAdditionsRecipes.validFluids[ProcessorsRegistry.get().STEAM_TURBINE.GUID],
+                NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().STEAM_TURBINE.GUID],
                 0, true,
-                NCSteamAdditionsRecipes.processorRecipeHandlers[SteamTurbine.GUID],
-                SteamTurbine.GUID+1, 0,0,10
+                NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_TURBINE.GUID],
+                ProcessorsRegistry.get().STEAM_TURBINE.GUID+1, 0,0,10
         );
         this.ic2reg = false;
         this.storage = new EnergyStorage(1024, maxRf);
@@ -78,7 +77,7 @@ public class TileSteamTurbine extends TileNCSProcessor implements ITileEnergy, I
         }
 
     }
-    @Override
+
     public void update() {
         super.update();
         if (!getWorld().isRemote) {
@@ -99,12 +98,21 @@ public class TileSteamTurbine extends TileNCSProcessor implements ITileEnergy, I
         }
     }
 
+    public void process() {
+        this.time += this.getSpeedMultiplier();
+        this.getEnergyStorage().changeEnergyStored((long)(-this.getProcessPower()));
+        this.getRadiationSource().setRadiationLevel(this.baseProcessRadiation * this.getSpeedMultiplier());
+
+        while(this.time >= this.baseProcessTime) {
+            this.finishProcess();
+        }
+    }
+
     public void invalidate() {
         super.invalidate();
         if (ModCheck.ic2Loaded()) {
             this.removeTileFromENet();
         }
-
     }
 
     public void onChunkUnload() {
@@ -112,7 +120,6 @@ public class TileSteamTurbine extends TileNCSProcessor implements ITileEnergy, I
         if (ModCheck.ic2Loaded()) {
             this.removeTileFromENet();
         }
-
     }
 
     public EnergyStorage getEnergyStorage() {

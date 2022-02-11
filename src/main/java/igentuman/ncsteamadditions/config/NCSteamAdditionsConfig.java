@@ -69,10 +69,10 @@ public class NCSteamAdditionsConfig {
 		Property digitalTransformerBasePower = config.get(CATEGORY_PROCESSORS, "digital_transformer_rf", 1024, Lang.localise("gui.ncsteamadditions.config.processors.digital_transformer_rf.comment"),0,32767);
 		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.digital_transformer_rf");
 
-		Property efficiency_cap = config.get(CATEGORY_PROCESSORS, "efficiency_cap", 100, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,32767);
+		Property efficiency_cap = config.get(CATEGORY_PROCESSORS, "efficiency_cap", 150, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,5000);
 		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_cap");
 
-		Property efficiency_change_speed = config.get(CATEGORY_PROCESSORS, "efficiency_change_speed", 50, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_change_speed.comment"),0,100);
+		Property efficiency_change_speed = config.get(CATEGORY_PROCESSORS, "efficiency_change_speed", 100, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_change_speed.comment"),0,200);
 		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_change_speed");
 
 		efficiencyChangeSpeed = efficiency_change_speed.getInt();

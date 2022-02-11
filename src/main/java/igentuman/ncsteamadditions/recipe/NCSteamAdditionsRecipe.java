@@ -24,10 +24,8 @@ public class NCSteamAdditionsRecipe implements INCSteamAdditionsRecipe
 		fluidIngredients = fluidIngredientsList;
 		itemProducts = itemProductsList;
 		fluidProducts = fluidProductsList;
-
 		extras = extrasList;
 		isShapeless = shapeless;
-		
 	}
 
 	@Override
