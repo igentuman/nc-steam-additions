@@ -1,0 +1,12 @@
+{
+  "name": "Efficiency",
+  "icon": "ncsteamadditions:steam_transformer",
+  "category": "ncsteamadditions:ncsteamadditions",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Some of NC Steam Additions machines has Efficiency bar. Efficiency means how fast the machine is producing recipes. It increases each time machine doing work and reduces when it's not working."
+    }
+  ]
+}

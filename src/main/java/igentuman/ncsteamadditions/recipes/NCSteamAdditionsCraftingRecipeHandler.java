@@ -6,8 +6,10 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.block.Blocks;
+import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.processors.*;
+import nc.ModCheck;
 import nc.config.NCConfig;
 import nc.init.NCBlocks;
 import nc.init.NCItems;
@@ -32,6 +34,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.ForgeRegistry;
+import vazkii.patchouli.common.item.ItemModBook;
 
 public class NCSteamAdditionsCraftingRecipeHandler
 {
@@ -44,12 +47,22 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		}
 		addShapedOreRecipe(new ItemStack(Blocks.otherBlocks[0],4),new Object[]{"SSS", "S S", "SSS", 'S', "copperSheet"});
 		addShapedOreRecipe(new ItemStack(Items.items[0],2),new Object[]{"   ", " SS", " SS", 'S', "ingotCopper"});
-		removeRecipeFor(new ItemStack(NCItems.part, 1, 4).getItem(),4);
-		removeRecipeFor(new ItemStack(NCBlocks.water_source, 1).getItem(),0);
-		removeRecipeFor(new ItemStack(NCBlocks.voltaic_pile_basic, 1).getItem(),0);
-		removeRecipeFor(new ItemStack(NCBlocks.turbine_controller, 1).getItem(),0);
-		addShapedOreRecipe(new ItemStack(NCItems.part, 2, 4), "CC", "II", "CC", 'C', "wireCopper", 'I', "ingotIron");
-		addShapedOreRecipe(new ItemStack(NCBlocks.turbine_controller, 1, 0), "THT", "CSC", "THT", 'C', net.minecraft.init.Items.COMPARATOR, 'H', "ingotHSLASteel",'T',"ingotTough", 'S', Blocks.blocks[ProcessorsRegistry.get().STEAM_TURBINE.GUID]);
+
+		if (ModCheck.patchouliLoaded())
+		{
+			addShapelessOreRecipe(ItemModBook.forBook("qmd:guide"), new Object[] {net.minecraft.init.Items.BOOK, "coal"});
+			addShapelessOreRecipe(net.minecraft.init.Items.BOOK, new Object[] {ItemModBook.forBook("qmd:guide")});
+		}
+
+		if(NCSteamAdditionsConfig.overrideNcRecipes) {
+			removeRecipeFor(new ItemStack(NCItems.part, 1, 4).getItem(), 4);
+			removeRecipeFor(new ItemStack(NCBlocks.water_source, 1).getItem(), 0);
+			removeRecipeFor(new ItemStack(NCBlocks.voltaic_pile_basic, 1).getItem(), 0);
+			removeRecipeFor(new ItemStack(NCBlocks.turbine_controller, 1).getItem(), 0);
+			addShapedOreRecipe(new ItemStack(NCItems.part, 2, 4), "CC", "II", "CC", 'C', "wireCopper", 'I', "ingotIron");
+			addShapedOreRecipe(new ItemStack(NCBlocks.turbine_controller, 1, 0), "THT", "CSC", "THT", 'C', net.minecraft.init.Items.COMPARATOR, 'H', "ingotHSLASteel", 'T', "ingotTough", 'S', Blocks.blocks[ProcessorsRegistry.get().STEAM_TURBINE.GUID]);
+		}
+
 		NCRecipes.infuser.addOxidizingRecipe("dustUranium",1000);
 		NCRecipes.chemical_reactor.addRecipe(new Object[] {fluidStack("uranium_oxide",1000),fluidStack("hydrofluoric_acid",500),fluidStack("uranium_hexafluoride",1000), new EmptyFluidIngredient()});
 		NCRecipes.centrifuge.addRecipe(new Object[]{fluidStack("uranium_hexafluoride",1000),fluidStack("uranium_235",144),fluidStack("uranium_238",144*4),fluidStack("uranium_233",72),new EmptyFluidIngredient(),new EmptyFluidIngredient(),new EmptyFluidIngredient()});

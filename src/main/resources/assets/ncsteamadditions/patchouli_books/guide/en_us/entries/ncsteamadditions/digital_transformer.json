@@ -1,0 +1,20 @@
+{
+  "name": "Digital Transformer",
+  "icon": "ncsteamadditions:digital_transformer",
+  "category": "ncsteamadditions:ncsteamadditions",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Digital Transformer is not a typical machine. It gives you a great opportunity to use cool recipes but you have to manage it's Efficiency. How to do that? Not that hard. Plug a computer to it and do some coding magic. In the script you write you need to keep Efficiency as high as possible. You can reach that by adjusting Reactivity. Digital transformer has 2 hidden parameters."
+    },
+    {
+      "type": "text",
+      "text": "Target Reactivity and Current Reactivity. And efficiency depends on how close Current Reactivity value to Target Reactivity."
+    },
+    {
+      "type": "text",
+      "text": "Call method digital_transformer.adjustEfficiency with positive or negative value as argument. Track efficiency by calling digital_transformer.getRecipeEfficiency() and digital_transformer.getRecipeProgress(). Keep in mind, Current Reactivity is not changing permanently after adjustments."
+    }
+  ]
+}

@@ -17,13 +17,17 @@ public class NCSteamAdditionsConfig {
 
 	private static Configuration config = null;
 	public static int[] processor_time;
+
 	public static final String CATEGORY_PROCESSORS = "processors";
 	public static final String CATEGORY_PIPES = "pipes";
+	public static final String CATEGORY_RECIPES = "recipes";
+
 	public static Configuration getConfig()
 	{
 		return config;
 	}
 	public static int pipeCapacity;
+	public static boolean overrideNcRecipes;
 	public static int pipeTransfer;
 	public static int turbineRF;
 	public static int efficiencyCap;
@@ -74,6 +78,11 @@ public class NCSteamAdditionsConfig {
 
 		Property efficiency_change_speed = config.get(CATEGORY_PROCESSORS, "efficiency_change_speed", 100, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_change_speed.comment"),0,200);
 		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_change_speed");
+
+		Property override_nc_recipes = config.get(CATEGORY_RECIPES, "override_nc_recipes", "true", Lang.localise("gui.ncsteamadditions.config.recipes.override_nc_recipes.comment"));
+		override_nc_recipes.setLanguageKey("gui.ncsteamadditions.config.recipes.override_nc_recipes");
+
+		overrideNcRecipes = override_nc_recipes.getBoolean();
 
 		efficiencyChangeSpeed = efficiency_change_speed.getInt();
 		efficiencyCap = efficiency_cap.getInt();

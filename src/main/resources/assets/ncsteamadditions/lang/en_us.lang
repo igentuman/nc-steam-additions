@@ -76,3 +76,10 @@ gui.ncsteamadditions.config.processors.efficiency_cap=Maximum efficiency machine
 gui.ncsteamadditions.config.processors.efficiency_change_speed=How fast machines gain or lose efficiency
 
 gui.nc.container.efficiency=Efficiency:
+
+gui.ncsteamadditions.config.recipes.override_nc_recipes=Override some of Nuclearcraft recipes
+gui.ncsteamadditions.config.recipes.override_nc_recipes.comment=I would recommend to keep this True
+
+ncsteamadditions.guide_book.name=NC Steam Additions Guide
+ncsteamadditions.guide_book_edition=English
+

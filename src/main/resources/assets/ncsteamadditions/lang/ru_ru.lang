@@ -1,0 +1,81 @@
+tile.ncsteamadditions.digital_transformer.name=Цифровой Трансформер
+tile.ncsteamadditions.digital_transformer.desc=Может трансформировать что угодно во что угодно. Но требует компьютер для эффективной работы
+
+tile.ncsteamadditions.steam_transformer.name=Преобразователь
+tile.ncsteamadditions.steam_transformer.desc=Трансформирует предметы из одних в другие
+
+tile.ncsteamadditions.steam_fluid_transformer.name=Жидкостный Преобразователь
+tile.ncsteamadditions.steam_fluid_transformer.desc=Трансформирует жидкости из одних в другие
+
+tile.ncsteamadditions.steam_crusher.name=Паровой Дробитель
+tile.ncsteamadditions.steam_crusher.desc=Дробит предметы силой пара
+
+tile.ncsteamadditions.steam_washer.name=Паровой Омыватель
+tile.ncsteamadditions.steam_washer.desc=Омывает вещи паром ;)
+
+tile.ncsteamadditions.steam_compactor.name=Паровой Компактор
+tile.ncsteamadditions.steam_compactor.desc=Компактит предметы с помощью пара
+
+tile.ncsteamadditions.steam_boiler.name=Бойлер
+tile.ncsteamadditions.steam_boiler.desc=А как еще получить пар?
+
+tile.ncsteamadditions.steam_turbine.name=Паровая Турбина
+tile.ncsteamadditions.steam_turbine.desc=Пар пихает турбину, турбина дает энергию!
+
+tile.ncsteamadditions.steam_blender.name=Блендер
+tile.ncsteamadditions.steam_blender.desc=Загрузи твердое, получишь жидкое.
+
+tile.ncsteamadditions.pipe.name=Жидкостная Труба
+item.ncsteamadditions.copper_sheet.name=Медный Лист
+
+item.ncsteamadditions.copper_wire.name=Медный Провод
+
+itemGroup.ncsteamadditions.blocks=NC Steam Additions
+
+item.ncsteamadditions.compressed_coal.name=Сжатый Уголь
+item.ncsteamadditions.compressed_coal.desc=Пригодится
+
+gui.ncsteamadditions.config.processors.time=Скорость процессоров (ticks)
+gui.ncsteamadditions.config.processors.time.comment=Порядок: Бойлер, Дробитель, Преобразователь, Жидкостный Преобразователь, Компактор, Омыватель, Турбина
+
+gui.ncsteamadditions.config.processors.boiler_conversion=Конверсия жидкости в пар в Бойлере
+gui.ncsteamadditions.config.processors.boiler_conversion.comment=Формула конверсии (Жидкость на входе x Конверсия)
+
+gui.ncsteamadditions.config.processors.turbine_conversion=Конверсия пара в жидкость в Турбине
+gui.ncsteamadditions.config.processors.turbine_conversion.comment=Формула конверсии (Объем пара на входе x Конверсию)
+
+gui.ncsteamadditions.config.processors.digital_transformer_rf=Энергозатраты Цифрового Трансформера
+gui.ncsteamadditions.config.processors.digital_transformer_rf.comment=
+
+gui.ncsteamadditions.config.processors.turbine_rf=Генерация турбины RF/тик
+gui.ncsteamadditions.config.processors.turbine_rf.comment=
+
+gui.ncsteamadditions.config.pipes.transfer=Передача жидкостей Мб/тик
+gui.ncsteamadditions.config.pipes.transfer.comment=
+
+gui.ncsteamadditions.config.pipes.capacity=Ёмкость трубы
+gui.ncsteamadditions.config.pipes.capacity.comment=
+
+fluid.uranium_oxide=Окись-Закись Урана
+fluid.uranium_hexafluoride=Гексафторид Урана
+
+item.ncsteamadditions.dust_uranium_oxide.copper.name=Пыль закиси окиси урана
+item.ncsteamadditions.dust_uranium_oxide.name=Пыль закиси окиси урана
+item.ncsteamadditions.dust_uranium_oxide.desc=Желтый КЕК
+
+item.ncsteamadditions.core_of_transformation.name=Ядро Трансформации
+item.ncsteamadditions.core_of_transformation.desc=Оооочень важная штука
+
+gui.ncsteamadditions.config.processors.efficiency_cap.comment=100 - обычная эффективность. 5000 max. 0 - отключить
+gui.ncsteamadditions.config.processors.efficiency_change_speed.comment=Большее значениее - большая скорость. 200 max
+
+gui.ncsteamadditions.config.processors.efficiency_cap=Максимальная эффективность, которую могут достичь машины
+gui.ncsteamadditions.config.processors.efficiency_change_speed=Как быстро изменяется эффективность машин
+
+gui.nc.container.efficiency=Эффективность:
+
+gui.ncsteamadditions.config.recipes.override_nc_recipes=Подменить рецепты из Nuclearcraft
+gui.ncsteamadditions.config.recipes.override_nc_recipes.comment=Лучше оставить это в значении True
+
+ncsteamadditions.guide_book.name=NC Steam Additions Гайд
+ncsteamadditions.guide_book_edition=Русский
