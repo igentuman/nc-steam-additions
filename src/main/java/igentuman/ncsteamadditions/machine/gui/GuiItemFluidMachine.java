@@ -369,12 +369,12 @@ public class GuiItemFluidMachine extends NCGui {
                 }
                 idCounter += getProcessor().getOutputFluids();
                 if(guiButton.id < idCounter) {
-                    FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptions.Output(this, tile, guiButton.id));
+                    FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptions.Output(this, tile, guiButton.id-1));
                     return;
                 }
                 idCounter += getProcessor().getOutputItems();
                 if(guiButton.id < idCounter) {
-                    FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Output(this, tile, guiButton.id));
+                    FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptions.Output(this, tile, guiButton.id-1));
                 }
             }
         }
