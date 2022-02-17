@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ncsteamadditions:steam_turbine"
+    },
+    "title": {
+      "translate": "advancement.ncsteamadditions.steam_turbine.name"
+    },
+    "description": {
+      "translate": "advancement.ncsteamadditions.steam_turbine.desc"
+    }
+  },
+  "parent": "ncsteamadditions:steam_boiler",
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ncsteamadditions:steam_turbine"
+          }
+        ]
+      }
+    }
+  }
+}

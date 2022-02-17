@@ -34,7 +34,12 @@ public class SteamCompactor extends AbstractProcessor {
         inputFluids = 1;
         outputFluids = 0;
         outputItems = 1;
-        craftingRecipe = new Object[] {"BRB", "RFR", "PRP", 'B', net.minecraft.init.Items.BUCKET, 'F', "chest", 'R', net.minecraft.init.Blocks.PISTON, 'P', Items.items[0]};
+        craftingRecipe = new Object[] {
+                "BRB", "RFR", "PRP",
+                'B', net.minecraft.init.Items.BUCKET,
+                'F', "chest",
+                'R', net.minecraft.init.Blocks.PISTON,
+                'P', Items.items[0]};
     }
 
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {

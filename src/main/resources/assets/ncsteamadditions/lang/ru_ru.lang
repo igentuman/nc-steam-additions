@@ -71,8 +71,8 @@ item.ncsteamadditions.ingot.zinc.desc=
 item.ncsteamadditions.ore.zinc.name=Цинковая руда
 item.ncsteamadditions.ore.zinc.desc=
 
-item.ncsteamadditions.ingot_block.zinc.name=Блок Цинка
-item.ncsteamadditions.ingot_block.zinc.desc=
+tile.ncsteamadditions.ingot_block.zinc.name=Блок Цинка
+tile.ncsteamadditions.ingot_block.zinc.desc=
 
 item.ncsteamadditions.core_of_transformation.name=Ядро Трансформации
 item.ncsteamadditions.core_of_transformation.desc=Оооочень важная штука
@@ -90,3 +90,12 @@ gui.ncsteamadditions.config.recipes.override_nc_recipes.comment=Лучше ос�
 
 ncsteamadditions.guide_book.name=NC Steam Additions Гайд
 ncsteamadditions.guide_book_edition=Русский
+
+advancement.ncsteamadditions.steam_boiler.name=Пора вскипятить водичку
+advancement.ncsteamadditions.steam_boiler.desc=Скрафти Бойлер
+
+advancement.ncsteamadditions.steam_turbine.name=Пар == Электричество
+advancement.ncsteamadditions.steam_turbine.desc=Скрафти Паровую Турбину
+
+advancement.ncsteamadditions.digital_transformer.name=Цифровые Технологии Производства
+advancement.ncsteamadditions.digital_transformer.desc=Скрафти Цифровой Преобразователь

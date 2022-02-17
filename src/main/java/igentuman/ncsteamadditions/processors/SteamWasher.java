@@ -31,7 +31,13 @@ public class SteamWasher extends AbstractProcessor {
         inputFluids = 1;
         outputFluids = 0;
         outputItems = 1;
-        craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', "chest", 'F', net.minecraft.init.Items.WATER_BUCKET, 'C', Items.items[0], 'R', net.minecraft.init.Items.ENDER_PEARL, 'H', Items.items[1]};
+        craftingRecipe = new Object[] {
+                "PRP", "CFC", "PHP",
+                'P', "chest",
+                'F', net.minecraft.init.Items.WATER_BUCKET,
+                'C', Items.items[0],
+                'R', net.minecraft.init.Items.ENDER_PEARL,
+                'H', Items.items[1]};
     }
 
     public String getBlockType()

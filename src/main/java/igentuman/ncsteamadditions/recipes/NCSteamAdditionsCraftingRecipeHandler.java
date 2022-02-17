@@ -48,7 +48,8 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		addShapedOreRecipe(new ItemStack(Blocks.otherBlocks[0],4),new Object[]{"SSS", "S S", "SSS", 'S', "copperSheet"});
 		addShapedOreRecipe(new ItemStack(Items.items[0],2),new Object[]{"   ", " SS", " SS", 'S', "ingotCopper"});
 
-		addShapedOreRecipe(new ItemStack(Blocks.ingot_block,1, IngotType.ZINC.getID()),new Object[]{"SSS", "SSS", "SSS", 'S', "ingotZinc"});
+		addShapedOreRecipe(new ItemStack(Blocks.ingot_block,1, IngotType.ZINC.getID()),new Object[]{"SSS", "SSS", "SSS", 'S', "dustZinc"});
+		addShapelessOreRecipe(new ItemStack(Items.ingot,9, IngotType.ZINC.getID()),new Object[]{"S", 'S', "blockZinc"});
 
 		for (int i = 0; i < IngotType.values().length; i++)
 		{
@@ -70,8 +71,10 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		if(NCSteamAdditionsConfig.overrideNcRecipes) {
 			removeRecipeFor(new ItemStack(NCItems.part, 1, 4).getItem(), 4);
 			removeRecipeFor(new ItemStack(NCBlocks.water_source, 1).getItem(), 0);
+			removeRecipeFor(new ItemStack(NCItems.part, 2).getItem(), 0);
 			removeRecipeFor(new ItemStack(NCBlocks.voltaic_pile_basic, 1).getItem(), 0);
 			removeRecipeFor(new ItemStack(NCBlocks.turbine_controller, 1).getItem(), 0);
+			addShapedOreRecipe(new ItemStack(NCItems.part, 2, 0), " L ", "GZG", " L ", 'L', "ingotLead", 'G', "dustGraphite",'Z',"ingotZinc");
 			addShapedOreRecipe(new ItemStack(NCItems.part, 2, 4), "CC", "II", "CC", 'C', "wireCopper", 'I', "ingotIron");
 			addShapedOreRecipe(new ItemStack(NCBlocks.turbine_controller, 1, 0), "THT", "CSC", "THT", 'C', net.minecraft.init.Items.COMPARATOR, 'H', "ingotHSLASteel", 'T', "ingotTough", 'S', Blocks.blocks[ProcessorsRegistry.get().STEAM_TURBINE.GUID]);
 		}

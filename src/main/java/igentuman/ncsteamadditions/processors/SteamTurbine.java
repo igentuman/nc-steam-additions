@@ -36,7 +36,7 @@ public class SteamTurbine extends AbstractProcessor {
                "PRP", "CFC", "PHP",
                'P', Items.items[ItemCopperSheet.regId],
                'F', "solenoidCopper",
-               'C', "blockIron",
+               'C', "blockZinc",
                'R', Blocks.otherBlocks[0],
                'H', NCBlocks.voltaic_pile_basic
        };

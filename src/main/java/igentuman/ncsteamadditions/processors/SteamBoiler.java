@@ -33,7 +33,7 @@ public class SteamBoiler extends AbstractProcessor {
        outputItems = 0;
        craftingRecipe = new Object[] {
                "PBP", "CFC", "PBP",
-               'P', "ingotLead",
+               'P', "ingotZinc",
                'F', net.minecraft.init.Blocks.FURNACE,
                'C', Items.items[0],
                'B', RegistryHelper.itemStackFromRegistry("minecraft:cauldron")

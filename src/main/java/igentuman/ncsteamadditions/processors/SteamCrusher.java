@@ -34,7 +34,13 @@ public class SteamCrusher extends AbstractProcessor {
         inputFluids = 1;
         outputFluids = 0;
         outputItems = 1;
-        craftingRecipe = new Object[] {"BRB", "CFC", "PRP", 'B', net.minecraft.init.Items.BUCKET, 'F', "chest", 'C', Items.items[0], 'R', net.minecraft.init.Blocks.PISTON, 'P', net.minecraft.init.Items.DIAMOND_PICKAXE};
+        craftingRecipe = new Object[] {
+                "BRB", "CFC", "PRP",
+                'B', net.minecraft.init.Items.BUCKET,
+                'F', "chest",
+                'C', Items.items[0],
+                'R', net.minecraft.init.Blocks.PISTON,
+                'P', net.minecraft.init.Items.DIAMOND_PICKAXE};
     }
 
     public String getBlockType()

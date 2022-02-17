@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "ncsteamadditions:digital_transformer"
+    },
+    "title": {
+      "translate": "advancement.ncsteamadditions.digital_transformer.name"
+    },
+    "description": {
+      "translate": "advancement.ncsteamadditions.digital_transformer.desc"
+    }
+  },
+  "parent": "ncsteamadditions:steam_turbine",
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ncsteamadditions:digital_transformer"
+          }
+        ]
+      }
+    }
+  }
+}

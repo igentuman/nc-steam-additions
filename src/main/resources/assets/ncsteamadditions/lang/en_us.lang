@@ -74,8 +74,8 @@ item.ncsteamadditions.ingot.zinc.desc=
 item.ncsteamadditions.ore.zinc.name=Zinc Ore
 item.ncsteamadditions.ore.zinc.desc=
 
-item.ncsteamadditions.ingot_block.zinc.name=Zinc Block
-item.ncsteamadditions.ingot_block.zinc.desc=
+tile.ncsteamadditions.ingot_block.zinc.name=Zinc Block
+tile.ncsteamadditions.ingot_block.zinc.desc=
 
 item.ncsteamadditions.core_of_transformation.name=Core of Transformation
 item.ncsteamadditions.core_of_transformation.desc=Very important thing
@@ -94,3 +94,11 @@ gui.ncsteamadditions.config.recipes.override_nc_recipes.comment=I would recommen
 ncsteamadditions.guide_book.name=NC Steam Additions Guide
 ncsteamadditions.guide_book_edition=English
 
+advancement.ncsteamadditions.steam_boiler.name=Let's do some Steam
+advancement.ncsteamadditions.steam_boiler.desc=Craft Steam Boiler
+
+advancement.ncsteamadditions.steam_turbine.name=Steam == Electricity
+advancement.ncsteamadditions.steam_turbine.desc=Craft Steam Turbine
+
+advancement.ncsteamadditions.digital_transformer.name=Digital Production Technologies
+advancement.ncsteamadditions.digital_transformer.desc=Craft Digital Transformer

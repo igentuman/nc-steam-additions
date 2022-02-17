@@ -30,7 +30,13 @@ public class SteamFluidTransformer extends AbstractProcessor {
         inputFluids = 4;
         outputFluids = 1;
         outputItems = 0;
-        craftingRecipe = new Object[] {"PRP", "CFC", "PHP", 'P', net.minecraft.init.Items.BUCKET, 'F', net.minecraft.init.Items.ENDER_EYE, 'C', Items.items[0], 'R', RegistryHelper.itemStackFromRegistry("minecraft:brewing_stand"), 'H', Items.items[1]};
+        craftingRecipe = new Object[] {
+                "PRP", "CFC", "PHP",
+                'P', net.minecraft.init.Items.BUCKET,
+                'F', net.minecraft.init.Items.ENDER_EYE,
+                'C', Items.items[0],
+                'R', RegistryHelper.itemStackFromRegistry("minecraft:brewing_stand"),
+                'H', Items.items[1]};
 
     }
 
