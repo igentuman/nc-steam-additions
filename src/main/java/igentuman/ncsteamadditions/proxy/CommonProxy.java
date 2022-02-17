@@ -11,6 +11,7 @@ import igentuman.ncsteamadditions.network.NCSAPacketHandler;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.NCSteamAdditionsTiles;
 import igentuman.ncsteamadditions.item.Items;
+import igentuman.ncsteamadditions.worldgen.OreGenerator;
 import nc.ModCheck;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +22,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLModIdMappingEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 @Mod.EventBusSubscriber(modid = NCSteamAdditions.MOD_ID)
 public class CommonProxy
 {
@@ -44,6 +47,7 @@ public class CommonProxy
 	
 	public void init(FMLInitializationEvent event) 
 	{
+		GameRegistry.registerWorldGenerator(new OreGenerator(), 0);
 		NCSteamAdditionsRecipes.init();
 	}
 

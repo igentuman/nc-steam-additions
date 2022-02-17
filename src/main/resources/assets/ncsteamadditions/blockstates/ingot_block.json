@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "type": {
+      "zinc": {
+        "textures": {
+          "all": "ncsteamadditions:blocks/ingot_block/zinc"
+        }
+      }
+    }
+  }
+}

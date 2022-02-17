@@ -1,10 +1,10 @@
 package igentuman.ncsteamadditions.block;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
-import igentuman.ncsteamadditions.item.ItemPipe;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.machine.block.BlockNCSteamAdditionsProcessor;
 import igentuman.ncsteamadditions.processors.*;
+import nc.block.item.ItemBlockMeta;
 import nc.block.item.NCItemBlock;
 import nc.block.tile.ITileType;
 import nc.util.InfoHelper;
@@ -17,11 +17,14 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+
 public class Blocks
 {
 
 	public static Block[] blocks;
 	public static Block[] otherBlocks;
+	public static Block ore;
+	public static Block ingot_block;
 
 	public static void init() 
 	{
@@ -30,6 +33,9 @@ public class Blocks
 
 		AbstractProcessor[] processors = ProcessorsRegistry.get().processors();
 		blocks = new Block[processors.length];
+
+		ore = withName(new BlockMeta.BlockOre(), "ore");
+		ingot_block = withName(new BlockMeta.BlockIngot(), "ingot_block");
 
 		for (AbstractProcessor processor: processors) {
 			if(processor.getBlockType().equals("nc_processor")) {
@@ -45,6 +51,8 @@ public class Blocks
 	
 	public static void register() 
 	{
+		registerBlock(ingot_block, new ItemBlockMeta(ingot_block, MetaEnums.IngotType.class, TextFormatting.AQUA));
+		registerBlock(ore, new ItemBlockMeta(ore, MetaEnums.OreType.class, TextFormatting.AQUA));
 		for(Block block: blocks) {
 			registerBlock(block);
 		}
@@ -55,12 +63,22 @@ public class Blocks
 
 	public static void registerRenders() 
 	{
+		int i;
+		for(i = 0; i < MetaEnums.OreType.values().length; ++i) {
+			registerRender(ore, i, MetaEnums.OreType.values()[i].getName());
+		}
+
+		for(i = 0; i < MetaEnums.IngotType.values().length; ++i) {
+			registerRender(ingot_block, i, MetaEnums.IngotType.values()[i].getName());
+		}
+
 		for(Block block: blocks) {
 			registerRender(block);
 		}
 		for(Block block: otherBlocks) {
 			registerRender(block);
 		}
+
 	}
 	
 	public static Block withName(Block block, String name) {

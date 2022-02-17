@@ -6,6 +6,7 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.block.Blocks;
+import igentuman.ncsteamadditions.block.MetaEnums.IngotType;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.processors.*;
@@ -22,15 +23,14 @@ import nc.recipe.vanilla.recipe.ShapedEnergyRecipe;
 import nc.recipe.vanilla.recipe.ShapedFluidRecipe;
 import nc.recipe.vanilla.recipe.ShapelessArmorRadShieldingRecipe;
 import nc.recipe.vanilla.recipe.ShapelessFluidRecipe;
-import nc.util.FluidRegHelper;
-import nc.util.NCUtil;
-import nc.util.OreDictHelper;
-import nc.util.StackHelper;
+import nc.util.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.ForgeRegistry;
@@ -48,10 +48,23 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		addShapedOreRecipe(new ItemStack(Blocks.otherBlocks[0],4),new Object[]{"SSS", "S S", "SSS", 'S', "copperSheet"});
 		addShapedOreRecipe(new ItemStack(Items.items[0],2),new Object[]{"   ", " SS", " SS", 'S', "ingotCopper"});
 
+		addShapedOreRecipe(new ItemStack(Blocks.ingot_block,1, IngotType.ZINC.getID()),new Object[]{"SSS", "SSS", "SSS", 'S', "ingotZinc"});
+
+		for (int i = 0; i < IngotType.values().length; i++)
+		{
+			String type = StringHelper.capitalize( IngotType.values()[i].getName());
+            for (ItemStack dust : OreDictionary.getOres("dust" + type)) {
+				GameRegistry.addSmelting(dust, OreDictHelper.getPrioritisedCraftingStack(new ItemStack(Items.ingot, 1, i), "ingot" + type), 0F);
+			}
+			for (ItemStack ore : OreDictionary.getOres("ore" + type)) {
+				GameRegistry.addSmelting(ore, OreDictHelper.getPrioritisedCraftingStack(new ItemStack(Items.ingot, 1, i), "ingot" + type), 0F);
+			}
+		}
+
 		if (ModCheck.patchouliLoaded())
 		{
-			addShapelessOreRecipe(ItemModBook.forBook("qmd:guide"), new Object[] {net.minecraft.init.Items.BOOK, "coal"});
-			addShapelessOreRecipe(net.minecraft.init.Items.BOOK, new Object[] {ItemModBook.forBook("qmd:guide")});
+			addShapelessOreRecipe(ItemModBook.forBook("ncsteamaddtions:guide"), new Object[] {net.minecraft.init.Items.BOOK, "coal"});
+			addShapelessOreRecipe(net.minecraft.init.Items.BOOK, new Object[] {ItemModBook.forBook("ncsteamaddtions:guide")});
 		}
 
 		if(NCSteamAdditionsConfig.overrideNcRecipes) {

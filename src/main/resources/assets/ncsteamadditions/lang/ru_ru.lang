@@ -59,9 +59,20 @@ gui.ncsteamadditions.config.pipes.capacity.comment=
 fluid.uranium_oxide=Окись-Закись Урана
 fluid.uranium_hexafluoride=Гексафторид Урана
 
-item.ncsteamadditions.dust_uranium_oxide.copper.name=Пыль закиси окиси урана
-item.ncsteamadditions.dust_uranium_oxide.name=Пыль закиси окиси урана
-item.ncsteamadditions.dust_uranium_oxide.desc=Желтый КЕК
+item.ncsteamadditions.dust.uranium_oxide.name=Пыль закиси окиси урана
+item.ncsteamadditions.dust.uranium_oxide.desc=Желтый КЕК
+
+item.ncsteamadditions.dust.zinc.name=Пыль цинка
+item.ncsteamadditions.dust.zinc.desc=
+
+item.ncsteamadditions.ingot.zinc.name=Слиток Цинка
+item.ncsteamadditions.ingot.zinc.desc=
+
+item.ncsteamadditions.ore.zinc.name=Цинковая руда
+item.ncsteamadditions.ore.zinc.desc=
+
+item.ncsteamadditions.ingot_block.zinc.name=Блок Цинка
+item.ncsteamadditions.ingot_block.zinc.desc=
 
 item.ncsteamadditions.core_of_transformation.name=Ядро Трансформации
 item.ncsteamadditions.core_of_transformation.desc=Оооочень важная штука

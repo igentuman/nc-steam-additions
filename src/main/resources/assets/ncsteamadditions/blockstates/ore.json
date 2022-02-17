@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "nuclearcraft:ore"
+  },
+  "variants": {
+    "type": {
+      "zinc": {
+        "textures": {
+          "ore": "ncsteamadditions:blocks/ore/zinc"
+        }
+      }
+    }
+  }
+}

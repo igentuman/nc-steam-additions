@@ -62,9 +62,20 @@ gui.ncsteamadditions.config.pipes.capacity.comment=How much Copper Pipe block ca
 fluid.uranium_oxide=Uranium Oxide
 fluid.uranium_hexafluoride=Uranium Hexafluoride
 
-item.ncsteamadditions.dust_uranium_oxide.copper.name=Uranium Oxide Dust
-item.ncsteamadditions.dust_uranium_oxide.name=Uranium Oxide Dust
-item.ncsteamadditions.dust_uranium_oxide.desc=Yellowcake
+item.ncsteamadditions.dust.uranium_oxide.name=Uranium Oxide Dust
+item.ncsteamadditions.dust.uranium_oxide.desc=Yellowcake
+
+item.ncsteamadditions.dust.zinc.name=Zinc Dust
+item.ncsteamadditions.dust.zinc.desc=
+
+item.ncsteamadditions.ingot.zinc.name=Zinc Ingot
+item.ncsteamadditions.ingot.zinc.desc=
+
+item.ncsteamadditions.ore.zinc.name=Zinc Ore
+item.ncsteamadditions.ore.zinc.desc=
+
+item.ncsteamadditions.ingot_block.zinc.name=Zinc Block
+item.ncsteamadditions.ingot_block.zinc.desc=
 
 item.ncsteamadditions.core_of_transformation.name=Core of Transformation
 item.ncsteamadditions.core_of_transformation.desc=Very important thing

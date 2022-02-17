@@ -21,6 +21,7 @@ public class NCSteamAdditionsConfig {
 	public static final String CATEGORY_PROCESSORS = "processors";
 	public static final String CATEGORY_PIPES = "pipes";
 	public static final String CATEGORY_RECIPES = "recipes";
+	public static final String CATEGORY_WORLDGEN = "worldgen";
 
 	public static Configuration getConfig()
 	{
@@ -33,6 +34,18 @@ public class NCSteamAdditionsConfig {
 	public static int efficiencyCap;
 	public static int efficiencyChangeSpeed;
 	public static int digitalTransformerRF;
+	public static int[] ore_dims;
+	public static boolean ore_dims_list_type;
+	public static boolean[] ore_gen;
+	public static int[] ore_size;
+	public static int[] ore_rate;
+	public static int[] ore_min_height;
+	public static int[] ore_max_height;
+
+	public static boolean[] ore_drops;
+	public static boolean ore_hide_disabled;
+	public static int[] ore_harvest_levels;
+
 	public static double turbineConversion;
 	public static double boilerConversion;
 
@@ -80,7 +93,49 @@ public class NCSteamAdditionsConfig {
 		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_change_speed");
 
 		Property override_nc_recipes = config.get(CATEGORY_RECIPES, "override_nc_recipes", "true", Lang.localise("gui.ncsteamadditions.config.recipes.override_nc_recipes.comment"));
+		
 		override_nc_recipes.setLanguageKey("gui.ncsteamadditions.config.recipes.override_nc_recipes");
+
+		//WORLDGEN
+		Property propertyOreDims = config.get(CATEGORY_WORLDGEN, "ore_dims", new int[]{0, 2, -6, -100, 4598, -9999, -11325}, Lang.localise("gui.ncsteamadditions.config.ore_dims.comment"), -2147483648, 2147483647);
+		propertyOreDims.setLanguageKey("gui.ncsteamadditions.config.ore_dims");
+
+		Property propertyOreDimsListType = config.get(CATEGORY_WORLDGEN, "ore_dims_list_type", false, Lang.localise("gui.ncsteamadditions.config.ore_dims_list_type.comment"));
+		propertyOreDimsListType.setLanguageKey("gui.ncsteamadditions.config.ore_dims_list_type");
+
+		Property propertyOreGen = config.get(CATEGORY_WORLDGEN, "ore_gen", new boolean[]{true}, Lang.localise("gui.ncsteamadditions.config.ore_gen.comment"));
+		propertyOreGen.setLanguageKey("gui.ncsteamadditions.config.ore_gen");
+
+		Property propertyOreSize = config.get(CATEGORY_WORLDGEN, "ore_size", new int[]{6}, Lang.localise("gui.ncsteamadditions.config.ore_size.comment"), 1, 2147483647);
+		propertyOreSize.setLanguageKey("gui.ncsteamadditions.config.ore_size");
+
+		Property propertyOreRate = config.get(CATEGORY_WORLDGEN, "ore_rate", new int[]{5}, Lang.localise("gui.ncsteamadditions.config.ore_rate.comment"), 1, 2147483647);
+		propertyOreRate.setLanguageKey("gui.ncsteamadditions.config.ore_rate");
+
+		Property propertyOreMinHeight = config.get(CATEGORY_WORLDGEN, "ore_min_height", new int[]{0}, Lang.localise("gui.ncsteamadditions.config.ore_min_height.comment"), 1, 255);
+		propertyOreMinHeight.setLanguageKey("gui.ncsteamadditions.config.ore_min_height");
+
+		Property propertyOreMaxHeight = config.get(CATEGORY_WORLDGEN, "ore_max_height", new int[]{52}, Lang.localise("gui.ncsteamadditions.config.ore_max_height.comment"), 1, 255);
+		propertyOreMaxHeight.setLanguageKey("gui.ncsteamadditions.config.ore_max_height");
+
+		Property propertyOreDrops = config.get(CATEGORY_WORLDGEN, "ore_drops", new boolean[]{false}, Lang.localise("gui.ncsteamadditions.config.ore_drops.comment"));
+		propertyOreDrops.setLanguageKey("gui.ncsteamadditions.config.ore_drops");
+
+		Property propertyOreHideDisabled = config.get(CATEGORY_WORLDGEN, "ore_hide_disabled", false, Lang.localise("gui.ncsteamadditions.config.ore_hide_disabled.comment"));
+		propertyOreHideDisabled.setLanguageKey("gui.ncsteamadditions.config.ore_hide_disabled");
+
+		Property propertyOreHarvestLevels = config.get(CATEGORY_WORLDGEN, "ore_harvest_levels", new int[]{2}, Lang.localise("gui.ncsteamadditions.config.ore_harvest_levels.comment"), 0, 15);
+
+		ore_dims = propertyOreDims.getIntList();
+		ore_dims_list_type = propertyOreDimsListType.getBoolean();
+		ore_gen = readBooleanArrayFromConfig(propertyOreGen);
+		ore_size = readIntegerArrayFromConfig(propertyOreSize);
+		ore_rate = readIntegerArrayFromConfig(propertyOreRate);
+		ore_min_height = readIntegerArrayFromConfig(propertyOreMinHeight);
+		ore_max_height = readIntegerArrayFromConfig(propertyOreMaxHeight);
+		ore_drops = readBooleanArrayFromConfig(propertyOreDrops);
+		ore_hide_disabled = propertyOreHideDisabled.getBoolean();
+		ore_harvest_levels = readIntegerArrayFromConfig(propertyOreHarvestLevels);
 
 		overrideNcRecipes = override_nc_recipes.getBoolean();
 
