@@ -48,13 +48,18 @@ public class TileDigitalTransformer extends TileNCSProcessor implements SimpleCo
             this.initReactivity();
         }
         this.tickReactivity();
-        this.time += this.getSpeedMultiplier() * getRecipeEfficiency();
+        this.time += this.getSpeedMultiplier() * Math.min(getRecipeEfficiency(),1000);
         this.getEnergyStorage().changeEnergyStored((long)(-this.getProcessPower()));
         this.getRadiationSource().setRadiationLevel(this.baseProcessRadiation * this.getSpeedMultiplier());
 
         while(this.time >= this.baseProcessTime) {
             this.finishProcess();
         }
+    }
+
+    public boolean hasUpgrades()
+    {
+        return false;
     }
 
     @Optional.Method(modid = "opencomputers")
@@ -66,6 +71,10 @@ public class TileDigitalTransformer extends TileNCSProcessor implements SimpleCo
     protected int baseTicksToChange = 200;
     public void adjust(float step)
     {
+        if(this.adjustmentAttempts > this.adjustmentsLimit) {
+            return;
+        }
+        this.adjustmentAttempts++;
         this.adjustment = step;
         this.ticksToChange = this.baseTicksToChange;
     }
@@ -74,13 +83,14 @@ public class TileDigitalTransformer extends TileNCSProcessor implements SimpleCo
     public void initReactivity()
     {
         if(world.isRemote) return;
+        adjustmentAttempts = 0;
         float low = 0F;
         float high = 2.0F;
         this.targetReactivity = (low + new Random().nextFloat() * (high - low))*10;
         low = 0F;
         high = 1.5F;
         this.currentReactivity = (low + new Random().nextFloat() * (high - low))*10;
-        ticksLastReactivityInit = 8000;
+        ticksLastReactivityInit = NCSteamAdditionsConfig.digitalTransformerResetTime * 20;
     }
 
     @Callback(doc = "--function():float Value betwean -0.48 and 10")

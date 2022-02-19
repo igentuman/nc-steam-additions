@@ -28,5 +28,4 @@ public class GuiSteamCrusher extends GuiItemFluidMachine
 		ySize = 166;
 		this.processor = processor;
 	}
-
 }

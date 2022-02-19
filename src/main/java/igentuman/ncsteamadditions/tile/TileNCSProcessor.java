@@ -72,6 +72,8 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     protected int ticksToChange;
     protected float adjustment = 0;
     protected int ticksLastReactivityInit = 0;
+    protected int adjustmentAttempts = 0;
+    protected int adjustmentsLimit = 5;
 
     public TileNCSProcessor(String code, int inputItems, int inputFluids, int outputItems, int outputFluids, int GUID)
     {
@@ -139,11 +141,9 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
 
     public static IntList defaultTankCapacities(int capacity, int inSize, int outSize) {
         IntList tankCapacities = new IntArrayList();
-
         for(int i = 0; i < inSize + outSize; ++i) {
             tankCapacities.add(capacity);
         }
-
         return tankCapacities;
     }
 
@@ -439,7 +439,6 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                         }
                     }
                 }
-
             }
         }
     }
@@ -536,7 +535,6 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                 this.refreshUpgrades();
             }
         }
-
         return stack;
     }
 
@@ -552,7 +550,6 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                 this.refreshUpgrades();
             }
         }
-
     }
 
     public void markDirty() {
@@ -575,7 +572,6 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                     return StackHelper.getMetadata(stack) == 1;
                 }
             }
-
             if (slot >= this.itemInputSize) {
                 return false;
             } else {
@@ -636,8 +632,9 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
 
     public NBTTagCompound writeAll(NBTTagCompound nbt) {
         super.writeAll(nbt);
-        nbt.setDouble("current_reactivity", this.currentReactivity);
-        nbt.setDouble("target_reactivity", this.targetReactivity);
+        nbt.setFloat("currentReactivity", this.currentReactivity);
+        nbt.setFloat("targetReactivity", this.targetReactivity);
+        nbt.setInteger("adjustmentsAttempts", this.adjustmentAttempts);
         nbt.setDouble("time", this.time);
         nbt.setDouble("resetTime", this.resetTime);
         nbt.setBoolean("isProcessing", this.isProcessing);
@@ -647,8 +644,9 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
 
     public void readAll(NBTTagCompound nbt) {
         super.readAll(nbt);
-        this.currentReactivity = nbt.getFloat("current_reactivity");
-        this.targetReactivity = nbt.getFloat("target_reactivity");
+        this.currentReactivity = nbt.getFloat("currentReactivity");
+        this.targetReactivity = nbt.getFloat("targetReactivity");
+        this.adjustmentAttempts = nbt.getInteger("adjustmentsAttempts");
         this.time = nbt.getDouble("time");
         this.resetTime = nbt.getDouble("resetTime");
         this.isProcessing = nbt.getBoolean("isProcessing");
@@ -658,7 +656,6 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         } else {
             this.setRedstoneControl(true);
         }
-
     }
 
     public int getGuiID() {
@@ -679,7 +676,8 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                 this.baseProcessPower,
                 this.getTanks(),
                 this.currentReactivity,
-                this.targetReactivity
+                this.targetReactivity,
+                this.adjustmentAttempts
         );
     }
 
@@ -695,6 +693,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         }
         this.currentReactivity = message.currentReactivity;
         this.targetReactivity = message.targetReactivity;
+        this.adjustmentAttempts = message.adjustmentAttempts;
     }
 
     public int getSideConfigYOffset() {

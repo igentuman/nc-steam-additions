@@ -85,7 +85,6 @@ public class GuiItemFluidMachine extends NCGui {
         drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(120), 24);
         drawUpgradeRenderers();
         drawBackgroundExtras();
-
     }
 
     public void drawEfficiencyBar()
@@ -135,9 +134,7 @@ public class GuiItemFluidMachine extends NCGui {
     @Override
     public void renderTooltips(int mouseX, int mouseY)
     {
-
         drawEfficiencyTooltip(tile, mouseX, mouseY, 8, 6, 16, 74);
-
         renderButtonTooltips(mouseX, mouseY);
     }
 

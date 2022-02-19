@@ -75,7 +75,11 @@ public class TileSteamTurbine extends TileNCSProcessor implements ITileEnergy, I
         if (ModCheck.ic2Loaded()) {
             this.addTileToENet();
         }
+    }
 
+    public boolean hasUpgrades()
+    {
+        return false;
     }
 
     public void update() {

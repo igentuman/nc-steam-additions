@@ -42,5 +42,4 @@ public class GuiSteamFluidTransformer extends GuiItemFluidMachine
 		drawBackgroundExtras();
 		drawEfficiencyBar();
 	}
-
 }

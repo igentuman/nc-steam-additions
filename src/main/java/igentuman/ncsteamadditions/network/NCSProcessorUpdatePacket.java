@@ -19,11 +19,12 @@ public class NCSProcessorUpdatePacket extends TileUpdatePacket {
     public List<Tank.TankInfo> tanksInfo;
     public float currentReactivity;
     public float targetReactivity;
+    public int adjustmentAttempts;
 
     public NCSProcessorUpdatePacket() {
     }
 
-    public NCSProcessorUpdatePacket(BlockPos pos, boolean isProcessing, double time, int energyStored, double baseProcessTime, double baseProcessPower, List<Tank> tanks, float currentReactivity, float targetReactivity) {
+    public NCSProcessorUpdatePacket(BlockPos pos, boolean isProcessing, double time, int energyStored, double baseProcessTime, double baseProcessPower, List<Tank> tanks, float currentReactivity, float targetReactivity, int adjustmentAttempts) {
         this.pos = pos;
         this.isProcessing = isProcessing;
         this.time = time;
@@ -33,6 +34,8 @@ public class NCSProcessorUpdatePacket extends TileUpdatePacket {
         this.tanksInfo = Tank.TankInfo.infoList(tanks);
         this.currentReactivity = currentReactivity;
         this.targetReactivity = targetReactivity;
+        this.adjustmentAttempts = adjustmentAttempts;
+
     }
 
     public void fromBytes(ByteBuf buf) {
@@ -46,6 +49,7 @@ public class NCSProcessorUpdatePacket extends TileUpdatePacket {
         this.tanksInfo = Tank.TankInfo.readBuf(buf, numberOfTanks);
         this.currentReactivity = buf.readFloat();
         this.targetReactivity = buf.readFloat();
+        this.adjustmentAttempts = buf.readInt();
     }
 
     public void toBytes(ByteBuf buf) {
@@ -66,6 +70,7 @@ public class NCSProcessorUpdatePacket extends TileUpdatePacket {
         }
         buf.writeFloat(this.currentReactivity);
         buf.writeFloat(this.targetReactivity);
+        buf.writeInt(this.adjustmentAttempts);
     }
 
     public static class Handler extends nc.network.tile.TileUpdatePacket.Handler<NCSProcessorUpdatePacket, ITileGui> {

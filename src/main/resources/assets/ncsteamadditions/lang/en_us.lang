@@ -102,3 +102,6 @@ advancement.ncsteamadditions.steam_turbine.desc=Craft Steam Turbine
 
 advancement.ncsteamadditions.digital_transformer.name=Digital Production Technologies
 advancement.ncsteamadditions.digital_transformer.desc=Craft Digital Transformer
+
+gui.ncsteamadditions.config.processors.digital_transformer_reset_time=Reset Time For Digital Transformer Reactivity (seconds)
+gui.ncsteamadditions.config.processors.digital_transformer_reset_time.comment=How often Digital Transformer resets its parameters

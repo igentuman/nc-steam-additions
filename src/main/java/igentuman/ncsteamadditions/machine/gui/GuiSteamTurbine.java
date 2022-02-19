@@ -45,5 +45,4 @@ public class GuiSteamTurbine extends GuiItemFluidMachine
 		super.initButtons();
 	}
 
-
 }

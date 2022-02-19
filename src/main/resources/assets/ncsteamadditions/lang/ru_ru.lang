@@ -99,3 +99,6 @@ advancement.ncsteamadditions.steam_turbine.desc=Скрафти Паровую Т
 
 advancement.ncsteamadditions.digital_transformer.name=Цифровые Технологии Производства
 advancement.ncsteamadditions.digital_transformer.desc=Скрафти Цифровой Преобразователь
+
+gui.ncsteamadditions.config.processors.digital_transformer_reset_time=Период сброса параметров Цифрового Преобразователя (сек.)
+gui.ncsteamadditions.config.processors.digital_transformer_reset_time.comment=Как часто Цифровой Преобразователь перезагружает свои параметры

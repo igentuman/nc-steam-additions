@@ -18,18 +18,9 @@ public class ContainerDigitalTransformer extends ContainerItemFluidProcessor
 	{
 		super(player, tileEntity, NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID]);
 
-		int x = GuiDigitalTransformer.inputFluidsLeft;
 		int idCounter = 0;
 		DigitalTransformer processor = ProcessorsRegistry.get().DIGITAL_TRANSFORMER;
-		if(processor.inputFluids > 0) {
-			for(int i = 0; i < processor.inputFluids; i++) {
-				//addSlotToContainer(new SlotProcessorInput(tileEntity, recipeHandler, idCounter, x, GuiDigitalTransformer.inputFluidsTop));
-				//x += GuiDigitalTransformer.cellSpan;
-				//idCounter++;
-			}
-		}
-
-		x = GuiDigitalTransformer.inputItemsLeft;
+		int x = GuiDigitalTransformer.inputItemsLeft;
 		if(processor.inputItems > 0) {
 			for (int i = 0; i < processor.inputItems; i++) {
 				addSlotToContainer(new SlotProcessorInput(tileEntity, recipeHandler, idCounter, x, GuiDigitalTransformer.inputItemsTop));
@@ -39,14 +30,6 @@ public class ContainerDigitalTransformer extends ContainerItemFluidProcessor
 		}
 
 		x = 152;
-		if(processor.outputFluids > 0) {
-			for (int i = 0; i < processor.outputFluids; i++) {
-				//x += GuiDigitalTransformer.cellSpan;
-				//addSlotToContainer(new SlotFurnace(player, tileEntity, idCounter, x, GuiDigitalTransformer.inputFluidsTop));
-				//idCounter++;
-			}
-		}
-		x = 152;
 		if(processor.outputItems > 0) {
 			for (int i = 0; i < processor.outputItems; i++) {
 				addSlotToContainer(new SlotFurnace(player, tileEntity, idCounter, x, GuiDigitalTransformer.inputItemsTop));
@@ -54,7 +37,6 @@ public class ContainerDigitalTransformer extends ContainerItemFluidProcessor
 				idCounter++;
 			}
 		}
-
 		
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -67,5 +49,4 @@ public class ContainerDigitalTransformer extends ContainerItemFluidProcessor
 		}
 		
 	}
-
 }

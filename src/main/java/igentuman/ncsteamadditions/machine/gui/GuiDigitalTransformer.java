@@ -35,7 +35,6 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 				tile.getEnergyStorage().getMaxEnergyStored(), 5, "RF");
 		String power = UnitHelper.prefix(this.tile.getProcessPower(), 5, "RF/t");
 
-		String speedMultiplier = "x" + NCMath.decimalPlaces(this.tile.getSpeedMultiplier(), 2);
 		String powerMultiplier = "x" + NCMath.decimalPlaces(this.tile.getPowerMultiplier(), 2);
 
 		return Lists.newArrayList(
@@ -43,8 +42,6 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 						+ " " + energy,
 				TextFormatting.LIGHT_PURPLE + Lang.localise("gui.nc.container.process_power") + TextFormatting.WHITE
 						+ " " + power,
-				TextFormatting.AQUA + Lang.localise("gui.nc.container.speed_multiplier") + TextFormatting.WHITE + " "
-						+ speedMultiplier,
 				TextFormatting.AQUA + Lang.localise("gui.nc.container.power_multiplier") + TextFormatting.WHITE + " "
 						+ powerMultiplier);
 	}
@@ -71,15 +68,6 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 		this.processor = processor;
 	}
 
-	protected void drawUpgradeRenderers()
-	{
-		if (energyUpgradeRender == null)
-		{
-			energyUpgradeRender = new GuiItemRenderer(NCItems.upgrade, 1, guiLeft + 152, guiTop + ySize - 102, 0.5F);
-		}
-		energyUpgradeRender.draw();
-	}
-
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
@@ -95,12 +83,11 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 			drawGradientRect(guiLeft + 8, guiTop + 6, guiLeft + 8 + 16, guiTop + 6 + 74, 0xFFC6C6C6, 0xFF8B8B8B);
 
 		drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(135), 12);
-		//drawUpgradeRenderers();
+
 		drawBackgroundExtras();
 		TileDigitalTransformer t = (TileDigitalTransformer) tile;
-		//drawRect(guiLeft,guiTop-25,guiLeft + xSize,guiTop,0xfffffff);
-		drawString(Minecraft.getMinecraft().fontRenderer,"EF: "+String.format("%.2f", t.getRecipeEfficiency()),guiLeft + 2, guiTop  - 7, 16711680);
-		drawString(Minecraft.getMinecraft().fontRenderer,"CR: "+String.format("%.2f", t.getCurrentReactivity()),guiLeft + 40, guiTop - 7,1113879);
+
+		drawString(Minecraft.getMinecraft().fontRenderer,"CR: "+String.format("%.2f", t.getCurrentReactivity()),guiLeft + 12, guiTop - 7,1113879);
 		drawString(Minecraft.getMinecraft().fontRenderer,"TR: "+String.format("%.2f", t.getTargetReactivity()),guiLeft + 75, guiTop  - 7,6950317);
 	}
 
@@ -110,5 +97,4 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 		drawEnergyTooltip(tile, mouseX, mouseY, 8, 6, 16, 74);
 		renderButtonTooltips(mouseX, mouseY);
 	}
-
 }

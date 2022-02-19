@@ -15,17 +15,8 @@ public class ProcessorContainer  extends ContainerItemFluidProcessor {
     public ProcessorContainer(EntityPlayer player, TileNCSProcessor tileEntity, AbstractProcessor processor)
     {
         super(player, tileEntity, NCSteamAdditionsRecipes.processorRecipeHandlers[processor.getGuid()]);
-        int x = GuiItemFluidMachine.inputFluidsLeft;
         int idCounter = 0;
-        if(processor.inputFluids > 0) {
-            for(int i = 0; i < processor.inputFluids; i++) {
-                //addSlotToContainer(new SlotProcessorInput(tileEntity, recipeHandler, idCounter, x, GuiItemFluidMachine.inputFluidsTop));
-                //x += GuiItemFluidMachine.cellSpan;
-                //idCounter++;
-            }
-        }
-
-        x = GuiItemFluidMachine.inputItemsLeft;
+        int x = GuiItemFluidMachine.inputItemsLeft;
         if(processor.inputItems > 0) {
             for (int i = 0; i < processor.inputItems; i++) {
                 addSlotToContainer(new SlotProcessorInput(tileEntity, recipeHandler, idCounter, x, GuiItemFluidMachine.inputItemsTop));
@@ -34,14 +25,6 @@ public class ProcessorContainer  extends ContainerItemFluidProcessor {
             }
         }
 
-        x = 152;
-        if(processor.outputFluids > 0) {
-            for (int i = 0; i < processor.outputFluids; i++) {
-                //x += GuiItemFluidMachine.cellSpan;
-                //addSlotToContainer(new SlotFurnace(player, tileEntity, idCounter, x, GuiItemFluidMachine.inputFluidsTop));
-                //idCounter++;
-            }
-        }
         x = 152;
         if(processor.outputItems > 0) {
             for (int i = 0; i < processor.outputItems; i++) {

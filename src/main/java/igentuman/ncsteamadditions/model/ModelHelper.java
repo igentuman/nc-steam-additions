@@ -29,7 +29,6 @@ public class ModelHelper
 	{
 		try
 		{
-
 			return ModelBlock.deserialize(getReaderForResource(location)).getAllTransforms();
 		}
 		catch (IOException exception)

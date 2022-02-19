@@ -34,6 +34,7 @@ public class NCSteamAdditionsConfig {
 	public static int efficiencyCap;
 	public static int efficiencyChangeSpeed;
 	public static int digitalTransformerRF;
+	public static int digitalTransformerResetTime;
 	public static int[] ore_dims;
 	public static boolean ore_dims_list_type;
 	public static boolean[] ore_gen;
@@ -75,7 +76,7 @@ public class NCSteamAdditionsConfig {
 		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.turbine_rf");
 
 		Property propertyTurbineConversion = config.get(CATEGORY_PROCESSORS, "turbine_conversion", 0.50, Lang.localise("gui.ncsteamadditions.config.processors.turbine_conversion.comment"),0,32767);
-		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.turbine_conversion");
+		propertyTurbineConversion.setLanguageKey("gui.ncsteamadditions.config.processors.turbine_conversion");
 
 		Property capacity = config.get(CATEGORY_PIPES, "capacity", 5000, Lang.localise("gui.ncsteamadditions.config.pipes.capacity.comment"),0,32767);
 		capacity.setLanguageKey("gui.ncsteamadditions.config.pipes.capacity");
@@ -83,14 +84,17 @@ public class NCSteamAdditionsConfig {
 		Property transfer = config.get(CATEGORY_PIPES, "transfer", 1000, Lang.localise("gui.ncsteamadditions.config.pipes.transfer.comment"),0,32767);
 		transfer.setLanguageKey("gui.ncsteamadditions.config.pipes.transfer");
 
-		Property digitalTransformerBasePower = config.get(CATEGORY_PROCESSORS, "digital_transformer_rf", 1024, Lang.localise("gui.ncsteamadditions.config.processors.digital_transformer_rf.comment"),0,32767);
-		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.digital_transformer_rf");
+		Property digitalTransformerBasePower = config.get(CATEGORY_PROCESSORS, "digital_transformer_reset_time", 20, Lang.localise("gui.ncsteamadditions.config.processors.digital_transformer_reset_time.comment"),0,32767);
+		digitalTransformerBasePower.setLanguageKey("gui.ncsteamadditions.config.processors.digital_transformer_reset_time");
+
+		Property digitalTransformerReset = config.get(CATEGORY_PROCESSORS, "digital_transformer_rf", 1024, Lang.localise("gui.ncsteamadditions.config.processors.digital_transformer_rf.comment"),0,32767);
+		digitalTransformerReset.setLanguageKey("gui.ncsteamadditions.config.processors.digital_transformer_rf");
 
 		Property efficiency_cap = config.get(CATEGORY_PROCESSORS, "efficiency_cap", 150, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,5000);
-		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_cap");
+		efficiency_cap.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_cap");
 
 		Property efficiency_change_speed = config.get(CATEGORY_PROCESSORS, "efficiency_change_speed", 100, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_change_speed.comment"),0,200);
-		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_change_speed");
+		efficiency_change_speed.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_change_speed");
 
 		Property override_nc_recipes = config.get(CATEGORY_RECIPES, "override_nc_recipes", "true", Lang.localise("gui.ncsteamadditions.config.recipes.override_nc_recipes.comment"));
 		
@@ -125,6 +129,7 @@ public class NCSteamAdditionsConfig {
 		propertyOreHideDisabled.setLanguageKey("gui.ncsteamadditions.config.ore_hide_disabled");
 
 		Property propertyOreHarvestLevels = config.get(CATEGORY_WORLDGEN, "ore_harvest_levels", new int[]{2}, Lang.localise("gui.ncsteamadditions.config.ore_harvest_levels.comment"), 0, 15);
+		propertyOreHarvestLevels.setLanguageKey("gui.ncsteamadditions.config.ore_harvest_levels");
 
 		ore_dims = propertyOreDims.getIntList();
 		ore_dims_list_type = propertyOreDimsListType.getBoolean();
@@ -144,6 +149,8 @@ public class NCSteamAdditionsConfig {
 
 
 		digitalTransformerRF = digitalTransformerBasePower.getInt();
+
+		digitalTransformerResetTime = digitalTransformerReset.getInt();
 
 		pipeCapacity = capacity.getInt();
 		pipeTransfer = transfer.getInt();
