@@ -15,6 +15,7 @@ import nc.tile.internal.energy.EnergyConnection;
 import nc.tile.internal.energy.EnergyStorage;
 import nc.tile.internal.energy.EnergyTileWrapper;
 import nc.tile.internal.energy.EnergyTileWrapperGT;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -75,6 +76,10 @@ public class TileSteamTurbine extends TileNCSProcessor implements ITileEnergy, I
         if (ModCheck.ic2Loaded()) {
             this.addTileToENet();
         }
+    }
+
+    public ItemStack getStackInSlot(int slot) {
+        return ItemStack.EMPTY;
     }
 
     public boolean hasUpgrades()
