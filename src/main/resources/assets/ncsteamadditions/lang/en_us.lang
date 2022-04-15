@@ -74,6 +74,9 @@ item.ncsteamadditions.ingot.zinc.desc=
 item.ncsteamadditions.ore.zinc.name=Zinc Ore
 item.ncsteamadditions.ore.zinc.desc=
 
+tile.ncsteamadditions.ore.zinc.name=Zinc Ore
+tile.ncsteamadditions.ore.zinc.desc=
+
 tile.ncsteamadditions.ingot_block.zinc.name=Zinc Block
 tile.ncsteamadditions.ingot_block.zinc.desc=
 
@@ -86,7 +89,7 @@ gui.ncsteamadditions.config.processors.efficiency_change_speed.comment=Bigger va
 gui.ncsteamadditions.config.processors.efficiency_cap=Maximum efficiency machines can reach
 gui.ncsteamadditions.config.processors.efficiency_change_speed=How fast machines gain or lose efficiency
 
-gui.nc.container.efficiency=Efficiency:
+gui.nc.container.efficiency=Heat efficiency:
 
 gui.ncsteamadditions.config.recipes.override_nc_recipes=Override some of Nuclearcraft recipes
 gui.ncsteamadditions.config.recipes.override_nc_recipes.comment=I would recommend to keep this True

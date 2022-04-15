@@ -71,6 +71,9 @@ item.ncsteamadditions.ingot.zinc.desc=
 item.ncsteamadditions.ore.zinc.name=Цинковая руда
 item.ncsteamadditions.ore.zinc.desc=
 
+tile.ncsteamadditions.ore.zinc.name=Цинковая руда
+tile.ncsteamadditions.ore.zinc.desc=
+
 tile.ncsteamadditions.ingot_block.zinc.name=Блок Цинка
 tile.ncsteamadditions.ingot_block.zinc.desc=
 
@@ -83,7 +86,7 @@ gui.ncsteamadditions.config.processors.efficiency_change_speed.comment=Боль�
 gui.ncsteamadditions.config.processors.efficiency_cap=Максимальная эффективность, которую могут достичь машины
 gui.ncsteamadditions.config.processors.efficiency_change_speed=Как быстро изменяется эффективность машин
 
-gui.nc.container.efficiency=Эффективность:
+gui.nc.container.efficiency=Тепловая эффективность:
 
 gui.ncsteamadditions.config.recipes.override_nc_recipes=Подменить рецепты из Nuclearcraft
 gui.ncsteamadditions.config.recipes.override_nc_recipes.comment=Лучше оставить это в значении True
