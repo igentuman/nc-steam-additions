@@ -13,6 +13,7 @@ import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.EmptyItemIngredient;
+import nc.tile.processor.TileFluidProcessor;
 import nc.util.FluidRegHelper;
 import nc.util.FluidStackHelper;
 import nc.util.RegistryHelper;
@@ -61,7 +62,7 @@ public class SteamBlender extends AbstractProcessor {
     }
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player, (TileNCSProcessor) tile);
+        return new ContainerMachineConfig(player, (TileFluidProcessor) tile);
     }
 
     public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)

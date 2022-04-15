@@ -73,12 +73,12 @@ public class NCSProcessorUpdatePacket extends TileUpdatePacket {
         buf.writeInt(this.adjustmentAttempts);
     }
 
-    public static class Handler extends nc.network.tile.TileUpdatePacket.Handler<NCSProcessorUpdatePacket, ITileGui> {
+    public static class Handler extends nc.network.tile.TileUpdatePacket.Handler<NCSProcessorUpdatePacket, ITileGui<NCSProcessorUpdatePacket>> {
         public Handler() {
         }
 
-        protected void onPacket(NCSProcessorUpdatePacket message, ITileGui processor) {
-            processor.onGuiPacket(message);
+        protected void onTileUpdatePacket(NCSProcessorUpdatePacket message, ITileGui processor) {
+            processor.onTileUpdatePacket(message);
         }
     }
 }

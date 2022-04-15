@@ -62,7 +62,7 @@ public class BlockNCSteamAdditionsProcessor extends BlockSidedTile implements IA
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing enumfacing = EnumFacing.byIndex(meta & 7);
+		EnumFacing enumfacing = EnumFacing.values()[meta & 7];
 		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
 		{
 			enumfacing = EnumFacing.NORTH;

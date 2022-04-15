@@ -68,7 +68,7 @@ public class NCSfluids {
 
     public static <T extends NCBlockFluid> Block withName(T block)
     {
-        return block.setTranslationKey(NCSteamAdditions.MOD_ID + "." + block.name).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, block.name));
+        return block.setUnlocalizedName(NCSteamAdditions.MOD_ID + "." + block.name).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, block.name));
     }
 
 

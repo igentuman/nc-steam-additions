@@ -27,9 +27,9 @@ public class TileDigitalTransformer extends TileNCSProcessor implements SimpleCo
                 defaultTankSorptions(ProcessorsRegistry.get().DIGITAL_TRANSFORMER.inputFluids, ProcessorsRegistry.get().DIGITAL_TRANSFORMER.outputFluids),
                 NCSteamAdditionsRecipes.validFluids[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID],
                 NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID],
-                NCSteamAdditionsConfig.digitalTransformerRF, true,
+                NCSteamAdditionsConfig.digitalTransformerRF, true, true,
                 NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID],
-                ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID+1, 0,0,0
+                ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID+1, 0,0,0,0
         );
         this.getEnergyStorage().setMaxTransfer(2048000);
         this.getEnergyStorage().setStorageCapacity(2048000);

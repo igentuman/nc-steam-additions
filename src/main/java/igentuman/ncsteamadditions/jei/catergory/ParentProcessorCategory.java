@@ -10,7 +10,7 @@ import nc.integration.jei.JEIMachineRecipeWrapper;
 import nc.integration.jei.NCJEI.IJEIHandler;
 import nc.recipe.IngredientSorption;
 
-public abstract class ParentProcessorCategory extends JEINCSteamAdditionsMachineCategory<JEIMachineRecipeWrapper>
+public abstract class ParentProcessorCategory extends JEINCSteamAdditionsMachineCategory
 {
 	private AbstractProcessor processor;
 
@@ -34,8 +34,7 @@ public abstract class ParentProcessorCategory extends JEINCSteamAdditionsMachine
 		super(guiHelper, handler, name, x, y, l, h);
 		processor = proc;
 	}
-	
-	@Override
+
 	public void setRecipe(IRecipeLayout recipeLayout, JEIMachineRecipeWrapper recipeWrapper, IIngredients ingredients)
 	{
 		super.setRecipe(recipeLayout, recipeWrapper, ingredients);

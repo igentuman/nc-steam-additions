@@ -60,9 +60,9 @@ public class TileSteamTurbine extends TileNCSProcessor implements ITileEnergy, I
                 defaultTankSorptions(ProcessorsRegistry.get().STEAM_TURBINE.inputFluids, ProcessorsRegistry.get().STEAM_TURBINE.outputFluids),
                 NCSteamAdditionsRecipes.validFluids[ProcessorsRegistry.get().STEAM_TURBINE.GUID],
                 NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().STEAM_TURBINE.GUID],
-                0, true,
+                0, true, false,
                 NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_TURBINE.GUID],
-                ProcessorsRegistry.get().STEAM_TURBINE.GUID+1, 0,0,10
+                ProcessorsRegistry.get().STEAM_TURBINE.GUID+1, 0,0,0,10
         );
         this.ic2reg = false;
         this.storage = new EnergyStorage(1024, maxRf);

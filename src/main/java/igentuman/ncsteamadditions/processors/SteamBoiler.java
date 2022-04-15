@@ -9,7 +9,6 @@ import igentuman.ncsteamadditions.machine.container.ContainerSteamBoiler;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamBoiler;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import li.cil.oc.common.block.traits.GUI;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;

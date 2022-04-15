@@ -67,7 +67,7 @@ public class OpenSideGuiPacket implements IMessage {
                 TileEntity tile = world.getTileEntity(message.pos);
                 if (tile instanceof TileNCSProcessor) {
                     FMLNetworkHandler.openGui(player, NCSteamAdditions.instance, ((TileNCSProcessor)tile).getGuiID() + 1000, player.getServerWorld(), message.pos.getX(), message.pos.getY(), message.pos.getZ());
-                    ((TileNCSProcessor)tile).beginUpdatingPlayer(player);
+                    ((TileNCSProcessor)tile).addTileUpdatePacketListener(player);
                 }
             }
         }

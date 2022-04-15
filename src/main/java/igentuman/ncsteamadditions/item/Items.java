@@ -58,7 +58,7 @@ public class Items {
 
     public static  Item withName(Item item, String name)
     {
-        item.setTranslationKey(NCSteamAdditions.MOD_ID + "." + name).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, name));
+        item.setUnlocalizedName(NCSteamAdditions.MOD_ID + "." + name).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, name));
         if(item instanceof NCItemMeta)
         ((IInfoItem)item).setInfo();
         return item;
@@ -66,7 +66,7 @@ public class Items {
 
     public static <T extends Item & IInfoItem> Item withMetaItem(T item, String name)
     {
-        item.setTranslationKey(NCSteamAdditions.MOD_ID + "." + name).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, name));
+        item.setUnlocalizedName(NCSteamAdditions.MOD_ID + "." + name).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, name));
         item.setInfo();
         return item;
     }
@@ -104,7 +104,7 @@ public class Items {
 
     public static void registerRender(Item item, int meta, String type)
     {
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(NCSteamAdditions.MOD_ID, item.getRegistryName().getPath() + "/" + type), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(NCSteamAdditions.MOD_ID, item.getRegistryName().getResourcePath() + "/" + type), "inventory"));
     }
 
 }

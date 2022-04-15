@@ -10,6 +10,7 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import nc.ModCheck;
 import nc.config.NCConfig;
 import nc.init.NCItems;
+import nc.network.tile.ProcessorUpdatePacket;
 import nc.recipe.AbstractRecipeHandler;
 import nc.recipe.BasicRecipe;
 import nc.recipe.BasicRecipeHandler;
@@ -29,6 +30,7 @@ import nc.tile.internal.inventory.ItemSorption;
 import nc.tile.inventory.ITileInventory;
 import nc.tile.processor.IItemFluidProcessor;
 import nc.tile.processor.IProcessor;
+import nc.tile.processor.ITileSideConfigGui;
 import nc.tile.processor.IUpgradable;
 import nc.util.StackHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,10 +47,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements IItemFluidProcessor, ITileGui<NCSProcessorUpdatePacket>, IUpgradable {
-
-    public final int defaultProcessTime;
-    public final int defaultProcessPower;
+public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements IItemFluidProcessor, ITileSideConfigGui<NCSProcessorUpdatePacket>, IUpgradable {
+    public final double defaultProcessTime;
+    public final double defaultProcessPower;
     public double baseProcessTime;
     public double baseProcessPower;
     public double baseProcessRadiation;
@@ -56,8 +57,6 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     protected final int fluidInputSize;
     protected final int itemOutputSize;
     protected final int fluidOutputSize;
-    public float currentReactivity;
-    public float targetReactivity;
     public double time;
     public double resetTime;
     public boolean isProcessing;
@@ -65,15 +64,18 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     public final boolean shouldLoseProgress;
     public final boolean hasUpgrades;
     public final int processorID;
+    public final int sideConfigXOffset;
     public final int sideConfigYOffset;
     public final BasicRecipeHandler recipeHandler;
     protected RecipeInfo<BasicRecipe> recipeInfo;
-    protected Set<EntityPlayer> playersToUpdate;
-    protected int ticksToChange;
+    protected Set<EntityPlayer> updatePacketListeners;
     protected float adjustment = 0;
     protected int ticksLastReactivityInit = 0;
     protected int adjustmentAttempts = 0;
     protected int adjustmentsLimit = 5;
+    public float currentReactivity;
+    public float targetReactivity;
+    protected int ticksToChange;
 
     public TileNCSProcessor(String code, int inputItems, int inputFluids, int outputItems, int outputFluids, int GUID)
     {
@@ -88,36 +90,60 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                 defaultTankSorptions(inputFluids, outputFluids),
                 NCSteamAdditionsRecipes.validFluids[GUID],
                 NCSteamAdditionsConfig.processor_time[GUID],
-                0, true,
+                0, true, true,
                 NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],
-                GUID+1, 0,0,10
+                GUID+1, 0,0,0,10
         );
     }
 
-    public TileNCSProcessor(String name, int itemInSize, int fluidInSize, int itemOutSize, int fluidOutSize, @Nonnull List<ItemSorption> itemSorptions, @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<List<String>> allowedFluids, int time, int power, boolean shouldLoseProgress, @Nonnull BasicRecipeHandler recipeHandler, int processorID, int sideConfigYOffset, float currentReactivity, float targetReactivity) {
-        this(name, itemInSize, fluidInSize, itemOutSize, fluidOutSize, itemSorptions, fluidCapacity, tankSorptions, allowedFluids, time, power, shouldLoseProgress, true, recipeHandler, processorID, sideConfigYOffset, currentReactivity, targetReactivity);
+    public TileNCSProcessor(String name, int itemInSize, int fluidInSize, int itemOutSize, int fluidOutSize, @Nonnull List<ItemSorption> itemSorptions, @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<List<String>> allowedFluids, double time, double power, boolean shouldLoseProgress, @Nonnull BasicRecipeHandler recipeHandler, int processorID, int sideConfigXOffset, int sideConfigYOffset) {
+        this(name, itemInSize, fluidInSize, itemOutSize, fluidOutSize, itemSorptions, fluidCapacity, tankSorptions, allowedFluids, time, power, shouldLoseProgress, true, recipeHandler, processorID, sideConfigXOffset, sideConfigYOffset);
     }
 
-    public TileNCSProcessor(String name, int itemInSize, int fluidInSize, int itemOutSize, int fluidOutSize, @Nonnull List<ItemSorption> itemSorptions, @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<List<String>> allowedFluids, int time, int power, boolean shouldLoseProgress, boolean upgrades, @Nonnull BasicRecipeHandler recipeHandler, int processorID, int sideConfigYOffset, float currentReactivity, float targetReactivity) {
-        super(name, itemInSize + itemOutSize + (upgrades ? 2 : 0), ITileInventory.inventoryConnectionAll(itemSorptions), (long) IProcessor.getCapacity(processorID, 1.0D, 1.0D), power != 0 ? ITileEnergy.energyConnectionAll(EnergyConnection.IN) : ITileEnergy.energyConnectionAll(EnergyConnection.NON), fluidCapacity, allowedFluids, ITileFluid.fluidConnectionAll(tankSorptions));
+    public TileNCSProcessor(String name, int itemInSize, int fluidInSize, int itemOutSize, int fluidOutSize, @Nonnull List<ItemSorption> itemSorptions, @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<List<String>> allowedFluids, double time, double power, boolean shouldLoseProgress, boolean upgrades, @Nonnull BasicRecipeHandler recipeHandler, int processorID, int sideConfigXOffset, int sideConfigYOffset) {
+        super(name, itemInSize + itemOutSize + (upgrades ? 2 : 0), ITileInventory.inventoryConnectionAll(itemSorptions), (long)IProcessor.getCapacity(processorID, 1.0D, 1.0D), power != 0.0D ? ITileEnergy.energyConnectionAll(EnergyConnection.IN) : ITileEnergy.energyConnectionAll(EnergyConnection.NON), fluidCapacity, allowedFluids, ITileFluid.fluidConnectionAll(tankSorptions));
         this.itemInputSize = itemInSize;
         this.fluidInputSize = fluidInSize;
         this.itemOutputSize = itemOutSize;
         this.fluidOutputSize = fluidOutSize;
-        this.defaultProcessTime = time;
-        this.defaultProcessPower = power;
-        this.baseProcessTime = (double)time;
-        this.baseProcessPower = (double)power;
+        this.defaultProcessTime = NCConfig.processor_time_multiplier * time;
+        this.defaultProcessPower = NCConfig.processor_power_multiplier * power;
+        this.baseProcessTime = NCConfig.processor_time_multiplier * time;
+        this.baseProcessPower = NCConfig.processor_power_multiplier * power;
         this.shouldLoseProgress = shouldLoseProgress;
         this.hasUpgrades = upgrades;
         this.processorID = processorID;
+        this.sideConfigXOffset = sideConfigXOffset;
         this.sideConfigYOffset = sideConfigYOffset;
         this.setInputTanksSeparated(fluidInSize > 1);
         this.recipeHandler = recipeHandler;
-        this.playersToUpdate = new ObjectOpenHashSet();
+        this.updatePacketListeners = new ObjectOpenHashSet();
+    }
+
+    public TileNCSProcessor(String name, int itemInSize, int fluidInSize, int itemOutSize, int fluidOutSize, @Nonnull List<ItemSorption> itemSorptions,
+                            @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<List<String>> allowedFluids, double time, double power, boolean shouldLoseProgress,
+                            boolean upgrades, @Nonnull BasicRecipeHandler recipeHandler, int processorID,  int sideConfigXOffset, int sideConfigYOffset,float currentReactivity, float targetReactivity) {
+        super(name, itemInSize + itemOutSize + (upgrades ? 2 : 0), ITileInventory.inventoryConnectionAll(itemSorptions), (long)IProcessor.getCapacity(processorID, 1.0D, 1.0D), power != 0.0D ? ITileEnergy.energyConnectionAll(EnergyConnection.IN) : ITileEnergy.energyConnectionAll(EnergyConnection.NON), fluidCapacity, allowedFluids, ITileFluid.fluidConnectionAll(tankSorptions));
+        this.itemInputSize = itemInSize;
+        this.fluidInputSize = fluidInSize;
+        this.itemOutputSize = itemOutSize;
+        this.fluidOutputSize = fluidOutSize;
+        this.defaultProcessTime = NCConfig.processor_time_multiplier * time;
+        this.defaultProcessPower = NCConfig.processor_power_multiplier * power;
+        this.baseProcessTime = NCConfig.processor_time_multiplier * time;
+        this.baseProcessPower = NCConfig.processor_power_multiplier * power;
+        this.shouldLoseProgress = shouldLoseProgress;
+        this.hasUpgrades = upgrades;
+        this.processorID = processorID;
+        this.sideConfigXOffset = sideConfigXOffset;
+        this.sideConfigYOffset = sideConfigYOffset;
+        this.setInputTanksSeparated(fluidInSize > 1);
+        this.recipeHandler = recipeHandler;
+        this.updatePacketListeners = new ObjectOpenHashSet();
         this.currentReactivity = currentReactivity;
         this.targetReactivity = targetReactivity;
     }
+
 
     public static List<ItemSorption> defaultItemSorptions(int inSize, int outSize, boolean upgrades) {
         List<ItemSorption> itemSorptions = new ArrayList();
@@ -141,9 +167,11 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
 
     public static IntList defaultTankCapacities(int capacity, int inSize, int outSize) {
         IntList tankCapacities = new IntArrayList();
+
         for(int i = 0; i < inSize + outSize; ++i) {
             tankCapacities.add(capacity);
         }
+
         return tankCapacities;
     }
 
@@ -160,6 +188,15 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         }
 
         return tankSorptions;
+    }
+    //values range 0.48 ... 10
+    public float getRecipeEfficiency()
+    {
+        if(!this.isProcessing) {
+            return 0;
+        }
+        float eff = (float)Math.exp(Math.log(1/Math.abs(this.targetReactivity/10 - this.currentReactivity/10)+0.1F));
+        return eff;
     }
 
     public void onLoad() {
@@ -190,26 +227,17 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
             if (wasProcessing != this.isProcessing) {
                 shouldUpdate = true;
                 this.setActivity(this.isProcessing);
-                this.sendUpdateToAllPlayers();
+                this.sendTileUpdatePacketToAll();
             }
 
-            this.sendUpdateToListeningPlayers();
+            this.sendTileUpdatePacketToListeners();
             if (shouldUpdate) {
                 this.markDirty();
             }
         }
 
     }
-    @Override
-    public void sendUpdateToListeningPlayers() {
-        Iterator var1 = this.getPlayersToUpdate().iterator();
 
-        while(var1.hasNext()) {
-            EntityPlayer player = (EntityPlayer)var1.next();
-            NCSAPacketHandler.instance.sendTo(this.getGuiUpdatePacket(), (EntityPlayerMP)player);
-        }
-
-    }
     public void refreshRecipe() {
         this.recipeInfo = this.recipeHandler.getRecipeInfoFromInputs(this.getItemInputs(), this.getFluidInputs());
     }
@@ -236,26 +264,17 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
 
     public boolean setRecipeStats() {
         if (this.recipeInfo == null) {
-            this.baseProcessTime = (double)this.defaultProcessTime;
-            this.baseProcessPower = (double)this.defaultProcessPower;
+            this.baseProcessTime = this.defaultProcessTime;
+            this.baseProcessPower = this.defaultProcessPower;
             this.baseProcessRadiation = 0.0D;
             return false;
         } else {
-            this.baseProcessTime = ((BasicRecipe)this.recipeInfo.getRecipe()).getBaseProcessTime((double)this.defaultProcessTime);
-            this.baseProcessPower = ((BasicRecipe)this.recipeInfo.getRecipe()).getBaseProcessPower((double)this.defaultProcessPower);
-            this.baseProcessRadiation = ((BasicRecipe)this.recipeInfo.getRecipe()).getBaseProcessRadiation();
+            BasicRecipe recipe = (BasicRecipe)this.recipeInfo.getRecipe();
+            this.baseProcessTime = recipe.getBaseProcessTime(this.defaultProcessTime);
+            this.baseProcessPower = recipe.getBaseProcessPower(this.defaultProcessPower);
+            this.baseProcessRadiation = recipe.getBaseProcessRadiation();
             return true;
         }
-    }
-
-    //values range 0.48 ... 10
-    public float getRecipeEfficiency()
-    {
-        if(!this.isProcessing) {
-            return 0;
-        }
-        float eff = (float)Math.exp(Math.log(1/Math.abs(this.targetReactivity/10 - this.currentReactivity/10)+0.1F));
-        return eff;
     }
 
     public void setCapacityFromSpeed() {
@@ -360,6 +379,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         while(this.time >= this.baseProcessTime) {
             this.finishProcess();
         }
+
     }
 
     public void finishProcess() {
@@ -386,11 +406,10 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
             IntList fluidInputOrder = this.recipeInfo.getFluidInputOrder();
             if (itemInputOrder != AbstractRecipeHandler.INVALID && fluidInputOrder != AbstractRecipeHandler.INVALID) {
                 int j;
-                int fluidIngredientStackSize;
                 for(j = 0; j < this.itemInputSize; ++j) {
-                    fluidIngredientStackSize = ((IItemIngredient)this.getItemIngredients().get((Integer)itemInputOrder.get(j))).getMaxStackSize((Integer)this.recipeInfo.getItemIngredientNumbers().get(j));
-                    if (fluidIngredientStackSize > 0) {
-                        ((ItemStack)this.getInventoryStacks().get(j)).shrink(fluidIngredientStackSize);
+                    int itemIngredientStackSize = ((IItemIngredient)this.getItemIngredients().get((Integer)itemInputOrder.get(j))).getMaxStackSize((Integer)this.recipeInfo.getItemIngredientNumbers().get(j));
+                    if (itemIngredientStackSize > 0) {
+                        ((ItemStack)this.getInventoryStacks().get(j)).shrink(itemIngredientStackSize);
                     }
 
                     if (((ItemStack)this.getInventoryStacks().get(j)).getCount() <= 0) {
@@ -398,14 +417,16 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                     }
                 }
 
+                int count;
                 for(j = 0; j < this.fluidInputSize; ++j) {
-                    fluidIngredientStackSize = ((IFluidIngredient)this.getFluidIngredients().get((Integer)fluidInputOrder.get(j))).getMaxStackSize((Integer)this.recipeInfo.getFluidIngredientNumbers().get(j));
-                    if (fluidIngredientStackSize > 0) {
-                        ((Tank)this.getTanks().get(j)).changeFluidAmount(-fluidIngredientStackSize);
+                    Tank tank = (Tank)this.getTanks().get(j);
+                    count = ((IFluidIngredient)this.getFluidIngredients().get((Integer)fluidInputOrder.get(j))).getMaxStackSize((Integer)this.recipeInfo.getFluidIngredientNumbers().get(j));
+                    if (count > 0) {
+                        tank.changeFluidAmount(-count);
                     }
 
-                    if (((Tank)this.getTanks().get(j)).getFluidAmount() <= 0) {
-                        ((Tank)this.getTanks().get(j)).setFluidStored((FluidStack)null);
+                    if (tank.getFluidAmount() <= 0) {
+                        tank.setFluidStored((FluidStack)null);
                     }
                 }
 
@@ -418,7 +439,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                             if (((ItemStack)this.getInventoryStacks().get(j + this.itemInputSize)).isEmpty()) {
                                 this.getInventoryStacks().set(j + this.itemInputSize, itemProduct.getNextStack(0));
                             } else if (((ItemStack)this.getInventoryStacks().get(j + this.itemInputSize)).isItemEqual((ItemStack)itemProduct.getStack())) {
-                                int count = Math.min(this.getInventoryStackLimit(), ((ItemStack)this.getInventoryStacks().get(j + this.itemInputSize)).getCount() + itemProduct.getNextStackSize(0));
+                                count = Math.min(this.getInventoryStackLimit(), ((ItemStack)this.getInventoryStacks().get(j + this.itemInputSize)).getCount() + itemProduct.getNextStackSize(0));
                                 ((ItemStack)this.getInventoryStacks().get(j + this.itemInputSize)).setCount(count);
                             }
                         }
@@ -439,6 +460,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                         }
                     }
                 }
+
             }
         }
     }
@@ -449,6 +471,38 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
             this.resetTime = this.time;
         }
         this.currentReactivity -= (this.targetReactivity-this.currentReactivity)*(float)NCSteamAdditionsConfig.efficiencyChangeSpeed/50000;
+
+    }
+    public float getCurrentReactivity() {
+        if(!this.isProcessing) {
+            return 0;
+        }
+        return  this.currentReactivity;
+    }
+
+    public float getTargetReactivity() {
+        if(!this.isProcessing) {
+            return 0;
+        }
+        return  this.targetReactivity;
+    }
+
+    public void tickReactivity()
+    {
+        if(world.isRemote) return;
+        this.ticksLastReactivityInit--;
+        if(this.ticksToChange < 1 || this.currentReactivity >= 20 || this.currentReactivity <= 0) {
+            this.ticksToChange = 0;
+            this. adjustment = 0;
+            return;
+        }
+
+        this.currentReactivity += (this.adjustment/this.ticksToChange);
+        this.currentReactivity = Math.min(20,Math.max(0,this.currentReactivity));
+        this.ticksToChange--;
+        this.adjustment-=(this.adjustment/this.ticksToChange);
+        this.sendTileUpdatePacketToAll();
+        this.sendTileUpdatePacketToListeners();
     }
 
     public int getItemInputSize() {
@@ -520,7 +574,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public int getSourceTier() {
-        return 2;
+        return 1;
     }
 
     public ItemStack decrStackSize(int slot, int amount) {
@@ -535,6 +589,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                 this.refreshUpgrades();
             }
         }
+
         return stack;
     }
 
@@ -550,6 +605,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                 this.refreshUpgrades();
             }
         }
+
     }
 
     public void markDirty() {
@@ -572,10 +628,11 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                     return StackHelper.getMetadata(stack) == 1;
                 }
             }
+
             if (slot >= this.itemInputSize) {
                 return false;
             } else {
-                return NCConfig.smart_processor_input ? this.recipeHandler.isValidItemInput(stack, (ItemStack)this.getInventoryStacks().get(slot), this.inputItemStacksExcludingSlot(slot)) : this.recipeHandler.isValidItemInput(stack);
+                return NCConfig.smart_processor_input ? this.recipeHandler.isValidItemInput(slot, stack, this.recipeInfo, this.getItemInputs(), this.inputItemStacksExcludingSlot(slot)) : this.recipeHandler.isValidItemInput(slot, stack);
             }
         }
     }
@@ -596,38 +653,6 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
 
     public boolean hasConfigurableFluidConnections() {
         return true;
-    }
-
-    public float getCurrentReactivity() {
-        if(!this.isProcessing) {
-            return 0;
-        }
-        return  this.currentReactivity;
-    }
-
-    public float getTargetReactivity() {
-        if(!this.isProcessing) {
-            return 0;
-        }
-        return  this.targetReactivity;
-    }
-
-    public void tickReactivity()
-    {
-        if(world.isRemote) return;
-        this.ticksLastReactivityInit--;
-        if(this.ticksToChange < 1 || this.currentReactivity >= 20 || this.currentReactivity <= 0) {
-            this.ticksToChange = 0;
-            this. adjustment = 0;
-            return;
-        }
-
-        this.currentReactivity += (this.adjustment/this.ticksToChange);
-        this.currentReactivity = Math.min(20,Math.max(0,this.currentReactivity));
-        this.ticksToChange--;
-        this.adjustment-=(this.adjustment/this.ticksToChange);
-        this.sendUpdateToAllPlayers();
-        this.sendUpdateToListeningPlayers();
     }
 
     public NBTTagCompound writeAll(NBTTagCompound nbt) {
@@ -656,17 +681,18 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         } else {
             this.setRedstoneControl(true);
         }
+
     }
 
     public int getGuiID() {
         return this.processorID;
     }
 
-    public Set<EntityPlayer> getPlayersToUpdate() {
-        return this.playersToUpdate;
+    public Set<EntityPlayer> getTileUpdatePacketListeners() {
+        return this.updatePacketListeners;
     }
 
-    public NCSProcessorUpdatePacket getGuiUpdatePacket() {
+    public NCSProcessorUpdatePacket getTileUpdatePacket() {
         return new NCSProcessorUpdatePacket(
                 this.pos,
                 this.isProcessing,
@@ -681,7 +707,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         );
     }
 
-    public void onGuiPacket(NCSProcessorUpdatePacket message) {
+    public void onTileUpdatePacket(NCSProcessorUpdatePacket message) {
         this.isProcessing = message.isProcessing;
         this.time = message.time;
         this.getEnergyStorage().setEnergyStored((long)message.energyStored);
@@ -694,6 +720,10 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         this.currentReactivity = message.currentReactivity;
         this.targetReactivity = message.targetReactivity;
         this.adjustmentAttempts = message.adjustmentAttempts;
+    }
+
+    public int getSideConfigXOffset() {
+        return this.sideConfigXOffset;
     }
 
     public int getSideConfigYOffset() {
