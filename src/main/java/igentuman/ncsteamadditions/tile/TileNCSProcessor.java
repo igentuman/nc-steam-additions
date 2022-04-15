@@ -195,8 +195,8 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         if(!this.isProcessing) {
             return 0;
         }
-        float eff = (float)Math.exp(Math.log(1/Math.abs(this.targetReactivity/10 - this.currentReactivity/10)+0.1F));
-        return eff;
+        float eff = (float)Math.exp(Math.log(1/Math.abs(this.targetReactivity/10 - this.currentReactivity/10)+0.1F))/2;
+        return Math.min(eff,500);
     }
 
     public void onLoad() {

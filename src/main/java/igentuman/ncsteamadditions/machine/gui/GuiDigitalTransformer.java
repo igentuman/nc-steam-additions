@@ -49,10 +49,7 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 	@Override
 	public void drawEnergyTooltip(ITileEnergy tile, int mouseX, int mouseY, int x, int y, int width, int height)
 	{
-		if (this.tile.defaultProcessPower != 0)
-			super.drawEnergyTooltip(tile, mouseX, mouseY, x, y, width, height);
-		else
-			drawNoEnergyTooltip(mouseX, mouseY, x, y, width, height);
+		this.drawTooltip(this.energyInfo(tile), mouseX, mouseY, x, y, width, height);
 	}
 
 	public GuiDigitalTransformer(EntityPlayer player, TileNCSProcessor tile, DigitalTransformer processor)
@@ -82,13 +79,13 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 		else
 			drawGradientRect(guiLeft + 8, guiTop + 6, guiLeft + 8 + 16, guiTop + 6 + 74, 0xFFC6C6C6, 0xFF8B8B8B);
 
-		drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(135), 12);
+			drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(135), 8);
+		drawTexturedModalRect(guiLeft +101, guiTop + 63, 0, 176, (int) Math.round(tile.getRecipeEfficiency() * 66 / 500), 3);
+		drawTexturedModalRect(guiLeft +101, guiTop + 69, 0, 179,  (int) Math.round(tile.getCurrentReactivity() * 66 / 20), 3);
+		drawTexturedModalRect(guiLeft +101, guiTop + 75, 0, 182, (int) Math.round(tile.getTargetReactivity() * 66 / 20), 3);
 
 		drawBackgroundExtras();
 		TileDigitalTransformer t = (TileDigitalTransformer) tile;
-
-		drawString(Minecraft.getMinecraft().fontRenderer,"CR: "+String.format("%.2f", t.getCurrentReactivity()),guiLeft + 12, guiTop - 7,1113879);
-		drawString(Minecraft.getMinecraft().fontRenderer,"TR: "+String.format("%.2f", t.getTargetReactivity()),guiLeft + 75, guiTop  - 7,6950317);
 	}
 
 	@Override
@@ -96,5 +93,9 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 	{
 		drawEnergyTooltip(tile, mouseX, mouseY, 8, 6, 16, 74);
 		renderButtonTooltips(mouseX, mouseY);
+		this.drawTooltip(Lang.localise("gui.nc.dt.efficiency") +" "+String.format("%.2f", tile.getRecipeEfficiency()), mouseX, mouseY, 101, 63, 66, 3);
+		this.drawTooltip(Lang.localise("gui.nc.dt.current_reactivity") +" "+String.format("%.2f", tile.getCurrentReactivity()), mouseX, mouseY, 101, 69, 66, 3);
+		this.drawTooltip(Lang.localise("gui.nc.dt.target_reactivity") +" "+String.format("%.2f", tile.getTargetReactivity()), mouseX, mouseY, 101, 75, 66, 3);
+
 	}
 }
