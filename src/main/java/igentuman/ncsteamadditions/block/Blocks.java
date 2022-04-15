@@ -82,11 +82,11 @@ public class Blocks
 	}
 	
 	public static Block withName(Block block, String name) {
-		return block.setUnlocalizedName(NCSteamAdditions.MOD_ID + "." + name).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, name));
+		return block.setTranslationKey(NCSteamAdditions.MOD_ID + "." + name).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, name));
 	}
 	
 	public static <T extends Block & ITileType> Block withName(T block) {
-		return block.setUnlocalizedName(NCSteamAdditions.MOD_ID + "." + block.getTileName()).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, block.getTileName()));
+		return block.setTranslationKey(NCSteamAdditions.MOD_ID + "." + block.getTileName()).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, block.getTileName()));
 	}
 	
 	public static String fixedLine(String name) {
@@ -125,6 +125,6 @@ public class Blocks
 	}
 	
 	public static void registerRender(Block block, int meta, String type) {
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta, new ModelResourceLocation(new ResourceLocation(NCSteamAdditions.MOD_ID, block.getRegistryName().getResourcePath()), "type=" + type));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta, new ModelResourceLocation(new ResourceLocation(NCSteamAdditions.MOD_ID, block.getRegistryName().getPath()), "type=" + type));
 	}
 }

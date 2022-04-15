@@ -148,7 +148,7 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		ItemStack outStack = StackHelper.fixItemStack(out);
 		if (!outStack.isEmpty() && inputs != null)
 		{
-			String outName = outStack.getUnlocalizedName();
+			String outName = outStack.getTranslationKey();
 			if (RECIPE_COUNT_MAP.containsKey(outName))
 			{
 				int count = RECIPE_COUNT_MAP.get(outName);
