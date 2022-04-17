@@ -28,6 +28,7 @@ Washes items with steam
 Transforms everything. Requires Computer
 ### 10. Steam Turbine ![Steam Turbine](src/main/resources/assets/ncsteamadditions/textures/blocks/machine/steam_turbine_front_on.png?raw=true)
 The way you can quit steam era and step into world of forge energy
+### 11. Heat Exchanger ![Heat Exchanger](src/main/resources/assets/ncsteamadditions/textures/blocks/machine/heat_exchanger_front_on.png?raw=true)
 
 ## Check mod [WIKI pages](https://github.com/igentuman/nc-steam-additions/wiki)
 
