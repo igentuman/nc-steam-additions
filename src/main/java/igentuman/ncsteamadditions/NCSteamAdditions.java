@@ -2,7 +2,7 @@ package igentuman.ncsteamadditions;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
-import igentuman.ncsteamadditions.gui.GUIHandler;
+import igentuman.ncsteamadditions.machine.gui.GUIHandler;
 import igentuman.ncsteamadditions.proxy.CommonProxy;
 import igentuman.ncsteamadditions.util.Util;
 import net.minecraftforge.fml.common.Mod;

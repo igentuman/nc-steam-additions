@@ -7,6 +7,7 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.SimpleComponent;
+import nc.ModCheck;
 import net.minecraftforge.fml.common.Optional;
 
 import java.util.Random;
@@ -43,12 +44,45 @@ public class TileDigitalTransformer extends TileNCSProcessor implements SimpleCo
         return result;
     }
 
+    public void update() {
+        if (!this.world.isRemote) {
+            boolean wasProcessing = this.isProcessing;
+            this.isProcessing = this.isProcessing();
+            boolean shouldUpdate = false;
+            if (this.isProcessing) {
+                this.process();
+            } else {
+                this.getRadiationSource().setRadiationLevel(0.0D);
+                if (this.time > 0.0D && !this.isHaltedByRedstone() && (this.shouldLoseProgress || !this.canProcessInputs)) {
+                    this.loseProgress();
+                }
+            }
+
+            if (wasProcessing != this.isProcessing) {
+                shouldUpdate = true;
+                this.setActivity(this.isProcessing);
+                this.sendTileUpdatePacketToAll();
+            }
+
+            this.sendTileUpdatePacketToListeners();
+            if (shouldUpdate) {
+                this.markDirty();
+            }
+        }
+
+    }
+
+    public int getEfficiencyCap()
+    {
+        return (int)Math.min(2300,NCSteamAdditionsConfig.digitalTransformerEfficienctCap);
+    }
+
     public void process() {
         if(this.currentReactivity == 0 && this.targetReactivity == 0) {
             this.initReactivity();
         }
         this.tickReactivity();
-        this.time += this.getSpeedMultiplier() * Math.min(getRecipeEfficiency(),1000);
+        this.time += this.getSpeedMultiplier() * getRecipeEfficiency()/50;
         this.getEnergyStorage().changeEnergyStored((long)(-this.getProcessPower()));
         this.getRadiationSource().setRadiationLevel(this.baseProcessRadiation * this.getSpeedMultiplier());
 
@@ -93,7 +127,18 @@ public class TileDigitalTransformer extends TileNCSProcessor implements SimpleCo
         ticksLastReactivityInit = NCSteamAdditionsConfig.digitalTransformerResetTime * 20;
     }
 
-    @Callback(doc = "--function():float Value betwean -0.48 and 10")
+    //values range -103,846 ... 2300
+    public float getRecipeEfficiency()
+    {
+        if(!this.isProcessing) {
+            return 0;
+        }
+        float eff = (float)(1/(Math.abs(this.targetReactivity - this.currentReactivity)/20+0.04)-1.2)*100-80;
+
+        return Math.min(eff,(float)NCSteamAdditionsConfig.digitalTransformerEfficienctCap);
+    }
+
+    @Callback(doc = "--function():float Value betwean -103.846 and 2300")
     @Optional.Method(modid = "opencomputers")
     public Object[] getRecipeEfficiency(Context context, Arguments args)
     {

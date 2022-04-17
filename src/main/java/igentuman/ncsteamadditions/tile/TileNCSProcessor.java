@@ -1,5 +1,6 @@
 package igentuman.ncsteamadditions.tile;
 
+import ic2.core.block.TileEntityHeatSourceInventory;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.network.NCSAPacketHandler;
 import igentuman.ncsteamadditions.network.NCSProcessorUpdatePacket;
@@ -7,6 +8,9 @@ import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import mekanism.api.IHeatTransfer;
+import mekanism.common.capabilities.Capabilities;
+import mekanism.common.tile.TileEntityFuelwoodHeater;
 import nc.ModCheck;
 import nc.config.NCConfig;
 import nc.init.NCItems;
@@ -19,6 +23,7 @@ import nc.recipe.ingredient.IFluidIngredient;
 import nc.recipe.ingredient.IItemIngredient;
 import nc.tile.ITileGui;
 import nc.tile.energy.ITileEnergy;
+import nc.tile.energy.TileEnergy;
 import nc.tile.energyFluid.TileEnergyFluidSidedInventory;
 import nc.tile.fluid.ITileFluid;
 import nc.tile.internal.energy.EnergyConnection;
@@ -35,10 +40,13 @@ import nc.tile.processor.IUpgradable;
 import nc.util.StackHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
@@ -46,6 +54,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import static net.minecraft.util.EnumFacing.*;
+import static net.minecraft.util.EnumFacing.NORTH;
+import static net.minecraft.util.EnumFacing.SOUTH;
 
 public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements IItemFluidProcessor, ITileSideConfigGui<NCSProcessorUpdatePacket>, IUpgradable {
     public final double defaultProcessTime;
@@ -189,14 +201,16 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
 
         return tankSorptions;
     }
-    //values range 0.48 ... 10
+
+    //values range -0.5 ... 950
     public float getRecipeEfficiency()
     {
         if(!this.isProcessing) {
             return 0;
         }
-        float eff = (float)Math.exp(Math.log(1/Math.abs(this.targetReactivity/10 - this.currentReactivity/10)+0.1F))/2;
-        return Math.min(eff,500);
+        float eff = (float)(1/(Math.abs(this.targetReactivity - this.currentReactivity)/20+0.05)-1)*10;
+        float effCap = NCSteamAdditionsConfig.efficiencyCap > 0? NCSteamAdditionsConfig.efficiencyCap : 99999;
+        return Math.min(eff,effCap);
     }
 
     public void onLoad() {
@@ -210,11 +224,51 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
 
     }
 
+    protected void processExternalHeaters()
+    {
+        TileEntity heater;
+        switch (getFacingHorizontal()) {
+            case SOUTH:
+                heater = world.getTileEntity(pos.north());
+                break;
+            case NORTH:
+                heater = world.getTileEntity(pos.south());
+                break;
+            case WEST:
+                heater = world.getTileEntity(pos.east());
+                break;
+            default:
+                heater = world.getTileEntity(pos.west());
+        }
+        if (heater == null) return;
+        double temperature = 0;
+        if(ModCheck.mekanismLoaded() && heater instanceof mekanism.common.tile.TileEntityFuelwoodHeater) {
+            temperature = ((mekanism.common.tile.TileEntityFuelwoodHeater) heater).getTemp();
+            if(this.getCurrentReactivity() < this.getTargetReactivity()-1) {
+                this.currentReactivity += (float)temperature/50000;
+                currentReactivity = Math.min(currentReactivity,targetReactivity);
+                ((TileEntityFuelwoodHeater) heater).temperature -= temperature/50;
+            }
+        } else if( ModCheck.ic2Loaded() && heater instanceof ic2.core.block.TileEntityHeatSourceInventory) {
+            if(this.getCurrentReactivity() < this.getTargetReactivity()-1) {
+                int heatPerTick = ((TileEntityHeatSourceInventory) heater).getMaxHeatEmittedPerTick();
+                ((TileEntityHeatSourceInventory) heater).addtoHeatBuffer(-heatPerTick);
+                this.currentReactivity += (float)heatPerTick/500;
+                currentReactivity = Math.min(currentReactivity,targetReactivity);
+            }
+        }
+
+
+    }
+
     public void update() {
         if (!this.world.isRemote) {
             boolean wasProcessing = this.isProcessing;
             this.isProcessing = this.isProcessing();
             boolean shouldUpdate = false;
+            if(ModCheck.mekanismLoaded() || ModCheck.ic2Loaded()) {
+                processExternalHeaters();
+            }
             if (this.isProcessing) {
                 this.process();
             } else {
@@ -365,14 +419,14 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public void process() {
-        if(currentReactivity < this.targetReactivity && this.getRecipeEfficiency() <= 100) {
+        if(currentReactivity < this.targetReactivity) {
             this.currentReactivity += (this.targetReactivity - this.currentReactivity) * (float)NCSteamAdditionsConfig.efficiencyChangeSpeed/50000;
         }
         float efficiency = 1;
         if(NCSteamAdditionsConfig.efficiencyCap > 0) {
-            efficiency = Math.min(this.getRecipeEfficiency() / 100, (float) NCSteamAdditionsConfig.efficiencyCap / 100);
+            efficiency = Math.min(this.getRecipeEfficiency(), (float) NCSteamAdditionsConfig.efficiencyCap);
         }
-        this.time += this.getSpeedMultiplier() * efficiency;
+        this.time += this.getSpeedMultiplier() * efficiency/100;
         this.getEnergyStorage().changeEnergyStored((long)(-this.getProcessPower()));
         this.getRadiationSource().setRadiationLevel(this.baseProcessRadiation * this.getSpeedMultiplier());
 
@@ -578,6 +632,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public ItemStack decrStackSize(int slot, int amount) {
+        if(getItemInputSize() == 0) return ItemStack.EMPTY;
         ItemStack stack = super.decrStackSize(slot, amount);
         if (!this.world.isRemote) {
             if (slot < this.itemInputSize) {
@@ -594,7 +649,8 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public void setInventorySlotContents(int slot, ItemStack stack) {
-        super.setInventorySlotContents(slot, stack);
+        if(getItemInputSize() == 0) return;
+         super.setInventorySlotContents(slot, stack);
         if (!this.world.isRemote) {
             if (slot < this.itemInputSize) {
                 this.refreshRecipe();

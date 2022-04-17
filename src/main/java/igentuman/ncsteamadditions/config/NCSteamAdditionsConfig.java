@@ -35,6 +35,7 @@ public class NCSteamAdditionsConfig {
 	public static int efficiencyChangeSpeed;
 	public static int digitalTransformerRF;
 	public static int digitalTransformerResetTime;
+	public static int digitalTransformerEfficienctCap;
 	public static int[] ore_dims;
 	public static boolean ore_dims_list_type;
 	public static boolean[] ore_gen;
@@ -69,6 +70,9 @@ public class NCSteamAdditionsConfig {
 		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {800,400,400,800,400,400,500,400,12000}, Lang.localise("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
 		propertyProcessorTime.setLanguageKey("gui.ncsteamadditions.config.processors.time");
 
+		Property efficiency_cap = config.get(CATEGORY_PROCESSORS, "efficiency_cap", 150, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,5000);
+		efficiency_cap.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_cap");
+
 		Property propertyBoilerConversion = config.get(CATEGORY_PROCESSORS, "boiler_conversion", 1.25F, Lang.localise("gui.ncsteamadditions.config.processors.boiler_conversion.comment"),0,32767);
 		propertyBoilerConversion.setLanguageKey("gui.ncsteamadditions.config.processors.boiler_conversion");
 
@@ -90,10 +94,12 @@ public class NCSteamAdditionsConfig {
 		Property digitalTransformerReset = config.get(CATEGORY_PROCESSORS, "digital_transformer_rf", 1024, Lang.localise("gui.ncsteamadditions.config.processors.digital_transformer_rf.comment"),0,32767);
 		digitalTransformerReset.setLanguageKey("gui.ncsteamadditions.config.processors.digital_transformer_rf");
 
-		Property efficiency_cap = config.get(CATEGORY_PROCESSORS, "efficiency_cap", 150, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,5000);
-		efficiency_cap.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_cap");
+		Property digital_transformer_efficiency_cap = config.get(CATEGORY_PROCESSORS, "digital_transformer_efficiency_cap", 1500, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,2300);
+		digital_transformer_efficiency_cap.setLanguageKey("gui.ncsteamadditions.config.processors.digital_transformer_efficiency_cap");
 
-		Property efficiency_change_speed = config.get(CATEGORY_PROCESSORS, "efficiency_change_speed", 100, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_change_speed.comment"),0,200);
+
+
+		Property efficiency_change_speed = config.get(CATEGORY_PROCESSORS, "efficiency_change_speed", 50, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_change_speed.comment"),0,200);
 		efficiency_change_speed.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_change_speed");
 
 		Property override_nc_recipes = config.get(CATEGORY_RECIPES, "override_nc_recipes", "true", Lang.localise("gui.ncsteamadditions.config.recipes.override_nc_recipes.comment"));
@@ -141,7 +147,7 @@ public class NCSteamAdditionsConfig {
 		ore_drops = readBooleanArrayFromConfig(propertyOreDrops);
 		ore_hide_disabled = propertyOreHideDisabled.getBoolean();
 		ore_harvest_levels = readIntegerArrayFromConfig(propertyOreHarvestLevels);
-
+		
 		overrideNcRecipes = override_nc_recipes.getBoolean();
 
 		efficiencyChangeSpeed = efficiency_change_speed.getInt();
@@ -149,7 +155,7 @@ public class NCSteamAdditionsConfig {
 
 
 		digitalTransformerRF = digitalTransformerBasePower.getInt();
-
+		digitalTransformerEfficienctCap = digital_transformer_efficiency_cap.getInt();
 		digitalTransformerResetTime = digitalTransformerReset.getInt();
 
 		pipeCapacity = capacity.getInt();

@@ -80,7 +80,7 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 			drawGradientRect(guiLeft + 8, guiTop + 6, guiLeft + 8 + 16, guiTop + 6 + 74, 0xFFC6C6C6, 0xFF8B8B8B);
 
 			drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(135), 8);
-		drawTexturedModalRect(guiLeft +101, guiTop + 63, 0, 176, (int) Math.round(tile.getRecipeEfficiency() * 66 / 500), 3);
+		drawTexturedModalRect(guiLeft +101, guiTop + 63, 0, 176, (int) Math.round(tile.getRecipeEfficiency() * 66 / ((TileDigitalTransformer)tile).getEfficiencyCap()), 3);
 		drawTexturedModalRect(guiLeft +101, guiTop + 69, 0, 179,  (int) Math.round(tile.getCurrentReactivity() * 66 / 20), 3);
 		drawTexturedModalRect(guiLeft +101, guiTop + 75, 0, 182, (int) Math.round(tile.getTargetReactivity() * 66 / 20), 3);
 

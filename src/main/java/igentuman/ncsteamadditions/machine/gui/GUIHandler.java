@@ -1,4 +1,4 @@
-package igentuman.ncsteamadditions.gui;
+package igentuman.ncsteamadditions.machine.gui;
 
 import igentuman.ncsteamadditions.processors.*;
 import igentuman.ncsteamadditions.tile.NCSteamAdditionsTiles;

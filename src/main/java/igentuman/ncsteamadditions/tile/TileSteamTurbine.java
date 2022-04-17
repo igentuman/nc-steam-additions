@@ -108,9 +108,15 @@ public class TileSteamTurbine extends TileNCSProcessor implements ITileEnergy, I
     }
 
     public void process() {
-        this.time += this.getSpeedMultiplier();
+        if(currentReactivity < this.targetReactivity && this.getRecipeEfficiency() <= 100) {
+            this.currentReactivity += (this.targetReactivity - this.currentReactivity) * (float)NCSteamAdditionsConfig.efficiencyChangeSpeed/50000;
+        }
+        float efficiency = 1;
+        if(NCSteamAdditionsConfig.efficiencyCap > 0) {
+            efficiency = Math.min(this.getRecipeEfficiency() / 100, (float) NCSteamAdditionsConfig.efficiencyCap / 100);
+        }
+        this.time += this.getSpeedMultiplier() * efficiency;
         this.getEnergyStorage().changeEnergyStored((long)(-this.getProcessPower()));
-        this.getRadiationSource().setRadiationLevel(this.baseProcessRadiation * this.getSpeedMultiplier());
 
         while(this.time >= this.baseProcessTime) {
             this.finishProcess();
@@ -161,7 +167,7 @@ public class TileSteamTurbine extends TileNCSProcessor implements ITileEnergy, I
             modid = "ic2"
     )
     public boolean acceptsEnergyFrom(IEnergyEmitter emitter, EnumFacing side) {
-        return super.acceptsEnergyFrom(emitter, side);
+        return false;
     }
 
     @Optional.Method(
