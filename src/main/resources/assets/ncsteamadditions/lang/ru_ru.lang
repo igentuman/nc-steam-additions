@@ -94,6 +94,9 @@ gui.ncsteamadditions.config.recipes.override_nc_recipes.comment=Лучше ос�
 ncsteamadditions.guide_book.name=NC Steam Additions Гайд
 ncsteamadditions.guide_book_edition=Русский
 
+tile.ncsteamadditions.heat_exchanger.name=Теплообменник
+tile.ncsteamadditions.heat_exchanger.desc=Нагривай жидкости с помощью других жидкостей
+
 advancement.ncsteamadditions.steam_boiler.name=Пора вскипятить водичку
 advancement.ncsteamadditions.steam_boiler.desc=Скрафти Бойлер
 

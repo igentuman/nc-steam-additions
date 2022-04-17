@@ -15,6 +15,11 @@ public class ProcessorContainer  extends ContainerItemFluidProcessor {
     public ProcessorContainer(EntityPlayer player, TileNCSProcessor tileEntity, AbstractProcessor processor)
     {
         super(player, tileEntity, NCSteamAdditionsRecipes.processorRecipeHandlers[processor.getGuid()]);
+        renderConteiner(player, tileEntity, processor);
+    }
+
+    public void renderConteiner(EntityPlayer player, TileNCSProcessor tileEntity, AbstractProcessor processor)
+    {
         int idCounter = 0;
         int x = GuiItemFluidMachine.inputItemsLeft;
         if(processor.inputItems > 0) {

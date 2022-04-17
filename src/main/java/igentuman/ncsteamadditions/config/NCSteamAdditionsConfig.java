@@ -67,7 +67,7 @@ public class NCSteamAdditionsConfig {
 	{
 		if (loadFromFile) config.load();
 
-		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {800,400,400,800,400,400,500,400,12000}, Lang.localise("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
+		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {800,400,400,800,400,400,500,400,12000,100}, Lang.localise("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
 		propertyProcessorTime.setLanguageKey("gui.ncsteamadditions.config.processors.time");
 
 		Property efficiency_cap = config.get(CATEGORY_PROCESSORS, "efficiency_cap", 150, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,5000);

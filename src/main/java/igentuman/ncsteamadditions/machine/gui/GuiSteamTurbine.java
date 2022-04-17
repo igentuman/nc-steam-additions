@@ -36,8 +36,10 @@ public class GuiSteamTurbine extends GuiItemFluidMachine
 		GlStateManager.color(1F, 1F, 1F, 1F);
 		mc.getTextureManager().bindTexture(gui_textures);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		drawEfficiencyBar();
 		drawTexturedModalRect(guiLeft + inputFluidsLeft+4, guiTop + 33, 0, 168, getCookProgressScaled(135), 12);
 		drawBackgroundExtras();
+
 	}
 
 	public void initButtons()

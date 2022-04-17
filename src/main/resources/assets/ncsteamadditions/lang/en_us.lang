@@ -19,6 +19,9 @@ tile.ncsteamadditions.steam_compactor.desc=Compacting items with the power of st
 tile.ncsteamadditions.steam_boiler.name=Steam Boiler
 tile.ncsteamadditions.steam_boiler.desc=How do you suppose to get steam?
 
+tile.ncsteamadditions.heat_exchanger.name=Heat Exchanger
+tile.ncsteamadditions.heat_exchanger.desc=Heat Fluids with other Fluids
+
 tile.ncsteamadditions.steam_turbine.name=Steam Turbine
 tile.ncsteamadditions.steam_turbine.desc=Steam is rotating turbine, turbine generates electricity!
 

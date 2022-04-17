@@ -115,7 +115,7 @@ public class TileSteamTurbine extends TileNCSProcessor implements ITileEnergy, I
         if(NCSteamAdditionsConfig.efficiencyCap > 0) {
             efficiency = Math.min(this.getRecipeEfficiency() / 100, (float) NCSteamAdditionsConfig.efficiencyCap / 100);
         }
-        this.time += this.getSpeedMultiplier() * efficiency;
+        this.time += this.getSpeedMultiplier() * 1 / efficiency;
         this.getEnergyStorage().changeEnergyStored((long)(-this.getProcessPower()));
 
         while(this.time >= this.baseProcessTime) {

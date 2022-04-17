@@ -6,7 +6,7 @@ public class ProcessorsRegistry {
 
     protected AbstractProcessor[] processorList;
 
-    protected int processorsCount = 9;
+    protected int processorsCount = 10;
 
     public SteamBoiler STEAM_BOILER                     = new SteamBoiler();
     public SteamCrusher STEAM_CRUSHER                   = new SteamCrusher();
@@ -17,6 +17,7 @@ public class ProcessorsRegistry {
     public SteamFluidTransformer STEAM_FLUID_TRANSFORMER = new SteamFluidTransformer();
     public SteamTurbine STEAM_TURBINE                   = new SteamTurbine();
     public DigitalTransformer DIGITAL_TRANSFORMER       = new DigitalTransformer();
+    public HeatExchanger HEAT_EXCHANGER                 = new HeatExchanger();
 
     private ProcessorsRegistry()
     {
@@ -45,9 +46,8 @@ public class ProcessorsRegistry {
             processorList[STEAM_TURBINE.getGuid()]              = STEAM_TURBINE;
             processorList[DIGITAL_TRANSFORMER.getGuid()]        = DIGITAL_TRANSFORMER;
             processorList[STEAM_BLENDER.getGuid()]              = STEAM_BLENDER;
+            processorList[HEAT_EXCHANGER.getGuid()]             = HEAT_EXCHANGER;
         }
         return processorList;
     }
-
-
 }
