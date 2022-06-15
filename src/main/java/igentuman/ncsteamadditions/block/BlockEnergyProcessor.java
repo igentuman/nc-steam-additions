@@ -3,7 +3,6 @@ package igentuman.ncsteamadditions.block;
 import ic2.api.item.IElectricItemManager;
 import ic2.api.item.ISpecialElectricItem;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import igentuman.ncsteamadditions.machine.block.BlockNCSteamAdditionsProcessor;
 
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import nc.item.energy.ElectricItemManager;
@@ -22,7 +21,7 @@ import javax.annotation.Nullable;
         iface = "ic2.api.item.ISpecialElectricItem",
         modid = "ic2"
 )})
-public class BlockEnergyProcessor extends  BlockNCSteamAdditionsProcessor implements ISpecialElectricItem, IChargableItem {
+public class BlockEnergyProcessor extends BlockProcessor implements ISpecialElectricItem, IChargableItem {
 
 
     public <T extends AbstractProcessor> BlockEnergyProcessor(T processor) {

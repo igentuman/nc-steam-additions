@@ -63,14 +63,14 @@ public class DigitalTransformerCategory extends ParentProcessorCategory
 		protected double getBaseProcessTime()
 		{
 			if (recipe == null)
-				return NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID];
-			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID]);
+				return NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.getGuid()];
+			return recipe.getBaseProcessTime(NCSteamAdditionsConfig.processor_time[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.getGuid()]);
 		}
 
 		@Override
 		protected double getBaseProcessPower()
 		{
-			return NCSteamAdditionsConfig.digitalTransformerRF;
+			return ProcessorsRegistry.get().DIGITAL_TRANSFORMER.getProcessPower();
 		}
 	}
 }

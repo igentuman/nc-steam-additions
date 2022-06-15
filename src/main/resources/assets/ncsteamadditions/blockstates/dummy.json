@@ -1,0 +1,14 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "ncsteamadditions:dummy",
+        "textures": {
+            "front": "ncsteamadditions:blocks/dummy"
+        }
+    },
+    "variants": {
+        "inventory": [{}],
+        "normal": [{}]
+    }
+}
+

@@ -17,6 +17,8 @@ import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
+import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
+
 public class SteamBoiler extends AbstractProcessor {
 
    public SteamBoiler()
@@ -34,7 +36,7 @@ public class SteamBoiler extends AbstractProcessor {
                "PBP", "CFC", "PBP",
                'P', "ingotZinc",
                'F', net.minecraft.init.Blocks.FURNACE,
-               'C', Items.items[0],
+               'C', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
                'B', RegistryHelper.itemStackFromRegistry("minecraft:cauldron")
        };
    }

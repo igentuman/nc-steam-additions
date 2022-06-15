@@ -16,8 +16,11 @@ import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCBlocks;
 import nc.integration.jei.JEIBasicCategory;
 import nc.util.FluidRegHelper;
+import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+
+import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
 public class SteamTurbine extends AbstractProcessor {
 
@@ -34,7 +37,7 @@ public class SteamTurbine extends AbstractProcessor {
        outputItems = 0;
        craftingRecipe = new Object[] {
                "PRP", "CFC", "PHP",
-               'P', Items.items[ItemCopperSheet.regId],
+               'P', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
                'F', "solenoidCopper",
                'C', "blockZinc",
                'R', Blocks.otherBlocks[0],

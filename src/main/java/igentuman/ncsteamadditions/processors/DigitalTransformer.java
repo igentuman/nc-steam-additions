@@ -1,6 +1,7 @@
 package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
+import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.DigitalTransformerCategory;
@@ -28,6 +29,10 @@ public class DigitalTransformer extends AbstractProcessor {
         outputFluids = 1;
         outputItems = 1;
         craftingRecipe = new Object[] {};
+    }
+
+    public int getProcessPower() {
+        return NCSteamAdditionsConfig.digitalTransformerRF;
     }
 
     public String getBlockType()

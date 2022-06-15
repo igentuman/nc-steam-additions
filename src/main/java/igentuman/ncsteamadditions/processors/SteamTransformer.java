@@ -13,8 +13,11 @@ import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
+import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+
+import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
 public class SteamTransformer extends AbstractProcessor {
 
@@ -33,9 +36,9 @@ public class SteamTransformer extends AbstractProcessor {
                 "PRP", "CFC", "PHP",
                 'P', "chest",
                 'F', net.minecraft.init.Items.BUCKET,
-                'C', Items.items[0],
+                'C', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
                 'R', net.minecraft.init.Items.ENDER_EYE,
-                'H', Items.items[1]};
+                'H', RegistryHelper.itemStackFromRegistry(MOD_ID+":pipe")};
     }
 
     public String getBlockType()

@@ -11,7 +11,7 @@ buildscript {
 			}
     }
     dependencies {
-		classpath 'com.github.GregTechCE:ForgeGradle:FG_2.3-SNAPSHOT'
+		//classpath 'com.github.GregTechCE:ForgeGradle:FG_2.3-SNAPSHOT'
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
@@ -84,18 +84,12 @@ minecraft {
 }
 
 dependencies {
-    deobfProvided "nuclearcraft-overhauled:NuclearCraft:${nuclearcraft_version}:${mc_version}"
-	
-	// compile against the JEI API but do not include it at runtime
-	deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
-	// at runtime, use the full JEI jar
-	runtime "mezz.jei:jei_${mc_version}:${jei_version}"
-	deobfCompile ("cofh:CoFHCore:${cofh_core_version}:universal") {
-		transitive = false
-	}
+	deobfProvided "nuclearcraft-overhauled:NuclearCraft:${nuclearcraft_version}:${mc_version}"
+
+	//deobfCompile "cofh:CoFHCore:${cofh_core_version}:universal"
 	deobfCompile "codechicken:CodeChickenLib:1.12.2-+:universal"
-	deobfCompile "cofh:RedstoneFlux:1.12-+:universal"
-	deobfCompile "net.industrial-craft:industrialcraft-2:${ic2_version}:api"
+	//deobfCompile "cofh:RedstoneFlux:1.12-+:universal"
+	deobfCompile "net.industrial-craft:industrialcraft-2:${ic2_version}"
 	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:${crafttweaker_version}"
 	deobfCompile "base:base:${b_a_s_e_version}"
 	deobfCompile "contenttweaker:ContentTweaker:${contenttweaker_version}"
@@ -104,6 +98,9 @@ dependencies {
 	deobfCompile "mekanism:Mekanism:${mekanism_version}"
 	deobfCompile "vazkii.patchouli:Patchouli:${patchouli_version}"
 	deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:${top_version}"
+	deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
+	implementation "mezz.jei:jei_${mc_version}:${jei_version}"
+	runtime "mezz.jei:jei_${mc_version}:${jei_version}"
 }
 
 processResources {

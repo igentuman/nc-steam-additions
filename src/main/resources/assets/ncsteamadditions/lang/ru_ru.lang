@@ -78,7 +78,9 @@ tile.ncsteamadditions.ingot_block.zinc.name=Блок Цинка
 tile.ncsteamadditions.ingot_block.zinc.desc=
 
 item.ncsteamadditions.core_of_transformation.name=Ядро Трансформации
+item.ncsteamadditions.core_of_transformation.zinc.name=Ядро Трансформации
 item.ncsteamadditions.core_of_transformation.desc=Оооочень важная штука
+item.ncsteamadditions.core_of_transformation.zinc.desc=Оооочень важная штука
 
 gui.ncsteamadditions.config.processors.efficiency_cap.comment=100 - обычная эффективность. 5000 max. 0 - отключить
 gui.ncsteamadditions.config.processors.efficiency_change_speed.comment=Большее значениее - большая скорость. 200 max

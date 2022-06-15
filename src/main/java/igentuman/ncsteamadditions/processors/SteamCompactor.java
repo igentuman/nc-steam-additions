@@ -15,11 +15,14 @@ import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
 import nc.util.OreDictHelper;
+import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Set;
+
+import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
 public class SteamCompactor extends AbstractProcessor {
 
@@ -39,7 +42,7 @@ public class SteamCompactor extends AbstractProcessor {
                 'B', net.minecraft.init.Items.BUCKET,
                 'F', "chest",
                 'R', net.minecraft.init.Blocks.PISTON,
-                'P', Items.items[0]};
+                'P', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet")};
     }
 
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {

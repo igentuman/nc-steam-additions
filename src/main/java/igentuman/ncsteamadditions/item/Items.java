@@ -2,7 +2,9 @@ package igentuman.ncsteamadditions.item;
 
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
+import igentuman.ncsteamadditions.block.BlockDummy;
 import igentuman.ncsteamadditions.block.BlockPipe;
+import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.block.MetaEnums;
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
 import nc.item.IInfoItem;
@@ -26,6 +28,9 @@ public class Items {
         if(BlockPipe.class == block.getClass()) {
             BlockPipe.PIPE_ITEM = new ItemPipe(block);
             return (ItemBlock) BlockPipe.PIPE_ITEM;
+        } else if(BlockDummy.class == block.getClass()) {
+            BlockDummy.ITEM_BLOCK = new ItemDummy(block);
+            return BlockDummy.ITEM_BLOCK;
         }
         return null;
     }

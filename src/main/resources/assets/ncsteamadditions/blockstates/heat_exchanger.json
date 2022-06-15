@@ -1,18 +1,19 @@
 {
     "forge_marker": 1,
     "defaults": {
-        "model": "nuclearcraft:processor",
+        "model": "ncsteamadditions:heat_exchanger",
         "textures": {
-            "front": "ncsteamadditions:blocks/machine/heat_exchanger_front_off"
+            "0": "ncsteamadditions:blocks/machine/heat_exchanger"
         }
     },
     "variants": {
+        "normal": [{}],
         "inventory": [{}],
         "active": {
             "false": {},
             "true": {
                 "textures": {
-                    "front": "ncsteamadditions:blocks/machine/heat_exchanger_front_on"
+                    "0": "ncsteamadditions:blocks/machine/heat_exchanger_on"
                 }
             }
         },

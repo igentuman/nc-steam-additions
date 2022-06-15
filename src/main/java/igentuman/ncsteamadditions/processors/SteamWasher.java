@@ -14,9 +14,12 @@ import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
 import nc.util.OreDictHelper;
+import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.oredict.OreDictionary;
+
+import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
 public class SteamWasher extends AbstractProcessor {
 
@@ -35,9 +38,9 @@ public class SteamWasher extends AbstractProcessor {
                 "PRP", "CFC", "PHP",
                 'P', "chest",
                 'F', net.minecraft.init.Items.WATER_BUCKET,
-                'C', Items.items[0],
+                'C', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
                 'R', net.minecraft.init.Items.ENDER_PEARL,
-                'H', Items.items[1]};
+                'H', RegistryHelper.itemStackFromRegistry(MOD_ID+":pipe")};
     }
 
     public String getBlockType()

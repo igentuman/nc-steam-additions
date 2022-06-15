@@ -17,6 +17,8 @@ import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
+import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
+
 public class SteamFluidTransformer extends AbstractProcessor {
 
     public SteamFluidTransformer()
@@ -34,9 +36,9 @@ public class SteamFluidTransformer extends AbstractProcessor {
                 "PRP", "CFC", "PHP",
                 'P', net.minecraft.init.Items.BUCKET,
                 'F', net.minecraft.init.Items.ENDER_EYE,
-                'C', Items.items[0],
+                'C', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
                 'R', RegistryHelper.itemStackFromRegistry("minecraft:brewing_stand"),
-                'H', Items.items[1]};
+                'H', RegistryHelper.itemStackFromRegistry(MOD_ID+":pipe")};
 
     }
 

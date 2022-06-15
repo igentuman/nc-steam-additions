@@ -2,7 +2,6 @@ package igentuman.ncsteamadditions.block;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.item.Items;
-import igentuman.ncsteamadditions.machine.block.BlockNCSteamAdditionsProcessor;
 import igentuman.ncsteamadditions.processors.*;
 import nc.block.item.ItemBlockMeta;
 import nc.block.item.NCItemBlock;
@@ -21,15 +20,16 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class Blocks
 {
 
-	public static Block[] blocks;
+    public static Block[] blocks;
 	public static Block[] otherBlocks;
 	public static Block ore;
 	public static Block ingot_block;
 
 	public static void init() 
 	{
-		otherBlocks = new Block[1];
+		otherBlocks = new Block[2];
 		otherBlocks[0] = withName(new BlockPipe(),"pipe");
+		otherBlocks[1] = withName(new BlockDummy(),"dummy");
 
 		AbstractProcessor[] processors = ProcessorsRegistry.get().processors();
 		blocks = new Block[processors.length];
@@ -39,8 +39,14 @@ public class Blocks
 
 		for (AbstractProcessor processor: processors) {
 			if(processor.getBlockType().equals("nc_processor")) {
-				BlockNCSteamAdditionsProcessor processorBlock = new BlockNCSteamAdditionsProcessor(processor);
-				blocks[processor.getGuid()] = withName(processorBlock);
+				if(processor.isCustomModel()) {
+					BlockCustomModelProcessor processorBlock = new BlockCustomModelProcessor(processor);
+					blocks[processor.getGuid()] = withName(processorBlock);
+				} else {
+					BlockProcessor processorBlock = new BlockProcessor(processor);
+					blocks[processor.getGuid()] = withName(processorBlock);
+				}
+
 			} else {
 				BlockEnergyProcessor processorBlock = new BlockEnergyProcessor(processor);
 				blocks[processor.getGuid()] = withName(processorBlock);
@@ -86,6 +92,10 @@ public class Blocks
 	}
 	
 	public static <T extends Block & ITileType> Block withName(T block) {
+		return block.setTranslationKey(NCSteamAdditions.MOD_ID + "." + block.getTileName()).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, block.getTileName()));
+	}
+
+	public static <T extends Block & ITileType> Block withCustomModel(T block) {
 		return block.setTranslationKey(NCSteamAdditions.MOD_ID + "." + block.getTileName()).setRegistryName(new ResourceLocation(NCSteamAdditions.MOD_ID, block.getTileName()));
 	}
 	

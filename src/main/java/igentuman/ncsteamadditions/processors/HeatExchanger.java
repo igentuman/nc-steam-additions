@@ -1,7 +1,5 @@
 package igentuman.ncsteamadditions.processors;
 
-import cofh.core.util.helpers.FluidHelper;
-import igentuman.ncsteamadditions.block.BlockPipe;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
@@ -15,10 +13,14 @@ import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCCoolantFluids;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
-import nc.util.FluidRegHelper;
 import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+
+import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
 public class HeatExchanger extends AbstractProcessor {
 
@@ -37,12 +39,15 @@ public class HeatExchanger extends AbstractProcessor {
                 "PRP", "CFC", "PHP",
                 'P', net.minecraft.init.Blocks.IRON_BARS,
                 'F', RegistryHelper.itemStackFromRegistry("minecraft:cauldron"),
-                'C', Items.items[0],
+                'C', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
                 'R', RegistryHelper.itemStackFromRegistry("minecraft:brewing_stand"),
                 'H', Blocks.otherBlocks[0]};
 
     }
-
+    public AxisAlignedBB getAABB()
+    {
+        return AABB;
+    }
     public String getBlockType()
     {
         return "nc_processor";
@@ -106,13 +111,27 @@ public class HeatExchanger extends AbstractProcessor {
                     ProcessorsRegistry.get().HEAT_EXCHANGER.GUID
             );
         }
+
+        public void update()
+        {
+            super.update();
+            FluidStack coolant = getTanks().get(0).getFluid();
+            FluidStack heater = getTanks().get(1).getFluid();
+            if (heater != null && !heater.getUnlocalizedName().matches("(.*)hot(.*)")) {
+                getTanks().get(0).setFluid(heater);
+                getTanks().get(1).setFluid(coolant);
+            }
+        }
     }
+    public boolean isFullCube() {return false;}
+    public AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.5D, 1.0D);
 
     public HeatExchanger.RecipeHandler getRecipes()
     {
         return new HeatExchanger.RecipeHandler();
     }
 
+    public boolean isCustomModel() {return true;}
 
     public class RecipeHandler extends AbstractProcessor.RecipeHandler {
         public RecipeHandler()

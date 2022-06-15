@@ -14,6 +14,7 @@ import nc.util.FluidStackHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 
 import java.util.ArrayList;
 
@@ -110,6 +111,17 @@ public abstract class AbstractProcessor {
 
     public abstract TileEntity getTile();
 
+    public boolean isFullCube() {return true;}
+    public AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+    public boolean isCustomModel() {return false;}
+    public AxisAlignedBB getAABB()
+    {
+        return AABB;
+    }
+
+    public int getProcessPower() {
+        return 0;
+    }
     public abstract class RecipeHandler extends ProcessorRecipeHandler {
         public int bucket() {
             return FluidStackHelper.BUCKET_VOLUME;
