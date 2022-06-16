@@ -2,28 +2,24 @@ package igentuman.ncsteamadditions.tile;
 
 import ic2.core.block.TileEntityHeatSourceInventory;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import igentuman.ncsteamadditions.network.NCSAPacketHandler;
+import igentuman.ncsteamadditions.machine.sound.SoundHandler;
 import igentuman.ncsteamadditions.network.NCSProcessorUpdatePacket;
+import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import mekanism.api.IHeatTransfer;
-import mekanism.common.capabilities.Capabilities;
 import mekanism.common.tile.TileEntityFuelwoodHeater;
 import nc.ModCheck;
 import nc.config.NCConfig;
 import nc.init.NCItems;
-import nc.network.tile.ProcessorUpdatePacket;
 import nc.recipe.AbstractRecipeHandler;
 import nc.recipe.BasicRecipe;
 import nc.recipe.BasicRecipeHandler;
 import nc.recipe.RecipeInfo;
 import nc.recipe.ingredient.IFluidIngredient;
 import nc.recipe.ingredient.IItemIngredient;
-import nc.tile.ITileGui;
 import nc.tile.energy.ITileEnergy;
-import nc.tile.energy.TileEnergy;
 import nc.tile.energyFluid.TileEnergyFluidSidedInventory;
 import nc.tile.fluid.ITileFluid;
 import nc.tile.internal.energy.EnergyConnection;
@@ -38,26 +34,26 @@ import nc.tile.processor.IProcessor;
 import nc.tile.processor.ITileSideConfigGui;
 import nc.tile.processor.IUpgradable;
 import nc.util.StackHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import static net.minecraft.util.EnumFacing.*;
-import static net.minecraft.util.EnumFacing.NORTH;
-import static net.minecraft.util.EnumFacing.SOUTH;
+import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
 public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements IItemFluidProcessor, ITileSideConfigGui<NCSProcessorUpdatePacket>, IUpgradable {
     public final double defaultProcessTime;
@@ -88,6 +84,10 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     public float currentReactivity;
     public float targetReactivity;
     protected int ticksToChange;
+
+    private SoundEvent soundEvent;
+    @SideOnly(Side.CLIENT)
+    private ISound activeSound;
 
     public TileNCSProcessor(String code, int inputItems, int inputFluids, int outputItems, int outputFluids, int GUID)
     {
@@ -154,6 +154,10 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         this.updatePacketListeners = new ObjectOpenHashSet();
         this.currentReactivity = currentReactivity;
         this.targetReactivity = targetReactivity;
+        String sound = ProcessorsRegistry.get().processors()[processorID-1].getSound();
+        if(!sound.equals("")) {
+            soundEvent = new SoundEvent(new ResourceLocation(MOD_ID, sound));
+        }
     }
 
 
@@ -215,6 +219,9 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
 
     public void onLoad() {
         super.onLoad();
+        if (world.isRemote) {
+            updateSound();
+        }
         if (!this.world.isRemote) {
             this.refreshRecipe();
             this.refreshActivity();
@@ -222,6 +229,38 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
             this.isProcessing = this.isProcessing();
         }
 
+    }
+    @SideOnly(Side.CLIENT)
+    protected void setSoundEvent(SoundEvent event) {
+        this.soundEvent = event;
+        SoundHandler.stopTileSound(getPos());
+    }
+    private int playSoundCooldown = 0;
+    private long lastActive = -1;
+    private int rapidChangeThreshold = 10;
+
+    @SideOnly(Side.CLIENT)
+    private void updateSound() {
+
+        if(soundEvent == null) return;
+        if (isProcessing()) {
+            if (--playSoundCooldown > 0) {
+                return;
+            }
+
+            if ((activeSound == null || !Minecraft.getMinecraft().getSoundHandler().isSoundPlaying(activeSound))) {
+                activeSound = SoundHandler.startTileSound(soundEvent.getSoundName(), (float)NCSteamAdditionsConfig.processorsSoundVolume, getPos());
+            }
+            playSoundCooldown = 20;
+
+        } else {
+            long downtime = world.getTotalWorldTime() - lastActive;
+            if (activeSound != null && downtime > rapidChangeThreshold) {
+                SoundHandler.stopTileSound(getPos());
+                activeSound = null;
+                playSoundCooldown = 0;
+            }
+        }
     }
 
     protected void processExternalHeaters()
@@ -262,6 +301,9 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public void update() {
+        if (world.isRemote) {
+            updateSound();
+        }
         if (!this.world.isRemote) {
             boolean wasProcessing = this.isProcessing;
             this.isProcessing = this.isProcessing();

@@ -9,15 +9,24 @@ import igentuman.ncsteamadditions.machine.container.ContainerSteamBoiler;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamBoiler;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
+import igentuman.ncsteamadditions.util.Util;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
+import nc.util.BlockHelper;
 import nc.util.FluidRegHelper;
 import nc.util.RegistryHelper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
+import static nc.block.property.BlockProperties.FACING_HORIZONTAL;
 
 public class SteamBoiler extends AbstractProcessor {
 
@@ -26,8 +35,8 @@ public class SteamBoiler extends AbstractProcessor {
        code = "steam_boiler";
        GUID = 0;
        SIDEID = 1000 + GUID;
-       particle1 = "splash";
-       particle2 = "flame";
+       particle1 = "flame";
+       particle2 = "smoke";
        inputItems = 1;
        inputFluids = 1;
        outputFluids = 1;
@@ -40,7 +49,20 @@ public class SteamBoiler extends AbstractProcessor {
                'B', RegistryHelper.itemStackFromRegistry("minecraft:cauldron")
        };
    }
-
+    public void spawnParticles(BlockPos pos, Random rand, World world, IBlockState state)
+    {
+        Util.spawnParticleOnProcessor(state, world, pos, rand, state.getValue(FACING_HORIZONTAL),
+                getType().getParticle1());
+        Util.spawnParticleOnProcessor(state, world, pos.add(0,1.5D,0), rand, state.getValue(FACING_HORIZONTAL).getOpposite(),
+                getType().getParticle2());
+    }
+    public String getSound()
+    {
+        return "boiler_on";
+    }
+    public boolean isFullCube() {return false;}
+    public AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 2.0D, 1.0D);
+    public boolean isCustomModel() {return true;}
     public String getBlockType()
     {
         return "nc_processor";

@@ -6,17 +6,26 @@ import igentuman.ncsteamadditions.recipes.ProcessorRecipeHandler;
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
 import igentuman.ncsteamadditions.tile.NCSteamAdditionsTiles;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
+import igentuman.ncsteamadditions.util.Util;
 import mezz.jei.api.IGuiHelper;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
+import nc.util.BlockHelper;
 import nc.util.FluidRegHelper;
 import nc.util.FluidStackHelper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import vazkii.patchouli.client.book.text.Word;
 
 import java.util.ArrayList;
+import java.util.Random;
+
+import static nc.block.property.BlockProperties.FACING_HORIZONTAL;
 
 public abstract class AbstractProcessor {
 
@@ -92,6 +101,19 @@ public abstract class AbstractProcessor {
     public String getCode()
     {
         return code;
+    }
+
+    public void spawnParticles(BlockPos pos, Random rand, World world, IBlockState state)
+    {
+        Util.spawnParticleOnProcessor(state, world, pos, rand, state.getValue(FACING_HORIZONTAL),
+                getType().getParticle1());
+        Util.spawnParticleOnProcessor(state, world, pos, rand, state.getValue(FACING_HORIZONTAL),
+                getType().getParticle2());
+    }
+
+    public String getSound()
+    {
+        return "";
     }
 
     public Class getTileClass() {

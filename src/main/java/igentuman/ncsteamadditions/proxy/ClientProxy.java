@@ -1,9 +1,11 @@
 package igentuman.ncsteamadditions.proxy;
 
+import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 import static igentuman.ncsteamadditions.config.NCSteamAdditionsConfig.clientPreInit;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.render.RenderHandler;
+import mekanism.client.sound.SoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -15,8 +17,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+@Mod.EventBusSubscriber(modid = MOD_ID)
 public class ClientProxy extends CommonProxy 
 {
 
@@ -26,6 +32,13 @@ public class ClientProxy extends CommonProxy
 		super.preInit(preEvent);
 		clientPreInit();
 		RenderHandler.init();
+	}
+
+	@Override
+	public void init(FMLInitializationEvent event)
+	{
+		super.init(event);
+		MinecraftForge.EVENT_BUS.register(SoundHandler.class);
 	}
 
 

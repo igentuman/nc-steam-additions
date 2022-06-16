@@ -45,6 +45,10 @@ public class SteamBlender extends AbstractProcessor {
         };
 
     }
+    public String getSound()
+    {
+        return "blender_on";
+    }
 
     public String getBlockType()
     {

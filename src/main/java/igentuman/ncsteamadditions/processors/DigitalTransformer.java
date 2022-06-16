@@ -14,6 +14,7 @@ import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 
 public class DigitalTransformer extends AbstractProcessor {
 
@@ -43,7 +44,7 @@ public class DigitalTransformer extends AbstractProcessor {
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
         return new GuiDigitalTransformer(player, (TileDigitalTransformer) tile, this);
     }
-
+    public boolean isFullCube() {return false;}
     public Object getGuiContainer(EntityPlayer player, TileEntity tile) {
         return new ContainerDigitalTransformer(player, (TileDigitalTransformer) tile);
     }

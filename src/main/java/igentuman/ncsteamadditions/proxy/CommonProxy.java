@@ -15,7 +15,10 @@ import igentuman.ncsteamadditions.worldgen.OreGenerator;
 import nc.ModCheck;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -24,7 +27,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod.EventBusSubscriber(modid = NCSteamAdditions.MOD_ID)
+import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
+
+@Mod.EventBusSubscriber(modid = MOD_ID)
 public class CommonProxy
 {
 
@@ -38,7 +43,7 @@ public class CommonProxy
 		Blocks.register();
 		Items.register();
 		NCSfluids.init();
-		NCSAPacketHandler.registerMessages(NCSteamAdditions.MOD_ID);
+		NCSAPacketHandler.registerMessages(MOD_ID);
 
 		NCSteamAdditionsTiles.register();
 		NCSOreDictionary.register();

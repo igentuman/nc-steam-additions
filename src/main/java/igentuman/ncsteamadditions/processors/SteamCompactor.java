@@ -49,6 +49,10 @@ public class SteamCompactor extends AbstractProcessor {
         return new GuiSteamCompactor(player, (TileNCSProcessor) tile, this);
     }
 
+    public String getSound()
+    {
+        return "compactor_on";
+    }
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
        return new GuiSteamCompactor.SideConfig(player, (TileNCSProcessor) tile, this);

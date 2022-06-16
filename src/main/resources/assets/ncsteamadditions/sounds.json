@@ -1,0 +1,7 @@
+{
+	"blender_on": {"category": "block", "sounds": [{"name": "ncsteamadditions:blender_on", "stream": false}]},
+	"compactor_on": {"category": "block", "sounds": [{"name": "ncsteamadditions:compactor_on", "stream": false}]},
+	"turbine_on": {"category": "block", "sounds": [{"name": "ncsteamadditions:turbine_on", "stream": false}]},
+	"boiler_on": {"category": "block", "sounds": [{"name": "ncsteamadditions:boiler_on", "stream": false}]},
+	"heat_exchanger_on": {"category": "block", "sounds": [{"name": "ncsteamadditions:heat_exchanger_on", "stream": false}]}
+}

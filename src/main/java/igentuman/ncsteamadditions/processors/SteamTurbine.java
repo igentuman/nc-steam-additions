@@ -19,6 +19,7 @@ import nc.util.FluidRegHelper;
 import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
@@ -45,11 +46,17 @@ public class SteamTurbine extends AbstractProcessor {
        };
    }
 
+    public AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.5D, 1.0D);
+
     public String getBlockType()
     {
         return "energy_processor";
     }
-
+    public boolean isFullCube() {return false;}
+    public String getSound()
+    {
+        return "turbine_on";
+    }
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
         return new GuiSteamTurbine(player, (TileSteamTurbine) tile, this);
     }

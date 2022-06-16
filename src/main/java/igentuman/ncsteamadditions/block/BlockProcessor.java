@@ -55,7 +55,17 @@ public class BlockProcessor extends BlockSidedTile implements IActivatable, ITil
 		this.type = processor.getType();
 		this.processor = processor;
 	}
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		if(processor == null) return true;
+		return processor.isFullCube();
+	}
 
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		if(processor == null) return true;
+		return processor.isFullCube();
+	}
 	@Override
 	public String getTileName()
 	{

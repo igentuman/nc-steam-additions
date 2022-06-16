@@ -45,7 +45,7 @@ import static nc.block.property.BlockProperties.FACING_HORIZONTAL;
 public class BlockCustomModelProcessor extends BlockSidedTile implements IActivatable, ITileType
 {
 	protected ProcessorType type;
-	private AbstractProcessor processor;
+	protected AbstractProcessor processor;
 
 	public <T extends AbstractProcessor> BlockCustomModelProcessor(T processor)
 	{
@@ -216,9 +216,6 @@ public class BlockCustomModelProcessor extends BlockSidedTile implements IActiva
 	{
 		if (!state.getValue(ACTIVE))
 			return;
-		BlockHelper.spawnParticleOnProcessor(state, world, pos, rand, state.getValue(FACING_HORIZONTAL),
-				type.getParticle1());
-		BlockHelper.spawnParticleOnProcessor(state, world, pos, rand, state.getValue(FACING_HORIZONTAL),
-				type.getParticle2());
+		processor.spawnParticles(pos, rand, world, state);
 	}
 }

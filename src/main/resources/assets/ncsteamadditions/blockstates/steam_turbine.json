@@ -1,18 +1,19 @@
 {
     "forge_marker": 1,
     "defaults": {
-        "model": "nuclearcraft:processor",
+        "model": "ncsteamadditions:steam_turbine",
         "textures": {
-            "front": "ncsteamadditions:blocks/machine/steam_turbine_front_off"
+            "0": "ncsteamadditions:blocks/machine/steam_turbine"
         }
     },
     "variants": {
+        "normal": [{}],
         "inventory": [{}],
         "active": {
             "false": {},
             "true": {
                 "textures": {
-                    "front": "ncsteamadditions:blocks/machine/steam_turbine_front_on"
+                    "0": "ncsteamadditions:blocks/machine/steam_turbine"
                 }
             }
         },

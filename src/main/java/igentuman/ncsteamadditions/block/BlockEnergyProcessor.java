@@ -9,9 +9,13 @@ import nc.item.energy.ElectricItemManager;
 import nc.item.energy.IChargableItem;
 import nc.item.energy.ItemEnergyCapabilityProvider;
 import nc.tile.internal.energy.EnergyConnection;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.Optional;
 
@@ -21,8 +25,7 @@ import javax.annotation.Nullable;
         iface = "ic2.api.item.ISpecialElectricItem",
         modid = "ic2"
 )})
-public class BlockEnergyProcessor extends BlockProcessor implements ISpecialElectricItem, IChargableItem {
-
+public class BlockEnergyProcessor extends BlockCustomModelProcessor implements ISpecialElectricItem, IChargableItem {
 
     public <T extends AbstractProcessor> BlockEnergyProcessor(T processor) {
         super(processor);
@@ -35,6 +38,7 @@ public class BlockEnergyProcessor extends BlockProcessor implements ISpecialElec
     public IElectricItemManager getManager(ItemStack itemStack) {
         return ElectricItemManager.getElectricItemManager(this);
     }
+
 
     @Override
     public void setEnergyStored(ItemStack stack, long energy) {

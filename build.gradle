@@ -118,6 +118,22 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
 
+	rename '(.+_at.cfg)', 'META-INF/$1'
+
+}
+jar {
+	manifest {
+		attributes([
+				"Specification-Title": "ncs",
+				"Specification-Vendor": "igentuman",
+				"Specification-Version": "1",
+				"Implementation-Title": project.name,
+				"Implementation-Version": "${version}",
+				"Implementation-Vendor" : "igentuman",
+				"FMLAT": "ncs_at.cfg",
+				"Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+		])
+	}
+}
 

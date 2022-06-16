@@ -123,16 +123,19 @@ public class HeatExchanger extends AbstractProcessor {
             }
         }
     }
-    public boolean isFullCube() {return false;}
-    public AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.5D, 1.0D);
+
 
     public HeatExchanger.RecipeHandler getRecipes()
     {
         return new HeatExchanger.RecipeHandler();
     }
-
+    public boolean isFullCube() {return false;}
+    public AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.5D, 1.0D);
     public boolean isCustomModel() {return true;}
-
+    public String getSound()
+    {
+        return "heat_exchanger_on";
+    }
     public class RecipeHandler extends AbstractProcessor.RecipeHandler {
         public RecipeHandler()
         {

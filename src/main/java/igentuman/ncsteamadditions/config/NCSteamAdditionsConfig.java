@@ -51,6 +51,8 @@ public class NCSteamAdditionsConfig {
 	public static double turbineConversion;
 	public static double boilerConversion;
 
+	public static double processorsSoundVolume;
+
 	public static void preInit()
 	{
 		config = new Configuration(new File(Loader.instance().getConfigDir(), "ncsteamadditions.cfg"));
@@ -72,6 +74,9 @@ public class NCSteamAdditionsConfig {
 
 		Property efficiency_cap = config.get(CATEGORY_PROCESSORS, "efficiency_cap", 150, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,5000);
 		efficiency_cap.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_cap");
+
+		Property processors_sound_volume = config.get(CATEGORY_PROCESSORS, "processors_sound_volume", 0.5, Lang.localise("gui.ncsteamadditions.config.processors.processors_sound_volume.comment"),0,1);
+		processors_sound_volume.setLanguageKey("gui.ncsteamadditions.config.processors.processors_sound_volume");
 
 		Property propertyBoilerConversion = config.get(CATEGORY_PROCESSORS, "boiler_conversion", 1.25F, Lang.localise("gui.ncsteamadditions.config.processors.boiler_conversion.comment"),0,32767);
 		propertyBoilerConversion.setLanguageKey("gui.ncsteamadditions.config.processors.boiler_conversion");
@@ -152,6 +157,8 @@ public class NCSteamAdditionsConfig {
 
 		efficiencyChangeSpeed = efficiency_change_speed.getInt();
 		efficiencyCap = efficiency_cap.getInt();
+
+		processorsSoundVolume = processors_sound_volume.getDouble();
 
 
 		digitalTransformerRF = digitalTransformerBasePower.getInt();
