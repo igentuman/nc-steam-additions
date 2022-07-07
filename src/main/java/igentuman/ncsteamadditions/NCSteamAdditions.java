@@ -22,7 +22,7 @@ public class NCSteamAdditions
 	public static final String MOD_ID = "ncsteamadditions";
 	public static final String VERSION = "@VERSION@";
 	public static final String MCVERSION = "1.12.2";
-	public static final String DEPENDENCIES = "required-after:nuclearcraft@[2o.6.0,2o.6.1,2o.6.2]";
+	public static final String DEPENDENCIES = "required-after:nuclearcraft@[2o.6.2]";
 
 	
 	@Instance(MOD_ID)
