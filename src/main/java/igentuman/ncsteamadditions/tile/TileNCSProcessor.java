@@ -206,9 +206,17 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         return tankSorptions;
     }
 
+    public void invalidate()
+    {
+        super.invalidate();
+        if (!ProcessorsRegistry.get().processors()[processorID-1].getSound().isEmpty()) {
+            stopSound();
+        }
+    }
     //values range -0.5 ... 950
     public float getRecipeEfficiency()
     {
+
         if(!this.isProcessing) {
             return 0;
         }
@@ -252,14 +260,19 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
                 activeSound = SoundHandler.startTileSound(soundEvent.getSoundName(), (float)NCSteamAdditionsConfig.processorsSoundVolume, getPos());
             }
             playSoundCooldown = 20;
-
         } else {
-            long downtime = world.getTotalWorldTime() - lastActive;
-            if (activeSound != null && downtime > rapidChangeThreshold) {
-                SoundHandler.stopTileSound(getPos());
-                activeSound = null;
-                playSoundCooldown = 0;
-            }
+            stopSound();
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    protected void stopSound()
+    {
+        long downtime = world.getTotalWorldTime() - lastActive;
+        if (activeSound != null && downtime > rapidChangeThreshold) {
+            SoundHandler.stopTileSound(getPos());
+            activeSound = null;
+            playSoundCooldown = 0;
         }
     }
 

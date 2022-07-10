@@ -45,6 +45,7 @@ public class TileDigitalTransformer extends TileNCSProcessor implements SimpleCo
     }
 
     public void update() {
+
         if (!this.world.isRemote) {
             boolean wasProcessing = this.isProcessing;
             this.isProcessing = this.isProcessing();

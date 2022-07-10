@@ -149,6 +149,7 @@ public class BlockCustomModelProcessor extends BlockSidedTile implements IActiva
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
+
 		if (player == null || hand != EnumHand.MAIN_HAND)
 			return false;
 
