@@ -4,8 +4,8 @@ import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 import static igentuman.ncsteamadditions.config.NCSteamAdditionsConfig.clientPreInit;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
+import igentuman.ncsteamadditions.machine.sound.SoundHandler;
 import igentuman.ncsteamadditions.render.RenderHandler;
-import mekanism.client.sound.SoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
