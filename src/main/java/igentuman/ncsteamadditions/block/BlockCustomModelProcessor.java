@@ -115,6 +115,11 @@ public class BlockCustomModelProcessor extends BlockSidedTile implements IActiva
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 
 		if(worldIn.isRemote || worldIn.getBlockState((pos.up())).getBlock() instanceof BlockDummy) return;
+		EntityPlayer pl = worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 10, false);
+		if(pl != null && pl.isCreative()) {
+			worldIn.setBlockToAir(pos);
+			return;
+		}
 		EntityItem item = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ());
 		IBlockState target = worldIn.getBlockState(pos);
 		ItemStack items = getItem(worldIn,pos,target);
