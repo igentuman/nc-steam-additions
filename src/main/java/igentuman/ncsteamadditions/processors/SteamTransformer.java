@@ -1,12 +1,11 @@
 package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
-import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
-import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamTransformerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTransformer;
+import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
@@ -40,7 +39,10 @@ public class SteamTransformer extends AbstractProcessor {
                 'R', net.minecraft.init.Items.ENDER_EYE,
                 'H', RegistryHelper.itemStackFromRegistry(MOD_ID+":pipe")};
     }
-
+    public Class getGuiClass()
+    {
+        return GuiSteamTransformer.class;
+    }
     public String getBlockType()
     {
         return "nc_processor";

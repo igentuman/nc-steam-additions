@@ -43,6 +43,7 @@ public class NCSteamAdditionsConfig {
 	public static int[] ore_rate;
 	public static int[] ore_min_height;
 	public static int[] ore_max_height;
+	public static boolean spawn_villager;
 
 	public static boolean[] ore_drops;
 	public static boolean ore_hide_disabled;
@@ -142,6 +143,10 @@ public class NCSteamAdditionsConfig {
 		Property propertyOreHarvestLevels = config.get(CATEGORY_WORLDGEN, "ore_harvest_levels", new int[]{2}, Lang.localise("gui.ncsteamadditions.config.ore_harvest_levels.comment"), 0, 15);
 		propertyOreHarvestLevels.setLanguageKey("gui.ncsteamadditions.config.ore_harvest_levels");
 
+		Property spawnVillager = config.get(CATEGORY_WORLDGEN, "spawn_villager", true, Lang.localise("gui.ncsteamadditions.config.spawn_villager.comment"));
+		propertyOreGen.setLanguageKey("gui.ncsteamadditions.config.spawn_villager");
+
+		spawn_villager = spawnVillager.getBoolean();
 		ore_dims = propertyOreDims.getIntList();
 		ore_dims_list_type = propertyOreDimsListType.getBoolean();
 		ore_gen = readBooleanArrayFromConfig(propertyOreGen);

@@ -106,6 +106,36 @@ public class SteamAdditionsCraftTweaker
 		}
 	}
 
+	@ZenClass("mods.ncsteamadditions.steam_washer")
+	@ZenRegister
+	public static class SteamWasherHandler
+	{
+
+		@ZenMethod
+		public static void addRecipe(IIngredient input1,IIngredient input2, IIngredient output1, @Optional(valueDouble = 1D) double timeMultiplier)
+		{
+			CraftTweakerAPI.apply(new CTAddRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_WASHER.GUID], Lists.newArrayList(input1, input2, output1, timeMultiplier)));
+		}
+
+		@ZenMethod
+		public static void removeRecipeWithInput(IIngredient input1,IIngredient input2)
+		{
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_WASHER.GUID], IngredientSorption.INPUT, Lists.newArrayList(input1,input2)));
+		}
+
+		@ZenMethod
+		public static void removeRecipeWithOutput(IIngredient output1)
+		{
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_WASHER.GUID], IngredientSorption.OUTPUT, Lists.newArrayList(output1)));
+		}
+
+		@ZenMethod
+		public static void removeAllRecipes()
+		{
+			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_WASHER.GUID]));
+		}
+	}
+
 	@ZenClass("mods.ncsteamadditions.steam_boiler")
 	@ZenRegister
 	public static class SteamBoilerHandler
@@ -135,6 +165,37 @@ public class SteamAdditionsCraftTweaker
 			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_BOILER.GUID]));
 		}
 	}
+
+	@ZenClass("mods.ncsteamadditions.steam_turbine")
+	@ZenRegister
+	public static class SteamTurbineHandler
+	{
+
+		@ZenMethod
+		public static void addRecipe(IIngredient input1, IIngredient output1, @Optional(valueDouble = 1D) double timeMultiplier)
+		{
+			CraftTweakerAPI.apply(new CTAddRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_TURBINE.GUID], Lists.newArrayList(input1, output1, timeMultiplier)));
+		}
+
+		@ZenMethod
+		public static void removeRecipeWithInput(IIngredient input1)
+		{
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_TURBINE.GUID], IngredientSorption.INPUT, Lists.newArrayList(input1)));
+		}
+
+		@ZenMethod
+		public static void removeRecipeWithOutput(IIngredient output1)
+		{
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_TURBINE.GUID], IngredientSorption.OUTPUT, Lists.newArrayList(output1)));
+		}
+
+		@ZenMethod
+		public static void removeAllRecipes()
+		{
+			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_TURBINE.GUID]));
+		}
+	}
+
 	@ZenClass("mods.ncsteamadditions.steam_compactor")
 	@ZenRegister
 	public static class SteamCompactorHandler
@@ -171,7 +232,7 @@ public class SteamAdditionsCraftTweaker
 	{
 
 		@ZenMethod
-		public static void addRecipe(IIngredient input1,IIngredient input2, IIngredient input3, IIngredient input4, IIngredient output1, @Optional(valueDouble = 1D) double timeMultiplier)
+		public static void addRecipe(IIngredient input1, IIngredient input2, IIngredient input3, IIngredient input4, IIngredient output1, @Optional(valueDouble = 1D) double timeMultiplier)
 		{
 			CraftTweakerAPI.apply(new CTAddRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.GUID], Lists.newArrayList(input1, input2, input3, input4, output1, timeMultiplier)));
 		}
@@ -201,27 +262,27 @@ public class SteamAdditionsCraftTweaker
 	{
 
 		@ZenMethod
-		public static void addRecipe(IIngredient input1,IIngredient input2, IIngredient input3, IIngredient input4, IIngredient output1, IIngredient output2, @Optional(valueDouble = 1D) double timeMultiplier)
+		public static void addRecipe(IIngredient input1,IIngredient input2, IIngredient output1, IIngredient output2, @Optional(valueDouble = 1D) double timeMultiplier)
 		{
-			CraftTweakerAPI.apply(new CTAddRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.GUID], Lists.newArrayList(input1, input2, input3, input4, output1, output1, timeMultiplier)));
+			CraftTweakerAPI.apply(new CTAddRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().HEAT_EXCHANGER.GUID], Lists.newArrayList(input1, input2, output1, output2, timeMultiplier)));
 		}
 
 		@ZenMethod
-		public static void removeRecipeWithInput(IIngredient input1,IIngredient input2,IIngredient input3,IIngredient input4)
+		public static void removeRecipeWithInput(IIngredient input1,IIngredient input2)
 		{
-			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.GUID], IngredientSorption.INPUT, Lists.newArrayList(input1,input2, input3, input4)));
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().HEAT_EXCHANGER.GUID], IngredientSorption.INPUT, Lists.newArrayList(input1,input2)));
 		}
 
 		@ZenMethod
 		public static void removeRecipeWithOutput(IIngredient output1, IIngredient output2)
 		{
-			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.GUID], IngredientSorption.OUTPUT, Lists.newArrayList(output1,output2)));
+			CraftTweakerAPI.apply(new CTRemoveRecipe(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().HEAT_EXCHANGER.GUID], IngredientSorption.OUTPUT, Lists.newArrayList(output1,output2)));
 		}
 
 		@ZenMethod
 		public static void removeAllRecipes()
 		{
-			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.GUID]));
+			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().HEAT_EXCHANGER.GUID]));
 		}
 	}
 

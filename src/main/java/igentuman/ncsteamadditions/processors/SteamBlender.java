@@ -1,11 +1,10 @@
 package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
-import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamBlenderCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBlender;
+import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamBlender;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
@@ -49,7 +48,10 @@ public class SteamBlender extends AbstractProcessor {
     {
         return "blender_on";
     }
-
+    public Class getGuiClass()
+    {
+        return GuiSteamBlender.class;
+    }
     public String getBlockType()
     {
         return "nc_processor";

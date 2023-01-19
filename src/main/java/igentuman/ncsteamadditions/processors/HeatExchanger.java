@@ -1,7 +1,6 @@
 package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
-import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.HeatExchangerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerHeatExchanger;
@@ -17,7 +16,6 @@ import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
@@ -124,7 +122,10 @@ public class HeatExchanger extends AbstractProcessor {
         }
     }
 
-
+    public Class getGuiClass()
+    {
+        return GuiHeatExchanger.class;
+    }
     public HeatExchanger.RecipeHandler getRecipes()
     {
         return new HeatExchanger.RecipeHandler();

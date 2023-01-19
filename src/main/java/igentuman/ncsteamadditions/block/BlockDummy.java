@@ -72,7 +72,9 @@ public class BlockDummy extends Block {
 
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(ITEM_BLOCK);
+        BlockCustomModelProcessor block = getMainBlock(worldIn, pos);
+        if(block == null) return new ItemStack(ITEM_BLOCK);
+        return new ItemStack(block);
     }
 
     @Override
@@ -88,7 +90,15 @@ public class BlockDummy extends Block {
     {
         BlockCustomModelProcessor block = getMainBlock(worldIn, pos);
         if(block == null) return;
-        super.harvestBlock(worldIn, worldIn.getClosestPlayer(pos.getX(),pos.getY(), pos.getZ(), 10D, false), pos.down(), worldIn.getBlockState(pos.down()), worldIn.getTileEntity(pos.down()), new ItemStack(Items.DIAMOND_PICKAXE));
+        EntityPlayer pl = worldIn.getClosestPlayer(pos.getX(),pos.getY(), pos.getZ(), 10D, false);
+        assert pl != null;
+        if(pl.isCreative()) {
+            super.onPlayerDestroy(worldIn, pos, state);
+            return;
+            //worldIn.setBlockToAir(pos.down());
+        } else {
+            super.harvestBlock(worldIn, pl, pos.down(), worldIn.getBlockState(pos.down()), worldIn.getTileEntity(pos.down()), new ItemStack(Items.DIAMOND_PICKAXE));
+        }
         worldIn.setBlockToAir(pos);
     }
 

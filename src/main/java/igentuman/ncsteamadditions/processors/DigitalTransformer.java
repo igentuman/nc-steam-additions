@@ -14,7 +14,6 @@ import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.AxisAlignedBB;
 
 public class DigitalTransformer extends AbstractProcessor {
 
@@ -55,6 +54,11 @@ public class DigitalTransformer extends AbstractProcessor {
 
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
         return new GuiDigitalTransformer.SideConfig(player, (TileDigitalTransformer) tile, this);
+    }
+
+    public Class getGuiClass()
+    {
+        return GuiDigitalTransformer.class;
     }
 
     public JEIHandler getRecipeHandler()

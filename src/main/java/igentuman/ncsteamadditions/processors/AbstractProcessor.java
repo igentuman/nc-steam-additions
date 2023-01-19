@@ -4,13 +4,11 @@ import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.recipes.ProcessorRecipeHandler;
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
-import igentuman.ncsteamadditions.tile.NCSteamAdditionsTiles;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import igentuman.ncsteamadditions.util.Util;
 import mezz.jei.api.IGuiHelper;
 import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
-import nc.util.BlockHelper;
 import nc.util.FluidRegHelper;
 import nc.util.FluidStackHelper;
 import net.minecraft.block.state.IBlockState;
@@ -20,7 +18,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import vazkii.patchouli.client.book.text.Word;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -47,6 +44,10 @@ public abstract class AbstractProcessor {
 
     public int outputItems;
 
+    public Class getGuiClass()
+    {
+        return null;
+    }
     public int getInputItems() {
         return inputItems;
     }

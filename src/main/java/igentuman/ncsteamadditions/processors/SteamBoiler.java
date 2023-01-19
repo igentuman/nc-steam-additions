@@ -2,7 +2,6 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamBoilerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBoiler;
@@ -13,7 +12,6 @@ import igentuman.ncsteamadditions.util.Util;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
-import nc.util.BlockHelper;
 import nc.util.FluidRegHelper;
 import nc.util.RegistryHelper;
 import net.minecraft.block.state.IBlockState;
@@ -55,6 +53,10 @@ public class SteamBoiler extends AbstractProcessor {
                 getType().getParticle1());
         Util.spawnParticleOnProcessor(state, world, pos.add(0,1.5D,0), rand, state.getValue(FACING_HORIZONTAL).getOpposite(),
                 getType().getParticle2());
+    }
+    public Class getGuiClass()
+    {
+        return GuiSteamBoiler.class;
     }
     public String getSound()
     {

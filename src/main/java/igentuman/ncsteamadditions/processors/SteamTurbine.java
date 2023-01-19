@@ -2,14 +2,11 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import igentuman.ncsteamadditions.item.ItemCopperSheet;
-import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamTurbineCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTurbine;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamTurbine;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
-import igentuman.ncsteamadditions.tile.TileDigitalTransformer;
 import igentuman.ncsteamadditions.tile.TileSteamTurbine;
 import mezz.jei.api.IGuiHelper;
 import nc.container.processor.ContainerMachineConfig;
@@ -45,7 +42,10 @@ public class SteamTurbine extends AbstractProcessor {
                'H', NCBlocks.voltaic_pile_basic
        };
    }
-
+    public Class getGuiClass()
+    {
+        return GuiSteamTurbine.class;
+    }
     public AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.5D, 1.0D);
 
     public String getBlockType()
