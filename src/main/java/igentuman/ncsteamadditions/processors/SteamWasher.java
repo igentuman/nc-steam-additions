@@ -17,6 +17,8 @@ import nc.util.OreDictHelper;
 import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
@@ -50,12 +52,12 @@ public class SteamWasher extends AbstractProcessor {
     {
         return "nc_processor";
     }
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
         return new GuiSteamWasher(player, (TileNCSProcessor) tile, this);
     }
 
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
         return new GuiSteamWasher.SideConfig(player, (TileNCSProcessor) tile, this);
     }

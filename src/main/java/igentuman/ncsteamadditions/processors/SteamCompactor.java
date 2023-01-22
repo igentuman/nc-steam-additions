@@ -17,6 +17,8 @@ import nc.util.OreDictHelper;
 import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Set;
@@ -43,7 +45,7 @@ public class SteamCompactor extends AbstractProcessor {
                 'R', net.minecraft.init.Blocks.PISTON,
                 'P', Items.items[0]};
     }
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
         return new GuiSteamCompactor(player, (TileNCSProcessor) tile, this);
     }
@@ -56,6 +58,7 @@ public class SteamCompactor extends AbstractProcessor {
     {
         return GuiSteamCompactor.class;
     }
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
        return new GuiSteamCompactor.SideConfig(player, (TileNCSProcessor) tile, this);
     }

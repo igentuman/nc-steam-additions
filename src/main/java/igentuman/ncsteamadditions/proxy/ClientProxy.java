@@ -21,9 +21,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
-public class ClientProxy extends CommonProxy 
+public class ClientProxy extends CommonProxy
 {
 
 	@Override
@@ -41,15 +43,16 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(SoundHandler.class);
 	}
 
-
 	@Override
-	public EntityPlayer getPlayerClient() 
+	@SideOnly(Side.CLIENT)
+	public EntityPlayer getPlayerClient()
 	{
 		return Minecraft.getMinecraft().player;
 	}
 
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerFluidBlockRendering(Block block, String name)
 	{
 		super.registerFluidBlockRendering(block, name);
@@ -61,7 +64,7 @@ public class ClientProxy extends CommonProxy
 
 		ModelLoader.setCustomStateMapper(block, mapper);
 	}
-
+	@SideOnly(Side.CLIENT)
 	public static class FluidStateMapper extends StateMapperBase implements ItemMeshDefinition
 	{
 		public final ModelResourceLocation location;

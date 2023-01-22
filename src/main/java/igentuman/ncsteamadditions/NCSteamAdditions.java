@@ -4,6 +4,7 @@ import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
 import igentuman.ncsteamadditions.machine.gui.GUIHandler;
 import igentuman.ncsteamadditions.proxy.CommonProxy;
+import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.util.Util;
 import igentuman.ncsteamadditions.villager.NCSVillagerHandler;
 import net.minecraft.client.model.ModelBase;
@@ -93,6 +94,6 @@ public class NCSteamAdditions
 	@EventHandler
 	public void onIdMapping(FMLModIdMappingEvent idMappingEvent) 
 	{
-		proxy.onIdMapping(idMappingEvent);
+		NCSteamAdditionsRecipes.refreshRecipeCaches();
 	}
 }

@@ -20,7 +20,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
-@Mod.EventBusSubscriber(modid = MOD_ID)
+@Mod.EventBusSubscriber(modid = MOD_ID, value = Side.CLIENT)
 @SideOnly(Side.CLIENT)
 public class SoundHandler {
 

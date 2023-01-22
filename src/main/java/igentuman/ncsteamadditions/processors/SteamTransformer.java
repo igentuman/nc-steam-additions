@@ -16,6 +16,8 @@ import nc.integration.jei.JEIBasicCategory;
 import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
@@ -48,12 +50,12 @@ public class SteamTransformer extends AbstractProcessor {
     {
         return "nc_processor";
     }
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
         return new GuiSteamTransformer(player, (TileNCSProcessor) tile, this);
     }
 
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
         return new GuiSteamTransformer.SideConfig(player, (TileNCSProcessor) tile, this);
     }

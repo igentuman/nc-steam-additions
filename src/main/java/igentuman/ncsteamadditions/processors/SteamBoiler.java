@@ -21,6 +21,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -70,11 +72,11 @@ public class SteamBoiler extends AbstractProcessor {
     {
         return "nc_processor";
     }
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
         return new GuiSteamBoiler(player, (TileNCSProcessor) tile, this);
     }
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
         return new GuiSteamBoiler.SideConfig(player, (TileNCSProcessor) tile, this);
     }

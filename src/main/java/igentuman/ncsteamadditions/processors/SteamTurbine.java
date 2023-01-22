@@ -18,6 +18,8 @@ import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
@@ -58,10 +60,11 @@ public class SteamTurbine extends AbstractProcessor {
     {
         return "turbine_on";
     }
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
         return new GuiSteamTurbine(player, (TileSteamTurbine) tile, this);
     }
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
         return new GuiSteamTurbine.SideConfig(player, (TileSteamTurbine) tile, this);
     }

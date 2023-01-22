@@ -14,6 +14,8 @@ import nc.container.processor.ContainerMachineConfig;
 import nc.integration.jei.JEIBasicCategory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class DigitalTransformer extends AbstractProcessor {
 
@@ -39,7 +41,7 @@ public class DigitalTransformer extends AbstractProcessor {
     {
         return "nc_processor";
     }
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
         return new GuiDigitalTransformer(player, (TileDigitalTransformer) tile, this);
     }
@@ -51,7 +53,7 @@ public class DigitalTransformer extends AbstractProcessor {
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
        return new ContainerMachineConfig(player, (TileDigitalTransformer) tile);
     }
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
         return new GuiDigitalTransformer.SideConfig(player, (TileDigitalTransformer) tile, this);
     }

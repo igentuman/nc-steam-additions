@@ -5,7 +5,6 @@ import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamBlenderCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBlender;
-import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamBlender;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
@@ -19,8 +18,8 @@ import nc.util.FluidStackHelper;
 import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-
-import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class SteamBlender extends AbstractProcessor {
 
@@ -57,11 +56,11 @@ public class SteamBlender extends AbstractProcessor {
     {
         return "nc_processor";
     }
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
         return new GuiSteamBlender(player,  (TileNCSProcessor)tile,this);
     }
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
         return new GuiSteamBlender.SideConfig(player, (TileNCSProcessor) tile, this);
     }

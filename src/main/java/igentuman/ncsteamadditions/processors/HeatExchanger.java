@@ -20,6 +20,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
@@ -54,11 +56,12 @@ public class HeatExchanger extends AbstractProcessor {
         return "nc_processor";
     }
 
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {
         return new GuiHeatExchanger(player, (TileNCSProcessor) tile, this);
     }
 
-
+    @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
         return new GuiHeatExchanger.SideConfig(player, (TileNCSProcessor) tile, this);
     }

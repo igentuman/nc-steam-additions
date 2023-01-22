@@ -23,8 +23,8 @@ public class NCSVillagerHandler
 	private static final VillagerRegistry VILLAGER_REGISTRY = VillagerRegistry.instance();
 	public static VillagerProfession PROF_SCIENTIST;
 
-	@ObjectHolder("minecraft:librarian")
-	public static final VillagerProfession LIBRARIAN = null;
+	@ObjectHolder(NCSteamAdditions.MOD_ID+":engineer")
+	public static final VillagerProfession SCIENTIST = null;
 
 	public static void initVillagerHouse()
 	{
@@ -40,7 +40,7 @@ public class NCSVillagerHandler
 		if(!NCSteamAdditionsConfig.spawn_villager)
 			return;
 
-		PROF_SCIENTIST = new VillagerProfession(NCSteamAdditions.MOD_ID+":engineer", "immersiveengineering:textures/models/villager_engineer.png", "immersiveengineering:textures/models/villager_engineer_zombie.png");
+		PROF_SCIENTIST = new VillagerProfession(NCSteamAdditions.MOD_ID+":engineer", NCSteamAdditions.MOD_ID+":textures/models/villager_engineer.png", NCSteamAdditions.MOD_ID+":textures/models/villager_engineer_zombie.png");
 		ForgeRegistries.VILLAGER_PROFESSIONS.register(PROF_SCIENTIST);
 
 		/* Engineer
