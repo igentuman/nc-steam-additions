@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamTurbineCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTurbine;
@@ -35,7 +36,7 @@ public class SteamTurbine extends AbstractProcessor {
        outputItems = 0;
        craftingRecipe = new Object[] {
                "PRP", "CFC", "PHP",
-               'P', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
+               'P', Items.items[0],
                'F', "solenoidCopper",
                'C', "blockZinc",
                'R', Blocks.otherBlocks[0],

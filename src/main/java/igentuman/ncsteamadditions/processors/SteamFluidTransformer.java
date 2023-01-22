@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamFluidTransformerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamFluidTransformer;
@@ -35,9 +36,9 @@ public class SteamFluidTransformer extends AbstractProcessor {
                 "PRP", "CFC", "PHP",
                 'P', net.minecraft.init.Items.BUCKET,
                 'F', net.minecraft.init.Items.ENDER_EYE,
-                'C', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
+                'C', Items.items[0],
                 'R', RegistryHelper.itemStackFromRegistry("minecraft:brewing_stand"),
-                'H', RegistryHelper.itemStackFromRegistry(MOD_ID+":pipe")};
+                'H', Items.items[1]};
 
     }
 

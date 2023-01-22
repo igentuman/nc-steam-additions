@@ -130,6 +130,9 @@ public class TransformerRecipesConfig {
 					if(stack == null) {
 						stack = RegistryHelper.blockStackFromRegistry(ingredient[0], qty);
 					}
+					if((stack == null || stack.isEmpty()) && !ingredient[0].equals("null")) {
+						return null;
+					}
 					recipeObj[i] = stack;
 				}
 			}
@@ -165,6 +168,9 @@ public class TransformerRecipesConfig {
 				ItemStack stack = RegistryHelper.itemStackFromRegistry(outputItem[0],qty);
 				if(stack == null) {
 					stack = RegistryHelper.blockStackFromRegistry(outputItem[0], qty);
+				}
+				if((stack == null || stack.isEmpty()) && !outputItem[0].equals("null")) {
+					return null;
 				}
 				recipeObj[recipeObj.length - 2] = stack;
 			}
@@ -215,59 +221,8 @@ public class TransformerRecipesConfig {
 						if(stack == null) {
 							stack = RegistryHelper.blockStackFromRegistry(ingredient[0], qty);
 						}
-						recipeObj[i] = stack;
-					}
-				}
-			}
-			String[] output = parts[1].split("\\*");
-			qty = 1;
-			if(output.length > 1) {
-				qty = Integer.parseInt(output[1]);
-			}
-			if(OreDictHelper.oreExists(output[0])) {
-				recipeObj[recipeObj.length-1] = oreStack(output[0], qty);
-			} else {
-				ItemStack stack = RegistryHelper.itemStackFromRegistry(output[0],qty);
-				if(stack == null) {
-					stack = RegistryHelper.blockStackFromRegistry(output[0], qty);
-				}
-				recipeObj[recipeObj.length-1] = stack;
-			}
-		} catch (Exception e) {
-			Util.getLogger().warn("Steam Transformer recipe exception: " + recipe);
-			return null;
-		}
-		return recipeObj;
-	}
-
-	public static Object[] parseFluidTransformerRecipe(String recipe)
-	{
-		String[] parts = recipe.split("=");
-		if(parts.length != 2) return null;
-		String[] input = parts[0].split(";");
-		Object[] recipeObj = new Object[input.length+1];
-		int qty = 1;
-		try {
-			for(int i = 0; i < input.length; i++) {
-				String[] ingredient = input[i].split("\\*");
-				if(input[i].equals("null")) {
-					recipeObj[i] = new EmptyItemIngredient();
-					continue;
-				}
-				if(i == 4) {
-					qty = 1000;
-					recipeObj[i] = fluidStack(ingredient[0], qty);
-				} else {
-					qty = 1;
-					if(ingredient.length > 1) {
-						qty = Integer.parseInt(ingredient[1]);
-					}
-					if(OreDictHelper.oreExists(ingredient[0])) {
-						recipeObj[i] = oreStack(ingredient[0], qty);
-					} else {
-						ItemStack stack = RegistryHelper.itemStackFromRegistry(ingredient[0],qty);
-						if(stack == null) {
-							stack = RegistryHelper.blockStackFromRegistry(ingredient[0], qty);
+						if((stack == null || stack.isEmpty()) && !ingredient[0].equals("null")) {
+							return null;
 						}
 						recipeObj[i] = stack;
 					}
@@ -285,8 +240,51 @@ public class TransformerRecipesConfig {
 				if(stack == null) {
 					stack = RegistryHelper.blockStackFromRegistry(output[0], qty);
 				}
+				if((stack == null || stack.isEmpty()) && !output[0].equals("null")) {
+					return null;
+				}
 				recipeObj[recipeObj.length-1] = stack;
 			}
+		} catch (Exception e) {
+			Util.getLogger().warn("Steam Transformer recipe exception: " + recipe);
+			return null;
+		}
+		return recipeObj;
+	}
+
+	public static Object[] parseFluidTransformerRecipe(String recipe)
+	{
+		String[] parts = recipe.split("=");
+		if(parts.length != 2) return null;
+		String[] input = parts[0].split(";");
+		Object[] recipeObj = new Object[input.length+1];
+		int qty = 1000;
+		try {
+			for (int i = 0; i < 4; i++) {
+				String[] ingredient = input[i].split("\\*");
+				if (input[i].equals("null")) {
+					recipeObj[i] = new EmptyFluidIngredient();
+					continue;
+				}
+				qty = 1000;
+				if (ingredient.length > 1) {
+					qty = Integer.parseInt(ingredient[1]);
+				}
+				if (!FluidRegHelper.fluidExists(ingredient[0])) {
+					return null;
+				}
+				recipeObj[i] = fluidStack(ingredient[0], qty);
+			}
+
+			String[] output = parts[1].split("\\*");
+			qty = 1000;
+			if (output.length > 1) {
+				qty = Integer.parseInt(output[1]);
+			}
+			if (!FluidRegHelper.fluidExists(output[0])) {
+				return null;
+			}
+			recipeObj[recipeObj.length - 1] = fluidStack(output[0], qty);
 		} catch (Exception e) {
 			Util.getLogger().warn("Steam Transformer recipe exception: " + recipe);
 			return null;

@@ -1,6 +1,7 @@
 package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamWasherCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamWasher;
@@ -37,9 +38,9 @@ public class SteamWasher extends AbstractProcessor {
                 "PRP", "CFC", "PHP",
                 'P', "chest",
                 'F', net.minecraft.init.Items.WATER_BUCKET,
-                'C', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
+                'C', Items.items[0],
                 'R', net.minecraft.init.Items.ENDER_PEARL,
-                'H', RegistryHelper.itemStackFromRegistry(MOD_ID+":pipe")};
+                'H', Blocks.otherBlocks[0]};
     }
     public Class getGuiClass()
     {

@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import com.google.common.collect.Sets;
 import igentuman.ncsteamadditions.block.Blocks;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamCompactorCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamCompactor;
@@ -40,7 +41,7 @@ public class SteamCompactor extends AbstractProcessor {
                 'B', net.minecraft.init.Items.BUCKET,
                 'F', "chest",
                 'R', net.minecraft.init.Blocks.PISTON,
-                'P', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet")};
+                'P', Items.items[0]};
     }
 
     public Object getLocalGuiContainer(EntityPlayer player, TileEntity tile) {

@@ -84,9 +84,10 @@ public class HeatExchangerCategory extends ParentProcessorCategory
 
 		int x = getFluidsLeft();
 		int y = getFluidsTop() - backPosY;
+		int c = 0;
 		if(getProcessor().getInputFluids() > 0) {
 			for (int i = 0; i < getProcessor().getInputFluids(); i++) {
-				fluidMapper.map(IngredientSorption.INPUT, i, i+1, x - backPosX, y, 16, 16);
+				fluidMapper.map(IngredientSorption.INPUT, i, c++, x - backPosX, y, 16, 16);
 				y+=27;
 			}
 		}
@@ -95,7 +96,7 @@ public class HeatExchangerCategory extends ParentProcessorCategory
 		x = 152;
 		if(getProcessor().getOutputFluids() > 0) {
 			for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
-				fluidMapper.map(IngredientSorption.OUTPUT, i, i, x - backPosX, y,16, 16);
+				fluidMapper.map(IngredientSorption.OUTPUT, i, c++, x - backPosX, y,16, 16);
 				y+=27;
 			}
 		}

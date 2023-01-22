@@ -1,6 +1,8 @@
 package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
+import igentuman.ncsteamadditions.item.ItemCopperSheet;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.HeatExchangerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerHeatExchanger;
@@ -16,6 +18,7 @@ import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
@@ -37,7 +40,7 @@ public class HeatExchanger extends AbstractProcessor {
                 "PRP", "CFC", "PHP",
                 'P', net.minecraft.init.Blocks.IRON_BARS,
                 'F', RegistryHelper.itemStackFromRegistry("minecraft:cauldron"),
-                'C', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
+                'C', Items.items[0],
                 'R', RegistryHelper.itemStackFromRegistry("minecraft:brewing_stand"),
                 'H', Blocks.otherBlocks[0]};
 
@@ -90,16 +93,16 @@ public class HeatExchanger extends AbstractProcessor {
 
     public TileEntity getTile()
     {
-        return new TileFluidTransformer();
+        return new TileHeatExchanger();
     }
 
     public Class getTileClass()
     {
-        return TileFluidTransformer.class;
+        return TileHeatExchanger.class;
     }
 
-    public static class TileFluidTransformer extends TileNCSProcessor {
-        public TileFluidTransformer() {
+    public static class TileHeatExchanger extends TileNCSProcessor {
+        public TileHeatExchanger() {
             super(
                     ProcessorsRegistry.get().HEAT_EXCHANGER.code,
                     ProcessorsRegistry.get().HEAT_EXCHANGER.inputItems,
@@ -109,15 +112,30 @@ public class HeatExchanger extends AbstractProcessor {
                     ProcessorsRegistry.get().HEAT_EXCHANGER.GUID
             );
         }
+        private boolean heaterActuallyHot(FluidStack heater, FluidStack coolant)
+        {
+            if(heater==null || coolant == null) return false;
+            Fluid h = heater.getFluid();
+            Fluid c = coolant.getFluid();
+            return c!= null && h!=null && h.getTemperature() > c.getTemperature();
+        }
 
         public void update()
         {
             super.update();
+            if(true) return; //will do that later
             FluidStack coolant = getTanks().get(0).getFluid();
             FluidStack heater = getTanks().get(1).getFluid();
-            if (heater != null && !heater.getUnlocalizedName().matches("(.*)hot(.*)")) {
+
+            if (heater != null && coolant!=null && (
+                    !heater.getUnlocalizedName().matches("(.*)hot(.*)")) ||
+                    heaterActuallyHot(heater, coolant)
+            ) {
                 getTanks().get(0).setFluid(heater);
                 getTanks().get(1).setFluid(coolant);
+            } else {
+                getTanks().get(1).setFluid(heater);
+                getTanks().get(0).setFluid(coolant);
             }
         }
     }

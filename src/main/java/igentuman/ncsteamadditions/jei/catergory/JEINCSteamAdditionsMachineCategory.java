@@ -4,6 +4,8 @@ import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
+import mezz.jei.api.gui.IDrawableAnimated;
+import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import nc.integration.jei.JEIBasicCategory;
@@ -19,13 +21,16 @@ import nc.util.NCMath;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIBasicRecipeWrapper<WRAPPER>> extends JEIBasicCategory<WRAPPER>
+public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIMachineRecipeWrapper<WRAPPER>> extends JEIBasicCategory<WRAPPER>
 {
 
     private final IDrawable background;
     protected String recipeTitle;
     protected final int backPosX, backPosY;
+    public IDrawableAnimated animatedArrow;
 
     public JEINCSteamAdditionsMachineCategory(IGuiHelper guiHelper, IJEIHandler handler, String title, int backX, int backY, int backWidth, int backHeight)
     {
@@ -40,12 +45,15 @@ public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIBasi
         recipeTitle = Lang.localise("tile." + NCSteamAdditions.MOD_ID + "." + title + ".name");
         backPosX = backX + 1;
         backPosY = backY + 1;
+        IDrawableStatic staticArrow = guiHelper.createDrawable(location, 0, 168, 135, 20);
+        animatedArrow = guiHelper.createAnimatedDrawable(staticArrow, 300 , IDrawableAnimated.StartDirection.LEFT, false);
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void drawExtras(Minecraft minecraft)
     {
-
+        animatedArrow.draw(minecraft, 6, 26);
     }
 
     @Override

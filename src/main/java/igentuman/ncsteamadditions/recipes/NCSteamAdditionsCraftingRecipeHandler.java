@@ -48,7 +48,7 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		addShapedOreRecipe(new ItemStack(Blocks.otherBlocks[0],4),new Object[]{"SSS", "S S", "SSS", 'S', "copperSheet"});
 		addShapedOreRecipe(new ItemStack(Items.items[0],2),new Object[]{"   ", " SS", " SS", 'S', "ingotCopper"});
 
-		addShapedOreRecipe(new ItemStack(Blocks.ingot_block,1, IngotType.ZINC.getID()),new Object[]{"SSS", "SSS", "SSS", 'S', "dustZinc"});
+		addShapedOreRecipe(new ItemStack(Blocks.ingot_block,1, IngotType.ZINC.getID()),new Object[]{"SSS", "SSS", "SSS", 'S', "ingotZinc"});
 		addShapelessOreRecipe(new ItemStack(Items.ingot,9, IngotType.ZINC.getID()),new Object[]{"S", 'S', "blockZinc"});
 
 		for (int i = 0; i < IngotType.values().length; i++)

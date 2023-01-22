@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import com.google.common.collect.Sets;
 import igentuman.ncsteamadditions.block.Blocks;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamCrusherCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamCrusher;
@@ -39,7 +40,7 @@ public class SteamCrusher extends AbstractProcessor {
                 "BRB", "CFC", "PRP",
                 'B', net.minecraft.init.Items.BUCKET,
                 'F', "chest",
-                'C', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
+                'C', Items.items[0],
                 'R', net.minecraft.init.Blocks.PISTON,
                 'P', net.minecraft.init.Items.DIAMOND_PICKAXE};
     }

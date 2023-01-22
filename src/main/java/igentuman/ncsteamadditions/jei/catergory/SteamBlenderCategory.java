@@ -57,6 +57,7 @@ public class SteamBlenderCategory extends ParentProcessorCategory
 		public SteamBlenderWrapper(IGuiHelper guiHelper, IJEIHandler jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
 		{
 			super(guiHelper, jeiHandler, recipeHandler, recipe, 24, 7, 0, 0, 0, 0, 0, 0, 94, 30, 16, 16);
+
 		}
 
 		@Override

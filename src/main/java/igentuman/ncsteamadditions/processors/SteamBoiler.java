@@ -2,6 +2,7 @@ package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamBoilerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBoiler;
@@ -43,7 +44,7 @@ public class SteamBoiler extends AbstractProcessor {
                "PBP", "CFC", "PBP",
                'P', "ingotZinc",
                'F', net.minecraft.init.Blocks.FURNACE,
-               'C', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
+               'C', Items.items[0],
                'B', RegistryHelper.itemStackFromRegistry("minecraft:cauldron")
        };
    }

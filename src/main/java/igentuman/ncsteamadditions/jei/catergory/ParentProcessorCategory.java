@@ -10,6 +10,9 @@ import nc.integration.jei.JEIHelper.RecipeItemMapper;
 import nc.integration.jei.JEIMachineRecipeWrapper;
 import nc.integration.jei.NCJEI.IJEIHandler;
 import nc.recipe.IngredientSorption;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class ParentProcessorCategory extends JEINCSteamAdditionsMachineCategory
 {
@@ -26,9 +29,11 @@ public abstract class ParentProcessorCategory extends JEINCSteamAdditionsMachine
 		JEIHelper.RecipeItemMapper itemMapper = new JEIHelper.RecipeItemMapper();
 		JEIHelper.RecipeFluidMapper fluidMapper = new JEIHelper.RecipeFluidMapper();
 		int x = getFluidsLeft();
+		int c = 0;
+
 		if(getProcessor().getInputFluids() > 0) {
 			for (int i = 0; i < getProcessor().getInputFluids(); i++) {
-				fluidMapper.map(IngredientSorption.INPUT, i, i+1, x - backPosX, getFluidsTop() - backPosY, 16, 16);
+				fluidMapper.map(IngredientSorption.INPUT, i, c++, x - backPosX, getFluidsTop() - backPosY, 16, 16);
 				x+=getCellSpan();
 			}
 		}
@@ -36,7 +41,7 @@ public abstract class ParentProcessorCategory extends JEINCSteamAdditionsMachine
 		x = getItemsLeft();
 		if(getProcessor().getInputItems() > 0) {
 			for (int i = 0; i < getProcessor().getInputItems(); i++) {
-				itemMapper.map(IngredientSorption.INPUT, i, i+1, x - backPosX, getItemsTop() - backPosY);
+				itemMapper.map(IngredientSorption.INPUT, i, c++, x - backPosX, getItemsTop() - backPosY);
 				x+=getCellSpan();
 			}
 		}
@@ -44,7 +49,7 @@ public abstract class ParentProcessorCategory extends JEINCSteamAdditionsMachine
 		x = 152;
 		if(getProcessor().getOutputFluids() > 0) {
 			for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
-				fluidMapper.map(IngredientSorption.OUTPUT, i, i, x - backPosX, getFluidsTop() - backPosY,16, 16);
+				fluidMapper.map(IngredientSorption.OUTPUT, i, c++, x - backPosX, getFluidsTop() - backPosY,16, 16);
 				x+=getCellSpan();
 
 			}
@@ -53,7 +58,7 @@ public abstract class ParentProcessorCategory extends JEINCSteamAdditionsMachine
 		x = 152;
 		if(getProcessor().getOutputItems() > 0) {
 			for (int i = 0; i < getProcessor().getOutputItems(); i++) {
-				itemMapper.map(IngredientSorption.OUTPUT, i, i, x - backPosX, getItemsTop() - backPosY);
+				itemMapper.map(IngredientSorption.OUTPUT, i, c++, x - backPosX, getItemsTop() - backPosY);
 				x+=getCellSpan();
 			}
 		}
@@ -61,5 +66,6 @@ public abstract class ParentProcessorCategory extends JEINCSteamAdditionsMachine
 		itemMapper.mapItemsTo(recipeLayout.getItemStacks(), ingredients);
 		fluidMapper.mapFluidsTo(recipeLayout.getFluidStacks(), ingredients);
 	}
+
 
 }

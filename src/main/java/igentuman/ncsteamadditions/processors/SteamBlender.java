@@ -1,6 +1,7 @@
 package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
+import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamBlenderCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBlender;
@@ -38,7 +39,7 @@ public class SteamBlender extends AbstractProcessor {
                 "PPP", "CFC", "RHR",
                 'P', "chest",
                 'F', net.minecraft.init.Blocks.FURNACE,
-                'C', RegistryHelper.itemStackFromRegistry(MOD_ID+":copper_sheet"),
+                'C', Items.items[0],
                 'R', net.minecraft.init.Items.ENDER_EYE,
                 'H',  RegistryHelper.itemStackFromRegistry("minecraft:cauldron")
         };
