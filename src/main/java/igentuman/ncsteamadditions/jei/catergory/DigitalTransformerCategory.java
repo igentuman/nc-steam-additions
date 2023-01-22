@@ -5,6 +5,8 @@ import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
 import igentuman.ncsteamadditions.processors.DigitalTransformer;
 import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import mezz.jei.api.IGuiHelper;
+import mezz.jei.api.gui.IDrawableAnimated;
+import mezz.jei.api.gui.IDrawableStatic;
 import nc.integration.jei.JEIMachineRecipeWrapper;
 import nc.integration.jei.NCJEI.IJEIHandler;
 import nc.recipe.BasicRecipe;
@@ -49,6 +51,9 @@ public class DigitalTransformerCategory extends ParentProcessorCategory
 	{
 		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
+		IDrawableStatic staticArrow = guiHelper.createDrawable(location, 0, 168, 135, 8);
+		animatedArrow = guiHelper.createAnimatedDrawable(staticArrow, 300 , IDrawableAnimated.StartDirection.LEFT, false);
+
 	}
 
 	public static class DigitalTransformerWrapper extends JEIMachineRecipeWrapper

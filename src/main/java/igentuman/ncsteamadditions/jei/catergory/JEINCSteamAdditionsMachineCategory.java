@@ -31,7 +31,7 @@ public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIMach
     protected String recipeTitle;
     protected final int backPosX, backPosY;
     public IDrawableAnimated animatedArrow;
-
+    public ResourceLocation location;
     public JEINCSteamAdditionsMachineCategory(IGuiHelper guiHelper, IJEIHandler handler, String title, int backX, int backY, int backWidth, int backHeight)
     {
         this(guiHelper, handler, title, "", backX, backY, backWidth, backHeight);
@@ -40,7 +40,7 @@ public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIMach
     public JEINCSteamAdditionsMachineCategory(IGuiHelper guiHelper, IJEIHandler handler, String title, String guiExtra, int backX, int backY, int backWidth, int backHeight)
     {
         super(handler);
-        ResourceLocation location = new ResourceLocation(NCSteamAdditions.MOD_ID + ":textures/gui/" + handler.getTextureName() + guiExtra + ".png");
+        location = new ResourceLocation(NCSteamAdditions.MOD_ID + ":textures/gui/" + handler.getTextureName() + guiExtra + ".png");
         background = guiHelper.createDrawable(location, backX, backY, backWidth, backHeight);
         recipeTitle = Lang.localise("tile." + NCSteamAdditions.MOD_ID + "." + title + ".name");
         backPosX = backX + 1;
@@ -73,7 +73,7 @@ public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIMach
     {
         recipeLayout.getItemStacks().addTooltipCallback((slotIndex, input, ingredient, tooltip) ->
         {
-            int outputIndex = slotIndex - recipeWrapper.recipeHandler.getItemInputSize();
+            int outputIndex = slotIndex - recipeWrapper.recipeHandler.getItemInputSize() - 1;
             if (outputIndex >= 0 && outputIndex <= recipeWrapper.recipeHandler.getItemOutputSize() && recipeWrapper.recipe.getItemProducts().get(outputIndex) instanceof ChanceItemIngredient)
             {
                 ChanceItemIngredient chanceIngredient = (ChanceItemIngredient)recipeWrapper.recipe.getItemProducts().get(outputIndex);

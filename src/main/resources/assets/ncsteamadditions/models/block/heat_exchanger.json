@@ -1,17 +1,10 @@
 {
 	"credit": "Made with Blockbench",
-	"texture_size": [128, 128],
 	"parent": "block/block",
+	"texture_size": [128, 128],
 	"textures": {
 		"0": "ncsteamadditions:blocks/machine/heat_exchanger",
 		"particle": "ncsteamadditions:blocks/machine/heat_exchanger"
-	},
-	"display": {
-		"gui": {
-			"rotation": [ 30, 225, 0 ],
-			"translation": [ 0, 0, 0],
-			"scale":[ 0.45, 0.45, 0.45 ]
-		}
 	},
 	"elements": [
 		{
@@ -363,6 +356,12 @@
 			}
 		}
 	],
+	"display": {
+		"gui": {
+			"rotation": [30, 225, 0],
+			"scale": [0.45, 0.45, 0.45]
+		}
+	},
 	"groups": [
 		0,
 		1,

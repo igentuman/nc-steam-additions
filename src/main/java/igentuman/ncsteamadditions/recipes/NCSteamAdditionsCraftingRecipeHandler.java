@@ -83,7 +83,7 @@ public class NCSteamAdditionsCraftingRecipeHandler
 		NCRecipes.chemical_reactor.addRecipe(new Object[] {fluidStack("uranium_oxide",1000),fluidStack("hydrofluoric_acid",500),fluidStack("uranium_hexafluoride",1000), new EmptyFluidIngredient()});
 		NCRecipes.centrifuge.addRecipe(new Object[]{fluidStack("uranium_hexafluoride",1000),fluidStack("uranium_235",144),fluidStack("uranium_238",144*4),fluidStack("uranium_233",72),new EmptyFluidIngredient(),new EmptyFluidIngredient(),new EmptyFluidIngredient()});
 		NCRecipes.assembler.addRecipe(new Object[]{NCBlocks.assembler, Blocks.blocks[ProcessorsRegistry.get().STEAM_TRANSFORMER.GUID], Blocks.blocks[ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.GUID], "coreOfTransformation", Blocks.blocks[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID], 2.0D, 2.0D});
-		NCRecipes.fission_irradiator.addRecipe(new Object[]{"gemEnderEye","coreOfTransformation",2720000, NCConfig.fission_irradiator_heat_per_flux[1], NCConfig.fission_irradiator_efficiency[1], RadSources.TBP});
+		NCRecipes.fission_irradiator.addRecipe(new Object[]{net.minecraft.init.Items.ENDER_EYE, Items.items[3],2720000, NCConfig.fission_irradiator_heat_per_flux[1], NCConfig.fission_irradiator_efficiency[1], RadSources.TBP});
 	}
 
 	public static OreIngredient oreStack(String oreType, int stackSize) {

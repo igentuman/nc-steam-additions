@@ -5,6 +5,8 @@ import igentuman.ncsteamadditions.machine.gui.GuiHeatExchanger;
 import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import igentuman.ncsteamadditions.processors.HeatExchanger;
 import mezz.jei.api.IGuiHelper;
+import mezz.jei.api.gui.IDrawableAnimated;
+import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import nc.integration.jei.JEIHelper;
@@ -13,6 +15,9 @@ import nc.integration.jei.NCJEI.IJEIHandler;
 import nc.recipe.BasicRecipe;
 import nc.recipe.BasicRecipeHandler;
 import nc.recipe.IngredientSorption;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class HeatExchangerCategory extends ParentProcessorCategory
 {
@@ -53,6 +58,15 @@ public class HeatExchangerCategory extends ParentProcessorCategory
 	{
 		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
+		IDrawableStatic staticArrow = guiHelper.createDrawable(location, 0, 168, 135, 40);
+		animatedArrow = guiHelper.createAnimatedDrawable(staticArrow, 300 , IDrawableAnimated.StartDirection.LEFT, false);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void drawExtras(Minecraft minecraft)
+	{
+		animatedArrow.draw(minecraft, 26, 11);
 	}
 
 	public static class HeatExchangerWrapper extends JEIMachineRecipeWrapper
