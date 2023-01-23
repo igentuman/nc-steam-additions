@@ -47,6 +47,9 @@ public class NCSteamAdditionsConfigGUIFactory implements IModGuiFactory
 		{
 			List<IConfigElement> list = new ArrayList<>();
 			list.add(categoryElement(NCSteamAdditionsConfig.CATEGORY_PROCESSORS, CategoryEntryProcessors.class));
+			list.add(categoryElement(NCSteamAdditionsConfig.CATEGORY_WORLDGEN, CategoryEntryWorldgen.class));
+			list.add(categoryElement(NCSteamAdditionsConfig.CATEGORY_PIPES, CategoryEntryPipes.class));
+			list.add(categoryElement(NCSteamAdditionsConfig.CATEGORY_RECIPES, CategoryEntryRecipes.class));
 			return list;
 		}
 
@@ -70,6 +73,54 @@ public class NCSteamAdditionsConfigGUIFactory implements IModGuiFactory
 			protected GuiScreen buildChildScreen()
 			{
 				return buildChildScreen(NCSteamAdditionsConfig.CATEGORY_PROCESSORS, owningScreen, configElement);
+			}
+		}
+
+		public static class CategoryEntryPipes extends CategoryEntry implements INCSteamAdditionsConfigCategory
+		{
+
+			public CategoryEntryPipes(GuiConfig owningScreen, GuiConfigEntries owningEntryList,
+										   IConfigElement configElement)
+			{
+				super(owningScreen, owningEntryList, configElement);
+			}
+
+			@Override
+			protected GuiScreen buildChildScreen()
+			{
+				return buildChildScreen(NCSteamAdditionsConfig.CATEGORY_PIPES, owningScreen, configElement);
+			}
+		}
+
+		public static class CategoryEntryRecipes extends CategoryEntry implements INCSteamAdditionsConfigCategory
+		{
+
+			public CategoryEntryRecipes(GuiConfig owningScreen, GuiConfigEntries owningEntryList,
+									  IConfigElement configElement)
+			{
+				super(owningScreen, owningEntryList, configElement);
+			}
+
+			@Override
+			protected GuiScreen buildChildScreen()
+			{
+				return buildChildScreen(NCSteamAdditionsConfig.CATEGORY_RECIPES, owningScreen, configElement);
+			}
+		}
+
+		public static class CategoryEntryWorldgen extends CategoryEntry implements INCSteamAdditionsConfigCategory
+		{
+
+			public CategoryEntryWorldgen(GuiConfig owningScreen, GuiConfigEntries owningEntryList,
+										   IConfigElement configElement)
+			{
+				super(owningScreen, owningEntryList, configElement);
+			}
+
+			@Override
+			protected GuiScreen buildChildScreen()
+			{
+				return buildChildScreen(NCSteamAdditionsConfig.CATEGORY_WORLDGEN, owningScreen, configElement);
 			}
 		}
 

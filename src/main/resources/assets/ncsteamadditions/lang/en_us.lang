@@ -128,3 +128,9 @@ entity.Villager.ncsteamadditions.engineer=Nuclear Engineer
 entity.Villager.ncsteamadditions.scientist=Nuclear Scientist
 
 gui.ncsteamadditions.config.spawn_villager.comment=Spawn Villager Scientists
+
+gui.ncsteamadditions.config.main_title=Nucleacraft Additions
+gui.ncsteamadditions.config.category.processors=Processors
+gui.ncsteamadditions.config.category.worldgen=World Generation
+gui.ncsteamadditions.config.category.pipes=Pipes
+gui.ncsteamadditions.config.category.recipes=Recipes
