@@ -5,12 +5,14 @@ import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
 import igentuman.ncsteamadditions.machine.gui.GUIHandler;
 import igentuman.ncsteamadditions.proxy.CommonProxy;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
+import igentuman.ncsteamadditions.util.NcsEventHandler;
 import igentuman.ncsteamadditions.util.Util;
 import igentuman.ncsteamadditions.villager.NCSVillagerHandler;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelVillager;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -54,6 +56,7 @@ public class NCSteamAdditions
 		Util.getLogger().info("Initialization");
 		proxy.init(event);
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
+		MinecraftForge.EVENT_BUS.register(new NcsEventHandler());
 		NCSVillagerHandler.initVillagerHouse();
 		NCSVillagerHandler.initVillagerTrades();
 	}

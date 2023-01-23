@@ -114,3 +114,8 @@ gui.nc.dt.target_reactivity=Целевая реактивность:
 
 gui.ncsteamadditions.config.processors.digital_transformer_reset_time=Период сброса параметров Цифрового Преобразователя (сек.)
 gui.ncsteamadditions.config.processors.digital_transformer_reset_time.comment=Как часто Цифровой Преобразователь перезагружает свои параметры
+
+entity.Villager.ncsteamadditions.engineer=Инженер ядерщик
+entity.Villager.ncsteamadditions.scientist=Ученый ядерщик
+
+gui.ncsteamadditions.config.spawn_villager.comment=Спавнить жителей ученых?

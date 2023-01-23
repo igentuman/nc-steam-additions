@@ -123,3 +123,8 @@ gui.ncsteamadditions.config.processors.digital_transformer_efficiency_cap.commen
 
 gui.ncsteamadditions.config.processors.digital_transformer_reset_time=Reset Time For Digital Transformer Reactivity (seconds)
 gui.ncsteamadditions.config.processors.digital_transformer_reset_time.comment=How often Digital Transformer resets its parameters
+
+entity.Villager.ncsteamadditions.engineer=Nuclear Engineer
+entity.Villager.ncsteamadditions.scientist=Nuclear Scientist
+
+gui.ncsteamadditions.config.spawn_villager.comment=Spawn Villager Scientists
