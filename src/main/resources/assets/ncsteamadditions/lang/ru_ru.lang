@@ -125,3 +125,5 @@ gui.ncsteamadditions.config.category.processors=Процессоры
 gui.ncsteamadditions.config.category.worldgen=Генерация
 gui.ncsteamadditions.config.category.pipes=Трубы
 gui.ncsteamadditions.config.category.recipes=Рецепты
+
+gui.ncsteamadditions.config.make_hx_alive.comment=Делает Теплообменник рабочим. Врядли оно работает правильно. Но почему бы и нет? Выключить, если возникают проблемы.

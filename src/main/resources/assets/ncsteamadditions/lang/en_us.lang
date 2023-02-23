@@ -134,3 +134,5 @@ gui.ncsteamadditions.config.category.processors=Processors
 gui.ncsteamadditions.config.category.worldgen=World Generation
 gui.ncsteamadditions.config.category.pipes=Pipes
 gui.ncsteamadditions.config.category.recipes=Recipes
+
+gui.ncsteamadditions.config.make_hx_alive.comment=Makes NCO Heat Exchanger working. Doubt if it works properly. Disable in case of issues.

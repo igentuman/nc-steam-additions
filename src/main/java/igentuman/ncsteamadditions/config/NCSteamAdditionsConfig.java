@@ -22,6 +22,7 @@ public class NCSteamAdditionsConfig {
 	public static final String CATEGORY_PIPES = "pipes";
 	public static final String CATEGORY_RECIPES = "recipes";
 	public static final String CATEGORY_WORLDGEN = "worldgen";
+	public static final String CUSTOM = "custom";
 
 	public static Configuration getConfig()
 	{
@@ -53,6 +54,8 @@ public class NCSteamAdditionsConfig {
 	public static double boilerConversion;
 
 	public static double processorsSoundVolume;
+
+	public static boolean makeHXalive;
 
 	public static void preInit()
 	{
@@ -145,6 +148,9 @@ public class NCSteamAdditionsConfig {
 
 		Property spawnVillager = config.get(CATEGORY_WORLDGEN, "spawn_villager", true, Lang.localise("gui.ncsteamadditions.config.spawn_villager.comment"));
 		propertyOreGen.setLanguageKey("gui.ncsteamadditions.config.spawn_villager");
+
+		Property makeHxAlive = config.get(CUSTOM, "make_hx_alive", true, Lang.localise("gui.ncsteamadditions.config.make_hx_alive.comment"));
+		makeHxAlive.setLanguageKey("gui.ncsteamadditions.config.make_hx_alive");
 
 		spawn_villager = spawnVillager.getBoolean();
 		ore_dims = propertyOreDims.getIntList();
