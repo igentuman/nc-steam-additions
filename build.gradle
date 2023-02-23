@@ -85,13 +85,13 @@ minecraft {
 
 dependencies {
 	deobfCompile "nuclearcraft-overhauled:NuclearCraft:${nuclearcraft_version}:${mc_version}"
-
 	deobfCompile "codechicken:CodeChickenLib:1.12.2-+:universal"
 	deobfCompile "net.industrial-craft:industrialcraft-2:${ic2_version}"
 	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:${crafttweaker_version}"
 	deobfCompile "base:base:${b_a_s_e_version}"
 	deobfCompile "contenttweaker:ContentTweaker:${contenttweaker_version}"
 	deobfCompile "li.cil.oc:OpenComputers:${oc_version}"
+	//deobfCompile "curse.maven:ae2-extended-life-570458:3791235"
 	deobfProvided "gregtechce:gregtech:${gregtech_version}"
 	deobfCompile "mekanism:Mekanism:${mekanism_version}"
 	deobfCompile "vazkii.patchouli:Patchouli:${patchouli_version}"

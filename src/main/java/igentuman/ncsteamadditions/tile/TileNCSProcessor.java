@@ -89,6 +89,12 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     @SideOnly(Side.CLIENT)
     private ISound activeSound;
 
+    @Override
+    public int getNumberOfUpgrades()
+    {
+        return 1;
+    }
+
     public TileNCSProcessor(String code, int inputItems, int inputFluids, int outputItems, int outputFluids, int GUID)
     {
         this(
