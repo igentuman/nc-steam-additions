@@ -23,7 +23,7 @@ public class ContainerDigitalTransformer extends ContainerItemFluidProcessor
 		int x = GuiDigitalTransformer.inputItemsLeft;
 		if(processor.inputItems > 0) {
 			for (int i = 0; i < processor.inputItems; i++) {
-				addSlotToContainer(new SlotProcessorInput(tileEntity, recipeHandler, idCounter, x, GuiDigitalTransformer.inputItemsTop));
+				addSlotToContainer(new SlotProcessorInput(tileEntity, recipeHandler, idCounter, x, 42));
 				x += GuiDigitalTransformer.cellSpan;
 				idCounter++;
 			}
@@ -32,7 +32,7 @@ public class ContainerDigitalTransformer extends ContainerItemFluidProcessor
 		x = 152;
 		if(processor.outputItems > 0) {
 			for (int i = 0; i < processor.outputItems; i++) {
-				addSlotToContainer(new SlotFurnace(player, tileEntity, idCounter, x, GuiDigitalTransformer.inputItemsTop));
+				addSlotToContainer(new SlotFurnace(player, tileEntity, idCounter, x, 42));
 				x += GuiDigitalTransformer.cellSpan;
 				idCounter++;
 			}

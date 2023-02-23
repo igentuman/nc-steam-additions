@@ -12,6 +12,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 
 public class ProcessorContainer  extends ContainerItemFluidProcessor {
+    public static int InputSlotsXOffset = 26;
+    public static int InputSlotsSpan = 19;
+    private static int InputSlotsYOffset = 42;
+
     public ProcessorContainer(EntityPlayer player, TileNCSProcessor tileEntity, AbstractProcessor processor)
     {
         super(player, tileEntity, NCSteamAdditionsRecipes.processorRecipeHandlers[processor.getGuid()]);
@@ -21,11 +25,11 @@ public class ProcessorContainer  extends ContainerItemFluidProcessor {
     public void renderConteiner(EntityPlayer player, TileNCSProcessor tileEntity, AbstractProcessor processor)
     {
         int idCounter = 0;
-        int x = GuiItemFluidMachine.inputItemsLeft;
+        int x = ProcessorContainer.InputSlotsXOffset;
         if(processor.inputItems > 0) {
             for (int i = 0; i < processor.inputItems; i++) {
-                addSlotToContainer(new SlotProcessorInput(tileEntity, recipeHandler, idCounter, x, GuiItemFluidMachine.inputItemsTop));
-                x += GuiItemFluidMachine.cellSpan;
+                addSlotToContainer(new SlotProcessorInput(tileEntity, recipeHandler, idCounter, x, ProcessorContainer.InputSlotsYOffset));
+                x += ProcessorContainer.InputSlotsSpan;
                 idCounter++;
             }
         }
@@ -33,8 +37,8 @@ public class ProcessorContainer  extends ContainerItemFluidProcessor {
         x = 152;
         if(processor.outputItems > 0) {
             for (int i = 0; i < processor.outputItems; i++) {
-                addSlotToContainer(new SlotFurnace(player, tileEntity, idCounter, x, GuiItemFluidMachine.inputItemsTop));
-                x += GuiItemFluidMachine.cellSpan;
+                addSlotToContainer(new SlotFurnace(player, tileEntity, idCounter, x, ProcessorContainer.InputSlotsYOffset));
+                x += ProcessorContainer.InputSlotsSpan;
                 idCounter++;
             }
         }
