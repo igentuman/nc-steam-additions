@@ -152,6 +152,7 @@ public class NCSteamAdditionsConfig {
 		Property makeHxAlive = config.get(CUSTOM, "make_hx_alive", true, Lang.localise("gui.ncsteamadditions.config.make_hx_alive.comment"));
 		makeHxAlive.setLanguageKey("gui.ncsteamadditions.config.make_hx_alive");
 
+		makeHXalive = makeHxAlive.getBoolean();
 		spawn_villager = spawnVillager.getBoolean();
 		ore_dims = propertyOreDims.getIntList();
 		ore_dims_list_type = propertyOreDimsListType.getBoolean();
