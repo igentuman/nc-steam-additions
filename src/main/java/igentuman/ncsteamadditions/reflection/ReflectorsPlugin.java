@@ -33,10 +33,6 @@ public class ReflectorsPlugin extends Reflectors.FMLLoadingPluginAdapter
             return Reflectors.reflectClass(basicClass, transformedName, HeatExchangerLogicReflection.class.getName());
         }
 
-        if (transformedName.equals("nc.multiblock.heatExchanger.CondenserLogic")) {
-            return Reflectors.reflectClass(basicClass, transformedName, CondenserLogicReflection.class.getName());
-        }
-
         return basicClass;
     }
 }
