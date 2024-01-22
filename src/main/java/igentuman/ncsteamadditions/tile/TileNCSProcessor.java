@@ -215,8 +215,10 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     public void invalidate()
     {
         super.invalidate();
-        if (!ProcessorsRegistry.get().processors()[processorID-1].getSound().isEmpty()) {
-            stopSound();
+        if(world.isRemote) {
+            if (!ProcessorsRegistry.get().processors()[processorID - 1].getSound().isEmpty()) {
+                stopSound();
+            }
         }
     }
     //values range -0.5 ... 950
