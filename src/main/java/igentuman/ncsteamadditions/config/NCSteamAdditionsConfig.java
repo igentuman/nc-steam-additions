@@ -73,83 +73,83 @@ public class NCSteamAdditionsConfig {
 	{
 		if (loadFromFile) config.load();
 
-		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {800,400,400,800,400,400,500,400,12000,100}, Lang.localise("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
+		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {800,400,400,800,400,400,500,400,12000,100}, Lang.localize("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
 		propertyProcessorTime.setLanguageKey("gui.ncsteamadditions.config.processors.time");
 
-		Property efficiency_cap = config.get(CATEGORY_PROCESSORS, "efficiency_cap", 150, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,5000);
+		Property efficiency_cap = config.get(CATEGORY_PROCESSORS, "efficiency_cap", 150, Lang.localize("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,5000);
 		efficiency_cap.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_cap");
 
-		Property processors_sound_volume = config.get(CATEGORY_PROCESSORS, "processors_sound_volume", 0.5, Lang.localise("gui.ncsteamadditions.config.processors.processors_sound_volume.comment"),0,1);
+		Property processors_sound_volume = config.get(CATEGORY_PROCESSORS, "processors_sound_volume", 0.5, Lang.localize("gui.ncsteamadditions.config.processors.processors_sound_volume.comment"),0,1);
 		processors_sound_volume.setLanguageKey("gui.ncsteamadditions.config.processors.processors_sound_volume");
 
-		Property propertyBoilerConversion = config.get(CATEGORY_PROCESSORS, "boiler_conversion", 1.25F, Lang.localise("gui.ncsteamadditions.config.processors.boiler_conversion.comment"),0,32767);
+		Property propertyBoilerConversion = config.get(CATEGORY_PROCESSORS, "boiler_conversion", 1.25F, Lang.localize("gui.ncsteamadditions.config.processors.boiler_conversion.comment"),0,32767);
 		propertyBoilerConversion.setLanguageKey("gui.ncsteamadditions.config.processors.boiler_conversion");
 
-		Property propertyTurbineRF = config.get(CATEGORY_PROCESSORS, "turbine_rf", 12, Lang.localise("gui.ncsteamadditions.config.processors.turbine_rf.comment"),0,32767);
+		Property propertyTurbineRF = config.get(CATEGORY_PROCESSORS, "turbine_rf", 12, Lang.localize("gui.ncsteamadditions.config.processors.turbine_rf.comment"),0,32767);
 		propertyTurbineRF.setLanguageKey("gui.ncsteamadditions.config.processors.turbine_rf");
 
-		Property propertyTurbineConversion = config.get(CATEGORY_PROCESSORS, "turbine_conversion", 0.50, Lang.localise("gui.ncsteamadditions.config.processors.turbine_conversion.comment"),0,32767);
+		Property propertyTurbineConversion = config.get(CATEGORY_PROCESSORS, "turbine_conversion", 0.50, Lang.localize("gui.ncsteamadditions.config.processors.turbine_conversion.comment"),0,32767);
 		propertyTurbineConversion.setLanguageKey("gui.ncsteamadditions.config.processors.turbine_conversion");
 
-		Property capacity = config.get(CATEGORY_PIPES, "capacity", 5000, Lang.localise("gui.ncsteamadditions.config.pipes.capacity.comment"),0,32767);
+		Property capacity = config.get(CATEGORY_PIPES, "capacity", 5000, Lang.localize("gui.ncsteamadditions.config.pipes.capacity.comment"),0,32767);
 		capacity.setLanguageKey("gui.ncsteamadditions.config.pipes.capacity");
 
-		Property transfer = config.get(CATEGORY_PIPES, "transfer", 1000, Lang.localise("gui.ncsteamadditions.config.pipes.transfer.comment"),0,32767);
+		Property transfer = config.get(CATEGORY_PIPES, "transfer", 1000, Lang.localize("gui.ncsteamadditions.config.pipes.transfer.comment"),0,32767);
 		transfer.setLanguageKey("gui.ncsteamadditions.config.pipes.transfer");
 
-		Property digitalTransformerBasePower = config.get(CATEGORY_PROCESSORS, "digital_transformer_reset_time", 20, Lang.localise("gui.ncsteamadditions.config.processors.digital_transformer_reset_time.comment"),0,32767);
+		Property digitalTransformerBasePower = config.get(CATEGORY_PROCESSORS, "digital_transformer_reset_time", 20, Lang.localize("gui.ncsteamadditions.config.processors.digital_transformer_reset_time.comment"),0,32767);
 		digitalTransformerBasePower.setLanguageKey("gui.ncsteamadditions.config.processors.digital_transformer_reset_time");
 
-		Property digitalTransformerReset = config.get(CATEGORY_PROCESSORS, "digital_transformer_rf", 1024, Lang.localise("gui.ncsteamadditions.config.processors.digital_transformer_rf.comment"),0,32767);
+		Property digitalTransformerReset = config.get(CATEGORY_PROCESSORS, "digital_transformer_rf", 1024, Lang.localize("gui.ncsteamadditions.config.processors.digital_transformer_rf.comment"),0,32767);
 		digitalTransformerReset.setLanguageKey("gui.ncsteamadditions.config.processors.digital_transformer_rf");
 
-		Property digital_transformer_efficiency_cap = config.get(CATEGORY_PROCESSORS, "digital_transformer_efficiency_cap", 1500, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,2300);
+		Property digital_transformer_efficiency_cap = config.get(CATEGORY_PROCESSORS, "digital_transformer_efficiency_cap", 1500, Lang.localize("gui.ncsteamadditions.config.processors.efficiency_cap.comment"),0,2300);
 		digital_transformer_efficiency_cap.setLanguageKey("gui.ncsteamadditions.config.processors.digital_transformer_efficiency_cap");
 
 
 
-		Property efficiency_change_speed = config.get(CATEGORY_PROCESSORS, "efficiency_change_speed", 50, Lang.localise("gui.ncsteamadditions.config.processors.efficiency_change_speed.comment"),0,200);
+		Property efficiency_change_speed = config.get(CATEGORY_PROCESSORS, "efficiency_change_speed", 50, Lang.localize("gui.ncsteamadditions.config.processors.efficiency_change_speed.comment"),0,200);
 		efficiency_change_speed.setLanguageKey("gui.ncsteamadditions.config.processors.efficiency_change_speed");
 
-		Property override_nc_recipes = config.get(CATEGORY_RECIPES, "override_nc_recipes", "true", Lang.localise("gui.ncsteamadditions.config.recipes.override_nc_recipes.comment"));
+		Property override_nc_recipes = config.get(CATEGORY_RECIPES, "override_nc_recipes", "true", Lang.localize("gui.ncsteamadditions.config.recipes.override_nc_recipes.comment"));
 		
 		override_nc_recipes.setLanguageKey("gui.ncsteamadditions.config.recipes.override_nc_recipes");
 
 		//WORLDGEN
-		Property propertyOreDims = config.get(CATEGORY_WORLDGEN, "ore_dims", new int[]{0, 2, -6, -100, 4598, -9999, -11325}, Lang.localise("gui.ncsteamadditions.config.ore_dims.comment"), -2147483648, 2147483647);
+		Property propertyOreDims = config.get(CATEGORY_WORLDGEN, "ore_dims", new int[]{0, 2, -6, -100, 4598, -9999, -11325}, Lang.localize("gui.ncsteamadditions.config.ore_dims.comment"), -2147483648, 2147483647);
 		propertyOreDims.setLanguageKey("gui.ncsteamadditions.config.ore_dims");
 
-		Property propertyOreDimsListType = config.get(CATEGORY_WORLDGEN, "ore_dims_list_type", false, Lang.localise("gui.ncsteamadditions.config.ore_dims_list_type.comment"));
+		Property propertyOreDimsListType = config.get(CATEGORY_WORLDGEN, "ore_dims_list_type", false, Lang.localize("gui.ncsteamadditions.config.ore_dims_list_type.comment"));
 		propertyOreDimsListType.setLanguageKey("gui.ncsteamadditions.config.ore_dims_list_type");
 
-		Property propertyOreGen = config.get(CATEGORY_WORLDGEN, "ore_gen", new boolean[]{true}, Lang.localise("gui.ncsteamadditions.config.ore_gen.comment"));
+		Property propertyOreGen = config.get(CATEGORY_WORLDGEN, "ore_gen", new boolean[]{true}, Lang.localize("gui.ncsteamadditions.config.ore_gen.comment"));
 		propertyOreGen.setLanguageKey("gui.ncsteamadditions.config.ore_gen");
 
-		Property propertyOreSize = config.get(CATEGORY_WORLDGEN, "ore_size", new int[]{6}, Lang.localise("gui.ncsteamadditions.config.ore_size.comment"), 1, 2147483647);
+		Property propertyOreSize = config.get(CATEGORY_WORLDGEN, "ore_size", new int[]{6}, Lang.localize("gui.ncsteamadditions.config.ore_size.comment"), 1, 2147483647);
 		propertyOreSize.setLanguageKey("gui.ncsteamadditions.config.ore_size");
 
-		Property propertyOreRate = config.get(CATEGORY_WORLDGEN, "ore_rate", new int[]{5}, Lang.localise("gui.ncsteamadditions.config.ore_rate.comment"), 1, 2147483647);
+		Property propertyOreRate = config.get(CATEGORY_WORLDGEN, "ore_rate", new int[]{5}, Lang.localize("gui.ncsteamadditions.config.ore_rate.comment"), 1, 2147483647);
 		propertyOreRate.setLanguageKey("gui.ncsteamadditions.config.ore_rate");
 
-		Property propertyOreMinHeight = config.get(CATEGORY_WORLDGEN, "ore_min_height", new int[]{0}, Lang.localise("gui.ncsteamadditions.config.ore_min_height.comment"), 1, 255);
+		Property propertyOreMinHeight = config.get(CATEGORY_WORLDGEN, "ore_min_height", new int[]{0}, Lang.localize("gui.ncsteamadditions.config.ore_min_height.comment"), 1, 255);
 		propertyOreMinHeight.setLanguageKey("gui.ncsteamadditions.config.ore_min_height");
 
-		Property propertyOreMaxHeight = config.get(CATEGORY_WORLDGEN, "ore_max_height", new int[]{52}, Lang.localise("gui.ncsteamadditions.config.ore_max_height.comment"), 1, 255);
+		Property propertyOreMaxHeight = config.get(CATEGORY_WORLDGEN, "ore_max_height", new int[]{52}, Lang.localize("gui.ncsteamadditions.config.ore_max_height.comment"), 1, 255);
 		propertyOreMaxHeight.setLanguageKey("gui.ncsteamadditions.config.ore_max_height");
 
-		Property propertyOreDrops = config.get(CATEGORY_WORLDGEN, "ore_drops", new boolean[]{false}, Lang.localise("gui.ncsteamadditions.config.ore_drops.comment"));
+		Property propertyOreDrops = config.get(CATEGORY_WORLDGEN, "ore_drops", new boolean[]{false}, Lang.localize("gui.ncsteamadditions.config.ore_drops.comment"));
 		propertyOreDrops.setLanguageKey("gui.ncsteamadditions.config.ore_drops");
 
-		Property propertyOreHideDisabled = config.get(CATEGORY_WORLDGEN, "ore_hide_disabled", false, Lang.localise("gui.ncsteamadditions.config.ore_hide_disabled.comment"));
+		Property propertyOreHideDisabled = config.get(CATEGORY_WORLDGEN, "ore_hide_disabled", false, Lang.localize("gui.ncsteamadditions.config.ore_hide_disabled.comment"));
 		propertyOreHideDisabled.setLanguageKey("gui.ncsteamadditions.config.ore_hide_disabled");
 
-		Property propertyOreHarvestLevels = config.get(CATEGORY_WORLDGEN, "ore_harvest_levels", new int[]{2}, Lang.localise("gui.ncsteamadditions.config.ore_harvest_levels.comment"), 0, 15);
+		Property propertyOreHarvestLevels = config.get(CATEGORY_WORLDGEN, "ore_harvest_levels", new int[]{2}, Lang.localize("gui.ncsteamadditions.config.ore_harvest_levels.comment"), 0, 15);
 		propertyOreHarvestLevels.setLanguageKey("gui.ncsteamadditions.config.ore_harvest_levels");
 
-		Property spawnVillager = config.get(CATEGORY_WORLDGEN, "spawn_villager", true, Lang.localise("gui.ncsteamadditions.config.spawn_villager.comment"));
+		Property spawnVillager = config.get(CATEGORY_WORLDGEN, "spawn_villager", true, Lang.localize("gui.ncsteamadditions.config.spawn_villager.comment"));
 		propertyOreGen.setLanguageKey("gui.ncsteamadditions.config.spawn_villager");
 
-		Property makeHxAlive = config.get(CUSTOM, "make_hx_alive", true, Lang.localise("gui.ncsteamadditions.config.make_hx_alive.comment"));
+		Property makeHxAlive = config.get(CUSTOM, "make_hx_alive", true, Lang.localize("gui.ncsteamadditions.config.make_hx_alive.comment"));
 		makeHxAlive.setLanguageKey("gui.ncsteamadditions.config.make_hx_alive");
 
 		makeHXalive = makeHxAlive.getBoolean();

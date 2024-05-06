@@ -29,10 +29,8 @@ import nc.tile.internal.fluid.TankSorption;
 import nc.tile.internal.inventory.ItemOutputSetting;
 import nc.tile.internal.inventory.ItemSorption;
 import nc.tile.inventory.ITileInventory;
-import nc.tile.processor.IItemFluidProcessor;
 import nc.tile.processor.IProcessor;
-import nc.tile.processor.ITileSideConfigGui;
-import nc.tile.processor.IUpgradable;
+import nc.tile.processor.IUpgradableProcessor;
 import nc.util.StackHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
@@ -55,7 +53,7 @@ import java.util.Set;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
-public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements IItemFluidProcessor, ITileSideConfigGui<NCSProcessorUpdatePacket>, IUpgradable {
+public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements IProcessor, ITileSideConfigGui<NCSProcessorUpdatePacket>, IUpgradableProcessor {
     public final double defaultProcessTime;
     public final double defaultProcessPower;
     public double baseProcessTime;
@@ -367,15 +365,15 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         this.canProcessInputs = this.canProcessInputs();
     }
 
-    public int getProcessTime() {
+    public long getProcessTime() {
         return Math.max(1, (int)Math.round(Math.ceil(this.baseProcessTime / this.getSpeedMultiplier())));
     }
 
-    public int getProcessPower() {
+    public long getProcessPower() {
         return Math.min(2147483647, (int)(this.baseProcessPower * this.getPowerMultiplier()));
     }
 
-    public int getProcessEnergy() {
+    public long getProcessEnergy() {
         return this.getProcessTime() * this.getProcessPower();
     }
 
@@ -386,7 +384,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
             this.baseProcessRadiation = 0.0D;
             return false;
         } else {
-            BasicRecipe recipe = (BasicRecipe)this.recipeInfo.getRecipe();
+            BasicRecipe recipe = (BasicRecipe)this.recipeInfo.recipe;
             this.baseProcessTime = recipe.getBaseProcessTime(this.defaultProcessTime);
             this.baseProcessPower = recipe.getBaseProcessPower(this.defaultProcessPower);
             this.baseProcessRadiation = recipe.getBaseProcessRadiation();
@@ -647,19 +645,19 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public List<IItemIngredient> getItemIngredients() {
-        return ((BasicRecipe)this.recipeInfo.getRecipe()).getItemIngredients();
+        return ((BasicRecipe)this.recipeInfo.recipe).getItemIngredients();
     }
 
     public List<IFluidIngredient> getFluidIngredients() {
-        return ((BasicRecipe)this.recipeInfo.getRecipe()).getFluidIngredients();
+        return ((BasicRecipe)this.recipeInfo.recipe).getFluidIngredients();
     }
 
     public List<IItemIngredient> getItemProducts() {
-        return ((BasicRecipe)this.recipeInfo.getRecipe()).getItemProducts();
+        return ((BasicRecipe)this.recipeInfo.recipe).getItemProducts();
     }
 
     public List<IFluidIngredient> getFluidProducts() {
-        return ((BasicRecipe)this.recipeInfo.getRecipe()).getFluidProducts();
+        return ((BasicRecipe)this.recipeInfo.recipe).getFluidProducts();
     }
 
     public boolean hasUpgrades() {

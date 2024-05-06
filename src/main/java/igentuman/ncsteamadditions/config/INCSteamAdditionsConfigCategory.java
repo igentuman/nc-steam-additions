@@ -13,7 +13,7 @@ public interface INCSteamAdditionsConfigCategory {
         Configuration config = NCSteamAdditionsConfig.getConfig();
         ConfigElement newElement = new ConfigElement(config.getCategory(categoryName));
         List<IConfigElement> propertiesOnScreen = newElement.getChildElements();
-        String windowTitle = Lang.localise("gui.ncsteamadditions.config.category." + categoryName);
+        String windowTitle = Lang.localize("gui.ncsteamadditions.config.category." + categoryName);
         return new GuiConfig(owningScreen, propertiesOnScreen, owningScreen.modID, configElement.requiresWorldRestart() || owningScreen.allRequireWorldRestart, configElement.requiresMcRestart() || owningScreen.allRequireMcRestart, windowTitle);
     }
 }

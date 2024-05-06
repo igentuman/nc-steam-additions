@@ -20,6 +20,9 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 repositories {
 	maven {
+		url = "https://cursemaven.com"
+	}
+	maven {
 		name = "CurseForge"
 		url = "https://minecraft.curseforge.com/api/maven/"
 	}
@@ -30,10 +33,6 @@ repositories {
 	maven {
 		name = "blamejared"
 		url = "http://maven.blamejared.com/"
-	}
-	maven {
-		name = "ic2"
-		url = "http://maven.ic2.player.to/"
 	}
 	maven {
 		name = "cil"
@@ -92,9 +91,10 @@ minecraft {
 
 dependencies {
 	shade "com.github.MJaroslav.Reflectors:library:v4"
-	deobfCompile "nuclearcraft-overhauled:NuclearCraft:${nuclearcraft_version}:${mc_version}"
+	deobfCompile "curse.maven:nuclearcraft-overhauled-336895:5316836"
+	//deobfCompile "nuclearcraft-overhauled:NuclearCraft:${nuclearcraft_version}:${mc_version}"
 	deobfCompile "codechicken:CodeChickenLib:1.12.2-+:universal"
-	deobfCompile "net.industrial-craft:industrialcraft-2:${ic2_version}"
+	compileOnly "net.industrial-craft:industrialcraft-2:${ic2_version}:dev"
 	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:${crafttweaker_version}"
 	deobfCompile "base:base:${b_a_s_e_version}"
 	deobfCompile "contenttweaker:ContentTweaker:${contenttweaker_version}"

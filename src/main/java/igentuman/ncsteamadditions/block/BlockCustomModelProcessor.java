@@ -11,7 +11,7 @@ import nc.init.NCItems;
 import nc.tile.ITileGui;
 import nc.tile.fluid.ITileFluid;
 import nc.tile.processor.IProcessor;
-import nc.tile.processor.IUpgradable;
+import nc.tile.processor.IUpgradableProcessor;
 import nc.util.BlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -159,9 +159,9 @@ public class BlockCustomModelProcessor extends BlockSidedTile implements IActiva
 			return false;
 
 		TileEntity tile = world.getTileEntity(pos);
-		if (tile instanceof IUpgradable)
+		if (tile instanceof IUpgradableProcessor)
 		{
-			if (installUpgrade(tile, ((IUpgradable) tile).getSpeedUpgradeSlot(), player, hand, facing,
+			if (installUpgrade(tile, ((IUpgradableProcessor) tile).getSpeedUpgradeSlot(), player, hand, facing,
 					new ItemStack(NCItems.upgrade, 1, 0)))
 				return true;
 		}
@@ -206,7 +206,7 @@ public class BlockCustomModelProcessor extends BlockSidedTile implements IActiva
 					((IProcessor) tile).refreshRecipe();
 					((IProcessor) tile).refreshActivity();
 				}
-				FMLNetworkHandler.openGui(player, NCSteamAdditions.instance, ((ITileGui) tile).getGuiID(), world, pos.getX(),
+				FMLNetworkHandler.openGui(player, NCSteamAdditions.instance, ((ITileGui) tile).getContainerInfo().getGuiId(), world, pos.getX(),
 						pos.getY(), pos.getZ());
 			}
 		}

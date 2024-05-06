@@ -40,7 +40,7 @@ public class NCSteamAdditionsConfigGUIFactory implements IModGuiFactory
 		public NCSteamAdditionsConfigGui(GuiScreen parentScreen)
 		{
 			super(parentScreen, getConfigElements(), NCSteamAdditions.MOD_ID, false, false,
-					Lang.localise("gui.ncsteamadditions.config.main_title"));
+					Lang.localize("gui.ncsteamadditions.config.main_title"));
 		}
 
 		private static List<IConfigElement> getConfigElements()
@@ -56,7 +56,7 @@ public class NCSteamAdditionsConfigGUIFactory implements IModGuiFactory
 		private static DummyCategoryElement categoryElement(String categoryName,
 				Class<? extends IConfigEntry> categoryClass)
 		{
-			return new DummyCategoryElement(Lang.localise("gui.ncsteamadditions.config.category." + categoryName),
+			return new DummyCategoryElement(Lang.localize("gui.ncsteamadditions.config.category." + categoryName),
 					"gui.ncsteamadditions.config.category." + categoryName, categoryClass);
 		}
 

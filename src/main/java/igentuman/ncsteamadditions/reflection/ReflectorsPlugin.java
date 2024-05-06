@@ -21,18 +21,6 @@ public class ReflectorsPlugin extends Reflectors.FMLLoadingPluginAdapter
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
 
-        if (transformedName.equals("nc.multiblock.heatExchanger.tile.TileHeatExchangerTube")) {
-            return Reflectors.reflectClass(basicClass, transformedName, TileHeatExchangerTubeReflection.class.getName());
-        }
-
-        if (transformedName.equals("nc.multiblock.heatExchanger.tile.TileCondenserTube")) {
-            return Reflectors.reflectClass(basicClass, transformedName, TileCondenserTubeReflection.class.getName());
-        }
-
-        if (transformedName.equals("nc.multiblock.heatExchanger.HeatExchangerLogic")) {
-            return Reflectors.reflectClass(basicClass, transformedName, HeatExchangerLogicReflection.class.getName());
-        }
-
         return basicClass;
     }
 }

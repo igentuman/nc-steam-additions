@@ -13,7 +13,7 @@
   "screenshots": [],
   "dependencies": ["nuclearcraft"],
   "requiredMods": [
-    "nuclearcraft@[2o.6.2-1.12.2]"
+    "nuclearcraft@[2o.7.0-1.12.2]"
   ]
 }
 ]
