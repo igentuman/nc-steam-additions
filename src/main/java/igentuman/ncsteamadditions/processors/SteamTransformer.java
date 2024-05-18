@@ -6,20 +6,13 @@ import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.SteamTransformerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTransformer;
-import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
-import nc.container.processor.ContainerMachineConfig;
-import nc.integration.jei.JEIBasicCategory;
-import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
+import net.minecraftforge.fml.relauncher.*;
 
 public class SteamTransformer extends AbstractProcessor {
 

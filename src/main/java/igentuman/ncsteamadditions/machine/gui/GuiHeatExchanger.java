@@ -1,16 +1,10 @@
 package igentuman.ncsteamadditions.machine.gui;
 
 import igentuman.ncsteamadditions.machine.container.ContainerHeatExchanger;
-import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import igentuman.ncsteamadditions.processors.HeatExchanger;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import nc.container.ContainerTile;
-import nc.container.processor.ContainerMachineConfig;
-import nc.gui.element.GuiFluidRenderer;
-import nc.gui.element.NCButton;
-import nc.gui.element.NCToggleButton;
+import nc.gui.element.*;
 import nc.gui.processor.GuiFluidSorptions;
-import nc.gui.processor.GuiItemSorptions;
 import nc.util.Lang;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -84,8 +78,8 @@ public class GuiHeatExchanger extends GuiItemFluidMachine
 			}
 		}
 
-		drawTooltip(Lang.localise("gui.nc.container.machine_side_config"), mouseX, mouseY, 27, 63, 18, 18);
-		drawTooltip(Lang.localise("gui.nc.container.redstone_control"), mouseX, mouseY, 47, 63, 18, 18);
+		drawTooltip(Lang.localize("gui.nc.container.machine_side_config"), mouseX, mouseY, 27, 63, 18, 18);
+		drawTooltip(Lang.localize("gui.nc.container.redstone_control"), mouseX, mouseY, 47, 63, 18, 18);
 	}
 
 	public void initButtons()
@@ -149,7 +143,7 @@ public class GuiHeatExchanger extends GuiItemFluidMachine
 
 			if(getProcessor().getInputFluids() > 0) {
 				for(int i = 0; i < getProcessor().getInputFluids(); i++) {
-					drawTooltip(TextFormatting.DARK_AQUA + Lang.localise("gui.nc.container.input_tank_config"), mouseX, mouseY, x, inputFluidsTop, 18, 18);
+					drawTooltip(TextFormatting.DARK_AQUA + Lang.localize("gui.nc.container.input_tank_config"), mouseX, mouseY, x, inputFluidsTop, 18, 18);
 					x += cellSpan;
 				}
 			}
@@ -157,7 +151,7 @@ public class GuiHeatExchanger extends GuiItemFluidMachine
 			x = 152;
 			if(getProcessor().getOutputFluids() > 0) {
 				for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
-					drawTooltip(TextFormatting.DARK_PURPLE + Lang.localise("gui.nc.container.output_tank_config"), mouseX, mouseY, x, inputFluidsTop, 18, 18);
+					drawTooltip(TextFormatting.DARK_PURPLE + Lang.localize("gui.nc.container.output_tank_config"), mouseX, mouseY, x, inputFluidsTop, 18, 18);
 					x += cellSpan;
 				}
 			}

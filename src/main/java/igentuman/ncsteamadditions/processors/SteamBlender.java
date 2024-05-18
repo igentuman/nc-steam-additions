@@ -9,17 +9,11 @@ import igentuman.ncsteamadditions.machine.gui.GuiSteamBlender;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
-import nc.container.processor.ContainerMachineConfig;
-import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.EmptyItemIngredient;
-import nc.tile.processor.TileFluidProcessor;
-import nc.util.FluidRegHelper;
-import nc.util.FluidStackHelper;
-import nc.util.RegistryHelper;
+import nc.util.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 public class SteamBlender extends AbstractProcessor {
 

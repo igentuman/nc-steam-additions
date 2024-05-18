@@ -1,6 +1,6 @@
 package igentuman.ncsteamadditions.block;
-import nc.enumm.IBlockMetaEnum;
-import nc.enumm.IMetaEnum;
+
+import nc.enumm.*;
 import net.minecraft.util.IStringSerializable;
 
 public class MetaEnums {

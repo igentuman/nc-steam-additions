@@ -1,12 +1,10 @@
 package igentuman.ncsteamadditions.item;
 
-
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class ItemPipe extends ItemBlock {

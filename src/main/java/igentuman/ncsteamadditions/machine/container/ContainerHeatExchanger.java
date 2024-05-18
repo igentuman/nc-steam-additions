@@ -1,7 +1,6 @@
 package igentuman.ncsteamadditions.machine.container;
 
-import igentuman.ncsteamadditions.processors.AbstractProcessor;
-import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
+import igentuman.ncsteamadditions.processors.*;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.container.slot.SlotSpecificInput;
 import net.minecraft.entity.player.EntityPlayer;

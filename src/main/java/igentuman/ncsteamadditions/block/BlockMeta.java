@@ -1,47 +1,30 @@
 package igentuman.ncsteamadditions.block;
 
-import java.util.Iterator;
-import java.util.List;
-import javax.annotation.Nullable;
-
+import igentuman.ncsteamadditions.block.MetaEnums.*;
 import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
-import igentuman.ncsteamadditions.block.MetaEnums.IngotType;
-import igentuman.ncsteamadditions.block.MetaEnums.OreType;
 import nc.block.IBlockMeta;
-import nc.enumm.IBlockMetaEnum;
-import nc.enumm.IMetaEnum;
+import nc.enumm.*;
 import nc.tile.ITile;
-import nc.util.CollectionHelper;
-import nc.util.NCInventoryHelper;
-import nc.util.StackHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
+import nc.util.*;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.properties.*;
+import net.minecraft.block.state.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.*;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
+
+import javax.annotation.Nullable;
+import java.util.*;
 
 public abstract class BlockMeta<T extends Enum<T> & IStringSerializable & IBlockMetaEnum> extends Block implements IBlockMeta {
     public final T[] values;

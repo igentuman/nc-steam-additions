@@ -1,10 +1,7 @@
 package igentuman.ncsteamadditions.worldgen;
 
-import igentuman.ncsteamadditions.block.BlockMeta;
-import igentuman.ncsteamadditions.block.Blocks;
-import igentuman.ncsteamadditions.block.MetaEnums;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import it.unimi.dsi.fastutil.ints.IntSet;
+import igentuman.ncsteamadditions.block.*;
+import it.unimi.dsi.fastutil.ints.*;
 import nc.worldgen.ore.UniversalOrePredicate;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -12,7 +9,9 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.IWorldGenerator;
+
 import java.util.Random;
+
 import static igentuman.ncsteamadditions.config.NCSteamAdditionsConfig.*;
 
 public class OreGenerator implements IWorldGenerator {

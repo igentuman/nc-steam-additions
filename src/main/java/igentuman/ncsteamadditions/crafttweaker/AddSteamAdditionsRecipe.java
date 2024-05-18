@@ -1,17 +1,12 @@
 package igentuman.ncsteamadditions.crafttweaker;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import crafttweaker.CraftTweakerAPI;
-import crafttweaker.IAction;
+import crafttweaker.*;
 import crafttweaker.api.item.IIngredient;
-import igentuman.ncsteamadditions.recipe.NCSteamAdditionsRecipe;
-import igentuman.ncsteamadditions.recipe.NCSteamAdditionsRecipeHandler;
-import igentuman.ncsteamadditions.recipe.NCSteamAdditionsRecipeHelper;
+import igentuman.ncsteamadditions.recipe.*;
 import nc.integration.crafttweaker.CTHelper;
-import nc.recipe.ingredient.IFluidIngredient;
-import nc.recipe.ingredient.IItemIngredient;
+import nc.recipe.ingredient.*;
+
+import java.util.*;
 
 public class AddSteamAdditionsRecipe implements IAction
 {
@@ -38,13 +33,13 @@ public class AddSteamAdditionsRecipe implements IAction
 		List<IFluidIngredient> fluidProducts = new ArrayList<>();
 		List extras = new ArrayList();
 		
-		while (listCount < objects.size()) 
+		while (listCount < objects.size())
 		{
 			Object object = objects.get(listCount);
-			if (ingredientCount < recipeHandler.getItemInputSize()) 
+			if (ingredientCount < recipeHandler.getItemInputSize())
 			{
 				if (object != null) {
-					if (!(object instanceof IIngredient)) 
+					if (!(object instanceof IIngredient))
 					{
 						ingredientError = true;
 						return;
@@ -57,10 +52,10 @@ public class AddSteamAdditionsRecipe implements IAction
 					return;
 				}
 				itemIngredients.add(ingredient);
-			} else if (ingredientCount < recipeHandler.getItemInputSize() + recipeHandler.getFluidInputSize()) 
+			} else if (ingredientCount < recipeHandler.getItemInputSize() + recipeHandler.getFluidInputSize())
 			{
 				if (object != null) {
-					if (!(object instanceof IIngredient)) 
+					if (!(object instanceof IIngredient))
 					{
 						ingredientError = true;
 						return;
@@ -76,7 +71,7 @@ public class AddSteamAdditionsRecipe implements IAction
 			} else if (ingredientCount < recipeHandler.getItemInputSize() + recipeHandler.getFluidInputSize())
 			{
 				if (object != null) {
-					if (!(object instanceof IIngredient)) 
+					if (!(object instanceof IIngredient))
 					{
 						ingredientError = true;
 						return;
@@ -86,7 +81,7 @@ public class AddSteamAdditionsRecipe implements IAction
 			} else if (ingredientCount < recipeHandler.getItemInputSize() + recipeHandler.getFluidInputSize() + recipeHandler.getItemOutputSize())
 			{
 				if (object != null) {
-					if (!(object instanceof IIngredient)) 
+					if (!(object instanceof IIngredient))
 					{
 						ingredientError = true;
 						return;
@@ -98,11 +93,11 @@ public class AddSteamAdditionsRecipe implements IAction
 					return;
 				}
 				itemProducts.add(ingredient);
-			} 
+			}
 			else if (ingredientCount < recipeHandler.getItemInputSize() + recipeHandler.getFluidInputSize() + recipeHandler.getItemOutputSize() + recipeHandler.getFluidOutputSize())
 			{
 				if (object != null) {
-					if (!(object instanceof IIngredient)) 
+					if (!(object instanceof IIngredient))
 					{
 						ingredientError = true;
 						return;
@@ -114,18 +109,18 @@ public class AddSteamAdditionsRecipe implements IAction
 					return;
 				}
 				fluidProducts.add(ingredient);
-			} 
+			}
 			else if (ingredientCount < recipeHandler.getItemInputSize() + recipeHandler.getFluidInputSize()  + recipeHandler.getItemOutputSize() + recipeHandler.getFluidOutputSize())
 			{
 				if (object != null) {
-					if (!(object instanceof IIngredient)) 
+					if (!(object instanceof IIngredient))
 					{
 						ingredientError = true;
 						return;
 					}
 				}
-			} 
-			else 
+			}
+			else
 			{
 				extras.add(object);
 			}
@@ -151,16 +146,16 @@ public class AddSteamAdditionsRecipe implements IAction
 	}
 	
 	@Override
-	public void apply() 
+	public void apply()
 	{
-		if (!inputsAllNull && !ingredientError && !wasNull && !wrongSize) 
+		if (!inputsAllNull && !ingredientError && !wasNull && !wrongSize)
 		{
 			recipeHandler.addRecipe(recipe);
 		}
 	}
 	
 	@Override
-	public String describe() 
+	public String describe()
 	{
 		if (inputsAllNull || ingredientError || wasNull || wrongSize) {
 			if (ingredientError || wrongSize) callError();
@@ -169,7 +164,7 @@ public class AddSteamAdditionsRecipe implements IAction
 		return String.format("Adding %s recipe: %s", recipeHandler.getRecipeName(), NCSteamAdditionsRecipeHelper.getRecipeString(itemIngredients, fluidIngredients, itemProducts, fluidProducts));
 	}
 	
-	public static void callError() 
+	public static void callError()
 	{
 		if (!hasErrored) {
 			CraftTweakerAPI.logError("At least one CraftTweaker recipe addition method has errored - check the CraftTweaker log for more details");

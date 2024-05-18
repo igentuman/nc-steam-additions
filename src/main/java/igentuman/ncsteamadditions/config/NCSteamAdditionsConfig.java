@@ -1,17 +1,15 @@
 package igentuman.ncsteamadditions.config;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import nc.util.Lang;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
+import net.minecraftforge.common.config.*;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.*;
+
+import java.io.File;
+import java.util.*;
 
 public class NCSteamAdditionsConfig {
 
@@ -190,7 +188,7 @@ public class NCSteamAdditionsConfig {
 
 		config.setCategoryPropertyOrder(CATEGORY_PROCESSORS, propertyOrderProcessors);
 		
-		if (setFromConfig) 
+		if (setFromConfig)
 		{
 			processor_time = readIntegerArrayFromConfig(propertyProcessorTime);
 		}

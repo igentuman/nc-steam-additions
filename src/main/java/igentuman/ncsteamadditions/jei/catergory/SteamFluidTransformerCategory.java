@@ -2,13 +2,9 @@ package igentuman.ncsteamadditions.jei.catergory;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamFluidTransformer;
-import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
-import igentuman.ncsteamadditions.processors.SteamFluidTransformer;
+import igentuman.ncsteamadditions.processors.*;
 import mezz.jei.api.IGuiHelper;
-import nc.integration.jei.JEIMachineRecipeWrapper;
-import nc.integration.jei.NCJEI.IJEIHandler;
-import nc.recipe.BasicRecipe;
-import nc.recipe.BasicRecipeHandler;
+import nc.recipe.*;
 
 public class SteamFluidTransformerCategory extends ParentProcessorCategory
 {

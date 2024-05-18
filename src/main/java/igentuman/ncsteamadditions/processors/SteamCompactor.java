@@ -10,20 +10,14 @@ import igentuman.ncsteamadditions.machine.gui.GuiSteamCompactor;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
-import nc.container.processor.ContainerMachineConfig;
-import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
 import nc.util.OreDictHelper;
-import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Set;
-
-import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
 public class SteamCompactor extends AbstractProcessor {
 

@@ -37,4 +37,8 @@ repositories {
 	name = "Cleanroom"
 		url 'https://maven.cleanroommc.com'
 	}
+	maven {
+		name 'jitpack'
+		url 'https://jitpack.io'
+	}
 }

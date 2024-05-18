@@ -2,22 +2,14 @@ package igentuman.ncsteamadditions.jei.catergory;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiHeatExchanger;
-import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
-import igentuman.ncsteamadditions.processors.HeatExchanger;
+import igentuman.ncsteamadditions.processors.*;
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawableAnimated;
-import mezz.jei.api.gui.IDrawableStatic;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.*;
 import mezz.jei.api.ingredients.IIngredients;
 import nc.integration.jei.JEIHelper;
-import nc.integration.jei.JEIMachineRecipeWrapper;
-import nc.integration.jei.NCJEI.IJEIHandler;
-import nc.recipe.BasicRecipe;
-import nc.recipe.BasicRecipeHandler;
-import nc.recipe.IngredientSorption;
+import nc.recipe.*;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 public class HeatExchangerCategory extends ParentProcessorCategory
 {

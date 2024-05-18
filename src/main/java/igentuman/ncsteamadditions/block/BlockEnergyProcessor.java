@@ -1,21 +1,13 @@
 package igentuman.ncsteamadditions.block;
 
-import ic2.api.item.IElectricItemManager;
-import ic2.api.item.ISpecialElectricItem;
+import ic2.api.item.*;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
-import nc.item.energy.ElectricItemManager;
-import nc.item.energy.IChargableItem;
-import nc.item.energy.ItemEnergyCapabilityProvider;
+import nc.item.energy.*;
 import nc.tile.internal.energy.EnergyConnection;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.Optional;
 

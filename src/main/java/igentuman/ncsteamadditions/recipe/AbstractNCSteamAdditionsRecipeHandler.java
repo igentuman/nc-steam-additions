@@ -1,36 +1,20 @@
 package igentuman.ncsteamadditions.recipe;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import javax.annotation.Nullable;
 import com.google.common.collect.Lists;
 import crafttweaker.annotations.ZenRegister;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.ints.IntList;
-import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
-import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.ints.*;
+import it.unimi.dsi.fastutil.longs.*;
 import nc.recipe.IngredientSorption;
-import nc.recipe.ingredient.ChanceFluidIngredient;
-import nc.recipe.ingredient.ChanceItemIngredient;
-import nc.recipe.ingredient.EmptyFluidIngredient;
-import nc.recipe.ingredient.EmptyItemIngredient;
-import nc.recipe.ingredient.FluidIngredient;
-import nc.recipe.ingredient.IFluidIngredient;
-import nc.recipe.ingredient.IItemIngredient;
-import nc.recipe.ingredient.ItemIngredient;
-import nc.recipe.ingredient.OreIngredient;
+import nc.recipe.ingredient.*;
 import nc.tile.internal.fluid.Tank;
-import nc.util.FluidRegHelper;
-import nc.util.OreDictHelper;
-import nc.util.StackHelper;
+import nc.util.*;
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
+import net.minecraft.item.*;
+import net.minecraftforge.fluids.*;
+import stanhebben.zenscript.annotations.*;
+
+import javax.annotation.Nullable;
+import java.util.*;
 
 @ZenClass("mods.ncsteamadditions.AbstractNCSteamAdditionsRecipeHandler")
 @ZenRegister
@@ -74,7 +58,7 @@ public abstract class AbstractNCSteamAdditionsRecipeHandler<RECIPE extends INCSt
 		List<RECIPE> matchingRecipes = recipeCache.get(NCSteamAdditionsRecipeHelper.hashMaterialsRaw(itemInputs, fluidInputs));
 		
 		if (matchingRecipes != null)
-		{	
+		{
 			
 			for(RECIPE recipe : matchingRecipes)
 			{

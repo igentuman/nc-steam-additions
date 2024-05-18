@@ -1,19 +1,14 @@
 package igentuman.ncsteamadditions.recipes;
 
-import java.util.List;
-
-import com.google.common.collect.Lists;
-
-import igentuman.ncsteamadditions.processors.AbstractProcessor;
-import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
-import igentuman.ncsteamadditions.processors.SteamTransformer;
+import igentuman.ncsteamadditions.processors.*;
 import nc.recipe.RecipeHelper;
 import nc.recipe.ingredient.FluidIngredient;
 import nc.util.FluidRegHelper;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.*;
+
+import java.util.List;
 
 public class NCSteamAdditionsRecipes
 {
@@ -37,7 +32,7 @@ public class NCSteamAdditionsRecipes
 	}
 
 
-	public static void init() 
+	public static void init()
 	{
 		validFluids = new List[processorRecipeHandlers.length];
 		for(AbstractProcessor proc: ProcessorsRegistry.get().processors()) {
@@ -45,7 +40,7 @@ public class NCSteamAdditionsRecipes
 		}
 	}
 
-	public static void refreshRecipeCaches() 
+	public static void refreshRecipeCaches()
 	{
 		for(ProcessorRecipeHandler recipeHandler: processorRecipeHandlers) {
 			recipeHandler.refreshCache();

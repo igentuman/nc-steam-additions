@@ -1,8 +1,7 @@
 package igentuman.ncsteamadditions.processors;
 
 import igentuman.ncsteamadditions.block.Blocks;
-import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
+import igentuman.ncsteamadditions.config.*;
 import igentuman.ncsteamadditions.jei.JEIHandler;
 import igentuman.ncsteamadditions.jei.catergory.DigitalTransformerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerDigitalTransformer;
@@ -10,12 +9,9 @@ import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileDigitalTransformer;
 import mezz.jei.api.IGuiHelper;
-import nc.container.processor.ContainerMachineConfig;
-import nc.integration.jei.JEIBasicCategory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 public class DigitalTransformer extends AbstractProcessor {
 

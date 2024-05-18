@@ -3,7 +3,6 @@ package igentuman.ncsteamadditions.machine.gui;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamWasher;
 import igentuman.ncsteamadditions.processors.SteamWasher;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import nc.container.ContainerTile;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class GuiSteamWasher extends GuiItemFluidMachine

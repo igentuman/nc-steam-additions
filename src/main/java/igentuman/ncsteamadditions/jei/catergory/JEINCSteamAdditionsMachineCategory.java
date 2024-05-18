@@ -3,26 +3,14 @@ package igentuman.ncsteamadditions.jei.catergory;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IDrawableAnimated;
-import mezz.jei.api.gui.IDrawableStatic;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.*;
 import mezz.jei.api.ingredients.IIngredients;
-import nc.integration.jei.JEIBasicCategory;
-import nc.integration.jei.JEIBasicRecipeWrapper;
-import nc.integration.jei.JEIHelper;
-import nc.integration.jei.JEIMachineRecipeWrapper;
-import nc.integration.jei.NCJEI.IJEIHandler;
-import nc.recipe.IngredientSorption;
-import nc.recipe.ingredient.ChanceFluidIngredient;
-import nc.recipe.ingredient.ChanceItemIngredient;
-import nc.util.Lang;
-import nc.util.NCMath;
+import nc.recipe.ingredient.*;
+import nc.util.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIMachineRecipeWrapper<WRAPPER>> extends JEIBasicCategory<WRAPPER>
 {
@@ -42,7 +30,7 @@ public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIMach
         super(handler);
         location = new ResourceLocation(NCSteamAdditions.MOD_ID + ":textures/gui/" + handler.getTextureName() + guiExtra + ".png");
         background = guiHelper.createDrawable(location, backX, backY, backWidth, backHeight);
-        recipeTitle = Lang.localise("tile." + NCSteamAdditions.MOD_ID + "." + title + ".name");
+        recipeTitle = Lang.localize("tile." + NCSteamAdditions.MOD_ID + "." + title + ".name");
         backPosX = backX + 1;
         backPosY = backY + 1;
         IDrawableStatic staticArrow = guiHelper.createDrawable(location, 0, 168, 135, 20);
@@ -77,7 +65,7 @@ public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIMach
             if (outputIndex >= 0 && outputIndex <= recipeWrapper.recipeHandler.getItemOutputSize() && recipeWrapper.recipe.getItemProducts().get(outputIndex) instanceof ChanceItemIngredient)
             {
                 ChanceItemIngredient chanceIngredient = (ChanceItemIngredient)recipeWrapper.recipe.getItemProducts().get(outputIndex);
-                tooltip.add(TextFormatting.WHITE + Lang.localise("jei.nuclearcraft.chance_output", chanceIngredient.minStackSize, chanceIngredient.getMaxStackSize(0), NCMath.decimalPlaces(chanceIngredient.meanStackSize, 2)));
+                tooltip.add(TextFormatting.WHITE + Lang.localize("jei.nuclearcraft.chance_output", chanceIngredient.minStackSize, chanceIngredient.getMaxStackSize(0), NCMath.decimalPlaces(chanceIngredient.meanStackSize, 2)));
             }
         });
 
@@ -87,7 +75,7 @@ public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIMach
             if (outputIndex >= 0 && outputIndex <= recipeWrapper.recipeHandler.getFluidOutputSize() && recipeWrapper.recipe.getFluidProducts().get(outputIndex) instanceof ChanceFluidIngredient)
             {
                 ChanceFluidIngredient chanceIngredient = (ChanceFluidIngredient)recipeWrapper.recipe.getFluidProducts().get(outputIndex);
-                tooltip.add(TextFormatting.WHITE + Lang.localise("jei.nuclearcraft.chance_output", chanceIngredient.minStackSize, chanceIngredient.getMaxStackSize(0), NCMath.decimalPlaces(chanceIngredient.meanStackSize, 2)));
+                tooltip.add(TextFormatting.WHITE + Lang.localize("jei.nuclearcraft.chance_output", chanceIngredient.minStackSize, chanceIngredient.getMaxStackSize(0), NCMath.decimalPlaces(chanceIngredient.meanStackSize, 2)));
             }
         });
 

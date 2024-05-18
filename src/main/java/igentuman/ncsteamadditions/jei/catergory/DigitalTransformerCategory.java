@@ -2,15 +2,10 @@ package igentuman.ncsteamadditions.jei.catergory;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
-import igentuman.ncsteamadditions.processors.DigitalTransformer;
-import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
+import igentuman.ncsteamadditions.processors.*;
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawableAnimated;
-import mezz.jei.api.gui.IDrawableStatic;
-import nc.integration.jei.JEIMachineRecipeWrapper;
-import nc.integration.jei.NCJEI.IJEIHandler;
-import nc.recipe.BasicRecipe;
-import nc.recipe.BasicRecipeHandler;
+import mezz.jei.api.gui.*;
+import nc.recipe.*;
 
 public class DigitalTransformerCategory extends ParentProcessorCategory
 {

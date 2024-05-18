@@ -3,19 +3,14 @@ package igentuman.ncsteamadditions.machine.gui;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.machine.container.ContainerDigitalTransformer;
 import igentuman.ncsteamadditions.processors.DigitalTransformer;
-import igentuman.ncsteamadditions.tile.TileDigitalTransformer;
-import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import nc.container.ContainerTile;
+import igentuman.ncsteamadditions.tile.*;
 import nc.gui.element.GuiItemRenderer;
-import nc.init.NCItems;
 import nc.tile.energy.ITileEnergy;
-import nc.util.NCMath;
-import nc.util.Lang;
-import nc.util.UnitHelper;
-import net.minecraft.client.Minecraft;
+import nc.util.*;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
+
 import java.util.List;
 
 public class GuiDigitalTransformer extends GuiItemFluidMachine
@@ -38,11 +33,11 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 		String powerMultiplier = "x" + NCMath.decimalPlaces(this.tile.getPowerMultiplier(), 2);
 
 		return Lists.newArrayList(
-				TextFormatting.LIGHT_PURPLE + Lang.localise("gui.nc.container.energy_stored") + TextFormatting.WHITE
+				TextFormatting.LIGHT_PURPLE + Lang.localize("gui.nc.container.energy_stored") + TextFormatting.WHITE
 						+ " " + energy,
-				TextFormatting.LIGHT_PURPLE + Lang.localise("gui.nc.container.process_power") + TextFormatting.WHITE
+				TextFormatting.LIGHT_PURPLE + Lang.localize("gui.nc.container.process_power") + TextFormatting.WHITE
 						+ " " + power,
-				TextFormatting.AQUA + Lang.localise("gui.nc.container.power_multiplier") + TextFormatting.WHITE + " "
+				TextFormatting.AQUA + Lang.localize("gui.nc.container.power_multiplier") + TextFormatting.WHITE + " "
 						+ powerMultiplier);
 	}
 
@@ -93,9 +88,9 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 	{
 		drawEnergyTooltip(tile, mouseX, mouseY, 8, 6, 16, 74);
 		renderButtonTooltips(mouseX, mouseY);
-		this.drawTooltip(Lang.localise("gui.nc.dt.efficiency") +" "+String.format("%.2f", tile.getRecipeEfficiency()), mouseX, mouseY, 101, 63, 66, 3);
-		this.drawTooltip(Lang.localise("gui.nc.dt.current_reactivity") +" "+String.format("%.2f", tile.getCurrentReactivity()), mouseX, mouseY, 101, 69, 66, 3);
-		this.drawTooltip(Lang.localise("gui.nc.dt.target_reactivity") +" "+String.format("%.2f", tile.getTargetReactivity()), mouseX, mouseY, 101, 75, 66, 3);
+		this.drawTooltip(Lang.localize("gui.nc.dt.efficiency") +" "+String.format("%.2f", tile.getRecipeEfficiency()), mouseX, mouseY, 101, 63, 66, 3);
+		this.drawTooltip(Lang.localize("gui.nc.dt.current_reactivity") +" "+String.format("%.2f", tile.getCurrentReactivity()), mouseX, mouseY, 101, 69, 66, 3);
+		this.drawTooltip(Lang.localize("gui.nc.dt.target_reactivity") +" "+String.format("%.2f", tile.getTargetReactivity()), mouseX, mouseY, 101, 75, 66, 3);
 
 	}
 }

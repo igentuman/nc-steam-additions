@@ -38,6 +38,8 @@
  * For more details, see https://docs.gradle.org/8.4/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
+	shadowImplementation("com.github.MJaroslav.Reflectors:library:v4")
+	
 	api("zone.rong:mixinbooter:8.4")
 	api("com.cleanroommc:groovyscript:1.0.1") { transitive = false }
 	

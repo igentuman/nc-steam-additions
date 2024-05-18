@@ -1,14 +1,12 @@
 package igentuman.ncsteamadditions.network;
 
 import io.netty.buffer.ByteBuf;
-import nc.network.tile.ProcessorUpdatePacket;
 import nc.network.tile.TileUpdatePacket;
 import nc.tile.ITileGui;
 import nc.tile.internal.fluid.Tank;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class NCSProcessorUpdatePacket extends TileUpdatePacket {
     public boolean isProcessing;

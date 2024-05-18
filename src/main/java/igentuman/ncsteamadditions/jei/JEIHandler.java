@@ -3,17 +3,13 @@ package igentuman.ncsteamadditions.jei;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import mezz.jei.api.IGuiHelper;
-import nc.integration.jei.JEIBasicCategory;
-import nc.integration.jei.JEIBasicRecipeWrapper;
-import nc.integration.jei.JEIHelper;
-import nc.integration.jei.NCJEI;
+import nc.integration.jei.*;
 import nc.recipe.BasicRecipeHandler;
 import nc.util.StackHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class JEIHandler implements NCJEI.IJEIHandler
 {

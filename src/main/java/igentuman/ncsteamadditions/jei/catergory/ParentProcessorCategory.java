@@ -5,14 +5,7 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import nc.integration.jei.JEIHelper;
-import nc.integration.jei.JEIHelper.RecipeFluidMapper;
-import nc.integration.jei.JEIHelper.RecipeItemMapper;
-import nc.integration.jei.JEIMachineRecipeWrapper;
-import nc.integration.jei.NCJEI.IJEIHandler;
 import nc.recipe.IngredientSorption;
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class ParentProcessorCategory extends JEINCSteamAdditionsMachineCategory
 {

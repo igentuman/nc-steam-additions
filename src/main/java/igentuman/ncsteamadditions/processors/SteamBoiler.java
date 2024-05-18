@@ -11,22 +11,16 @@ import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import igentuman.ncsteamadditions.util.Util;
 import mezz.jei.api.IGuiHelper;
-import nc.container.processor.ContainerMachineConfig;
-import nc.integration.jei.JEIBasicCategory;
-import nc.util.FluidRegHelper;
-import nc.util.RegistryHelper;
+import nc.util.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 import java.util.Random;
 
-import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 import static nc.block.property.BlockProperties.FACING_HORIZONTAL;
 
 public class SteamBoiler extends AbstractProcessor {

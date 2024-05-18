@@ -10,18 +10,12 @@ import igentuman.ncsteamadditions.machine.gui.GuiSteamTurbine;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileSteamTurbine;
 import mezz.jei.api.IGuiHelper;
-import nc.container.processor.ContainerMachineConfig;
 import nc.init.NCBlocks;
-import nc.integration.jei.JEIBasicCategory;
 import nc.util.FluidRegHelper;
-import nc.util.RegistryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
+import net.minecraftforge.fml.relauncher.*;
 
 public class SteamTurbine extends AbstractProcessor {
 

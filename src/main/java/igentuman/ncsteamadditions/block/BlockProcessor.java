@@ -1,46 +1,31 @@
 package igentuman.ncsteamadditions.block;
 
-import static nc.block.property.BlockProperties.ACTIVE;
-import static nc.block.property.BlockProperties.FACING_HORIZONTAL;
-
-import java.util.Random;
-
 import igentuman.ncsteamadditions.NCSteamAdditions;
-import igentuman.ncsteamadditions.processors.ProcessorType;
-import igentuman.ncsteamadditions.processors.AbstractProcessor;
+import igentuman.ncsteamadditions.processors.*;
 import nc.block.property.BlockProperties;
-import nc.block.tile.BlockSidedTile;
-import nc.block.tile.IActivatable;
-import nc.block.tile.ITileType;
+import nc.block.tile.*;
 import nc.init.NCItems;
 import nc.tile.ITileGui;
 import nc.tile.fluid.ITileFluid;
 import nc.tile.processor.IProcessor;
-import nc.tile.processor.IUpgradableProcessor;
 import nc.util.BlockHelper;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.*;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
-import javax.annotation.Nonnull;
+import java.util.Random;
+
+import static nc.block.property.BlockProperties.*;
 
 public class BlockProcessor extends BlockSidedTile implements IActivatable, ITileType
 {

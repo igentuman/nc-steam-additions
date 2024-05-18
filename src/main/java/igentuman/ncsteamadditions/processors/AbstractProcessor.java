@@ -7,20 +7,16 @@ import igentuman.ncsteamadditions.tab.NCSteamAdditionsTabs;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import igentuman.ncsteamadditions.util.Util;
 import mezz.jei.api.IGuiHelper;
-import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
-import nc.util.FluidRegHelper;
-import nc.util.FluidStackHelper;
+import nc.util.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 import static nc.block.property.BlockProperties.FACING_HORIZONTAL;
 

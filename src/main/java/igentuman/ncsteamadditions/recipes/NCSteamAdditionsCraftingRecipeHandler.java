@@ -1,8 +1,5 @@
 package igentuman.ncsteamadditions.recipes;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.block.Blocks;
@@ -12,34 +9,27 @@ import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.processors.*;
 import nc.ModCheck;
 import nc.config.NCConfig;
-import nc.init.NCBlocks;
-import nc.init.NCItems;
+import nc.init.*;
 import nc.radiation.RadSources;
 import nc.recipe.NCRecipes;
-import nc.recipe.ingredient.EmptyFluidIngredient;
-import nc.recipe.ingredient.FluidIngredient;
 import nc.recipe.ingredient.OreIngredient;
-import nc.recipe.vanilla.recipe.ShapedEnergyRecipe;
-import nc.recipe.vanilla.recipe.ShapedFluidRecipe;
-import nc.recipe.vanilla.recipe.ShapelessArmorRadShieldingRecipe;
-import nc.recipe.vanilla.recipe.ShapelessFluidRecipe;
+import nc.recipe.ingredient.*;
+import nc.recipe.vanilla.recipe.*;
 import nc.util.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.fml.common.registry.*;
+import net.minecraftforge.oredict.*;
 import net.minecraftforge.registries.ForgeRegistry;
 import vazkii.patchouli.common.item.ItemModBook;
+
+import java.util.*;
 
 public class NCSteamAdditionsCraftingRecipeHandler
 {
 
-	public static void registerCraftingRecipes() 
+	public static void registerCraftingRecipes()
 	{
 		//crafting
 		for (AbstractProcessor processor: ProcessorsRegistry.get().processors()) {
@@ -160,7 +150,7 @@ public class NCSteamAdditionsCraftingRecipeHandler
 			ResourceLocation location = new ResourceLocation(NCSteamAdditions.MOD_ID, outName);
 			try
 			{
-				IRecipe recipe = NCUtil.newInstance(clazz, location, outStack, inputs);
+				IRecipe recipe = ReflectionHelper.newInstance(clazz, location, outStack, inputs);
 				recipe.setRegistryName(location);
 				ForgeRegistries.RECIPES.register(recipe);
 			}

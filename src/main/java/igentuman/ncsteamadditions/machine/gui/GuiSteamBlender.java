@@ -3,7 +3,6 @@ package igentuman.ncsteamadditions.machine.gui;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBlender;
 import igentuman.ncsteamadditions.processors.SteamBlender;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import nc.container.ContainerTile;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 

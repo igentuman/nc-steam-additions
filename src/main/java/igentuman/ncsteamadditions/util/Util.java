@@ -1,16 +1,11 @@
 package igentuman.ncsteamadditions.util;
 
-import nc.config.NCConfig;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.world.World;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import igentuman.ncsteamadditions.NCSteamAdditions;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import org.apache.logging.log4j.*;
 
 import java.util.Random;
 
@@ -102,7 +97,7 @@ public class Util
 	{
 		int x = Math.abs(a.getX()- b.getX());
 		int y = Math.abs(a.getY()- b.getY());
-		int z = Math.abs(a.getZ()- b.getZ());	
+		int z = Math.abs(a.getZ()- b.getZ());
 		return x+y+z;
 	}
 	

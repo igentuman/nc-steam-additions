@@ -1,18 +1,8 @@
 package igentuman.ncsteamadditions.jei;
 
-import igentuman.ncsteamadditions.processors.AbstractProcessor;
-import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
-import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.IJeiHelpers;
-import mezz.jei.api.IModPlugin;
-import mezz.jei.api.IModRegistry;
-import mezz.jei.api.JEIPlugin;
+import igentuman.ncsteamadditions.processors.*;
+import mezz.jei.api.*;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
-import nc.gui.processor.GuiManufactory;
-import nc.integration.jei.NCJEI;
-
-import static nc.config.NCConfig.register_processor;
 
 @JEIPlugin
 public class NCSteamAdditionsJEI implements IModPlugin

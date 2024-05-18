@@ -1,13 +1,9 @@
 package igentuman.ncsteamadditions.machine.container;
 
-import igentuman.ncsteamadditions.machine.gui.GuiItemFluidMachine;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import nc.container.processor.ContainerItemFluidProcessor;
-import nc.container.slot.SlotFurnace;
-import nc.container.slot.SlotProcessorInput;
-import nc.container.slot.SlotSpecificInput;
+import nc.container.slot.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 

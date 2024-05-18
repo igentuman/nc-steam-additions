@@ -1,30 +1,18 @@
 package igentuman.ncsteamadditions.machine.gui;
 
-import java.util.List;
 import com.google.common.collect.Lists;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import igentuman.ncsteamadditions.network.NCSAPacketHandler;
-import igentuman.ncsteamadditions.network.OpenSideGuiPacket;
+import igentuman.ncsteamadditions.network.*;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import nc.container.ContainerTile;
-import nc.container.processor.ContainerMachineConfig;
 import nc.gui.NCGui;
-import nc.gui.element.GuiFluidRenderer;
-import nc.gui.element.GuiItemRenderer;
-import nc.gui.element.NCButton;
-import nc.gui.element.NCToggleButton;
-import nc.gui.processor.GuiFluidSorptions;
-import nc.gui.processor.GuiItemSorptions;
+import nc.gui.element.*;
+import nc.gui.processor.*;
 import nc.init.NCItems;
-import nc.network.PacketHandler;
-import nc.network.gui.EmptyTankPacket;
 import nc.network.gui.ToggleRedstoneControlPacket;
 import nc.tile.energy.ITileEnergy;
-import nc.util.Lang;
-import nc.util.NCUtil;
-import net.minecraft.client.Minecraft;
+import nc.util.*;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,6 +20,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import java.util.List;
 
 public class GuiItemFluidMachine extends NCGui {
     protected final EntityPlayer player;
@@ -141,7 +131,7 @@ public class GuiItemFluidMachine extends NCGui {
     public void drawEfficiencyTooltip(TileNCSProcessor tile, int mouseX, int mouseY, int x, int y, int width, int height)
     {
         if(NCSteamAdditionsConfig.efficiencyCap > 0) {
-            super.drawTooltip(Lang.localise("gui.nc.container.efficiency")+" "+String.format("%.1f",tile.getRecipeEfficiency()), mouseX, mouseY, x, y, width, height);
+            super.drawTooltip(Lang.localize("gui.nc.container.efficiency")+" "+String.format("%.1f",tile.getRecipeEfficiency()), mouseX, mouseY, x, y, width, height);
         }
     }
 
@@ -165,8 +155,8 @@ public class GuiItemFluidMachine extends NCGui {
             }
         }
 
-        drawTooltip(Lang.localise("gui.nc.container.machine_side_config"), mouseX, mouseY, 27, 63, 18, 18);
-        drawTooltip(Lang.localise("gui.nc.container.redstone_control"), mouseX, mouseY, 47, 63, 18, 18);
+        drawTooltip(Lang.localize("gui.nc.container.machine_side_config"), mouseX, mouseY, 27, 63, 18, 18);
+        drawTooltip(Lang.localize("gui.nc.container.redstone_control"), mouseX, mouseY, 47, 63, 18, 18);
     }
 
     protected void drawBackgroundExtras()
@@ -268,7 +258,7 @@ public class GuiItemFluidMachine extends NCGui {
 
             if(getProcessor().getInputFluids() > 0) {
                 for(int i = 0; i < getProcessor().getInputFluids(); i++) {
-                    drawTooltip(TextFormatting.DARK_AQUA + Lang.localise("gui.nc.container.input_tank_config"), mouseX, mouseY, x, inputFluidsTop, 18, 18);
+                    drawTooltip(TextFormatting.DARK_AQUA + Lang.localize("gui.nc.container.input_tank_config"), mouseX, mouseY, x, inputFluidsTop, 18, 18);
                     x += cellSpan;
                 }
             }
@@ -276,7 +266,7 @@ public class GuiItemFluidMachine extends NCGui {
             x = inputItemsLeft;
             if(getProcessor().getInputItems() > 0) {
                 for (int i = 0; i < getProcessor().getInputItems(); i++) {
-                    drawTooltip(TextFormatting.BLUE + Lang.localise("gui.nc.container.input_item_config"), mouseX, mouseY, x, inputItemsTop, 18, 18);
+                    drawTooltip(TextFormatting.BLUE + Lang.localize("gui.nc.container.input_item_config"), mouseX, mouseY, x, inputItemsTop, 18, 18);
                     x += cellSpan;
                 }
             }
@@ -284,7 +274,7 @@ public class GuiItemFluidMachine extends NCGui {
             x = 152;
             if(getProcessor().getOutputFluids() > 0) {
                 for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
-                    drawTooltip(TextFormatting.DARK_PURPLE + Lang.localise("gui.nc.container.output_tank_config"), mouseX, mouseY, x, inputFluidsTop, 18, 18);
+                    drawTooltip(TextFormatting.DARK_PURPLE + Lang.localize("gui.nc.container.output_tank_config"), mouseX, mouseY, x, inputFluidsTop, 18, 18);
                     x += cellSpan;
                 }
             }
@@ -292,7 +282,7 @@ public class GuiItemFluidMachine extends NCGui {
             x = 152;
             if(getProcessor().getOutputItems() > 0) {
                 for (int i = 0; i < getProcessor().getOutputItems(); i++) {
-                    drawTooltip(TextFormatting.GOLD + Lang.localise("gui.nc.container.output_item_config"), mouseX, mouseY, x, inputItemsTop, 18, 18);
+                    drawTooltip(TextFormatting.GOLD + Lang.localize("gui.nc.container.output_item_config"), mouseX, mouseY, x, inputItemsTop, 18, 18);
                     x += cellSpan;
                 }
             }

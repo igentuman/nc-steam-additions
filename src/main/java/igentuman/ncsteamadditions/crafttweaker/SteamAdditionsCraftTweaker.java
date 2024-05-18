@@ -4,15 +4,11 @@ import com.google.common.collect.Lists;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
-import igentuman.ncsteamadditions.processors.*;
+import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
-import nc.integration.crafttweaker.CTAddRecipe;
-import nc.integration.crafttweaker.CTClearRecipes;
-import nc.integration.crafttweaker.CTRemoveRecipe;
+import nc.integration.crafttweaker.*;
 import nc.recipe.IngredientSorption;
-import stanhebben.zenscript.annotations.Optional;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
+import stanhebben.zenscript.annotations.*;
 
 public class SteamAdditionsCraftTweaker
 {
@@ -42,13 +38,13 @@ public class SteamAdditionsCraftTweaker
 		@ZenMethod
 		public static void removeAllRecipes()
 		{
-			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID]));
+			CraftTweakerAPI.apply(new CTRemoveAllRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().DIGITAL_TRANSFORMER.GUID]));
 		}
 	}
 
 	@ZenClass("mods.ncsteamadditions.steam_transformer")
 	@ZenRegister
-	public static class SteamTransformerHandler 
+	public static class SteamTransformerHandler
 	{
 		
 		@ZenMethod
@@ -70,9 +66,9 @@ public class SteamAdditionsCraftTweaker
 		}
 		
 		@ZenMethod
-		public static void removeAllRecipes() 
+		public static void removeAllRecipes()
 		{
-			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_TRANSFORMER.GUID]));
+			CraftTweakerAPI.apply(new CTRemoveAllRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_TRANSFORMER.GUID]));
 		}
 	}
 
@@ -102,7 +98,7 @@ public class SteamAdditionsCraftTweaker
 		@ZenMethod
 		public static void removeAllRecipes()
 		{
-			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_CRUSHER.GUID]));
+			CraftTweakerAPI.apply(new CTRemoveAllRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_CRUSHER.GUID]));
 		}
 	}
 
@@ -132,7 +128,7 @@ public class SteamAdditionsCraftTweaker
 		@ZenMethod
 		public static void removeAllRecipes()
 		{
-			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_WASHER.GUID]));
+			CraftTweakerAPI.apply(new CTRemoveAllRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_WASHER.GUID]));
 		}
 	}
 
@@ -162,7 +158,7 @@ public class SteamAdditionsCraftTweaker
 		@ZenMethod
 		public static void removeAllRecipes()
 		{
-			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_BOILER.GUID]));
+			CraftTweakerAPI.apply(new CTRemoveAllRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_BOILER.GUID]));
 		}
 	}
 
@@ -192,7 +188,7 @@ public class SteamAdditionsCraftTweaker
 		@ZenMethod
 		public static void removeAllRecipes()
 		{
-			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_TURBINE.GUID]));
+			CraftTweakerAPI.apply(new CTRemoveAllRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_TURBINE.GUID]));
 		}
 	}
 
@@ -222,7 +218,7 @@ public class SteamAdditionsCraftTweaker
 		@ZenMethod
 		public static void removeAllRecipes()
 		{
-			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_COMPACTOR.GUID]));
+			CraftTweakerAPI.apply(new CTRemoveAllRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_COMPACTOR.GUID]));
 		}
 	}
 
@@ -252,7 +248,7 @@ public class SteamAdditionsCraftTweaker
 		@ZenMethod
 		public static void removeAllRecipes()
 		{
-			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.GUID]));
+			CraftTweakerAPI.apply(new CTRemoveAllRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_FLUID_TRANSFORMER.GUID]));
 		}
 	}
 
@@ -282,7 +278,7 @@ public class SteamAdditionsCraftTweaker
 		@ZenMethod
 		public static void removeAllRecipes()
 		{
-			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().HEAT_EXCHANGER.GUID]));
+			CraftTweakerAPI.apply(new CTRemoveAllRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().HEAT_EXCHANGER.GUID]));
 		}
 	}
 
@@ -312,7 +308,7 @@ public class SteamAdditionsCraftTweaker
 		@ZenMethod
 		public static void removeAllRecipes()
 		{
-			CraftTweakerAPI.apply(new CTClearRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_BLENDER.GUID]));
+			CraftTweakerAPI.apply(new CTRemoveAllRecipes(NCSteamAdditionsRecipes.processorRecipeHandlers[ProcessorsRegistry.get().STEAM_BLENDER.GUID]));
 		}
 	}
 }

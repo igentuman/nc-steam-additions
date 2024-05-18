@@ -3,7 +3,6 @@ package igentuman.ncsteamadditions.machine.gui;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTransformer;
 import igentuman.ncsteamadditions.processors.SteamTransformer;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import nc.container.ContainerTile;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class GuiSteamTransformer  extends GuiItemFluidMachine
