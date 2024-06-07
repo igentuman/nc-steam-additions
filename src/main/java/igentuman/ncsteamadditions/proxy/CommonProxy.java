@@ -3,11 +3,11 @@ package igentuman.ncsteamadditions.proxy;
 import crafttweaker.CraftTweakerAPI;
 import igentuman.ncsteamadditions.NCSOreDictionary;
 import igentuman.ncsteamadditions.block.Blocks;
-import igentuman.ncsteamadditions.fluid.NCSfluids;
+import igentuman.ncsteamadditions.fluid.NCSFluids;
 import igentuman.ncsteamadditions.item.*;
 import igentuman.ncsteamadditions.network.NCSAPacketHandler;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
-import igentuman.ncsteamadditions.tile.NCSteamAdditionsTiles;
+import igentuman.ncsteamadditions.tile.*;
 import igentuman.ncsteamadditions.worldgen.OreGenerator;
 import nc.ModCheck;
 import net.minecraft.block.Block;
@@ -32,11 +32,14 @@ public class CommonProxy
 		if (ModCheck.craftTweakerLoaded()) {
 			CraftTweakerAPI.tweaker.loadScript(false, "ncsteamadditions_preinit");
 		}
+		
+		NCSTileInfoHandler.preInit();
+		
 		Items.init();
 		Blocks.init();
 		Blocks.register();
 		Items.register();
-		NCSfluids.init();
+		NCSFluids.init();
 		NCSAPacketHandler.registerMessages(MOD_ID);
 
 		NCSteamAdditionsTiles.register();
@@ -48,6 +51,8 @@ public class CommonProxy
 	{
 		GameRegistry.registerWorldGenerator(new OreGenerator(), 0);
 		NCSteamAdditionsRecipes.init();
+		
+		NCSTileInfoHandler.init();
 	}
 
 	@SubscribeEvent

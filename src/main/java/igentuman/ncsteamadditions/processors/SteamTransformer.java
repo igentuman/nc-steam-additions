@@ -4,7 +4,7 @@ import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.catergory.SteamTransformerCategory;
+import igentuman.ncsteamadditions.jei.category.SteamTransformerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTransformer;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;

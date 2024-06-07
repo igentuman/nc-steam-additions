@@ -27,6 +27,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public abstract class BlockMeta<T extends Enum<T> & IStringSerializable & IBlockMetaEnum> extends Block implements IBlockMeta {
+    public final Class<T> enumm;
     public final T[] values;
     public final PropertyEnum<T> type;
     protected boolean canSustainPlant = true;
@@ -35,6 +36,7 @@ public abstract class BlockMeta<T extends Enum<T> & IStringSerializable & IBlock
 
     public BlockMeta(Class<T> enumm, PropertyEnum<T> property, Material material) {
         super(material);
+        this.enumm = enumm;
         this.values = (T[])enumm.getEnumConstants();
         this.type = property;
         this.setDefaultState(this.blockState.getBaseState().withProperty(this.type, this.values[0]));
@@ -42,13 +44,21 @@ public abstract class BlockMeta<T extends Enum<T> & IStringSerializable & IBlock
         this.setHardness(2.0F);
         this.setResistance(15.0F);
     }
+    
+    public Class<T> getEnumClass() {
+        return enumm;
+    }
+    
+    public T[] getValues() {
+        return values;
+    }
 
     public String getMetaName(ItemStack stack) {
         return ((IStringSerializable)this.values[StackHelper.getMetadata(stack)]).getName();
     }
 
     public void setMetaHarvestLevels() {
-        Iterator itr = CollectionHelper.asList(this.values).iterator();
+        Iterator itr = Arrays.asList(this.values).iterator();
 
         while(itr.hasNext()) {
             T nextState = (T)itr.next();

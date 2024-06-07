@@ -14,7 +14,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
-public class NCSfluids {
+public class NCSFluids {
     public static List<Pair<Fluid, NCBlockFluid>> fluidPairList = new ArrayList<Pair<Fluid, NCBlockFluid>>();
 
 

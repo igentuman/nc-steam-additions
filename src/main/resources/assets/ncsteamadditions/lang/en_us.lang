@@ -1,29 +1,29 @@
 tile.ncsteamadditions.digital_transformer.name=Digital Transformer
-tile.ncsteamadditions.digital_transformer.desc=Transforms everything. Requires Computer controlling
+tile.ncsteamadditions.digital_transformer.desc=Transforms everything. Requires Computer controlling.
 
 tile.ncsteamadditions.steam_transformer.name=Steam Transformer
-tile.ncsteamadditions.steam_transformer.desc=Transforms items with the power of steam
+tile.ncsteamadditions.steam_transformer.desc=Transforms items with the power of steam.
 
 tile.ncsteamadditions.steam_fluid_transformer.name=Steam Fluid Transformer
-tile.ncsteamadditions.steam_fluid_transformer.desc=Transforms fluids with the power of steam
+tile.ncsteamadditions.steam_fluid_transformer.desc=Transforms fluids with the power of steam.
 
 tile.ncsteamadditions.steam_crusher.name=Steam Crusher
-tile.ncsteamadditions.steam_crusher.desc=Crushes items with the power of steam
+tile.ncsteamadditions.steam_crusher.desc=Crushes items with the power of steam.
 
 tile.ncsteamadditions.steam_washer.name=Steam Washer
-tile.ncsteamadditions.steam_washer.desc=Washing stuff with steam. Nice ;)
+tile.ncsteamadditions.steam_washer.desc=Washes stuff with steam. Nice ;)
 
 tile.ncsteamadditions.steam_compactor.name=Steam Compactor
-tile.ncsteamadditions.steam_compactor.desc=Compacting items with the power of steam
+tile.ncsteamadditions.steam_compactor.desc=Compacts items with the power of steam.
 
 tile.ncsteamadditions.steam_boiler.name=Steam Boiler
-tile.ncsteamadditions.steam_boiler.desc=How do you suppose to get steam?
+tile.ncsteamadditions.steam_boiler.desc=How do you suppose we get steam?
 
 tile.ncsteamadditions.heat_exchanger.name=Heat Exchanger
-tile.ncsteamadditions.heat_exchanger.desc=Heat Fluids with other Fluids
+tile.ncsteamadditions.heat_exchanger.desc=Heat fluids with other fluids.
 
 tile.ncsteamadditions.steam_turbine.name=Steam Turbine
-tile.ncsteamadditions.steam_turbine.desc=Steam is rotating turbine, turbine generates electricity!
+tile.ncsteamadditions.steam_turbine.desc=Steam rotates turbine, turbine generates electricity!
 
 tile.ncsteamadditions.steam_blender.name=Steam Blender
 tile.ncsteamadditions.steam_blender.desc=Drop solid, get liquid.
@@ -36,10 +36,10 @@ item.ncsteamadditions.copper_wire.name=Copper Wire
 itemGroup.ncsteamadditions.blocks=NC Steam Additions
 
 item.ncsteamadditions.compressed_coal.name=Compressed Coal
-item.ncsteamadditions.compressed_coal.desc=Has some advantages
+item.ncsteamadditions.compressed_coal.desc=Has some advantages...
 
 gui.ncsteamadditions.config.processors.time=Processor Processing Time (ticks)
-gui.ncsteamadditions.config.processors.time.comment=Order: Transformer, Crusher, Boiler, Fluid Transformer, Compactor, Washer, Turbine
+gui.ncsteamadditions.config.processors.time.comment=Order: Transformer, Crusher, Boiler, Fluid Transformer, Compactor, Washer, Turbine.
 
 gui.ncsteamadditions.config.processors.boiler_conversion=Boiler Water to Steam conversion rate
 gui.ncsteamadditions.config.processors.boiler_conversion.comment=Steam amount equals formula (Water Amount x Rate)
@@ -57,10 +57,10 @@ gui.ncsteamadditions.config.processors.turbine_rf=Turbine RF output
 gui.ncsteamadditions.config.processors.turbine_rf.comment=
 
 gui.ncsteamadditions.config.pipes.transfer=Copper Pipe Transfer Rate
-gui.ncsteamadditions.config.pipes.transfer.comment=How much Copper Pipe can transfer fluid per tick
+gui.ncsteamadditions.config.pipes.transfer.comment=How much Copper Pipe can transfer fluid per tick.
 
 gui.ncsteamadditions.config.pipes.capacity=Copper Pipe Capacity
-gui.ncsteamadditions.config.pipes.capacity.comment=How much Copper Pipe block can store fluid inside
+gui.ncsteamadditions.config.pipes.capacity.comment=How much Copper Pipe block can store fluid inside.
 
 fluid.uranium_oxide=Uranium Oxide
 fluid.uranium_hexafluoride=Uranium Hexafluoride
@@ -83,25 +83,24 @@ tile.ncsteamadditions.ore.zinc.desc=
 tile.ncsteamadditions.ingot_block.zinc.name=Zinc Block
 tile.ncsteamadditions.ingot_block.zinc.desc=
 
-tile.ncsteamadditions.dummy.desc=
 tile.ncsteamadditions.dummy.name=
-item.ncsteamadditions.dummy.name=
+tile.ncsteamadditions.dummy.desc=
 
 item.ncsteamadditions.core_of_transformation.name=Core of Transformation
 item.ncsteamadditions.core_of_transformation.zinc.name=Core of Transformation
-item.ncsteamadditions.core_of_transformation.desc=Very important thing
-item.ncsteamadditions.core_of_transformation.zinc.desc=Very important thing
+item.ncsteamadditions.core_of_transformation.desc=Very important thing...
+item.ncsteamadditions.core_of_transformation.zinc.desc=Very important thing...
 
-gui.ncsteamadditions.config.processors.efficiency_cap.comment=Value 100 Means normal machine efficiency. 5000 max. 0 - normal operation
-gui.ncsteamadditions.config.processors.efficiency_change_speed.comment=Bigger value means faster speed. 200 max
+gui.ncsteamadditions.config.processors.efficiency_cap.comment=Value 100 Means normal machine efficiency. 5000 max. 0 - normal operation.
+gui.ncsteamadditions.config.processors.efficiency_change_speed.comment=Bigger value means faster speed. 200 max.
 
-gui.ncsteamadditions.config.processors.efficiency_cap=Maximum efficiency machines can reach
-gui.ncsteamadditions.config.processors.efficiency_change_speed=How fast machines gain or lose efficiency
+gui.ncsteamadditions.config.processors.efficiency_cap=Maximum efficiency machines can reach.
+gui.ncsteamadditions.config.processors.efficiency_change_speed=How fast machines gain or lose efficiency.
 
 gui.nc.container.efficiency=Heat efficiency:
 
-gui.ncsteamadditions.config.recipes.override_nc_recipes=Override some of Nuclearcraft recipes
-gui.ncsteamadditions.config.recipes.override_nc_recipes.comment=I would recommend to keep this True
+gui.ncsteamadditions.config.recipes.override_nc_recipes=Override Some NC Recipes
+gui.ncsteamadditions.config.recipes.override_nc_recipes.comment=I would recommend to keep this true.
 
 ncsteamadditions.guide_book.name=NC Steam Additions Guide
 ncsteamadditions.guide_book_edition=English
@@ -119,10 +118,10 @@ gui.nc.dt.efficiency=Efficiency:
 gui.nc.dt.current_reactivity=Current Reactivity:
 gui.nc.dt.target_reactivity=Target Reactivity:
 
-gui.ncsteamadditions.config.processors.digital_transformer_efficiency_cap.comment=How fast digital transformer can do things
+gui.ncsteamadditions.config.processors.digital_transformer_efficiency_cap.comment=How fast digital transformer can do things.
 
-gui.ncsteamadditions.config.processors.digital_transformer_reset_time=Reset Time For Digital Transformer Reactivity (seconds)
-gui.ncsteamadditions.config.processors.digital_transformer_reset_time.comment=How often Digital Transformer resets its parameters
+gui.ncsteamadditions.config.processors.digital_transformer_reset_time=Digital Transformer Reset Time
+gui.ncsteamadditions.config.processors.digital_transformer_reset_time.comment=How often Digital Transformer resets its parameters in seconds.
 
 entity.Villager.ncsteamadditions.engineer=Nuclear Engineer
 entity.Villager.ncsteamadditions.scientist=Nuclear Scientist

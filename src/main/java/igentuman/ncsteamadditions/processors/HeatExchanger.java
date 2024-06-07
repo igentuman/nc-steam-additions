@@ -3,7 +3,7 @@ package igentuman.ncsteamadditions.processors;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.catergory.HeatExchangerCategory;
+import igentuman.ncsteamadditions.jei.category.HeatExchangerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerHeatExchanger;
 import igentuman.ncsteamadditions.machine.gui.GuiHeatExchanger;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;

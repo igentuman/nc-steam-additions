@@ -1,7 +1,6 @@
 package igentuman.ncsteamadditions;
 
 import igentuman.ncsteamadditions.config.*;
-import igentuman.ncsteamadditions.machine.gui.GUIHandler;
 import igentuman.ncsteamadditions.proxy.CommonProxy;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.util.*;
@@ -13,7 +12,6 @@ import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.Mod.*;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = NCSteamAdditions.MOD_ID, name = NCSteamAdditions.MOD_NAME, version = NCSteamAdditions.VERSION, acceptedMinecraftVersions = NCSteamAdditions.MCVERSION, dependencies = NCSteamAdditions.DEPENDENCIES, guiFactory = "igentuman.ncsteamadditions.config.NCSteamAdditionsConfigGUIFactory")
 public class NCSteamAdditions
@@ -46,7 +44,6 @@ public class NCSteamAdditions
 	{
 		Util.getLogger().info("Initialization");
 		proxy.init(event);
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
 		MinecraftForge.EVENT_BUS.register(new NcsEventHandler());
 		NCSVillagerHandler.initVillagerHouse();
 		NCSVillagerHandler.initVillagerTrades();

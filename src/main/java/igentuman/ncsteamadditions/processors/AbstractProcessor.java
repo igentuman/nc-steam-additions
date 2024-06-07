@@ -25,25 +25,18 @@ public abstract class AbstractProcessor {
     public String code;
 
     public String particle1;
-
     public String particle2;
 
-    public int GUID;
-
-    public int SIDEID = 1000 + GUID;
-
     public int inputItems;
-
     public int inputFluids;
-
     public int outputFluids;
-
     public int outputItems;
 
     public Class getGuiClass()
     {
         return null;
     }
+	
     public int getInputItems() {
         return inputItems;
     }
@@ -85,16 +78,6 @@ public abstract class AbstractProcessor {
 
     public abstract ProcessorType getType();
 
-    public int getGuid()
-    {
-        return GUID;
-    }
-
-    public int getSideid()
-    {
-        return SIDEID;
-    }
-
     public String getCode()
     {
         return code;
@@ -102,10 +85,8 @@ public abstract class AbstractProcessor {
 
     public void spawnParticles(BlockPos pos, Random rand, World world, IBlockState state)
     {
-        Util.spawnParticleOnProcessor(state, world, pos, rand, state.getValue(FACING_HORIZONTAL),
-                getType().getParticle1());
-        Util.spawnParticleOnProcessor(state, world, pos, rand, state.getValue(FACING_HORIZONTAL),
-                getType().getParticle2());
+        Util.spawnParticleOnProcessor(state, world, pos, rand, state.getValue(FACING_HORIZONTAL), getType().getParticle1());
+        Util.spawnParticleOnProcessor(state, world, pos, rand, state.getValue(FACING_HORIZONTAL), getType().getParticle2());
     }
 
     public String getSound()
@@ -130,9 +111,16 @@ public abstract class AbstractProcessor {
 
     public abstract TileEntity getTile();
 
-    public boolean isFullCube() {return true;}
+    public boolean isFullCube() {
+        return true;
+    }
+    
     public AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
-    public boolean isCustomModel() {return false;}
+    
+    public boolean isCustomModel() {
+        return false;
+    }
+    
     public AxisAlignedBB getAABB()
     {
         return AABB;
@@ -141,23 +129,23 @@ public abstract class AbstractProcessor {
     public int getProcessPower() {
         return 0;
     }
+    
     public abstract class RecipeHandler extends ProcessorRecipeHandler {
+        
         public int bucket() {
             return FluidStackHelper.BUCKET_VOLUME;
         }
-        public int ingot()
-        {
+        
+        public int ingot() {
             return FluidStackHelper.INGOT_VOLUME;
         }
-        public ArrayList steam;
+        
+        public ArrayList<FluidIngredient> steam;
 
-        public ArrayList getSteamIngredient()
-        {
-            if(steam == null) {
-                steam = Lists.newArrayList(
-                        new FluidIngredient[]{fluidStack("steam", bucket())}
-                );
-                if(FluidRegHelper.fluidExists("ic2steam")) {
+        public ArrayList<FluidIngredient> getSteamIngredient() {
+            if (steam == null) {
+                steam = Lists.newArrayList(fluidStack("steam", bucket()));
+                if (FluidRegHelper.fluidExists("ic2steam")) {
                     steam.add(fluidStack("ic2steam", bucket()));
                 }
             }

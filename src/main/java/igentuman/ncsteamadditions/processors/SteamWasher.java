@@ -3,7 +3,7 @@ package igentuman.ncsteamadditions.processors;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.catergory.SteamWasherCategory;
+import igentuman.ncsteamadditions.jei.category.SteamWasherCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamWasher;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamWasher;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;

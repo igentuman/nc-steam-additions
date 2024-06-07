@@ -5,7 +5,7 @@ import igentuman.ncsteamadditions.processors.*;
 import nc.block.property.BlockProperties;
 import nc.block.tile.*;
 import nc.init.NCItems;
-import nc.tile.ITileGui;
+import nc.tile.*;
 import nc.tile.fluid.ITileFluid;
 import nc.tile.processor.IProcessor;
 import nc.util.BlockHelper;
@@ -147,11 +147,8 @@ public class BlockCustomModelProcessor extends BlockSidedTile implements IActiva
 			return false;
 
 		TileEntity tile = world.getTileEntity(pos);
-		if (tile instanceof IUpgradableProcessor)
-		{
-			if (installUpgrade(tile, ((IUpgradableProcessor) tile).getSpeedUpgradeSlot(), player, hand, facing,
-					new ItemStack(NCItems.upgrade, 1, 0)))
-				return true;
+		if (tile instanceof ITileInstallable && ((ITileInstallable) tile).tryInstall(player, hand, facing)) {
+			return true;
 		}
 
 		if (player.isSneaking())

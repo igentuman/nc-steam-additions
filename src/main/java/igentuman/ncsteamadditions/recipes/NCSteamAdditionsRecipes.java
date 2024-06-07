@@ -8,14 +8,14 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.*;
 
-import java.util.List;
+import java.util.*;
 
 public class NCSteamAdditionsRecipes
 {
 	private static boolean initialized = false;
 
 	public static ProcessorRecipeHandler[] processorRecipeHandlers;
-	public static List<List<String>>[] validFluids;
+	public static List<Set<String>>[] validFluids;
 
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void registerRecipes(RegistryEvent.Register<IRecipe> event)

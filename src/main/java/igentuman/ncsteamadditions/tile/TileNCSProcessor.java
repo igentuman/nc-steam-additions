@@ -39,7 +39,8 @@ import java.util.*;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
-public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements IProcessor, ITileSideConfigGui<NCSProcessorUpdatePacket>, IUpgradableProcessor {
+public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements INCSProcessor<TileNCSProcessor> {
+    
     public final double defaultProcessTime;
     public final double defaultProcessPower;
     public double baseProcessTime;
@@ -123,7 +124,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public TileNCSProcessor(String name, int itemInSize, int fluidInSize, int itemOutSize, int fluidOutSize, @Nonnull List<ItemSorption> itemSorptions,
-                            @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<List<String>> allowedFluids, double time, double power, boolean shouldLoseProgress,
+                            @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<Set<String>> allowedFluids, double time, double power, boolean shouldLoseProgress,
                             boolean upgrades, @Nonnull BasicRecipeHandler recipeHandler, int processorID,  int sideConfigXOffset, int sideConfigYOffset,float currentReactivity, float targetReactivity) {
         super(name, itemInSize + itemOutSize + (upgrades ? 2 : 0), ITileInventory.inventoryConnectionAll(itemSorptions), (long)IProcessor.getCapacity(processorID, 1.0D, 1.0D), power != 0.0D ? ITileEnergy.energyConnectionAll(EnergyConnection.IN) : ITileEnergy.energyConnectionAll(EnergyConnection.NON), fluidCapacity, allowedFluids, ITileFluid.fluidConnectionAll(tankSorptions));
         this.itemInputSize = itemInSize;
@@ -697,7 +698,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
 
     public void setInventorySlotContents(int slot, ItemStack stack) {
         if(getItemInputSize() == 0) return;
-         super.setInventorySlotContents(slot, stack);
+        super.setInventorySlotContents(slot, stack);
         if (!this.world.isRemote) {
             if (slot < this.itemInputSize) {
                 this.refreshRecipe();

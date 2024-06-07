@@ -3,7 +3,7 @@ package igentuman.ncsteamadditions.processors;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.*;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.catergory.DigitalTransformerCategory;
+import igentuman.ncsteamadditions.jei.category.DigitalTransformerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerDigitalTransformer;
 import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
