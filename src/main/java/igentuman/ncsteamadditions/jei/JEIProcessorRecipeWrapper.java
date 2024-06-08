@@ -7,12 +7,13 @@ import nc.integration.jei.NCJEI;
 import nc.radiation.RadiationHelper;
 import nc.recipe.*;
 import nc.util.*;
+import nclegacy.jei.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.*;
 
-public abstract class JEIProcessorRecipeWrapper<WRAPPER extends JEIProcessorRecipeWrapper<WRAPPER>> extends JEIBasicRecipeWrapper<WRAPPER> {
+public abstract class JEIProcessorRecipeWrapper<WRAPPER extends JEIProcessorRecipeWrapper<WRAPPER>> extends JEIBasicRecipeWrapperLegacy<WRAPPER> {
     private final int infoX;
     private final int infoY;
     private final int infoWidth;
@@ -22,7 +23,7 @@ public abstract class JEIProcessorRecipeWrapper<WRAPPER extends JEIProcessorReci
     private static final String BASE_RADIATION = Lang.localize("jei.nuclearcraft.base_process_radiation");
     public final IDrawableAnimated animatedArrow;
 
-    public JEIProcessorRecipeWrapper(IGuiHelper guiHelper, NCJEI.IJEIHandler<WRAPPER> handler, BasicRecipeHandler recipeHandler, BasicRecipe recipe, int backX, int backY, int arrowX, int arrowY, int arrowWidth, int arrowHeight, int arrowPosX, int arrowPosY, int infoX, int infoY, int infoWidth, int infoHeight) {
+    public JEIProcessorRecipeWrapper(IGuiHelper guiHelper, IJEIHandlerLegacy<WRAPPER> handler, BasicRecipeHandler recipeHandler, BasicRecipe recipe, int backX, int backY, int arrowX, int arrowY, int arrowWidth, int arrowHeight, int arrowPosX, int arrowPosY, int infoX, int infoY, int infoWidth, int infoHeight) {
         super(guiHelper, handler, recipeHandler, recipe, backX, backY, arrowX, arrowY, arrowWidth, arrowHeight, arrowPosX, arrowPosY);
         this.infoX = infoX - backX;
         this.infoY = infoY - backY;

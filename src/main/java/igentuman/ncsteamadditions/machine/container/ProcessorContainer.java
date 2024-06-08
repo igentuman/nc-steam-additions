@@ -4,10 +4,11 @@ import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.container.slot.*;
+import nclegacy.container.ContainerItemFluidProcessorLegacy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 
-public class ProcessorContainer  extends ContainerItemFluidProcessor {
+public class ProcessorContainer  extends ContainerItemFluidProcessorLegacy {
     public static int InputSlotsXOffset = 26;
     public static int InputSlotsSpan = 19;
     private static int InputSlotsYOffset = 42;

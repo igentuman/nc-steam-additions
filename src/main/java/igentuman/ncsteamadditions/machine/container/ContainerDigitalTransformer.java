@@ -5,10 +5,11 @@ import igentuman.ncsteamadditions.processors.*;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.container.slot.*;
+import nclegacy.container.ContainerItemFluidProcessorLegacy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 
-public class ContainerDigitalTransformer extends ContainerItemFluidProcessor
+public class ContainerDigitalTransformer extends ContainerItemFluidProcessorLegacy
 {
 
 	public ContainerDigitalTransformer(EntityPlayer player, TileNCSProcessor tileEntity)

@@ -3,15 +3,14 @@ package igentuman.ncsteamadditions.block;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.processors.*;
-import nc.block.IBlockMeta;
 import nc.block.item.*;
 import nc.block.tile.ITileType;
-import nc.enumm.IMetaEnum;
 import nc.util.InfoHelper;
+import nclegacy.block.item.ItemBlockMetaLegacy;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.*;
-import net.minecraft.util.*;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -57,8 +56,8 @@ public class Blocks
 	
 	public static void register()
 	{
-		registerBlock(ingot_block, new ItemBlockMeta(ingot_block, TextFormatting.AQUA));
-		registerBlock(ore, new ItemBlockMeta(ore, TextFormatting.AQUA));
+		registerBlock(ingot_block, new ItemBlockMetaLegacy(ingot_block, MetaEnums.IngotType.class, TextFormatting.AQUA));
+		registerBlock(ore, new ItemBlockMetaLegacy(ore, MetaEnums.OreType.class, TextFormatting.AQUA));
 		for(Block block: blocks) {
 			registerBlock(block);
 		}

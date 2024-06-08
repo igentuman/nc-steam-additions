@@ -1,10 +1,11 @@
-package igentuman.ncsteamadditions.jei.category;
+package igentuman.ncsteamadditions.jei.catergory;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamBoiler;
 import igentuman.ncsteamadditions.processors.*;
 import mezz.jei.api.IGuiHelper;
 import nc.recipe.*;
+import nclegacy.jei.*;
 
 public class SteamBoilerCategory extends ParentProcessorCategory
 {
@@ -41,16 +42,16 @@ public class SteamBoilerCategory extends ParentProcessorCategory
 		return processor;
 	}
 
-	public SteamBoilerCategory(IGuiHelper guiHelper, IJEIHandler handler, SteamBoiler proc)
+	public SteamBoilerCategory(IGuiHelper guiHelper, IJEIHandlerLegacy handler, SteamBoiler proc)
 	{
 		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
 	}
 
-	public static class SteamBoilerWrapper extends JEIMachineRecipeWrapper
+	public static class SteamBoilerWrapper extends JEIMachineRecipeWrapperLegacy
 	{
 
-		public SteamBoilerWrapper(IGuiHelper guiHelper, IJEIHandler jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
+		public SteamBoilerWrapper(IGuiHelper guiHelper, IJEIHandlerLegacy jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
 		{
 			super(guiHelper, jeiHandler, recipeHandler, recipe, 24, 7, 0, 0, 0, 0, 0, 0, 94, 30, 16, 16);
 		}

@@ -5,10 +5,11 @@ import igentuman.ncsteamadditions.processors.*;
 import nc.block.property.BlockProperties;
 import nc.block.tile.*;
 import nc.init.NCItems;
-import nc.tile.*;
+import nc.tile.ITileGui;
 import nc.tile.fluid.ITileFluid;
 import nc.tile.processor.IProcessor;
 import nc.util.BlockHelper;
+import nclegacy.tile.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -24,6 +25,7 @@ import net.minecraft.world.*;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import net.minecraftforge.fml.relauncher.*;
+import net.minecraftforge.items.*;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -147,17 +149,19 @@ public class BlockCustomModelProcessor extends BlockSidedTile implements IActiva
 			return false;
 
 		TileEntity tile = world.getTileEntity(pos);
-		if (tile instanceof ITileInstallable && ((ITileInstallable) tile).tryInstall(player, hand, facing)) {
-			return true;
+		if (tile instanceof IUpgradableLegacy)
+		{
+			if (installUpgrade(tile, ((IUpgradableLegacy) tile).getSpeedUpgradeSlot(), player, hand, facing,
+					new ItemStack(NCItems.upgrade, 1, 0)))
+				return true;
 		}
 
 		if (player.isSneaking())
 			return false;
 
-		if (!(tile instanceof ITileFluid) && !(tile instanceof ITileGui))
+		if (!(tile instanceof ITileFluid) && !(tile instanceof ITileGui) && !(tile instanceof ITileGuiLegacy))
 			return false;
-		if (tile instanceof ITileFluid && !(tile instanceof ITileGui)
-				&& FluidUtil.getFluidHandler(player.getHeldItem(hand)) == null)
+		if (tile instanceof ITileFluid && !(tile instanceof ITileGui) && !(tile instanceof ITileGuiLegacy) && FluidUtil.getFluidHandler(player.getHeldItem(hand)) == null)
 			return false;
 
 		if (tile instanceof ITileFluid)
@@ -172,6 +176,11 @@ public class BlockCustomModelProcessor extends BlockSidedTile implements IActiva
 				{
 					((IProcessor) tile).refreshRecipe();
 					((IProcessor) tile).refreshActivity();
+				}
+				else if (tile instanceof IProcessorLegacy)
+				{
+					((IProcessorLegacy) tile).refreshRecipe();
+					((IProcessorLegacy) tile).refreshActivity();
 				}
 				return true;
 			}
@@ -191,14 +200,62 @@ public class BlockCustomModelProcessor extends BlockSidedTile implements IActiva
 					((IProcessor) tile).refreshRecipe();
 					((IProcessor) tile).refreshActivity();
 				}
-				FMLNetworkHandler.openGui(player, NCSteamAdditions.instance, ((ITileGui) tile).getContainerInfo().getGuiId(), world, pos.getX(),
-						pos.getY(), pos.getZ());
+				else if (tile instanceof IProcessorLegacy)
+				{
+					((IProcessorLegacy) tile).refreshRecipe();
+					((IProcessorLegacy) tile).refreshActivity();
+				}
+				FMLNetworkHandler.openGui(player, NCSteamAdditions.instance, ((ITileGui) tile).getContainerInfo().getGuiId(), world, pos.getX(), pos.getY(), pos.getZ());
+			}
+		}
+		else if (tile instanceof ITileGuiLegacy)
+		{
+			if (world.isRemote)
+			{
+				onGuiOpened(world, pos);
+				return true;
+			}
+			else
+			{
+				onGuiOpened(world, pos);
+				if (tile instanceof IProcessor)
+				{
+					((IProcessor) tile).refreshRecipe();
+					((IProcessor) tile).refreshActivity();
+				}
+				else if (tile instanceof IProcessorLegacy)
+				{
+					((IProcessorLegacy) tile).refreshRecipe();
+					((IProcessorLegacy) tile).refreshActivity();
+				}
+				FMLNetworkHandler.openGui(player, NCSteamAdditions.instance, ((ITileGuiLegacy) tile).getGuiID(), world, pos.getX(), pos.getY(), pos.getZ());
 			}
 		}
 		else
 			return false;
 
 		return true;
+	}
+	
+	protected boolean installUpgrade(TileEntity tile, int slot, EntityPlayer player, EnumHand hand, EnumFacing facing, @Nonnull ItemStack stack) {
+		ItemStack held = player.getHeldItem(hand);
+		if (held.isItemEqual(stack)) {
+			IItemHandler inv = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
+			
+			if (inv != null && inv.isItemValid(slot, held)) {
+				if (player.isSneaking()) {
+					player.setHeldItem(EnumHand.MAIN_HAND, inv.insertItem(slot, held, false));
+					return true;
+				}
+				else {
+					if (inv.insertItem(slot, stack, false).isEmpty()) {
+						player.getHeldItem(hand).shrink(1);
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override

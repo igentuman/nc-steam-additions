@@ -1,4 +1,4 @@
-package igentuman.ncsteamadditions.jei.category;
+package igentuman.ncsteamadditions.jei.catergory;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
@@ -7,12 +7,13 @@ import mezz.jei.api.gui.*;
 import mezz.jei.api.ingredients.IIngredients;
 import nc.recipe.ingredient.*;
 import nc.util.*;
+import nclegacy.jei.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.*;
 
-public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIMachineRecipeWrapper<WRAPPER>> extends JEIBasicCategory<WRAPPER>
+public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIMachineRecipeWrapperLegacy<WRAPPER>> extends JEIBasicCategoryLegacy<WRAPPER>
 {
 
     private final IDrawable background;
@@ -20,12 +21,12 @@ public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIMach
     protected final int backPosX, backPosY;
     public IDrawableAnimated animatedArrow;
     public ResourceLocation location;
-    public JEINCSteamAdditionsMachineCategory(IGuiHelper guiHelper, IJEIHandler handler, String title, int backX, int backY, int backWidth, int backHeight)
+    public JEINCSteamAdditionsMachineCategory(IGuiHelper guiHelper, IJEIHandlerLegacy handler, String title, int backX, int backY, int backWidth, int backHeight)
     {
         this(guiHelper, handler, title, "", backX, backY, backWidth, backHeight);
     }
 
-    public JEINCSteamAdditionsMachineCategory(IGuiHelper guiHelper, IJEIHandler handler, String title, String guiExtra, int backX, int backY, int backWidth, int backHeight)
+    public JEINCSteamAdditionsMachineCategory(IGuiHelper guiHelper, IJEIHandlerLegacy handler, String title, String guiExtra, int backX, int backY, int backWidth, int backHeight)
     {
         super(handler);
         location = new ResourceLocation(NCSteamAdditions.MOD_ID + ":textures/gui/" + handler.getTextureName() + guiExtra + ".png");
@@ -71,7 +72,7 @@ public abstract class JEINCSteamAdditionsMachineCategory<WRAPPER extends JEIMach
 
         recipeLayout.getFluidStacks().addTooltipCallback((slotIndex, input, ingredient, tooltip) ->
         {
-            int outputIndex = slotIndex - recipeWrapper.recipeHandler.getFluidInputSize();
+            int outputIndex = slotIndex - recipeWrapper.recipeHandler.getFluidInputSize() - 1;
             if (outputIndex >= 0 && outputIndex <= recipeWrapper.recipeHandler.getFluidOutputSize() && recipeWrapper.recipe.getFluidProducts().get(outputIndex) instanceof ChanceFluidIngredient)
             {
                 ChanceFluidIngredient chanceIngredient = (ChanceFluidIngredient)recipeWrapper.recipe.getFluidProducts().get(outputIndex);

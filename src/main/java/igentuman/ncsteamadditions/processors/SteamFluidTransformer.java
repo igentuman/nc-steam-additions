@@ -4,13 +4,15 @@ import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.category.SteamFluidTransformerCategory;
+import igentuman.ncsteamadditions.jei.catergory.SteamFluidTransformerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamFluidTransformer;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamFluidTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
 import nc.util.RegistryHelper;
+import nclegacy.container.ContainerMachineConfigLegacy;
+import nclegacy.jei.JEIBasicCategoryLegacy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.*;
@@ -62,10 +64,10 @@ public class SteamFluidTransformer extends AbstractProcessor {
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player, (TileNCSProcessor) tile);
+        return new ContainerMachineConfigLegacy(player, (TileNCSProcessor) tile);
     }
 
-    public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
+    public JEIBasicCategoryLegacy getRecipeCategory(IGuiHelper guiHelper)
     {
         recipeHandler = new JEIHandler(this,
                 NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],

@@ -3,12 +3,14 @@ package igentuman.ncsteamadditions.processors;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.*;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.category.DigitalTransformerCategory;
+import igentuman.ncsteamadditions.jei.catergory.DigitalTransformerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerDigitalTransformer;
 import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileDigitalTransformer;
 import mezz.jei.api.IGuiHelper;
+import nclegacy.container.ContainerMachineConfigLegacy;
+import nclegacy.jei.JEIBasicCategoryLegacy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.*;
@@ -47,7 +49,7 @@ public class DigitalTransformer extends AbstractProcessor {
     }
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-       return new ContainerMachineConfig(player, (TileDigitalTransformer) tile);
+       return new ContainerMachineConfigLegacy(player, (TileDigitalTransformer) tile);
     }
     @SideOnly(Side.CLIENT)
     public Object getLocalGuiContainerConfig(EntityPlayer player, TileEntity tile) {
@@ -64,7 +66,7 @@ public class DigitalTransformer extends AbstractProcessor {
         return this.recipeHandler;
     }
 
-    public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
+    public JEIBasicCategoryLegacy getRecipeCategory(IGuiHelper guiHelper)
     {
         recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[getGuid()], Blocks.blocks[getGuid()], code, DigitalTransformerCategory.DigitalTransformerWrapper.class);
         return new DigitalTransformerCategory(guiHelper,recipeHandler, this);

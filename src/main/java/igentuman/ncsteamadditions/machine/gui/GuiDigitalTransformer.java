@@ -7,6 +7,7 @@ import igentuman.ncsteamadditions.tile.*;
 import nc.gui.element.GuiItemRenderer;
 import nc.tile.energy.ITileEnergy;
 import nc.util.*;
+import nclegacy.container.ContainerTileLegacy;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
@@ -52,7 +53,7 @@ public class GuiDigitalTransformer extends GuiItemFluidMachine
 		this(player, tile, new ContainerDigitalTransformer(player, tile), processor);
 	}
 
-	private GuiDigitalTransformer(EntityPlayer player, TileNCSProcessor tile, ContainerTile container, DigitalTransformer processor)
+	private GuiDigitalTransformer(EntityPlayer player, TileNCSProcessor tile, ContainerTileLegacy container, DigitalTransformer processor)
 	{
 		super(processor.getCode(), player, tile, container);
 		xSize = 176;

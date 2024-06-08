@@ -4,6 +4,7 @@ import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import io.netty.buffer.ByteBuf;
 import nc.tile.ITileGui;
+import nclegacy.tile.ITileGuiLegacy;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +21,7 @@ public class OpenSideGuiPacket implements IMessage {
         messageValid = false;
     }
 
-    public OpenSideGuiPacket(ITileGui machine) {
+    public OpenSideGuiPacket(ITileGuiLegacy machine) {
         this.pos = machine.getTilePos();
         messageValid = true;
     }

@@ -3,6 +3,7 @@ package igentuman.ncsteamadditions.machine.gui;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBlender;
 import igentuman.ncsteamadditions.processors.SteamBlender;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
+import nclegacy.container.ContainerTileLegacy;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -21,7 +22,7 @@ public class GuiSteamBlender extends GuiItemFluidMachine
 		this(player, tile, new ContainerSteamBlender(player, tile), processor);
 	}
 
-	private GuiSteamBlender(EntityPlayer player, TileNCSProcessor tile, ContainerTile container, SteamBlender processor)
+	private GuiSteamBlender(EntityPlayer player, TileNCSProcessor tile, ContainerTileLegacy container, SteamBlender processor)
 	{
 		super(processor.getCode(), player, tile, container);
 		xSize = 176;

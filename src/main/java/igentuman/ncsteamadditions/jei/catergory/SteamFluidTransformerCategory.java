@@ -1,10 +1,11 @@
-package igentuman.ncsteamadditions.jei.category;
+package igentuman.ncsteamadditions.jei.catergory;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamFluidTransformer;
 import igentuman.ncsteamadditions.processors.*;
 import mezz.jei.api.IGuiHelper;
 import nc.recipe.*;
+import nclegacy.jei.*;
 
 public class SteamFluidTransformerCategory extends ParentProcessorCategory
 {
@@ -41,16 +42,16 @@ public class SteamFluidTransformerCategory extends ParentProcessorCategory
 		return processor;
 	}
 
-	public SteamFluidTransformerCategory(IGuiHelper guiHelper, IJEIHandler handler, SteamFluidTransformer proc)
+	public SteamFluidTransformerCategory(IGuiHelper guiHelper, IJEIHandlerLegacy handler, SteamFluidTransformer proc)
 	{
 		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
 	}
 
-	public static class SteamFluidTransformerWrapper extends JEIMachineRecipeWrapper
+	public static class SteamFluidTransformerWrapper extends JEIMachineRecipeWrapperLegacy
 	{
 
-		public SteamFluidTransformerWrapper(IGuiHelper guiHelper, IJEIHandler jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
+		public SteamFluidTransformerWrapper(IGuiHelper guiHelper, IJEIHandlerLegacy jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
 		{
 			super(guiHelper, jeiHandler, recipeHandler, recipe, 24, 7, 0, 0, 0, 0, 0, 0, 94, 30, 16, 16);
 		}

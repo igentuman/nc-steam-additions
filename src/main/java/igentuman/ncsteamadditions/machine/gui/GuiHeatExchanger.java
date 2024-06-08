@@ -6,6 +6,8 @@ import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import nc.gui.element.*;
 import nc.gui.processor.GuiFluidSorptions;
 import nc.util.Lang;
+import nclegacy.container.*;
+import nclegacy.gui.GuiFluidSorptionsLegacy;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +29,7 @@ public class GuiHeatExchanger extends GuiItemFluidMachine
 		this(player, tile, new ContainerHeatExchanger(player, tile), processor);
 	}
 
-	private GuiHeatExchanger(EntityPlayer player, TileNCSProcessor tile, ContainerTile container, HeatExchanger processor)
+	private GuiHeatExchanger(EntityPlayer player, TileNCSProcessor tile, ContainerTileLegacy container, HeatExchanger processor)
 	{
 		super(processor.getCode(), player, tile, container);
 		xSize = 176;
@@ -89,7 +91,7 @@ public class GuiHeatExchanger extends GuiItemFluidMachine
 		int idCounter = 1;
 		if(getProcessor().getInputFluids() > 0) {
 			for(int i = 0; i < getProcessor().getInputFluids(); i++) {
-				buttonList.add(new NCButton.EmptyTank(idCounter++, guiLeft + x, y, 16, 16));
+				buttonList.add(new NCButton.ClearTank(idCounter++, guiLeft + x, y, 16, 16));
 				y += 27;
 			}
 		}
@@ -97,7 +99,7 @@ public class GuiHeatExchanger extends GuiItemFluidMachine
 		x = 152;
 		if(getProcessor().getOutputFluids() > 0) {
 			for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
-				buttonList.add(new NCButton.EmptyTank(idCounter++, guiLeft + x, guiTop + inputFluidsTop, 16, 16));
+				buttonList.add(new NCButton.ClearTank(idCounter++, guiLeft + x, guiTop + inputFluidsTop, 16, 16));
 				y += 27;
 			}
 		}
@@ -131,7 +133,7 @@ public class GuiHeatExchanger extends GuiItemFluidMachine
 
 		public SideConfig(EntityPlayer player, TileNCSProcessor tile, HeatExchanger proc)
 		{
-			super(player, tile, new ContainerMachineConfig(player, tile), proc);
+			super(player, tile, new ContainerMachineConfigLegacy(player, tile), proc);
 			processor = proc;
 		}
 
@@ -178,7 +180,7 @@ public class GuiHeatExchanger extends GuiItemFluidMachine
 
 			if(getProcessor().getInputFluids() > 0) {
 				for(int i = 0; i < getProcessor().getInputFluids(); i++) {
-					buttonList.add(new NCButton.SorptionConfig.FluidInput(idCounter++, guiLeft + x, guiTop + inputFluidsTop-1));
+					buttonList.add(new NCButton.SorptionConfig.FluidInput(idCounter++, guiLeft + x, guiTop + inputFluidsTop-1, 18, 18));
 					x += cellSpan;
 				}
 			}
@@ -187,7 +189,7 @@ public class GuiHeatExchanger extends GuiItemFluidMachine
 			x = guiLeft + 151;
 			if(getProcessor().getOutputFluids() > 0) {
 				for (int i = 0; i < getProcessor().getOutputFluids(); i++) {
-					buttonList.add(new NCButton.SorptionConfig.FluidOutputSmall(idCounter++,  x, guiTop + inputFluidsTop-1));
+					buttonList.add(new NCButton.SorptionConfig.FluidOutput(idCounter++,  x, guiTop + inputFluidsTop-1, 18, 18));
 					x += cellSpan;
 				}
 			}
@@ -202,12 +204,12 @@ public class GuiHeatExchanger extends GuiItemFluidMachine
 				//order Finput,Iinput,Foutput,Ioutput
 				int idCounter = getProcessor().getInputFluids();
 				if(guiButton.id < idCounter) {
-					FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptions.Input(this, tile, guiButton.id));
+					FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptionsLegacy.Input(this, tile, guiButton.id));
 					return;
 				}
 				idCounter += getProcessor().getOutputFluids();
 				if(guiButton.id < idCounter) {
-					FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptions.Output(this, tile, guiButton.id-1));
+					FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptionsLegacy.Output(this, tile, guiButton.id-1));
 					return;
 				}
 			}

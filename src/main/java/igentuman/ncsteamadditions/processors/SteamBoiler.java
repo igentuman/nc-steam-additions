@@ -4,7 +4,7 @@ import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.category.SteamBoilerCategory;
+import igentuman.ncsteamadditions.jei.catergory.SteamBoilerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBoiler;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamBoiler;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
@@ -12,6 +12,8 @@ import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import igentuman.ncsteamadditions.util.Util;
 import mezz.jei.api.IGuiHelper;
 import nc.util.*;
+import nclegacy.container.ContainerMachineConfigLegacy;
+import nclegacy.jei.JEIBasicCategoryLegacy;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -80,10 +82,10 @@ public class SteamBoiler extends AbstractProcessor {
     }
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player, (TileNCSProcessor) tile);
+        return new ContainerMachineConfigLegacy(player, (TileNCSProcessor) tile);
     }
 
-    public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
+    public JEIBasicCategoryLegacy getRecipeCategory(IGuiHelper guiHelper)
     {
         recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[GUID], code, SteamBoilerCategory.SteamBoilerWrapper.class);
         return new SteamBoilerCategory(guiHelper,recipeHandler, this);

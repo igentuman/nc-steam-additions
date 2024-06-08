@@ -1,6 +1,7 @@
 package igentuman.ncsteamadditions;
 
 import igentuman.ncsteamadditions.config.*;
+import igentuman.ncsteamadditions.machine.gui.GUIHandler;
 import igentuman.ncsteamadditions.proxy.CommonProxy;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.util.*;
@@ -12,6 +13,7 @@ import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.Mod.*;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = NCSteamAdditions.MOD_ID, name = NCSteamAdditions.MOD_NAME, version = NCSteamAdditions.VERSION, acceptedMinecraftVersions = NCSteamAdditions.MCVERSION, dependencies = NCSteamAdditions.DEPENDENCIES, guiFactory = "igentuman.ncsteamadditions.config.NCSteamAdditionsConfigGUIFactory")
 public class NCSteamAdditions
@@ -20,7 +22,7 @@ public class NCSteamAdditions
 	public static final String MOD_ID = "ncsteamadditions";
 	public static final String VERSION = "0.3.5";
 	public static final String MCVERSION = "1.12.2";
-	public static final String DEPENDENCIES = "required-after:nuclearcraft";
+	public static final String DEPENDENCIES = "required-after:nuclearcraft;required-after:nclegacy";
 
 	
 	@Instance(MOD_ID)
@@ -44,6 +46,7 @@ public class NCSteamAdditions
 	{
 		Util.getLogger().info("Initialization");
 		proxy.init(event);
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
 		MinecraftForge.EVENT_BUS.register(new NcsEventHandler());
 		NCSVillagerHandler.initVillagerHouse();
 		NCSVillagerHandler.initVillagerTrades();

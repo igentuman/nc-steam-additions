@@ -3,7 +3,7 @@ package igentuman.ncsteamadditions.processors;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.category.HeatExchangerCategory;
+import igentuman.ncsteamadditions.jei.catergory.HeatExchangerCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerHeatExchanger;
 import igentuman.ncsteamadditions.machine.gui.GuiHeatExchanger;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
@@ -12,6 +12,8 @@ import mezz.jei.api.IGuiHelper;
 import nc.init.NCCoolantFluids;
 import nc.recipe.ingredient.FluidIngredient;
 import nc.util.RegistryHelper;
+import nclegacy.container.ContainerMachineConfigLegacy;
+import nclegacy.jei.JEIBasicCategoryLegacy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -65,10 +67,10 @@ public class HeatExchanger extends AbstractProcessor {
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player, (TileNCSProcessor) tile);
+        return new ContainerMachineConfigLegacy(player, (TileNCSProcessor) tile);
     }
 
-    public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
+    public JEIBasicCategoryLegacy getRecipeCategory(IGuiHelper guiHelper)
     {
         recipeHandler = new JEIHandler(this,
                 NCSteamAdditionsRecipes.processorRecipeHandlers[GUID],

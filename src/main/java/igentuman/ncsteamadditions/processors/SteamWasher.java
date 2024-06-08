@@ -3,7 +3,7 @@ package igentuman.ncsteamadditions.processors;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.category.SteamWasherCategory;
+import igentuman.ncsteamadditions.jei.catergory.SteamWasherCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamWasher;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamWasher;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
@@ -11,6 +11,8 @@ import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
 import nc.recipe.ingredient.FluidIngredient;
 import nc.util.OreDictHelper;
+import nclegacy.container.ContainerMachineConfigLegacy;
+import nclegacy.jei.JEIBasicCategoryLegacy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.*;
@@ -61,11 +63,11 @@ public class SteamWasher extends AbstractProcessor {
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player, (TileNCSProcessor) tile);
+        return new ContainerMachineConfigLegacy(player, (TileNCSProcessor) tile);
     }
 
 
-    public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
+    public JEIBasicCategoryLegacy getRecipeCategory(IGuiHelper guiHelper)
     {
         recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[GUID], code, SteamWasherCategory.SteamWasherWrapper.class);
         return new SteamWasherCategory(guiHelper,recipeHandler, this);
