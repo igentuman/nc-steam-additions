@@ -1,4 +1,4 @@
-package igentuman.ncsteamadditions.jei.catergory;
+package igentuman.ncsteamadditions.jei.category;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.processors.AbstractProcessor;

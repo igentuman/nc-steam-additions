@@ -1,10 +1,9 @@
-package igentuman.ncsteamadditions.jei.catergory;
+package igentuman.ncsteamadditions.jei.category;
 
 import igentuman.ncsteamadditions.processors.AbstractProcessor;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
-import nc.integration.jei.JEIHelper;
 import nc.recipe.IngredientSorption;
 import nclegacy.jei.*;
 

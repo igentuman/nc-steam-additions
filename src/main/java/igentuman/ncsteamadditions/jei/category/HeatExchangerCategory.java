@@ -1,4 +1,4 @@
-package igentuman.ncsteamadditions.jei.catergory;
+package igentuman.ncsteamadditions.jei.category;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiHeatExchanger;
@@ -6,7 +6,6 @@ import igentuman.ncsteamadditions.processors.*;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.*;
 import mezz.jei.api.ingredients.IIngredients;
-import nc.integration.jei.JEIHelper;
 import nc.recipe.*;
 import nclegacy.jei.*;
 import net.minecraft.client.Minecraft;

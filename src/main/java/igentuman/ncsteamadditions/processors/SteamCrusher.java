@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.catergory.SteamCrusherCategory;
+import igentuman.ncsteamadditions.jei.category.SteamCrusherCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamCrusher;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamCrusher;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
