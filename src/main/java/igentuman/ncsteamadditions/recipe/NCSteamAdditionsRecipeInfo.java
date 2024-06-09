@@ -1,8 +1,7 @@
 package igentuman.ncsteamadditions.recipe;
 
-import java.util.List;
-
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public class NCSteamAdditionsRecipeInfo<T extends INCSteamAdditionsRecipe>
 {

@@ -4,26 +4,22 @@ import com.google.common.collect.Sets;
 import igentuman.ncsteamadditions.block.Blocks;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.jei.JEIHandler;
-import igentuman.ncsteamadditions.jei.catergory.SteamCrusherCategory;
+import igentuman.ncsteamadditions.jei.category.SteamCrusherCategory;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamCrusher;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamCrusher;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import mezz.jei.api.IGuiHelper;
-import nc.container.processor.ContainerMachineConfig;
-import nc.integration.jei.JEIBasicCategory;
 import nc.recipe.ingredient.FluidIngredient;
 import nc.util.OreDictHelper;
-import nc.util.RegistryHelper;
+import nclegacy.container.ContainerMachineConfigLegacy;
+import nclegacy.jei.JEIBasicCategoryLegacy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Set;
-
-import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
 public class SteamCrusher extends AbstractProcessor {
 
@@ -70,10 +66,10 @@ public class SteamCrusher extends AbstractProcessor {
 
 
     public Object getGuiContainerConfig(EntityPlayer player, TileEntity tile) {
-        return new ContainerMachineConfig(player, (TileNCSProcessor) tile);
+        return new ContainerMachineConfigLegacy(player, (TileNCSProcessor) tile);
     }
 
-    public JEIBasicCategory getRecipeCategory(IGuiHelper guiHelper)
+    public JEIBasicCategoryLegacy getRecipeCategory(IGuiHelper guiHelper)
     {
         recipeHandler = new JEIHandler(this, NCSteamAdditionsRecipes.processorRecipeHandlers[GUID], Blocks.blocks[GUID], code, SteamCrusherCategory.SteamCrusherWrapper.class);
         return new SteamCrusherCategory(guiHelper,recipeHandler, this);

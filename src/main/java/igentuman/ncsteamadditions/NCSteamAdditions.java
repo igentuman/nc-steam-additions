@@ -1,26 +1,17 @@
 package igentuman.ncsteamadditions;
 
-import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import igentuman.ncsteamadditions.config.TransformerRecipesConfig;
+import igentuman.ncsteamadditions.config.*;
 import igentuman.ncsteamadditions.machine.gui.GUIHandler;
 import igentuman.ncsteamadditions.proxy.CommonProxy;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
-import igentuman.ncsteamadditions.util.NcsEventHandler;
-import igentuman.ncsteamadditions.util.Util;
+import igentuman.ncsteamadditions.util.*;
 import igentuman.ncsteamadditions.villager.NCSVillagerHandler;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelVillager;
+import net.minecraft.client.model.*;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLModIdMappingEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.common.Mod.*;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
@@ -29,9 +20,9 @@ public class NCSteamAdditions
 {
 	public static final String MOD_NAME = "Steam Additions for NuclearCraft";
 	public static final String MOD_ID = "ncsteamadditions";
-	public static final String VERSION = "@VERSION@";
+	public static final String VERSION = "0.3.5";
 	public static final String MCVERSION = "1.12.2";
-	public static final String DEPENDENCIES = "required-after:nuclearcraft";
+	public static final String DEPENDENCIES = "required-after:nuclearcraft;required-after:nclegacy";
 
 	
 	@Instance(MOD_ID)
@@ -95,7 +86,7 @@ public class NCSteamAdditions
 	}
 
 	@EventHandler
-	public void onIdMapping(FMLModIdMappingEvent idMappingEvent) 
+	public void onIdMapping(FMLModIdMappingEvent idMappingEvent)
 	{
 		NCSteamAdditionsRecipes.refreshRecipeCaches();
 	}

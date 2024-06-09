@@ -1,12 +1,11 @@
 package igentuman.ncsteamadditions.recipe;
 
-import java.util.List;
-
 import nc.recipe.IngredientSorption;
-import nc.recipe.ingredient.IFluidIngredient;
-import nc.recipe.ingredient.IItemIngredient;
+import nc.recipe.ingredient.*;
 import nc.tile.internal.fluid.Tank;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public class NCSteamAdditionsRecipe implements INCSteamAdditionsRecipe
 {
@@ -58,7 +57,7 @@ public class NCSteamAdditionsRecipe implements INCSteamAdditionsRecipe
 		return extras;
 	}
 	
-	public boolean isShapeless() 
+	public boolean isShapeless()
 	{
 		return isShapeless;
 	}

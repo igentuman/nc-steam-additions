@@ -1,23 +1,15 @@
-package igentuman.ncsteamadditions.jei.catergory;
+package igentuman.ncsteamadditions.jei.category;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiHeatExchanger;
-import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
-import igentuman.ncsteamadditions.processors.HeatExchanger;
+import igentuman.ncsteamadditions.processors.*;
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawableAnimated;
-import mezz.jei.api.gui.IDrawableStatic;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.*;
 import mezz.jei.api.ingredients.IIngredients;
-import nc.integration.jei.JEIHelper;
-import nc.integration.jei.JEIMachineRecipeWrapper;
-import nc.integration.jei.NCJEI.IJEIHandler;
-import nc.recipe.BasicRecipe;
-import nc.recipe.BasicRecipeHandler;
-import nc.recipe.IngredientSorption;
+import nc.recipe.*;
+import nclegacy.jei.*;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 public class HeatExchangerCategory extends ParentProcessorCategory
 {
@@ -54,7 +46,7 @@ public class HeatExchangerCategory extends ParentProcessorCategory
 		return processor;
 	}
 
-	public HeatExchangerCategory(IGuiHelper guiHelper, IJEIHandler handler, HeatExchanger proc)
+	public HeatExchangerCategory(IGuiHelper guiHelper, IJEIHandlerLegacy handler, HeatExchanger proc)
 	{
 		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
@@ -69,10 +61,10 @@ public class HeatExchangerCategory extends ParentProcessorCategory
 		animatedArrow.draw(minecraft, 26, 11);
 	}
 
-	public static class HeatExchangerWrapper extends JEIMachineRecipeWrapper
+	public static class HeatExchangerWrapper extends JEIMachineRecipeWrapperLegacy
 	{
 
-		public HeatExchangerWrapper(IGuiHelper guiHelper, IJEIHandler jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
+		public HeatExchangerWrapper(IGuiHelper guiHelper, IJEIHandlerLegacy jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
 		{
 			super(guiHelper, jeiHandler, recipeHandler, recipe, 24, 7, 0, 0, 0, 0, 0, 0, 94, 30, 16, 16);
 		}
@@ -94,7 +86,7 @@ public class HeatExchangerCategory extends ParentProcessorCategory
 
 	public void mapLayout(IRecipeLayout recipeLayout, IIngredients ingredients)
 	{
-		JEIHelper.RecipeFluidMapper fluidMapper = new JEIHelper.RecipeFluidMapper();
+		JEIHelperLegacy.RecipeFluidMapper fluidMapper = new JEIHelperLegacy.RecipeFluidMapper();
 
 		int x = getFluidsLeft();
 		int y = getFluidsTop() - backPosY;

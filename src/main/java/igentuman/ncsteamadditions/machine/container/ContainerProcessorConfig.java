@@ -1,11 +1,11 @@
 package igentuman.ncsteamadditions.machine.container;
 
-import nc.container.processor.ContainerMachineConfig;
-import nc.tile.processor.ITileSideConfigGui;
+import nclegacy.container.ContainerMachineConfigLegacy;
+import nclegacy.tile.ITileSideConfigGuiLegacy;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class ContainerProcessorConfig extends ContainerMachineConfig {
-    public ContainerProcessorConfig(EntityPlayer player, ITileSideConfigGui tile) {
+public class ContainerProcessorConfig extends ContainerMachineConfigLegacy {
+    public ContainerProcessorConfig(EntityPlayer player, ITileSideConfigGuiLegacy tile) {
         super(player, tile);
     }
 

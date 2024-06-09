@@ -2,36 +2,28 @@ package igentuman.ncsteamadditions.jei;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawableAnimated;
-import mezz.jei.api.gui.IDrawableStatic;
-import nc.integration.jei.JEIBasicRecipeWrapper;
-import nc.integration.jei.JEIMachineRecipeWrapper;
+import mezz.jei.api.gui.*;
 import nc.integration.jei.NCJEI;
 import nc.radiation.RadiationHelper;
-import nc.recipe.BasicRecipe;
-import nc.recipe.BasicRecipeHandler;
-import nc.util.Lang;
-import nc.util.UnitHelper;
-import net.minecraft.client.Minecraft;
+import nc.recipe.*;
+import nc.util.*;
+import nclegacy.jei.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public abstract class JEIProcessorRecipeWrapper<WRAPPER extends JEIProcessorRecipeWrapper<WRAPPER>> extends JEIBasicRecipeWrapper<WRAPPER> {
+public abstract class JEIProcessorRecipeWrapper<WRAPPER extends JEIProcessorRecipeWrapper<WRAPPER>> extends JEIBasicRecipeWrapperLegacy<WRAPPER> {
     private final int infoX;
     private final int infoY;
     private final int infoWidth;
     private final int infoHeight;
-    private static final String BASE_TIME = Lang.localise("jei.nuclearcraft.base_process_time");
-    private static final String BASE_POWER = Lang.localise("jei.nuclearcraft.base_process_power");
-    private static final String BASE_RADIATION = Lang.localise("jei.nuclearcraft.base_process_radiation");
+    private static final String BASE_TIME = Lang.localize("jei.nuclearcraft.base_process_time");
+    private static final String BASE_POWER = Lang.localize("jei.nuclearcraft.base_process_power");
+    private static final String BASE_RADIATION = Lang.localize("jei.nuclearcraft.base_process_radiation");
     public final IDrawableAnimated animatedArrow;
 
-    public JEIProcessorRecipeWrapper(IGuiHelper guiHelper, NCJEI.IJEIHandler<WRAPPER> handler, BasicRecipeHandler recipeHandler, BasicRecipe recipe, int backX, int backY, int arrowX, int arrowY, int arrowWidth, int arrowHeight, int arrowPosX, int arrowPosY, int infoX, int infoY, int infoWidth, int infoHeight) {
+    public JEIProcessorRecipeWrapper(IGuiHelper guiHelper, IJEIHandlerLegacy<WRAPPER> handler, BasicRecipeHandler recipeHandler, BasicRecipe recipe, int backX, int backY, int arrowX, int arrowY, int arrowWidth, int arrowHeight, int arrowPosX, int arrowPosY, int infoX, int infoY, int infoWidth, int infoHeight) {
         super(guiHelper, handler, recipeHandler, recipe, backX, backY, arrowX, arrowY, arrowWidth, arrowHeight, arrowPosX, arrowPosY);
         this.infoX = infoX - backX;
         this.infoY = infoY - backY;

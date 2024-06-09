@@ -6,8 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class ProcessorType {
     private String name;
     private int id;
@@ -57,4 +55,3 @@ public class ProcessorType {
         return NCSteamAdditionsTabs.ITEMS;
     }
 }
-

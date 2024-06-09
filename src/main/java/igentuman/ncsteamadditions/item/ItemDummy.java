@@ -1,11 +1,9 @@
 package igentuman.ncsteamadditions.item;
 
-
 import igentuman.ncsteamadditions.block.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class ItemDummy extends ItemBlock {

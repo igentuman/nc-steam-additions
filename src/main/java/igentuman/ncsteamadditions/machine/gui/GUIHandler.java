@@ -1,7 +1,6 @@
 package igentuman.ncsteamadditions.machine.gui;
 
 import igentuman.ncsteamadditions.processors.*;
-import igentuman.ncsteamadditions.tile.NCSteamAdditionsTiles;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

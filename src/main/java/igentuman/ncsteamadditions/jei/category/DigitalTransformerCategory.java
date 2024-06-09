@@ -1,16 +1,12 @@
-package igentuman.ncsteamadditions.jei.catergory;
+package igentuman.ncsteamadditions.jei.category;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiDigitalTransformer;
-import igentuman.ncsteamadditions.processors.DigitalTransformer;
-import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
+import igentuman.ncsteamadditions.processors.*;
 import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawableAnimated;
-import mezz.jei.api.gui.IDrawableStatic;
-import nc.integration.jei.JEIMachineRecipeWrapper;
-import nc.integration.jei.NCJEI.IJEIHandler;
-import nc.recipe.BasicRecipe;
-import nc.recipe.BasicRecipeHandler;
+import mezz.jei.api.gui.*;
+import nc.recipe.*;
+import nclegacy.jei.*;
 
 public class DigitalTransformerCategory extends ParentProcessorCategory
 {
@@ -47,7 +43,7 @@ public class DigitalTransformerCategory extends ParentProcessorCategory
 		return processor;
 	}
 
-	public DigitalTransformerCategory(IGuiHelper guiHelper, IJEIHandler handler, DigitalTransformer proc)
+	public DigitalTransformerCategory(IGuiHelper guiHelper, IJEIHandlerLegacy handler, DigitalTransformer proc)
 	{
 		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
@@ -56,10 +52,10 @@ public class DigitalTransformerCategory extends ParentProcessorCategory
 
 	}
 
-	public static class DigitalTransformerWrapper extends JEIMachineRecipeWrapper
+	public static class DigitalTransformerWrapper extends JEIMachineRecipeWrapperLegacy
 	{
 
-		public DigitalTransformerWrapper(IGuiHelper guiHelper, IJEIHandler jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
+		public DigitalTransformerWrapper(IGuiHelper guiHelper, IJEIHandlerLegacy jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
 		{
 			super(guiHelper, jeiHandler, recipeHandler, recipe, 24, 7, 0, 0, 0, 0, 0, 0, 94, 30, 16, 16);
 		}

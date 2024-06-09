@@ -8,7 +8,6 @@ import net.minecraftforge.event.village.MerchantTradeOffersEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Iterator;
-import java.util.Random;
 
 public class NcsEventHandler {
     @SubscribeEvent

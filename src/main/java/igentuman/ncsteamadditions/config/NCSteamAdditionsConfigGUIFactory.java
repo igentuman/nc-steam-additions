@@ -1,19 +1,15 @@
 package igentuman.ncsteamadditions.config;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import nc.util.Lang;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
 import net.minecraftforge.fml.client.config.DummyConfigElement.DummyCategoryElement;
-import net.minecraftforge.fml.client.config.GuiConfig;
-import net.minecraftforge.fml.client.config.GuiConfigEntries;
-import net.minecraftforge.fml.client.config.GuiConfigEntries.CategoryEntry;
-import net.minecraftforge.fml.client.config.GuiConfigEntries.IConfigEntry;
-import net.minecraftforge.fml.client.config.IConfigElement;
+import net.minecraftforge.fml.client.config.*;
+import net.minecraftforge.fml.client.config.GuiConfigEntries.*;
+
+import java.util.*;
 
 public class NCSteamAdditionsConfigGUIFactory implements IModGuiFactory
 {

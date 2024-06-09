@@ -1,14 +1,11 @@
-package igentuman.ncsteamadditions.jei.catergory;
+package igentuman.ncsteamadditions.jei.category;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamCrusher;
-import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
-import igentuman.ncsteamadditions.processors.SteamCrusher;
+import igentuman.ncsteamadditions.processors.*;
 import mezz.jei.api.IGuiHelper;
-import nc.integration.jei.JEIMachineRecipeWrapper;
-import nc.integration.jei.NCJEI.IJEIHandler;
-import nc.recipe.BasicRecipe;
-import nc.recipe.BasicRecipeHandler;
+import nc.recipe.*;
+import nclegacy.jei.*;
 
 public class SteamCrusherCategory extends ParentProcessorCategory
 {
@@ -45,16 +42,16 @@ public class SteamCrusherCategory extends ParentProcessorCategory
 		return processor;
 	}
 
-	public SteamCrusherCategory(IGuiHelper guiHelper, IJEIHandler handler, SteamCrusher proc)
+	public SteamCrusherCategory(IGuiHelper guiHelper, IJEIHandlerLegacy handler, SteamCrusher proc)
 	{
 		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
 	}
 
-	public static class SteamCrusherWrapper extends JEIMachineRecipeWrapper
+	public static class SteamCrusherWrapper extends JEIMachineRecipeWrapperLegacy
 	{
 
-		public SteamCrusherWrapper(IGuiHelper guiHelper, IJEIHandler jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
+		public SteamCrusherWrapper(IGuiHelper guiHelper, IJEIHandlerLegacy jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
 		{
 			super(guiHelper, jeiHandler, recipeHandler, recipe, 24, 7, 0, 0, 0, 0, 0, 0, 94, 30, 16, 16);
 		}

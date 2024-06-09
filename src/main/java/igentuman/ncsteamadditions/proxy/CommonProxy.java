@@ -1,16 +1,13 @@
 package igentuman.ncsteamadditions.proxy;
 
-import java.util.Locale;
 import crafttweaker.CraftTweakerAPI;
 import igentuman.ncsteamadditions.NCSOreDictionary;
-import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.block.Blocks;
-import igentuman.ncsteamadditions.fluid.NCSfluids;
-import igentuman.ncsteamadditions.item.ItemCompressedCoal;
+import igentuman.ncsteamadditions.fluid.NCSFluids;
+import igentuman.ncsteamadditions.item.*;
 import igentuman.ncsteamadditions.network.NCSAPacketHandler;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.NCSteamAdditionsTiles;
-import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.worldgen.OreGenerator;
 import nc.ModCheck;
 import net.minecraft.block.Block;
@@ -18,10 +15,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.util.Locale;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
@@ -29,7 +27,7 @@ import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 public class CommonProxy
 {
 
-	public void preInit(FMLPreInitializationEvent preEvent) 
+	public void preInit(FMLPreInitializationEvent preEvent)
 	{
 		if (ModCheck.craftTweakerLoaded()) {
 			CraftTweakerAPI.tweaker.loadScript(false, "ncsteamadditions_preinit");
@@ -38,7 +36,7 @@ public class CommonProxy
 		Blocks.init();
 		Blocks.register();
 		Items.register();
-		NCSfluids.init();
+		NCSFluids.init();
 		NCSAPacketHandler.registerMessages(MOD_ID);
 
 		NCSteamAdditionsTiles.register();
@@ -46,7 +44,7 @@ public class CommonProxy
 		MinecraftForge.EVENT_BUS.register(new NCSteamAdditionsRecipes());
 	}
 	
-	public void init(FMLInitializationEvent event) 
+	public void init(FMLInitializationEvent event)
 	{
 		GameRegistry.registerWorldGenerator(new OreGenerator(), 0);
 		NCSteamAdditionsRecipes.init();
@@ -58,12 +56,12 @@ public class CommonProxy
 			e.setBurnTime(12800);
 	}
 
-	public void registerFluidBlockRendering(Block block, String name) 
+	public void registerFluidBlockRendering(Block block, String name)
 	{
 		name = name.toLowerCase(Locale.ROOT);
 	}
 
-	public EntityPlayer getPlayerClient() 
+	public EntityPlayer getPlayerClient()
 	{
 		return null;
 	}

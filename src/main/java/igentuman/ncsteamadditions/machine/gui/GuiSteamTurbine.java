@@ -3,7 +3,7 @@ package igentuman.ncsteamadditions.machine.gui;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamTurbine;
 import igentuman.ncsteamadditions.processors.SteamTurbine;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import nc.container.ContainerTile;
+import nclegacy.container.ContainerTileLegacy;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -22,7 +22,7 @@ public class GuiSteamTurbine extends GuiItemFluidMachine
 		this(player, tile, new ContainerSteamTurbine(player, tile), processor);
 	}
 
-	private GuiSteamTurbine(EntityPlayer player, TileNCSProcessor tile, ContainerTile container, SteamTurbine processor)
+	private GuiSteamTurbine(EntityPlayer player, TileNCSProcessor tile, ContainerTileLegacy container, SteamTurbine processor)
 	{
 		super(processor.getCode(), player, tile, container);
 		xSize = 176;

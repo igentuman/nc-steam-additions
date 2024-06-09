@@ -1,8 +1,5 @@
 package igentuman.ncsteamadditions.proxy;
 
-import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
-import static igentuman.ncsteamadditions.config.NCSteamAdditionsConfig.clientPreInit;
-
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.machine.sound.SoundHandler;
 import igentuman.ncsteamadditions.render.RenderHandler;
@@ -10,19 +7,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.relauncher.*;
+
+import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
+import static igentuman.ncsteamadditions.config.NCSteamAdditionsConfig.clientPreInit;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class ClientProxy extends CommonProxy

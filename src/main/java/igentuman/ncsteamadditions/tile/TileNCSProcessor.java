@@ -6,54 +6,40 @@ import igentuman.ncsteamadditions.machine.sound.SoundHandler;
 import igentuman.ncsteamadditions.network.NCSProcessorUpdatePacket;
 import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.ints.*;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import mekanism.common.tile.TileEntityFuelwoodHeater;
 import nc.ModCheck;
 import nc.config.NCConfig;
 import nc.init.NCItems;
-import nc.recipe.AbstractRecipeHandler;
-import nc.recipe.BasicRecipe;
-import nc.recipe.BasicRecipeHandler;
-import nc.recipe.RecipeInfo;
-import nc.recipe.ingredient.IFluidIngredient;
-import nc.recipe.ingredient.IItemIngredient;
+import nc.recipe.*;
+import nc.recipe.ingredient.*;
 import nc.tile.energy.ITileEnergy;
 import nc.tile.energyFluid.TileEnergyFluidSidedInventory;
 import nc.tile.fluid.ITileFluid;
 import nc.tile.internal.energy.EnergyConnection;
-import nc.tile.internal.fluid.Tank;
-import nc.tile.internal.fluid.TankOutputSetting;
-import nc.tile.internal.fluid.TankSorption;
-import nc.tile.internal.inventory.ItemOutputSetting;
-import nc.tile.internal.inventory.ItemSorption;
+import nc.tile.internal.fluid.*;
+import nc.tile.internal.inventory.*;
 import nc.tile.inventory.ITileInventory;
-import nc.tile.processor.IProcessor;
-import nc.tile.processor.IUpgradableProcessor;
 import nc.util.StackHelper;
+import nclegacy.tile.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static igentuman.ncsteamadditions.NCSteamAdditions.MOD_ID;
 
-public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements IProcessor, ITileSideConfigGui<NCSProcessorUpdatePacket>, IUpgradableProcessor {
+public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements IItemFluidProcessorLegacy, ITileSideConfigGuiLegacy<NCSProcessorUpdatePacket>, IUpgradableLegacy {
     public final double defaultProcessTime;
     public final double defaultProcessPower;
     public double baseProcessTime;
@@ -112,12 +98,12 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
         );
     }
 
-    public TileNCSProcessor(String name, int itemInSize, int fluidInSize, int itemOutSize, int fluidOutSize, @Nonnull List<ItemSorption> itemSorptions, @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<List<String>> allowedFluids, double time, double power, boolean shouldLoseProgress, @Nonnull BasicRecipeHandler recipeHandler, int processorID, int sideConfigXOffset, int sideConfigYOffset) {
+    public TileNCSProcessor(String name, int itemInSize, int fluidInSize, int itemOutSize, int fluidOutSize, @Nonnull List<ItemSorption> itemSorptions, @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<Set<String>> allowedFluids, double time, double power, boolean shouldLoseProgress, @Nonnull BasicRecipeHandler recipeHandler, int processorID, int sideConfigXOffset, int sideConfigYOffset) {
         this(name, itemInSize, fluidInSize, itemOutSize, fluidOutSize, itemSorptions, fluidCapacity, tankSorptions, allowedFluids, time, power, shouldLoseProgress, true, recipeHandler, processorID, sideConfigXOffset, sideConfigYOffset);
     }
 
-    public TileNCSProcessor(String name, int itemInSize, int fluidInSize, int itemOutSize, int fluidOutSize, @Nonnull List<ItemSorption> itemSorptions, @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<List<String>> allowedFluids, double time, double power, boolean shouldLoseProgress, boolean upgrades, @Nonnull BasicRecipeHandler recipeHandler, int processorID, int sideConfigXOffset, int sideConfigYOffset) {
-        super(name, itemInSize + itemOutSize + (upgrades ? 2 : 0), ITileInventory.inventoryConnectionAll(itemSorptions), (long)IProcessor.getCapacity(processorID, 1.0D, 1.0D), power != 0.0D ? ITileEnergy.energyConnectionAll(EnergyConnection.IN) : ITileEnergy.energyConnectionAll(EnergyConnection.NON), fluidCapacity, allowedFluids, ITileFluid.fluidConnectionAll(tankSorptions));
+    public TileNCSProcessor(String name, int itemInSize, int fluidInSize, int itemOutSize, int fluidOutSize, @Nonnull List<ItemSorption> itemSorptions, @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<Set<String>> allowedFluids, double time, double power, boolean shouldLoseProgress, boolean upgrades, @Nonnull BasicRecipeHandler recipeHandler, int processorID, int sideConfigXOffset, int sideConfigYOffset) {
+        super(name, itemInSize + itemOutSize + (upgrades ? 2 : 0), ITileInventory.inventoryConnectionAll(itemSorptions), 1L, power != 0.0D ? ITileEnergy.energyConnectionAll(EnergyConnection.IN) : ITileEnergy.energyConnectionAll(EnergyConnection.NON), fluidCapacity, allowedFluids, ITileFluid.fluidConnectionAll(tankSorptions));
         this.itemInputSize = itemInSize;
         this.fluidInputSize = fluidInSize;
         this.itemOutputSize = itemOutSize;
@@ -137,9 +123,9 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public TileNCSProcessor(String name, int itemInSize, int fluidInSize, int itemOutSize, int fluidOutSize, @Nonnull List<ItemSorption> itemSorptions,
-                            @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<List<String>> allowedFluids, double time, double power, boolean shouldLoseProgress,
+                            @Nonnull IntList fluidCapacity, @Nonnull List<TankSorption> tankSorptions, List<Set<String>> allowedFluids, double time, double power, boolean shouldLoseProgress,
                             boolean upgrades, @Nonnull BasicRecipeHandler recipeHandler, int processorID,  int sideConfigXOffset, int sideConfigYOffset,float currentReactivity, float targetReactivity) {
-        super(name, itemInSize + itemOutSize + (upgrades ? 2 : 0), ITileInventory.inventoryConnectionAll(itemSorptions), (long)IProcessor.getCapacity(processorID, 1.0D, 1.0D), power != 0.0D ? ITileEnergy.energyConnectionAll(EnergyConnection.IN) : ITileEnergy.energyConnectionAll(EnergyConnection.NON), fluidCapacity, allowedFluids, ITileFluid.fluidConnectionAll(tankSorptions));
+        super(name, itemInSize + itemOutSize + (upgrades ? 2 : 0), ITileInventory.inventoryConnectionAll(itemSorptions), 1L, power != 0.0D ? ITileEnergy.energyConnectionAll(EnergyConnection.IN) : ITileEnergy.energyConnectionAll(EnergyConnection.NON), fluidCapacity, allowedFluids, ITileFluid.fluidConnectionAll(tankSorptions));
         this.itemInputSize = itemInSize;
         this.fluidInputSize = fluidInSize;
         this.itemOutputSize = itemOutSize;
@@ -393,8 +379,8 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
     }
 
     public void setCapacityFromSpeed() {
-        int capacity = IProcessor.getCapacity(this.processorID, this.getSpeedMultiplier(), this.getPowerMultiplier());
-        this.getEnergyStorage().setStorageCapacity((long)capacity);
+        long capacity = 1L;
+        this.getEnergyStorage().setStorageCapacity(capacity);
         this.getEnergyStorage().setMaxTransfer(capacity);
     }
 
@@ -749,7 +735,7 @@ public class TileNCSProcessor extends TileEnergyFluidSidedInventory implements I
             if (slot >= this.itemInputSize) {
                 return false;
             } else {
-                return NCConfig.smart_processor_input ? this.recipeHandler.isValidItemInput(slot, stack, this.recipeInfo, this.getItemInputs(), this.inputItemStacksExcludingSlot(slot)) : this.recipeHandler.isValidItemInput(slot, stack);
+                return NCConfig.smart_processor_input ? this.recipeHandler.isValidItemInput(stack, slot, this.getItemInputs(), this.getFluidInputs(), this.recipeInfo) : this.recipeHandler.isValidItemInput(stack, slot);
             }
         }
     }

@@ -3,8 +3,7 @@ package igentuman.ncsteamadditions.machine.gui;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamBoiler;
 import igentuman.ncsteamadditions.processors.SteamBoiler;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import nc.container.ContainerTile;
-import net.minecraft.client.Minecraft;
+import nclegacy.container.ContainerTileLegacy;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -23,7 +22,7 @@ public class GuiSteamBoiler extends GuiItemFluidMachine
 		this(player, tile, new ContainerSteamBoiler(player, tile), processor);
 	}
 
-	private GuiSteamBoiler(EntityPlayer player, TileNCSProcessor tile, ContainerTile container, SteamBoiler processor)
+	private GuiSteamBoiler(EntityPlayer player, TileNCSProcessor tile, ContainerTileLegacy container, SteamBoiler processor)
 	{
 		super(processor.getCode(), player, tile, container);
 		xSize = 176;

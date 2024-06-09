@@ -1,10 +1,7 @@
 package igentuman.ncsteamadditions;
 
 import igentuman.ncsteamadditions.block.MetaEnums;
-import igentuman.ncsteamadditions.item.ItemCompressedCoal;
-import igentuman.ncsteamadditions.item.ItemCopperSheet;
-import igentuman.ncsteamadditions.item.ItemCopperWire;
-import igentuman.ncsteamadditions.item.Items;
+import igentuman.ncsteamadditions.item.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;

@@ -3,7 +3,7 @@ package igentuman.ncsteamadditions.machine.gui;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamCrusher;
 import igentuman.ncsteamadditions.processors.SteamCrusher;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import nc.container.ContainerTile;
+import nclegacy.container.ContainerTileLegacy;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class GuiSteamCrusher extends GuiItemFluidMachine
@@ -21,7 +21,7 @@ public class GuiSteamCrusher extends GuiItemFluidMachine
 		this(player, tile, new ContainerSteamCrusher(player, tile), processor);
 	}
 
-	private GuiSteamCrusher(EntityPlayer player, TileNCSProcessor tile, ContainerTile container, SteamCrusher processor)
+	private GuiSteamCrusher(EntityPlayer player, TileNCSProcessor tile, ContainerTileLegacy container, SteamCrusher processor)
 	{
 		super(processor.getCode(), player, tile, container);
 		xSize = 176;

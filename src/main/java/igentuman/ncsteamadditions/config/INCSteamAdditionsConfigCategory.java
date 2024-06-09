@@ -1,11 +1,11 @@
 package igentuman.ncsteamadditions.config;
 
-import java.util.List;
-
 import nc.util.Lang;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.*;
 import net.minecraftforge.fml.client.config.*;
+
+import java.util.List;
 
 public interface INCSteamAdditionsConfigCategory {
 

@@ -4,15 +4,14 @@ import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
 import io.netty.buffer.ByteBuf;
 import nc.tile.ITileGui;
+import nclegacy.tile.ITileGuiLegacy;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.simpleimpl.*;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class OpenSideGuiPacket implements IMessage {
@@ -22,7 +21,7 @@ public class OpenSideGuiPacket implements IMessage {
         messageValid = false;
     }
 
-    public OpenSideGuiPacket(ITileGui machine) {
+    public OpenSideGuiPacket(ITileGuiLegacy machine) {
         this.pos = machine.getTilePos();
         messageValid = true;
     }
@@ -73,4 +72,3 @@ public class OpenSideGuiPacket implements IMessage {
         }
     }
 }
-

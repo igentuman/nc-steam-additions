@@ -1,17 +1,13 @@
 package igentuman.ncsteamadditions.crafttweaker;
 
-import java.util.ArrayList;
-import java.util.List;
-import crafttweaker.CraftTweakerAPI;
-import crafttweaker.IAction;
+import crafttweaker.*;
 import crafttweaker.api.item.IIngredient;
-import igentuman.ncsteamadditions.recipe.NCSteamAdditionsRecipe;
-import igentuman.ncsteamadditions.recipe.NCSteamAdditionsRecipeHandler;
-import igentuman.ncsteamadditions.recipe.NCSteamAdditionsRecipeHelper;
+import igentuman.ncsteamadditions.recipe.*;
 import nc.integration.crafttweaker.CTHelper;
 import nc.recipe.IngredientSorption;
-import nc.recipe.ingredient.IFluidIngredient;
-import nc.recipe.ingredient.IItemIngredient;
+import nc.recipe.ingredient.*;
+
+import java.util.*;
 
 public class RemoveSteamAdditionsRecipe implements IAction
 {
@@ -39,20 +35,20 @@ public class RemoveSteamAdditionsRecipe implements IAction
 		}
 		List<IItemIngredient> itemIngredients = new ArrayList<>();
 		List<IFluidIngredient> fluidIngredients = new ArrayList<>();
-		for (int i = 0; i < itemSize; i++) 
+		for (int i = 0; i < itemSize; i++)
 		{
 			IItemIngredient ingredient = CTHelper.buildRemovalItemIngredient(ctIngredients.get(i));
-			if (ingredient == null) 
+			if (ingredient == null)
 			{
 				ingredientError = true;
 				return;
 			}
 			itemIngredients.add(ingredient);
 		}
-		for (int i = itemSize; i < itemSize+fluidSize; i++) 
+		for (int i = itemSize; i < itemSize+fluidSize; i++)
 		{
 			IFluidIngredient ingredient = CTHelper.buildRemovalFluidIngredient(ctIngredients.get(i));
-			if (ingredient == null) 
+			if (ingredient == null)
 			{
 				ingredientError = true;
 				return;
@@ -69,9 +65,9 @@ public class RemoveSteamAdditionsRecipe implements IAction
 	}
 	
 	@Override
-	public void apply() 
+	public void apply()
 	{
-		if (!ingredientError && !wasNull && !wrongSize) 
+		if (!ingredientError && !wasNull && !wrongSize)
 		{
 			boolean removed = recipeHandler.removeRecipe(recipe);
 			while (removed) {
@@ -83,23 +79,23 @@ public class RemoveSteamAdditionsRecipe implements IAction
 	}
 	
 	@Override
-	public String describe() 
+	public String describe()
 	{
-		if (ingredientError || wasNull || wrongSize) 
+		if (ingredientError || wasNull || wrongSize)
 		{
 			if (ingredientError || wrongSize) callError();
 			return String.format("Error: Failed to remove %s recipe with %s as the " + (type == IngredientSorption.INPUT ? "input" : "output"), recipeHandler.getRecipeName(), NCSteamAdditionsRecipeHelper.getAllIngredientNamesConcat(itemIngredients, fluidIngredients));
 		}
-		if (type == IngredientSorption.INPUT) 
+		if (type == IngredientSorption.INPUT)
 		{
 			return String.format("Removing %s recipe: %s", recipeHandler.getRecipeName(), NCSteamAdditionsRecipeHelper.getRecipeString(recipe));
 		}
 		else return String.format("Removing %s recipes for: %s", recipeHandler.getRecipeName(), NCSteamAdditionsRecipeHelper.getAllIngredientNamesConcat(itemIngredients, fluidIngredients));
 	}
 	
-	public static void callError() 
+	public static void callError()
 	{
-		if (!hasErrored) 
+		if (!hasErrored)
 		{
 			CraftTweakerAPI.logError("At least one CraftTweaker recipe removal method has errored - check the CraftTweaker log for more details");
 		}

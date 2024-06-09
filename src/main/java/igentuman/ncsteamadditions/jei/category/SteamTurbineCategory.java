@@ -1,14 +1,11 @@
-package igentuman.ncsteamadditions.jei.catergory;
+package igentuman.ncsteamadditions.jei.category;
 
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
 import igentuman.ncsteamadditions.machine.gui.GuiSteamTurbine;
-import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
-import igentuman.ncsteamadditions.processors.SteamTurbine;
+import igentuman.ncsteamadditions.processors.*;
 import mezz.jei.api.IGuiHelper;
-import nc.integration.jei.JEIMachineRecipeWrapper;
-import nc.integration.jei.NCJEI.IJEIHandler;
-import nc.recipe.BasicRecipe;
-import nc.recipe.BasicRecipeHandler;
+import nc.recipe.*;
+import nclegacy.jei.*;
 
 public class SteamTurbineCategory extends ParentProcessorCategory
 {
@@ -45,16 +42,16 @@ public class SteamTurbineCategory extends ParentProcessorCategory
 		return processor;
 	}
 
-	public SteamTurbineCategory(IGuiHelper guiHelper, IJEIHandler handler, SteamTurbine proc)
+	public SteamTurbineCategory(IGuiHelper guiHelper, IJEIHandlerLegacy handler, SteamTurbine proc)
 	{
 		super(guiHelper, handler, proc.code, 24, 7, 148, 56, proc);
 		processor = proc;
 	}
 
-	public static class SteamTurbineWrapper extends JEIMachineRecipeWrapper
+	public static class SteamTurbineWrapper extends JEIMachineRecipeWrapperLegacy
 	{
 
-		public SteamTurbineWrapper(IGuiHelper guiHelper, IJEIHandler jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
+		public SteamTurbineWrapper(IGuiHelper guiHelper, IJEIHandlerLegacy jeiHandler, BasicRecipeHandler recipeHandler, BasicRecipe recipe)
 		{
 			super(guiHelper, jeiHandler, recipeHandler, recipe, 24, 7, 0, 0, 0, 0, 0, 0, 94, 30, 16, 16);
 		}

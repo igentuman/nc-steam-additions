@@ -3,12 +3,12 @@ package igentuman.ncsteamadditions.machine.container;
 import igentuman.ncsteamadditions.processors.ProcessorsRegistry;
 import igentuman.ncsteamadditions.recipes.NCSteamAdditionsRecipes;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import nc.container.processor.ContainerItemFluidProcessor;
 import nc.container.slot.SlotSpecificInput;
+import nclegacy.container.ContainerItemFluidProcessorLegacy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 
-public class ContainerSteamTurbine extends ContainerItemFluidProcessor
+public class ContainerSteamTurbine extends ContainerItemFluidProcessorLegacy
 {
 	public ContainerSteamTurbine(EntityPlayer player, TileNCSProcessor tileEntity)
 	{

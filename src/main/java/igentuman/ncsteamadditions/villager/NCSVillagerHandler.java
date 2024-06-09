@@ -2,23 +2,15 @@ package igentuman.ncsteamadditions.villager;
 
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.config.NCSteamAdditionsConfig;
-import nc.block.NCBlock;
-import nc.init.NCBlocks;
-import nc.init.NCItems;
+import nc.init.*;
 import net.minecraft.entity.IMerchant;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.village.MerchantRecipe;
-import net.minecraft.village.MerchantRecipeList;
+import net.minecraft.item.*;
+import net.minecraft.village.*;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
-import net.minecraftforge.fml.common.registry.VillagerRegistry;
+import net.minecraftforge.fml.common.registry.*;
 import net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.Random;

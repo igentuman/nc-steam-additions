@@ -11,9 +11,7 @@
   "credits": "tomdodd4598 For making NuclearCraft",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": ["nuclearcraft"],
-  "requiredMods": [
-    "nuclearcraft@[2o.7.0-1.12.2]"
-  ]
+  "dependencies": ["nuclearcraft", "nclegacy"],
+  "requiredMods": ["nuclearcraft@[2o.7.0-1.12.2]", "nclegacy@[1.0-1.12.2]]
 }
 ]

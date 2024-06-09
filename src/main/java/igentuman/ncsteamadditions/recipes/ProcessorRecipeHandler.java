@@ -1,9 +1,8 @@
 package igentuman.ncsteamadditions.recipes;
 
-
 import nc.recipe.BasicRecipeHandler;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 public abstract class ProcessorRecipeHandler extends BasicRecipeHandler
 {
@@ -14,7 +13,7 @@ public abstract class ProcessorRecipeHandler extends BasicRecipeHandler
 	}
 
 	@Override
-	public List fixExtras(List extras) 
+	public List fixedExtras(List extras)
 	{
 		List fixed = new ArrayList(3);
 		fixed.add(extras.size() > 0 && extras.get(0) instanceof Double ? (double) extras.get(0) : 1D);

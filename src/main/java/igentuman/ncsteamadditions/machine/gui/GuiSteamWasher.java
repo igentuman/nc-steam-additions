@@ -3,7 +3,7 @@ package igentuman.ncsteamadditions.machine.gui;
 import igentuman.ncsteamadditions.machine.container.ContainerSteamWasher;
 import igentuman.ncsteamadditions.processors.SteamWasher;
 import igentuman.ncsteamadditions.tile.TileNCSProcessor;
-import nc.container.ContainerTile;
+import nclegacy.container.ContainerTileLegacy;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class GuiSteamWasher extends GuiItemFluidMachine
@@ -21,7 +21,7 @@ public class GuiSteamWasher extends GuiItemFluidMachine
 		this(player, tile, new ContainerSteamWasher(player, tile), processor);
 	}
 
-	private GuiSteamWasher(EntityPlayer player, TileNCSProcessor tile, ContainerTile container, SteamWasher processor)
+	private GuiSteamWasher(EntityPlayer player, TileNCSProcessor tile, ContainerTileLegacy container, SteamWasher processor)
 	{
 		super(processor.getCode(), player, tile, container);
 		xSize = 176;

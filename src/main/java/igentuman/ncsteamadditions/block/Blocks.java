@@ -3,14 +3,13 @@ package igentuman.ncsteamadditions.block;
 import igentuman.ncsteamadditions.NCSteamAdditions;
 import igentuman.ncsteamadditions.item.Items;
 import igentuman.ncsteamadditions.processors.*;
-import nc.block.item.ItemBlockMeta;
-import nc.block.item.NCItemBlock;
+import nc.block.item.*;
 import nc.block.tile.ITileType;
 import nc.util.InfoHelper;
+import nclegacy.block.item.ItemBlockMetaLegacy;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.model.ModelLoader;
@@ -25,7 +24,7 @@ public class Blocks
 	public static Block ore;
 	public static Block ingot_block;
 
-	public static void init() 
+	public static void init()
 	{
 		otherBlocks = new Block[2];
 		otherBlocks[0] = withName(new BlockPipe(),"pipe");
@@ -55,10 +54,10 @@ public class Blocks
 		}
 	}
 	
-	public static void register() 
+	public static void register()
 	{
-		registerBlock(ingot_block, new ItemBlockMeta(ingot_block, MetaEnums.IngotType.class, TextFormatting.AQUA));
-		registerBlock(ore, new ItemBlockMeta(ore, MetaEnums.OreType.class, TextFormatting.AQUA));
+		registerBlock(ingot_block, new ItemBlockMetaLegacy(ingot_block, MetaEnums.IngotType.class, TextFormatting.AQUA));
+		registerBlock(ore, new ItemBlockMetaLegacy(ore, MetaEnums.OreType.class, TextFormatting.AQUA));
 		for(Block block: blocks) {
 			registerBlock(block);
 		}
@@ -67,7 +66,7 @@ public class Blocks
 		}
 	}
 
-	public static void registerRenders() 
+	public static void registerRenders()
 	{
 		int i;
 		for(i = 0; i < MetaEnums.OreType.values().length; ++i) {
