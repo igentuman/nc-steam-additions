@@ -205,7 +205,7 @@ public class BlockCustomModelProcessor extends BlockSidedTile implements IActiva
 					((IProcessorLegacy) tile).refreshRecipe();
 					((IProcessorLegacy) tile).refreshActivity();
 				}
-				FMLNetworkHandler.openGui(player, NCSteamAdditions.instance, ((ITileGui) tile).getContainerInfo().getGuiId(), world, pos.getX(), pos.getY(), pos.getZ());
+				((ITileGui) tile).openGui(world, pos, player);
 			}
 		}
 		else if (tile instanceof ITileGuiLegacy)
