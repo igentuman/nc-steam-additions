@@ -20,7 +20,7 @@ public class NCSteamAdditions
 {
 	public static final String MOD_NAME = "Steam Additions for NuclearCraft";
 	public static final String MOD_ID = "ncsteamadditions";
-	public static final String VERSION = "0.3.5";
+	public static final String VERSION = "0.3.6";
 	public static final String MCVERSION = "1.12.2";
 	public static final String DEPENDENCIES = "required-after:nuclearcraft;required-after:nclegacy";
 
