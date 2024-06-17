@@ -202,7 +202,7 @@ public class GuiItemFluidMachine extends NCGuiLegacy {
         }
 
         sideConfigButton = idCounter;
-        redstoneButton = idCounter+1;
+        redstoneButton = idCounter + 1;
         buttonList.add(new NCButton.MachineConfig(sideConfigButton, guiLeft + 27, guiTop + 63));
         buttonList.add(new NCToggleButton.RedstoneControl(redstoneButton, guiLeft + 47, guiTop + 63, tile));
     }
@@ -345,24 +345,24 @@ public class GuiItemFluidMachine extends NCGuiLegacy {
             if (tile.getWorld().isRemote)
             {
                 //order Finput,Iinput,Foutput,Ioutput
-                int idCounter = getProcessor().getInputFluids();
-                if(guiButton.id < idCounter) {
+                int inputFluids = getProcessor().getInputFluids();
+                if(guiButton.id < inputFluids) {
                     FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptionsLegacy.Input(this, tile, guiButton.id));
                     return;
                 }
-                idCounter += getProcessor().getInputItems();
-                if(guiButton.id < idCounter) {
-                    FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptionsLegacy.Input(this, tile, guiButton.id));
+                int inputItems = getProcessor().getInputItems();
+                if(guiButton.id < inputFluids + inputItems) {
+                    FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptionsLegacy.Input(this, tile, guiButton.id - inputFluids));
                     return;
                 }
-                idCounter += getProcessor().getOutputFluids();
-                if(guiButton.id < idCounter) {
-                    FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptionsLegacy.Output(this, tile, guiButton.id-1));
+                int outputFluids = getProcessor().getOutputFluids();
+                if(guiButton.id < inputFluids + inputItems + outputFluids) {
+                    FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptionsLegacy.Output(this, tile, guiButton.id - inputItems));
                     return;
                 }
-                idCounter += getProcessor().getOutputItems();
-                if(guiButton.id < idCounter) {
-                    FMLCommonHandler.instance().showGuiScreen(new GuiFluidSorptionsLegacy.Output(this, tile, guiButton.id-1));
+                int outputItems = getProcessor().getOutputItems();
+                if(guiButton.id < inputFluids + inputItems + outputFluids + outputItems) {
+                    FMLCommonHandler.instance().showGuiScreen(new GuiItemSorptionsLegacy.Output(this, tile, guiButton.id - inputFluids - outputFluids));
                 }
             }
         }
