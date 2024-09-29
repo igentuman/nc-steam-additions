@@ -1,3 +1,12 @@
+tile.ncsteamadditions.quantum_solar_panel.name=Квантовая Солнечная Панель
+tile.ncsteamadditions.hyper_solar_panel.name=Гипер Солнечная Панель
+tile.ncsteamadditions.fusion_solar_panel.name=Фьюжн Солнечная Панель
+tile.ncsteamadditions.nova_solar_panel.name=Нова Солнечная Панель
+tile.ncsteamadditions.stellar_solar_array.name=Звездная Солнечная Панель
+tile.ncsteamadditions.photon_amplifier_panel.name=Фотонная Солнечная Панель
+tile.ncsteamadditions.nebula_solar_collector.name=Совершенная Солнечная Панель
+tile.ncsteamadditions.graviton_solar_harvester.name=Гравитонная Солнечная Панель
+
 tile.ncsteamadditions.digital_transformer.name=Цифровой Трансформер
 tile.ncsteamadditions.digital_transformer.desc=Может трансформировать что угодно во что угодно. Но требует компьютер для эффективной работы
 

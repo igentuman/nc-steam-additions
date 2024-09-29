@@ -33,6 +33,7 @@ public class CommonProxy
 			CraftTweakerAPI.tweaker.loadScript(false, "ncsteamadditions_preinit");
 		}
 		Items.init();
+		NCSteamAdditionsTiles.registerSolar();
 		Blocks.init();
 		Blocks.register();
 		Items.register();

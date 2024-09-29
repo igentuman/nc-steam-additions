@@ -11,12 +11,17 @@ import net.minecraftforge.fml.common.eventhandler.*;
 import java.io.File;
 import java.util.*;
 
+import static nc.config.NCConfig.sync;
+
+
 public class NCSteamAdditionsConfig {
 
+	protected static final boolean LIST = false, ARRAY = true;
 	private static Configuration config = null;
 	public static int[] processor_time;
 
 	public static final String CATEGORY_PROCESSORS = "processors";
+	public static final String CATEGORY_SOLAR = "solar_panels";
 	public static final String CATEGORY_PIPES = "pipes";
 	public static final String CATEGORY_RECIPES = "recipes";
 	public static final String CATEGORY_WORLDGEN = "worldgen";
@@ -55,6 +60,8 @@ public class NCSteamAdditionsConfig {
 
 	public static boolean makeHXalive;
 
+	public static int[] solar_power;
+
 	public static void preInit()
 	{
 		config = new Configuration(new File(Loader.instance().getConfigDir(), "ncsteamadditions.cfg"));
@@ -70,6 +77,9 @@ public class NCSteamAdditionsConfig {
 	private static void syncConfig(boolean loadFromFile, boolean setFromConfig)
 	{
 		if (loadFromFile) config.load();
+
+		Property solarPower = config.get(CATEGORY_SOLAR, "solar_power", new int[] {1280, 5120, 20480, 81920, 327680, 1310720, 5242880, 20971520}, Lang.localize("gui.ncsteamadditions.config.solar_power.generation.comment"), 0, 32767);
+		solarPower.setLanguageKey("gui.ncsteamadditions.config.solar_power.generation");
 
 		Property propertyProcessorTime = config.get(CATEGORY_PROCESSORS, "time", new int[] {800,400,400,800,400,400,500,400,12000,100}, Lang.localize("gui.ncsteamadditions.config.processors.time.comment"), 0, 32767);
 		propertyProcessorTime.setLanguageKey("gui.ncsteamadditions.config.processors.time");
@@ -150,6 +160,7 @@ public class NCSteamAdditionsConfig {
 		Property makeHxAlive = config.get(CUSTOM, "make_hx_alive", true, Lang.localize("gui.ncsteamadditions.config.make_hx_alive.comment"));
 		makeHxAlive.setLanguageKey("gui.ncsteamadditions.config.make_hx_alive");
 
+		solar_power = solarPower.getIntList();
 		makeHXalive = makeHxAlive.getBoolean();
 		spawn_villager = spawnVillager.getBoolean();
 		ore_dims = propertyOreDims.getIntList();

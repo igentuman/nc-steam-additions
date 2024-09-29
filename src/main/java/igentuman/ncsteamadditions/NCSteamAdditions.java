@@ -18,9 +18,9 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 @Mod(modid = NCSteamAdditions.MOD_ID, name = NCSteamAdditions.MOD_NAME, version = NCSteamAdditions.VERSION, acceptedMinecraftVersions = NCSteamAdditions.MCVERSION, dependencies = NCSteamAdditions.DEPENDENCIES, guiFactory = "igentuman.ncsteamadditions.config.NCSteamAdditionsConfigGUIFactory")
 public class NCSteamAdditions
 {
-	public static final String MOD_NAME = "Steam Additions for NuclearCraft";
+	public static final String MOD_NAME = "NuclearCraft Additions";
 	public static final String MOD_ID = "ncsteamadditions";
-	public static final String VERSION = "0.3.6";
+	public static final String VERSION = "1.0.0";
 	public static final String MCVERSION = "1.12.2";
 	public static final String DEPENDENCIES = "required-after:nuclearcraft;required-after:nclegacy";
 

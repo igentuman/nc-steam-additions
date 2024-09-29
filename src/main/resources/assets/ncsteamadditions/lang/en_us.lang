@@ -1,3 +1,13 @@
+tile.ncsteamadditions.quantum_solar_panel.name=Quantum Solar Panel
+tile.ncsteamadditions.hyper_solar_panel.name=Hyper Solar Panel
+tile.ncsteamadditions.fusion_solar_panel.name=Fusion Solar Panel
+tile.ncsteamadditions.nova_solar_panel.name=Nova Solar Panel
+tile.ncsteamadditions.stellar_solar_array.name=Stellar Solar Panel
+tile.ncsteamadditions.photon_amplifier_panel.name=Photon Solar Panel
+tile.ncsteamadditions.nebula_solar_collector.name=Nebula Solar Panel
+tile.ncsteamadditions.graviton_solar_harvester.name=Graviton Solar Panel
+tile.ncsteamadditions.solar_panel.desc=Produces %s constantly during daytime.
+
 tile.ncsteamadditions.digital_transformer.name=Digital Transformer
 tile.ncsteamadditions.digital_transformer.desc=Transforms everything. Requires Computer controlling
 
@@ -33,7 +43,7 @@ item.ncsteamadditions.copper_sheet.name=Copper Sheet
 
 item.ncsteamadditions.copper_wire.name=Copper Wire
 
-itemGroup.ncsteamadditions.blocks=NC Steam Additions
+itemGroup.ncsteamadditions.blocks=NuclearCraft Additions
 
 item.ncsteamadditions.compressed_coal.name=Compressed Coal
 item.ncsteamadditions.compressed_coal.desc=Has some advantages
@@ -103,7 +113,7 @@ gui.nc.container.efficiency=Heat efficiency:
 gui.ncsteamadditions.config.recipes.override_nc_recipes=Override some of Nuclearcraft recipes
 gui.ncsteamadditions.config.recipes.override_nc_recipes.comment=I would recommend to keep this True
 
-ncsteamadditions.guide_book.name=NC Steam Additions Guide
+ncsteamadditions.guide_book.name=NuclearCraft Additions Guide
 ncsteamadditions.guide_book_edition=English
 
 advancement.ncsteamadditions.steam_boiler.name=Let's do some Steam
